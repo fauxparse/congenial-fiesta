@@ -1,0 +1,50 @@
+---
+version: 2
+jobs:
+  build:
+    working_directory: ~/nzif
+    docker:
+      - image: circleci/ruby:2.4.2-node-browsers
+        environment:
+          PGHOST: localhost
+          PGUSER: nzif
+          RAILS_ENV: test
+      - image: postgres:9.5
+        environment:
+          POSTGRES_USER: nzif
+          POSTGRES_DB: nzif_test
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+
+      - run: gem install bundler
+
+      # Restore Cached Dependencies
+      - type: cache-restore
+        name: Restore bundle cache
+        key: nzif-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
+
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
+
+      - run: yarn install
+
+      # Cache Dependencies
+      - type: cache-save
+        name: Store bundle cache
+        key: nzif-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
+        paths:
+          - vendor/bundle
+          - node_modules
+
+      # Wait for DB
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      # Setup the environment
+      - run: cp config/application.yml.example config/application.yml
+
+      # Setup the database
+      - run: bundle exec rake db:setup
+
+      # Run the tests
+      - run: bundle exec rake
