@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2018_03_19_024434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "festivals", force: :cascade do |t|
+    t.integer "year"
+    t.date "start_date"
+    t.date "end_date"
+    t.index ["year"], name: "index_festivals_on_year", unique: true
+  end
 
 end
