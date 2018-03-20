@@ -1,22 +1,31 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :oauth
+
   def new
     @login_form = LoginForm.new
   end
 
   def create
     if login_form.valid?
-      log_in_as(login_form.participant)
-      redirect_to root_path
+      log_in_and_redirect(login_form.participant)
     else
       render :new
     end
   end
 
+  def oauth
+    participant = ParticipantFromOauth.new(oauth_hash).participant
+    if participant.persisted?
+      log_in_and_redirect(participant)
+    else
+      redirect_to login_path
+    end
+  end
+
   def destroy
     log_out
-    redirect_to root_path
   end
 
   private
@@ -31,11 +40,7 @@ class SessionsController < ApplicationController
     params.require(:login).permit(:email, :password)
   end
 
-  def log_in_as(participant)
-    session[:participant] = participant.id
-  end
-
-  def log_out
-    session.delete(:participant)
+  def oauth_hash
+    request.env['omniauth.auth']
   end
 end

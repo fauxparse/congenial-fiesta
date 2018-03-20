@@ -24,11 +24,17 @@ FactoryBot.define do
         participant.identities << build(:password_identity)
       end
     end
+
+    trait :with_oauth do
+      after(:build) do |participant|
+        participant.identities << build(:oauth_identity)
+      end
+    end
   end
 
   factory :oauth_identity, class: 'Identity::Oauth' do
-    provider 'google'
-    uuid { SecureRandom.uuid }
+    provider 'twitter'
+    uid { SecureRandom.uuid }
   end
 
   factory :password_identity, class: 'Identity::Password' do
