@@ -42,3 +42,4 @@ en:
         on_or_before: 'must be on or before %{date}'
         on_or_after: 'must be on or after %{date}'
         on: 'must be %{date}'
+      email: 'is not a valid email address'

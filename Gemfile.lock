@@ -69,8 +69,11 @@ GEM
       tzinfo (~> 1.1)
     arel (9.0.0)
     ast (2.4.0)
+    auto_strip_attributes (2.3.0)
+      activerecord (>= 3.0)
     autoprefixer-rails (8.0.0)
       execjs
+    bcrypt (3.1.11)
     bindex (0.5.0)
     bootsnap (1.2.0)
       msgpack (~> 1.0)
@@ -280,7 +283,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  auto_strip_attributes (~> 2.3)
   autoprefixer-rails
+  bcrypt (~> 3.1.7)
   bitters!
   bootsnap (>= 1.1.0)
   bourbon!
