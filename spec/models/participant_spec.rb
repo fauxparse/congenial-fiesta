@@ -35,4 +35,12 @@ RSpec.describe Participant, type: :model do
     it { is_expected.to include(participant_with_password) }
     it { is_expected.not_to include(participant_without_password) }
   end
+
+  describe '.with_email' do
+    it 'is case-insensitive' do
+      participant = create(:participant)
+      expect(Participant.with_email(participant.email.upcase))
+        .to include(participant)
+    end
+  end
 end

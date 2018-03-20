@@ -8,7 +8,7 @@ class Participant < ApplicationRecord
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, email: true
 
-  scope :with_email, ->(email) { where('LOWER(email) = ?', email) }
+  scope :with_email, ->(email) { where('LOWER(email) = ?', email&.downcase) }
 
   def self.password_authenticated
     joins(:identities)
