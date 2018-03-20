@@ -9,6 +9,7 @@ jobs:
           PGHOST: localhost
           PGUSER: nzif
           RAILS_ENV: test
+          CC_TEST_REPORTER_ID: eb44112dcf870432644cab6aa559ff727e61b24e71b55a400e8dfef0fdb74e15
       - image: postgres:10.1
         environment:
           POSTGRES_USER: nzif
@@ -42,14 +43,22 @@ jobs:
 
       - run: sudo apt-get install postgresql-client
 
+      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+
+      - run: chmod +x ./cc-test-reporter
+
       # Setup the environment
       - run: cp config/application.yml.example config/application.yml
 
       # Setup the database
       - run: bundle exec rake db:setup
 
+      - run: ./cc-test-reporter before-build
+
       # Run the tests
       - run: bundle exec rake
+
+      - run: ./cc-test-reporter after-build
 
       - store_artifacts:
           path: ~/nzif/coverage
