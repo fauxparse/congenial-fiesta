@@ -1,0 +1,10 @@
+= form_for login_form, url: login_path do |form|
+  = form.group(:email) do
+    = form.label :email
+    = form.email_field :email
+    = form.error_messages_for :email
+  .form-field
+    = form.label :password
+    = form.password_field :password
+  .form-buttons
+    = form.submit t('.submit')

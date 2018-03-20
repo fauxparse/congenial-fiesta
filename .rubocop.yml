@@ -15,9 +15,17 @@ Metrics/LineLength:
   Max: 80
   IgnoredPatterns: ['\A\s*#']
 
+Metrics/MethodLength:
+  Exclude:
+    - 'db/**/*'
+
 Style/BlockComments:
   Exclude:
     - 'spec/spec_helper.rb'
 
 Style/Documentation:
   Enabled: false
+
+Style/StructInheritance:
+  Exclude:
+    - 'spec/**/*'

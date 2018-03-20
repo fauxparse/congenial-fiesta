@@ -9,7 +9,7 @@ jobs:
           PGHOST: localhost
           PGUSER: nzif
           RAILS_ENV: test
-      - image: postgres:9.5
+      - image: postgres:10.1
         environment:
           POSTGRES_USER: nzif
           POSTGRES_DB: nzif_test
@@ -40,6 +40,8 @@ jobs:
       # Wait for DB
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
+      - run: sudo apt-get install postgresql-client
+
       # Setup the environment
       - run: cp config/application.yml.example config/application.yml
 
@@ -48,3 +50,7 @@ jobs:
 
       # Run the tests
       - run: bundle exec rake
+
+      - store_artifacts:
+          path: ~/nzif/coverage
+          destination: coverage

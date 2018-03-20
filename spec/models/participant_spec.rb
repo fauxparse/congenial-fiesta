@@ -26,4 +26,13 @@ RSpec.describe Participant, type: :model do
       expect(participant).to have_exactly(1).error_on(:email)
     end
   end
+
+  describe '.password_authenticated' do
+    subject(:participants) { Participant.password_authenticated.all }
+    let!(:participant_with_password) { create(:participant, :with_password) }
+    let!(:participant_without_password) { create(:participant) }
+
+    it { is_expected.to include(participant_with_password) }
+    it { is_expected.not_to include(participant_without_password) }
+  end
 end

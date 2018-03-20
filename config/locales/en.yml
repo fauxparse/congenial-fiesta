@@ -43,3 +43,18 @@ en:
         on_or_after: 'must be on or after %{date}'
         on: 'must be %{date}'
       email: 'is not a valid email address'
+
+  activemodel:
+    attributes:
+      login_form:
+        email: 'Email address'
+    errors:
+      models:
+        login_form:
+          attributes:
+            email:
+              invalid: 'or password incorrect'
+
+  sessions:
+    new:
+      submit: 'Log in'

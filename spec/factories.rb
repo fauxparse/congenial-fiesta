@@ -18,14 +18,20 @@ FactoryBot.define do
   factory :participant do
     name
     email
+
+    trait :with_password do
+      after(:build) do |participant|
+        participant.identities << build(:password_identity)
+      end
+    end
   end
 
-  factory :oauth_identity, class: Identity::Oauth do
+  factory :oauth_identity, class: 'Identity::Oauth' do
     provider 'google'
     uuid { SecureRandom.uuid }
   end
 
-  factory :password_identity, class: Identity::Password do
+  factory :password_identity, class: 'Identity::Password' do
     password 'p4$$w0rd'
   end
 end
