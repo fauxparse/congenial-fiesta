@@ -28,6 +28,22 @@ RSpec.describe ProfilesController, type: :request do
     end
   end
 
+  describe 'patch /profile' do
+    let(:participant) { create(:participant, :with_password) }
+    let(:attributes) { { name: 'New name', email: 'new@example.com' } }
+
+    before do
+      log_in_as(participant)
+      patch profile_path, params: { participant: attributes }
+    end
+
+    it { is_expected.to be_successful }
+
+    it 'updates the participant’s details' do
+      expect(participant.reload.email).to eq attributes[:email]
+    end
+  end
+
   describe 'get /connect/twitter' do
     before do
       log_in_as(participant)

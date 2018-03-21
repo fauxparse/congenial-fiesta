@@ -61,6 +61,11 @@ en:
       facebook: Facebook
       twitter: Twitter
 
+  profiles:
+    show:
+      submit: 'Save changes'
+
   sessions:
+    log_in: 'Log in'
     new:
       submit: 'Log in'

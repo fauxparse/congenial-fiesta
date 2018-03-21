@@ -1,2 +1,16 @@
-%section.oauth-accounts
-  = render partial: 'account', collection: oauth_accounts(current_participant)
+= form_for current_participant, url: profile_path do |form|
+  %section.details
+    = form.group :name do
+      = form.label :name
+      = form.text_field :name
+      = form.error_messages_for :name
+    = form.group :email do
+      = form.label :email
+      = form.email_field :email
+      = form.error_messages_for :email
+
+  %section.oauth-accounts
+    = render partial: 'account', collection: oauth_accounts(current_participant)
+
+  %footer
+    = form.submit t('.submit')
