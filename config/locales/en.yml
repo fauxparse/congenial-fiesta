@@ -57,9 +57,9 @@ en:
 
   oauth:
     providers:
-      google: Google
-      facebook: Facebook
-      twitter: Twitter
+      google: 'Google'
+      facebook: 'Facebook'
+      twitter: 'Twitter'
 
   profiles:
     show:
@@ -69,3 +69,4 @@ en:
     log_in: 'Log in'
     new:
       submit: 'Log in'
+      log_in_with: 'Or log in with'
