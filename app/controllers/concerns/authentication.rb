@@ -38,7 +38,7 @@ module Authentication
   end
 
   def redirect_after_login
-    redirect_to session.delete(:redirect) || root_path
+    redirect_to session.delete(:redirect) || root_path(anchor: nil)
   end
 
   def store_and_redirect_to(*url)
