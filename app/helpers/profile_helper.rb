@@ -4,6 +4,7 @@ module ProfileHelper
   def oauth_accounts(participant)
     Identity
       .providers
+      .except(:developer)
       .keys
       .map do |provider|
         oauth_account(participant, provider) ||

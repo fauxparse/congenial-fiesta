@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post   '/login'  => 'sessions#create'
   delete '/logout' => 'sessions#destroy', as: :logout
 
-  constraints(provider: /google|facebook|twitter/) do
+  constraints(provider: /#{OmniAuth.registered_providers.join('|')}/) do
     match '/auth/:provider/callback' => 'sessions#oauth', via: %i[get post]
 
     resource :profile, only: %i[show update] do

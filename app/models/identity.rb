@@ -3,11 +3,8 @@
 class Identity < ApplicationRecord
   belongs_to :participant
 
-  enum provider: {
-    google: 'google',
-    facebook: 'facebook',
-    twitter: 'twitter'
-  }
+  enum provider:
+    OmniAuth.registered_providers.map { |p| [p, p.to_s] }.to_h.freeze
 
   scope :password, -> { where(type: 'Identity::Password') }
 end
