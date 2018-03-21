@@ -48,6 +48,7 @@ gem 'haml-rails'
 gem 'neat', github: 'thoughtbot/neat'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 
 group :development, :test do
