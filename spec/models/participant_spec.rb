@@ -21,9 +21,16 @@ RSpec.describe Participant, type: :model do
   context 'with no email address' do
     subject(:participant) { build(:participant, email: nil) }
 
-    it 'is invalid' do
-      expect(participant).not_to be_valid
-      expect(participant).to have_exactly(1).error_on(:email)
+    it 'is valid' do
+      expect(participant).to be_valid
+    end
+
+    context 'when there is an existing participant with no email address' do
+      before { create(:participant, email: nil) }
+
+      it 'is valid' do
+        expect(participant).to be_valid
+      end
     end
   end
 

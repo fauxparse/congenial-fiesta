@@ -6,7 +6,8 @@ class Participant < ApplicationRecord
   has_many :identities, dependent: :destroy, autosave: true
 
   validates :name, presence: true
-  validates :email, uniqueness: { case_sensitive: false }, email: true
+  validates :email, uniqueness: { case_sensitive: false }, if: :email?
+  validates :email, email: { allow_blank: true }
 
   scope :with_email, ->(email) { where('LOWER(email) = ?', email&.downcase) }
 
