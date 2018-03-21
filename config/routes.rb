@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   post   '/login'  => 'sessions#create'
   delete '/logout' => 'sessions#destroy', as: :logout
 
+  match  '/auth/:provider/callback' => 'sessions#oauth', via: %i[get post]
+
   root to: 'festivals#show'
 end

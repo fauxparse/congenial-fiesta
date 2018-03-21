@@ -79,7 +79,7 @@ CREATE TABLE identities (
     participant_id bigint,
     type character varying,
     provider character varying(64),
-    uuid character varying(64),
+    uid character varying(64),
     password_digest character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -229,10 +229,10 @@ CREATE UNIQUE INDEX index_identities_on_participant_id_and_type_and_provider ON 
 
 
 --
--- Name: index_identities_on_provider_and_uuid; Type: INDEX; Schema: public; Owner: -
+-- Name: index_identities_on_provider_and_uid; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_identities_on_provider_and_uuid ON identities USING btree (provider, uuid);
+CREATE UNIQUE INDEX index_identities_on_provider_and_uid ON identities USING btree (provider, uid);
 
 
 --
@@ -260,6 +260,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180319024434'),
 ('20180319221013'),
 ('20180319223809'),
-('20180319225055');
+('20180319225055'),
+('20180320203311');
 
 
