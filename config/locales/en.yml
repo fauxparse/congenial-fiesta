@@ -55,6 +55,12 @@ en:
             email:
               invalid: 'or password incorrect'
 
+  oauth:
+    providers:
+      google: Google
+      facebook: Facebook
+      twitter: Twitter
+
   sessions:
     new:
       submit: 'Log in'

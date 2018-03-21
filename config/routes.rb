@@ -5,7 +5,14 @@ Rails.application.routes.draw do
   post   '/login'  => 'sessions#create'
   delete '/logout' => 'sessions#destroy', as: :logout
 
-  match  '/auth/:provider/callback' => 'sessions#oauth', via: %i[get post]
+  constraints(provider: /google|facebook|twitter/) do
+    match '/auth/:provider/callback' => 'sessions#oauth', via: %i[get post]
+
+    resource :profile, only: %i[show update] do
+      get 'connect/:provider' => 'profiles#connect', as: :connect
+      delete 'connect/:provider' => 'profiles#disconnect'
+    end
+  end
 
   root to: 'festivals#show'
 end

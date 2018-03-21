@@ -17,11 +17,7 @@ class SessionsController < ApplicationController
 
   def oauth
     participant = ParticipantFromOauth.new(oauth_hash).participant
-    if participant.persisted?
-      log_in_and_redirect(participant)
-    else
-      redirect_to login_path
-    end
+    log_in_and_redirect(participant)
   end
 
   def destroy

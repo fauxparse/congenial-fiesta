@@ -16,4 +16,8 @@ class Participant < ApplicationRecord
       .group('participants.id')
       .having('COUNT(identities.id) > 0')
   end
+
+  def password?
+    identities.any?(&:password_digest?)
+  end
 end

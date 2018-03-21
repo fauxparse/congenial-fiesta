@@ -1,0 +1,28 @@
+# frozen_string_literal: true
+
+class ProfilesController < ApplicationController
+  authenticate
+
+  def show; end
+
+  def connect
+    if current_participant.identities.where(provider: provider).exists?
+      redirect_to profile_path
+    else
+      session[:redirect] = profile_path
+      redirect_to "/auth/#{params[:provider]}"
+    end
+  end
+
+  def disconnect
+    current_participant.identities.find_by(provider: provider)&.destroy \
+      if current_participant.identities.many?
+    redirect_to profile_path
+  end
+
+  private
+
+  def provider
+    params[:provider]
+  end
+end
