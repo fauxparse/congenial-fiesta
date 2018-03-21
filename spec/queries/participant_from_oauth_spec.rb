@@ -54,5 +54,22 @@ RSpec.describe ParticipantFromOauth, type: :query do
         expect { participant }.to change(Participant, :count).by(1)
       end
     end
+
+    describe 'for a logged-in participant with a different email address' do
+      let(:query) { ParticipantFromOauth.new(oauth_hash, existing) }
+      let!(:existing) { create(:participant, :with_oauth) }
+      let(:provider) { :google }
+      let(:email) { 'test@gmail.com' }
+
+      it { is_expected.to eq(existing) }
+
+      it 'does not create a participant' do
+        expect { participant }.not_to change(Participant, :count)
+      end
+
+      it 'creates an identity' do
+        expect { participant }.to change(Identity::Oauth, :count).by(1)
+      end
+    end
   end
 end

@@ -72,6 +72,21 @@ RSpec.describe SessionsController, type: :request do
       it 'logs in the user' do
         expect(session[:participant]).to eq participant.id
       end
+
+      context 'who is already logged in' do
+        let(:provider) { :google }
+        let(:email) { 'test@gmail.com' }
+
+        before { log_in_as(participant) }
+
+        it 'logs in the existing user' do
+          expect(session[:participant]).to eq participant.id
+        end
+
+        it 'does not change the participant’s email' do
+          expect(participant.reload.email).not_to eq email
+        end
+      end
     end
 
     context 'for a new participant' do

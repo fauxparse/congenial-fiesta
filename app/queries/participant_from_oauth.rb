@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class ParticipantFromOauth
-  def initialize(oauth_hash)
+  def initialize(oauth_hash, existing_participant = nil)
     @oauth_hash = oauth_hash.deep_symbolize_keys
+    @participant = existing_participant
   end
 
   def participant
@@ -28,7 +29,8 @@ class ParticipantFromOauth
   end
 
   def find_or_create_participant
-    Participant.with_email(email).first ||
+    @participant ||
+      Participant.with_email(email).first ||
       Participant.create!(name: name, email: email)
   end
 

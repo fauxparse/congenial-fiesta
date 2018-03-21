@@ -16,7 +16,8 @@ class SessionsController < ApplicationController
   end
 
   def oauth
-    participant = ParticipantFromOauth.new(oauth_hash).participant
+    participant =
+      ParticipantFromOauth.new(oauth_hash, current_participant).participant
     log_in_and_redirect(participant)
   end
 
