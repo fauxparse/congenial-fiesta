@@ -8,6 +8,7 @@ class Participant < ApplicationRecord
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, if: :email?
   validates :email, email: { allow_blank: true }
+  validates_associated :identities
 
   scope :with_email, ->(email) { where('LOWER(email) = ?', email&.downcase) }
 

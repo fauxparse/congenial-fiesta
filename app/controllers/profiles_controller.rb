@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProfilesController < ApplicationController
-  authenticate
+  authenticate except: %i[new create]
 
   def show; end
 
