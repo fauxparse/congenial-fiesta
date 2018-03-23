@@ -6,5 +6,9 @@ class Identity
     validates :provider,
       uniqueness: { scope: :participant_id, case_sensitive: false }
     validates :password_digest, absence: true
+
+    def connected?
+      persisted?
+    end
   end
 end
