@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PasswordsController < ApplicationController
+  layout 'login'
+
   before_action :complain_about_invalid_token,
     unless: :participant,
     only: %i[update reset]

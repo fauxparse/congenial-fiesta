@@ -1,0 +1,96 @@
+body.login {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, $mandarin 0%, $tomato 100%);
+  padding: $base-spacing;
+
+  main {
+    @include shadow;
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+    max-width: calc(100vw - #{$base-spacing * 2});
+    background: rgba($white, 0.9);
+    border-radius: $base-border-radius;
+    overflow: hidden;
+  }
+
+  section {
+    padding: $base-spacing;
+    position: relative;
+  }
+}
+
+.login-form {
+  @include shadow(0.5);
+  background: white;
+  border-radius: $base-border-radius;
+
+  h1 {
+    font-size: modular-scale(6);
+    line-height: 1;
+  }
+
+  h2 {
+    font-family: $hero-font-family;
+    font-size: modular-scale(2);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .form-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    a {
+      text-decoration: none;
+      order: -1;
+    }
+
+    > :first-child:last-child {
+      flex: 1;
+    }
+  }
+}
+
+.login-social {
+  &::before {
+    @include size(2.5em);
+    // @include shadow(0.25);
+    content: 'or';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin: -1.25em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $medium-grey;
+    color: $white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: $light-font-weight;
+    font-size: modular-scale(-1);
+    border-radius: 50%;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+
+    a {
+      padding: 0.5em;
+      margin: 0 0.5em;
+      border-radius: 50%;
+      color: $base-font-color;
+
+      &:focus {
+        background-color: $focus-outline-color;
+        outline: none;
+      }
+    }
+  }
+}

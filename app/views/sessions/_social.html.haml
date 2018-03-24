@@ -1,0 +1,3 @@
+%section.login-social
+  .social-links
+    = render partial: 'sessions/provider', collection: Identity.providers.except(:developer).keys

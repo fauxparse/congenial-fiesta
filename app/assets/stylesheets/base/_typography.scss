@@ -1,6 +1,13 @@
+@mixin all-caps {
+  font-weight: $light-font-weight;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 html {
   color: $base-font-color;
   font-family: $base-font-family;
+  font-weight: $base-font-weight;
   font-size: 100%;
   line-height: $base-line-height;
 }
@@ -15,6 +22,11 @@ h6 {
   font-size: modular-scale(1);
   line-height: $heading-line-height;
   margin: 0 0 $small-spacing;
+}
+
+h1 {
+  font-family: $hero-font-family;
+  text-transform: uppercase;
 }
 
 p {
@@ -32,7 +44,7 @@ a {
 
   &:focus {
     outline: $focus-outline;
-    outline-offset: $focus-outline-offset;
+    background: $focus-outline-color;
   }
 }
 

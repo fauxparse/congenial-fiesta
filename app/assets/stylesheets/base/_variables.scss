@@ -1,36 +1,63 @@
+@font-face {
+  font-family: 'Brother';
+  src: font-url('brother.woff2') format('woff2'), font-url('brother.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
+
 // Typography
-$base-font-family: $font-stack-system;
+$base-font-family: 'Work Sans', $font-stack-system;
 $heading-font-family: $base-font-family;
+$hero-font-family: 'Brother', $base-font-family;
 
 // Line height
 $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
 // Other Sizes
-$base-border-radius: 3px;
-$base-spacing: 1.5em;
+$base-border-radius: 0.1875em;
+$base-spacing: 1.5rem;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
-$blue: #1565c0;
-$dark-gray: #333;
-$medium-gray: #999;
-$light-gray: #ddd;
+$tomato: #ef4136;
+$mandarin: #f7941d;
+$grape: #573b91;
+$plum: #ee2a7b;
+$mint: #009c93;
+$apple: #62bc46;
+$dark-grey: #283149;
+$medium-grey: #404B69;
+$light-grey: #DBEDF3;
+$white: #fff;
+
+$facebook: #4267b2;
+$google: #ea4335;
+$twitter: #1da1f2;
 
 // Font Colors
-$base-font-color: $dark-gray;
-$action-color: $blue;
+$base-font-color: $dark-grey;
+$action-color: $plum;
+$hover-color: $grape;
+$error-color: $tomato;
+$success-color: $apple;
+
+$base-font-weight: 400;
+$light-font-weight: 300;
+$bold-font-weight: 700;
 
 // Border
-$base-border-color: $light-gray;
+$base-border-color: transparentize($medium-grey, 0.75);
 $base-border: 1px solid $base-border-color;
 
 // Background Colors
-$viewport-background-color: #fff;
+$viewport-background-color: $white;
 
 // Focus
-$focus-outline-color: transparentize($action-color, 0.4);
+$focus-outline-color: transparentize($action-color, 0.75);
 $focus-outline-width: 3px;
 $focus-outline: $focus-outline-width solid $focus-outline-color;
 $focus-outline-offset: 2px;
@@ -38,3 +65,7 @@ $focus-outline-offset: 2px;
 // Animations
 $base-duration: 150ms;
 $base-timing: ease;
+
+@mixin shadow($depth: 1) {
+  box-shadow: 0 ($depth * 0.25em) ($depth * 1em) rgba($dark-grey, 0.25);
+}

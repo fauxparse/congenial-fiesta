@@ -1,0 +1,11 @@
+.icon {
+  display: inline-block;
+
+  svg {
+    display: block;
+  }
+
+  a & {
+    display: block;
+  }
+}

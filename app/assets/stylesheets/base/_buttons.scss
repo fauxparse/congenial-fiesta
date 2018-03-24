@@ -1,43 +1,40 @@
-$_button-background-color: $action-color;
-$_button-background-color-hover: shade($action-color, 20%);
-
-#{$all-buttons} {
+#{$all-buttons},
+.button {
   appearance: none;
-  background-color: $_button-background-color;
-  border: 0;
+  background-color: transparent;
+  border: 1px solid $action-color;
   border-radius: $base-border-radius;
-  color: contrast-switch($_button-background-color);
+  color: $action-color;
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   font-family: $base-font-family;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 600;
+  font-size: 1em;
   line-height: 1;
-  padding: $small-spacing $base-spacing;
-  text-align: center;
+  padding: calc(#{$small-spacing} - 1px);
   text-decoration: none;
-  transition: background-color $base-duration $base-timing;
+  transition: all $base-duration $base-timing;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
 
-  &:hover {
-    background-color: $_button-background-color-hover;
-    color: contrast-switch($_button-background-color-hover);
-  }
-
   &:focus {
-    outline: $focus-outline;
-    outline-offset: $focus-outline-offset;
+    background-color: $focus-outline-color;
+    outline: none;
   }
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
 
-    &:hover {
-      background-color: $_button-background-color;
+  &.primary {
+    background-color: $action-color;
+    color: $white;
+
+    &:focus {
+      @include shadow(0.5);
     }
   }
 }

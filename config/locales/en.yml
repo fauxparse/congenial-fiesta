@@ -1,4 +1,10 @@
 en:
+  festival:
+    name:
+      full: 'New Zealand Improv Festival'
+      short: 'NZIF'
+      tagline: 'The Festival of Moments'
+
   date:
     formats:
       long: '%d %B, %Y'
@@ -41,18 +47,26 @@ en:
   accounts:
     sign_up: 'Sign up'
     new:
+      log_in: 'Log in'
       password_confirmation: 'Confirm password'
       submit: 'Create account'
 
   passwords:
     create:
+      back: 'Back to home page'
       check_email: 'Check your email for a link to reset your password.'
+      reset: 'Reset password'
     edit:
-      submit: 'Change password'
+      add: 'Add password'
+      title: 'Password'
+      update: 'Update password'
     invalid:
-      sorry: 'Maybe the token you tried to use was invalid or has expired.'
+      invalid: 'Maybe the token you tried to use was invalid or has expired.'
+      sorry: 'Sorry…'
     new:
+      email: 'Email address'
       submit: 'Request password reset'
+      title: 'Reset password'
     update:
       created: 'Password added successfully'
       changed: 'Password changed successfully'
@@ -73,5 +87,6 @@ en:
   sessions:
     log_in: 'Log in'
     new:
+      error: 'Hmm, those details don’t look quite right.'
+      forgot: 'Forgot?'
       submit: 'Log in'
-      log_in_with: 'Or log in with'
