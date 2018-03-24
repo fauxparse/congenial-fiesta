@@ -19,6 +19,11 @@
   vertical-align: middle;
   white-space: nowrap;
 
+  &:not(:disabled):hover {
+    color: $action-color-hover;
+    border-color: $action-color-hover;
+  }
+
   &:focus {
     background-color: $focus-outline-color;
     outline: none;
@@ -32,6 +37,11 @@
   &.primary {
     background-color: $action-color;
     color: $white;
+
+    &:not(:disabled):hover {
+      background: $action-color-hover;
+      color: $white;
+    }
 
     &:focus {
       @include shadow(0.5);

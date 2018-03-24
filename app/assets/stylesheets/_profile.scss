@@ -1,0 +1,38 @@
+.configuration-options {
+  &:not(:first-child) {
+    margin-top: $base-spacing;
+  }
+}
+
+.configuration-option {
+  display: flex;
+  align-items: flex-start;
+
+  &:not(:last-child) {
+    margin-bottom: $small-spacing;
+  }
+
+  .icon {
+    margin: 0.5em $base-spacing 0.5em 0;
+    color: $medium-grey;
+  }
+}
+
+.configuration-option-name {
+  flex: 1;
+  padding-top: 0.5em;
+}
+
+.configuration-option-value {
+}
+
+.oauth-accounts .configuration-options {
+  @media(screen and min-width: #{$line-width}) {
+    display: flex;
+    justify-content: space-between;
+
+    .button {
+      margin-left: $base-spacing;
+    }
+  }
+}

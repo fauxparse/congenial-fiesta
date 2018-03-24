@@ -1,19 +1,27 @@
-%section.details
-  %h3= t('.details')
-  = form_for current_participant, url: profile_path do |form|
-    = form.group :name do
-      = form.label :name
-      = form.text_field :name
-      = form.error_messages_for :name
-    = form.group :email do
-      = form.label :email
-      = form.email_field :email
-      = form.error_messages_for :email
-    .form-buttons
-      = form.submit t('.submit')
+%main.profile
+  %header.hero
+    %h1= t('.title')
+  %section.details
+    %h3= t('.details')
+    = form_for current_participant, url: profile_path do |form|
+      = form.group :name do
+        = form.label :name
+        = form.text_field :name
+        = form.error_messages_for :name
+      = form.group :email do
+        = form.label :email
+        = form.email_field :email
+        = form.error_messages_for :email
+      .form-buttons
+        = form.submit t('.submit'), class: 'primary'
 
-%section.password
-  %h3= t('.password')
-  = link_to t(current_participant.password? ? 'change_password' : 'add_password'), edit_password_path, class: 'button'
+  %section.password
+    .configuration-options
+      .configuration-option
+        = icon('password')
+        .configuration-option-name= t('.password')
+        .configuration-option-value
+          = link_to edit_password_path, class: class_string('button', { primary: !current_participant.password? }) do
+            = t(current_participant.password? ? 'change_password' : 'add_password')
 
-= render 'oauth_accounts'
+  = render 'oauth_accounts'

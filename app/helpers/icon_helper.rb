@@ -4,7 +4,9 @@ module IconHelper
   def icon(name, options = {})
     inline_svg(
       "icons/#{name}",
-      options.reverse_merge(class: "icon icon-#{name}")
+      options.merge(
+        class: class_string('icon', "icon-#{name}", options[:class])
+      )
     )
   end
 end

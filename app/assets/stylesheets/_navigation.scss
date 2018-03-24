@@ -1,0 +1,39 @@
+.page-header {
+  @include full-width;
+  height: 3.5rem;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  background: $dark-grey;
+  color: $white;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 0 $small-spacing;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      background: $medium-grey;
+    }
+  }
+
+  .logo {
+    color: white;
+    font-family: $hero-font-family;
+    font-weight: $bold-font-weight;
+    font-size: modular-scale(1);
+    text-decoration: none;
+    margin-left: -$small-spacing;
+  }
+
+  .login {
+    display: flex;
+    align-items: stretch;
+    margin-right: -$small-spacing;
+  }
+}

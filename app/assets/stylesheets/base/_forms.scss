@@ -115,6 +115,13 @@ select {
   }
 }
 
+.form-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .form-errors {
   font-size: modular-scale(-1);
   margin: 0 0 $small-spacing;

@@ -1,0 +1,55 @@
+@mixin horizontal-padding($padding) {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+@mixin vertical-padding($padding) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+@mixin full-width {
+  @include horizontal-padding($base-spacing);
+
+  @media (screen and min-width: #{$line-width + $base-spacing * 2}) {
+    @include horizontal-padding(calc((100vw - #{$line-width}) / 2));
+  }
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+
+  header.hero {
+    @include full-width;
+    @include vertical-padding($base-spacing);
+    background: linear-gradient(to bottom right, $mandarin, $tomato);
+    color: $white;
+
+    h1 {
+      font-family: $base-font-family;
+      font-weight: 100;
+      font-size: modular-scale(6);
+      text-transform: none;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+
+    + section {
+      border-top: none;
+    }
+  }
+
+  > section {
+    @include full-width;
+    @include vertical-padding($base-spacing);
+    border-top: $base-border;
+  }
+}

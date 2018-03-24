@@ -3,7 +3,7 @@ en:
     name:
       full: 'New Zealand Improv Festival'
       short: 'NZIF'
-      tagline: 'The Festival of Moments'
+      tagline: 'A Festival of Moments'
 
   date:
     formats:
@@ -77,12 +77,16 @@ en:
       reset_link: 'Click here to reset your password'
 
   profiles:
+    oauth_accounts:
+      title: 'Other ways to log in'
+      explanation: 'Connect these other accounts to use them to log in instead of remembering a separate password. We will never post to your other accounts or access data other than your name, email address, and photo.'
     show:
       add_password: 'Add a password'
       details: 'Your details'
       change_password: 'Change password'
       password: 'Password'
       submit: 'Save changes'
+      title: 'Edit profile'
 
   sessions:
     log_in: 'Log in'

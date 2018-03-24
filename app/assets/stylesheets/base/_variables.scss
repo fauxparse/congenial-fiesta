@@ -5,7 +5,7 @@
   font-style: normal;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,300,400,700');
 
 // Typography
 $base-font-family: 'Work Sans', $font-stack-system;
@@ -21,6 +21,9 @@ $base-border-radius: 0.1875em;
 $base-spacing: 1.5rem;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
+$line-width: 60rem;
+$icon-size: 1.5em;
+$keyline: 4.5em;
 
 // Colors
 $tomato: #ef4136;
@@ -30,8 +33,8 @@ $plum: #ee2a7b;
 $mint: #009c93;
 $apple: #62bc46;
 $dark-grey: #283149;
-$medium-grey: #404B69;
-$light-grey: #DBEDF3;
+$medium-grey: #404b69;
+$light-grey: #64738e;
 $white: #fff;
 
 $facebook: #4267b2;
@@ -41,6 +44,7 @@ $twitter: #1da1f2;
 // Font Colors
 $base-font-color: $dark-grey;
 $action-color: $plum;
+$action-color-hover: shade($action-color, 25%);
 $hover-color: $grape;
 $error-color: $tomato;
 $success-color: $apple;

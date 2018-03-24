@@ -1,3 +1,4 @@
-.oauth-account{data: { provider: account.provider }}
-  %h3= t(account.provider, scope: 'oauth.providers')
-  = connect_account_link(account)
+.configuration-option.oauth-account{data: { provider: account.provider }}
+  = icon account.provider
+  .configuration-option-name= t(account.provider, scope: 'oauth.providers')
+  .configuration-option-value= connect_account_link(account)
