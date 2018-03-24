@@ -1,0 +1,6 @@
+= form_tag password_path, method: :post do
+  .form-field
+    = label_tag :email
+    = email_field_tag :email
+  .form-buttons
+    = submit_tag t('.submit')

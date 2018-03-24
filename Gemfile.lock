@@ -67,6 +67,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
     ast (2.4.0)
     auto_strip_attributes (2.3.0)
@@ -84,8 +86,14 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.3)
     css-class-string (0.1.1)
+    css_parser (1.6.0)
+      addressable
     diff-lcs (1.3)
     docile (1.3.0)
+    email_spec (2.1.1)
+      htmlentities (~> 4.3.3)
+      launchy (~> 2.1)
+      mail (~> 2.6)
     erubi (1.7.1)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -116,6 +124,7 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    htmlentities (4.3.4)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -123,6 +132,14 @@ GEM
       multi_json (>= 1.2)
     json (2.1.0)
     jwt (1.5.6)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.6.0)
+      launchy (~> 2.2)
+    letter_opener_web (1.3.3)
+      actionmailer (>= 3.2)
+      letter_opener (~> 1.0)
+      railties (>= 3.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -172,15 +189,23 @@ GEM
       omniauth-oauth (~> 1.1)
       rack
     parallel (1.12.1)
-    parser (2.5.0.4)
+    parser (2.5.0.5)
       ast (~> 2.4.0)
     pg (1.0.0)
     powerpack (0.1.1)
+    premailer (1.11.1)
+      addressable
+      css_parser (>= 1.6.0)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.10.2)
+      actionmailer (>= 3, < 6)
+      premailer (~> 1.7, >= 1.7.9)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
+    public_suffix (3.0.2)
     puma (3.11.3)
     rack (2.0.4)
     rack-proxy (0.6.4)
@@ -324,10 +349,13 @@ DEPENDENCIES
   brakeman
   byebug
   css-class-string
+  email_spec
   factory_bot_rails
   figaro
   haml-rails
   jbuilder (~> 2.5)
+  letter_opener
+  letter_opener_web
   listen (>= 3.0.5, < 3.2)
   neat!
   omniauth
@@ -335,6 +363,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-twitter
   pg (>= 0.18, < 2.0)
+  premailer-rails
   pry-rails
   puma (~> 3.11)
   rails (~> 5.2.0.rc1)
@@ -358,4 +387,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

@@ -1,0 +1,17 @@
+= form_for password_form, as: :password, url: password_path do |form|
+  = form.hidden_field :token if password_form.token.present?
+  - if password_form.requires_current_password?
+    = form.group :current_password do
+      = form.label :current_password
+      = form.password_field :current_password
+      = form.error_messages_for :current_password
+  = form.group :password do
+    = form.label :password
+    = form.password_field :password
+    = form.error_messages_for :password
+  = form.group :password_confirmation do
+    = form.label :password_confirmation
+    = form.password_field :password_confirmation
+    = form.error_messages_for :password_confirmation
+  .form-buttons
+    = form.submit t('.submit')

@@ -45,11 +45,14 @@ gem 'bourbon', github: 'thoughtbot/bourbon'
 gem 'css-class-string'
 gem 'figaro'
 gem 'haml-rails'
+gem 'letter_opener'
+gem 'letter_opener_web'
 gem 'neat', github: 'thoughtbot/neat'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
+gem 'premailer-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -74,6 +77,7 @@ group :development do
 end
 
 group :test do
+  gem 'email_spec'
   gem 'rspec-collection_matchers'
   gem 'rspec-rainbow'
   gem 'shoulda-matchers'
