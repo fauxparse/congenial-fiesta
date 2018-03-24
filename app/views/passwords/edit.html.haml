@@ -1,5 +1,6 @@
 = form_for password_form, as: :password, url: password_path do |form|
-  - if password_form.existing_password?
+  = form.hidden_field :token if password_form.token.present?
+  - if password_form.requires_current_password?
     = form.group :current_password do
       = form.label :current_password
       = form.password_field :current_password

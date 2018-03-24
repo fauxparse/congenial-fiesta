@@ -4,14 +4,15 @@ class PasswordForm
   extend ActiveModel::Naming
   include ActiveModel::Validations
 
-  attr_reader :participant, :params
+  attr_reader :participant, :params, :token
 
-  validate :current_password_matches, if: :existing_password?
+  validate :current_password_matches, if: :requires_current_password?
   validate :passwords_match
 
-  def initialize(participant, params)
+  def initialize(participant, params, token: nil)
     @participant = participant
     @params = params
+    @token = token || params[:token]
     @existing_password = identity.persisted?
     identity.password = params[:password]
     identity.password_confirmation = params[:password_confirmation]
@@ -43,6 +44,10 @@ class PasswordForm
 
   def existing_password?
     @existing_password
+  end
+
+  def requires_current_password?
+    existing_password? && token.blank?
   end
 
   private

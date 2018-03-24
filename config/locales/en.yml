@@ -45,8 +45,14 @@ en:
       submit: 'Create account'
 
   passwords:
+    create:
+      check_email: 'Check your email for a link to reset your password.'
     edit:
       submit: 'Change password'
+    invalid:
+      sorry: 'Maybe the token you tried to use was invalid or has expired.'
+    new:
+      submit: 'Request password reset'
     update:
       created: 'Password added successfully'
       changed: 'Password changed successfully'

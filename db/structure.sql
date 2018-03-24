@@ -138,6 +138,38 @@ ALTER SEQUENCE participants_id_seq OWNED BY participants.id;
 
 
 --
+-- Name: password_resets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE password_resets (
+    id bigint NOT NULL,
+    participant_id bigint,
+    token character varying,
+    created_at timestamp without time zone,
+    expires_at timestamp without time zone
+);
+
+
+--
+-- Name: password_resets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE password_resets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: password_resets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE password_resets_id_seq OWNED BY password_resets.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -165,6 +197,13 @@ ALTER TABLE ONLY identities ALTER COLUMN id SET DEFAULT nextval('identities_id_s
 --
 
 ALTER TABLE ONLY participants ALTER COLUMN id SET DEFAULT nextval('participants_id_seq'::regclass);
+
+
+--
+-- Name: password_resets id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY password_resets ALTER COLUMN id SET DEFAULT nextval('password_resets_id_seq'::regclass);
 
 
 --
@@ -197,6 +236,14 @@ ALTER TABLE ONLY identities
 
 ALTER TABLE ONLY participants
     ADD CONSTRAINT participants_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: password_resets password_resets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY password_resets
+    ADD CONSTRAINT password_resets_pkey PRIMARY KEY (id);
 
 
 --
@@ -243,11 +290,40 @@ CREATE UNIQUE INDEX index_participants_on_lowercase_email ON participants USING 
 
 
 --
+-- Name: index_password_resets_on_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_password_resets_on_participant_id ON password_resets USING btree (participant_id);
+
+
+--
+-- Name: index_password_resets_on_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_password_resets_on_token ON password_resets USING btree (token);
+
+
+--
+-- Name: index_password_resets_on_token_and_expires_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_password_resets_on_token_and_expires_at ON password_resets USING btree (token, expires_at);
+
+
+--
 -- Name: identities fk_rails_27e74d7b52; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY identities
     ADD CONSTRAINT fk_rails_27e74d7b52 FOREIGN KEY (participant_id) REFERENCES participants(id) ON DELETE CASCADE;
+
+
+--
+-- Name: password_resets fk_rails_286b6e4fd3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY password_resets
+    ADD CONSTRAINT fk_rails_286b6e4fd3 FOREIGN KEY (participant_id) REFERENCES participants(id) ON DELETE CASCADE;
 
 
 --
@@ -261,6 +337,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180319221013'),
 ('20180319223809'),
 ('20180319225055'),
-('20180320203311');
+('20180320203311'),
+('20180324023927');
 
 

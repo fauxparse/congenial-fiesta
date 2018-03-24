@@ -4,6 +4,7 @@ class Participant < ApplicationRecord
   auto_strip_attributes :name, :email
 
   has_many :identities, dependent: :destroy, autosave: true
+  has_many :password_resets
 
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, if: :email?
