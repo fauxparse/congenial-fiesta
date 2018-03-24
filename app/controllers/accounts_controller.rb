@@ -3,6 +3,8 @@
 class AccountsController < ApplicationController
   layout 'login'
 
+  must_be_logged_out
+
   def new; end
 
   def create

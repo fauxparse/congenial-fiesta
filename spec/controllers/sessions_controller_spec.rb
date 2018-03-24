@@ -10,8 +10,19 @@ RSpec.describe SessionsController, type: :request do
   let(:credentials) { { email: email, password: password } }
 
   describe 'get /login' do
-    before { get login_path }
-    it { is_expected.to be_successful }
+    context 'when not logged in' do
+      before { get login_path }
+      it { is_expected.to be_successful }
+    end
+
+    context 'when logged in' do
+      before do
+        log_in_as create(:participant, :with_password)
+        get login_path
+      end
+
+      it { is_expected.to redirect_to root_path }
+    end
   end
 
   describe 'post /login' do

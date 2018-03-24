@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   layout 'login'
 
   skip_before_action :verify_authenticity_token, only: :oauth
+  must_be_logged_out only: %i[new create]
 
   def new
     @login_form = LoginForm.new
