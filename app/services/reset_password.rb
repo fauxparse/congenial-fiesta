@@ -18,7 +18,7 @@ class ResetPassword
   end
 
   def generate_and_send
-    password_reset
+    PasswordMailer.password_reset_email(password_reset).deliver_later
   end
 
   def password_reset

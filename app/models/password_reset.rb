@@ -14,6 +14,10 @@ class PasswordReset < ApplicationRecord
 
   scope :active, -> { where('expires_at > ?', Time.zone.now) }
 
+  def to_param
+    token
+  end
+
   def expired?
     expires_at <= Time.zone.now
   end

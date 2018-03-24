@@ -57,6 +57,11 @@ en:
       created: 'Password added successfully'
       changed: 'Password changed successfully'
 
+  password_mailer:
+    password_reset_email:
+      subject: 'Reset your NZIF password'
+      reset_link: 'Click here to reset your password'
+
   profiles:
     show:
       add_password: 'Add a password'

@@ -146,9 +146,20 @@ RSpec.describe PasswordsController, type: :request do
     context 'for a valid email address' do
       let(:participant) { create(:participant, :with_password) }
       let(:email) { participant.email }
+      let(:password_reset_email) { double }
 
       it 'creates a password reset token' do
         expect { reset_request }.to change(PasswordReset, :count).by(1)
+      end
+
+      it 'sends an email' do
+        expect(PasswordMailer)
+          .to receive(:password_reset_email)
+          .once
+          .with(an_instance_of(PasswordReset))
+          .and_return(password_reset_email)
+        expect(password_reset_email).to receive(:deliver_later)
+        reset_request
       end
     end
 

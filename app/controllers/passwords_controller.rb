@@ -15,8 +15,7 @@ class PasswordsController < ApplicationController
 
   def update
     if participant.present? && password_form.save
-      log_in_as(password_form.participant) unless logged_in?
-      redirect_to profile_path, notice: password_changed_message
+      redirect_after_password_change
     else
       render :edit
     end
@@ -27,6 +26,11 @@ class PasswordsController < ApplicationController
   end
 
   private
+
+  def redirect_after_password_change
+    log_in_as(password_form.participant) unless logged_in?
+    redirect_to profile_path, notice: password_changed_message
+  end
 
   def complain_about_invalid_token
     render :invalid unless participant.present?

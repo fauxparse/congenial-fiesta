@@ -13,6 +13,7 @@ Lint/AmbiguousBlockAssociation:
 
 Metrics/BlockLength:
   Exclude:
+    - 'config/environments/*'
     - 'spec/**/*'
 
 Metrics/LineLength:
