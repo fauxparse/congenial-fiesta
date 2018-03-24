@@ -7,6 +7,10 @@ AllCops:
 Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*'
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'

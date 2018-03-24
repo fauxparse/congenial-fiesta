@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get    '/signup' => 'accounts#new', as: :signup
   post   '/signup' => 'accounts#create'
 
+  resource :password, except: %i[show destroy] do
+    get '/reset/:token' => 'passwords#reset', as: :reset
+  end
+
   constraints(provider: /#{OmniAuth.registered_providers.join('|')}/) do
     match '/auth/:provider/callback' => 'sessions#oauth', via: %i[get post]
 

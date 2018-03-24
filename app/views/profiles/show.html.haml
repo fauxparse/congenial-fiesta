@@ -1,5 +1,6 @@
-= form_for current_participant, url: profile_path do |form|
-  %section.details
+%section.details
+  %h3= t('.details')
+  = form_for current_participant, url: profile_path do |form|
     = form.group :name do
       = form.label :name
       = form.text_field :name
@@ -8,9 +9,11 @@
       = form.label :email
       = form.email_field :email
       = form.error_messages_for :email
+    .form-buttons
+      = form.submit t('.submit')
 
-  %section.oauth-accounts
-    = render partial: 'account', collection: oauth_accounts(current_participant)
+%section.password
+  %h3= t('.password')
+  = link_to t(current_participant.password? ? 'change_password' : 'add_password'), edit_password_path, class: 'button'
 
-  %footer
-    = form.submit t('.submit')
+= render 'oauth_accounts'

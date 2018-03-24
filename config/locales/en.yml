@@ -23,10 +23,14 @@ en:
           attributes:
             email:
               invalid: 'or password incorrect'
+        password_form:
+          attributes:
+            current_password:
+              mismatch: 'does not match'
         signup_form:
           attributes:
             password_confirmation:
-              confirmation: 'must match'
+              confirmation: 'does not match'
 
   oauth:
     providers:
@@ -40,8 +44,19 @@ en:
       password_confirmation: 'Confirm password'
       submit: 'Create account'
 
+  passwords:
+    edit:
+      submit: 'Change password'
+    update:
+      created: 'Password added successfully'
+      changed: 'Password changed successfully'
+
   profiles:
     show:
+      add_password: 'Add a password'
+      details: 'Your details'
+      change_password: 'Change password'
+      password: 'Password'
       submit: 'Save changes'
 
   sessions:
