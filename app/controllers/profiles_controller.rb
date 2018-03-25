@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
   def show; end
 
   def update
-    current_participant.update_attributes(attributes)
+    current_participant.update!(attributes)
     render :show
   end
 
@@ -32,6 +32,6 @@ class ProfilesController < ApplicationController
   end
 
   def attributes
-    params.require(:participant).permit(:name, :email)
+    params.require(:participant).permit(:name, :email, :avatar)
   end
 end

@@ -2,16 +2,23 @@
   %header.hero
     %h1= t('.title')
   %section.details
-    %h3= t('.details')
-    = form_for current_participant, url: profile_path do |form|
-      = form.group :name do
-        = form.label :name
-        = form.text_field :name
-        = form.error_messages_for :name
-      = form.group :email do
-        = form.label :email
-        = form.email_field :email
-        = form.error_messages_for :email
+    = form_for current_participant, url: profile_path, html: { class: 'profile-form' } do |form|
+      .profile-avatar
+        = form.label :avatar do
+          %span.profile-avatar-upload
+            = icon :upload
+          = avatar(form.object, size: 128)
+        = form.file_field :avatar
+      .profile-details
+        = form.group :name do
+          = form.label :name
+          = form.text_field :name
+          = form.error_messages_for :name
+        = form.group :email do
+          = form.label :email
+          = form.email_field :email
+          = form.error_messages_for :email
+
       .form-buttons
         = form.submit t('.submit'), class: 'primary'
 

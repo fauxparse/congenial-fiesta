@@ -1,4 +1,6 @@
 .configuration-options {
+  padding-left: 3.5em;
+
   &:not(:first-child) {
     margin-top: $base-spacing;
   }
@@ -33,6 +35,73 @@
 
     .button {
       margin-left: $base-spacing;
+    }
+  }
+}
+
+.profile-form {
+  .profile-avatar {
+    label {
+      width: 5em;
+      font-size: 100%;
+      position: relative;
+      margin: 0 auto $small-spacing;
+    }
+
+    .avatar {
+      @include size(5em);
+      background: $light-grey;
+      color: rgba($white, 0.5);
+
+      .icon {
+        transition: opacity $base-duration $base-timing;
+      }
+    }
+
+    .profile-avatar-upload {
+      @include position(absolute, 0 0 0 0);
+      @include center-content;
+      background: rgba($dark-grey, 0.5);
+      border-radius: 50%;
+      color: $white;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity $base-duration $base-timing;
+      z-index: 1;
+
+      &:hover {
+        opacity: 1;
+
+        + .avatar .icon {
+          opacity: 0;
+        }
+      }
+    }
+
+    input {
+      display: none;
+    }
+  }
+
+  @media(screen and min-width: 30em) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "avatar details"
+      "buttons buttons";
+    grid-column-gap: $base-spacing;
+
+    .profile-avatar {
+      grid-area: avatar;
+      padding-top: $base-spacing;
+    }
+
+    .profile-details {
+      grid-area: details;
+    }
+
+    .form-buttons {
+      grid-area: buttons;
     }
   }
 }

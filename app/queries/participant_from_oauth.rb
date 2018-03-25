@@ -7,7 +7,7 @@ class ParticipantFromOauth
   end
 
   def participant
-    identity.participant
+    participant_with_avatar
   end
 
   private
@@ -26,6 +26,18 @@ class ParticipantFromOauth
       uid: uid,
       participant: find_or_create_participant
     )
+  end
+
+  def participant_with_avatar
+    identity.participant.tap do |participant|
+      if participant.avatar.blank? && avatar.present?
+        participant.avatar.attach(
+          io: File.open(avatar),
+          filename: File.basename(avatar),
+          content_type: 'image/jpg'
+        )
+      end
+    end
   end
 
   def find_or_create_participant
@@ -48,5 +60,9 @@ class ParticipantFromOauth
 
   def email
     oauth_hash[:info][:email]
+  end
+
+  def avatar
+    oauth_hash[:info][:image]
   end
 end

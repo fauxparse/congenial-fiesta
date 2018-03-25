@@ -36,4 +36,9 @@
     align-items: stretch;
     margin-right: -$small-spacing;
   }
+
+  .avatar {
+    margin-right: $small-spacing;
+    background: rgba($light-grey, 0.5);
+  }
 }

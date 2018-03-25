@@ -7,7 +7,9 @@
         = t('festival.name.short')
       .login
         - if logged_in?
-          = link_to current_participant, profile_path
+          = link_to profile_path do
+            = avatar(current_participant)
+            .name= current_participant
           = link_to 'Log out', logout_path, method: :delete if logged_in?
         - else
           = link_to_unless_current t('sessions.log_in'), login_path
@@ -15,4 +17,3 @@
     = yield
 
     %footer.page-footer
-      
