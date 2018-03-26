@@ -78,17 +78,27 @@ body.login {
 }
 
 .login-social-links {
-  @include center-content;
+  display: flex;
+  align-items: center;
+
+  p {
+    flex: 1;
+    margin: 0;
+  }
 
   a {
     border-radius: 50%;
     color: $base-font-color;
-    margin: 0 0.5em;
+    margin: 0 0.25em;
     padding: 0.5em;
 
     &:focus {
       background-color: $focus-outline-color;
       outline: none;
+    }
+
+    &:last-child {
+      margin-right: -0.5em;
     }
   }
 }

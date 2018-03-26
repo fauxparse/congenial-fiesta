@@ -45,11 +45,13 @@ en:
       twitter: 'Twitter'
 
   accounts:
-    sign_up: 'Sign up'
     new:
       log_in: 'Log in'
       password_confirmation: 'Confirm password'
       submit: 'Create account'
+    sign_up: 'Sign up'
+    social:
+      log_in_with: 'Log in with'
 
   passwords:
     create:
