@@ -1,5 +1,5 @@
-%section.login-form
-  = form_for signup_form, url: signup_path do |form|
+%main.login-dialog
+  = form_for signup_form, url: signup_path, html: { class: 'login-form' } do |form|
     %h1= t('festival.name.short')
     = form.group :name do
       = form.label :name
@@ -17,7 +17,7 @@
       = form.label :password_confirmation, t('.password_confirmation')
       = form.password_field :password_confirmation
       = form.error_messages_for :password_confirmation
-    .form-buttons
+    .form-buttons.login-form-buttons
       = form.submit t('.submit'), class: 'primary'
       = link_to t('.log_in'), login_path
-= render 'sessions/social'
+  = render 'social'

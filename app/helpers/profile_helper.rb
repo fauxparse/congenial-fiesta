@@ -17,7 +17,7 @@ module ProfileHelper
       t(account.connected? ? :disconnect : :connect, scope: 'profiles.show'),
       connect_profile_path(account.provider),
       method: account.connected? ? :delete : :get,
-      class: class_string('button', primary: account.connected?)
+      class: class_string('button', primary: !account.connected?)
     )
   end
 

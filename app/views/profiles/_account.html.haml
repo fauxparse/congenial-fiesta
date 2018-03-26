@@ -1,4 +1,4 @@
-.configuration-option.oauth-account{data: { provider: account.provider }}
-  = icon account.provider
-  .configuration-option-name= t(account.provider, scope: 'oauth.providers')
-  .configuration-option-value= connect_account_link(account)
+.option.oauth-account{data: { provider: account.provider }}
+  = icon account.provider, class: 'option-icon'
+  .option-name= t(account.provider, scope: 'oauth.providers')
+  .option-value= connect_account_link(account)

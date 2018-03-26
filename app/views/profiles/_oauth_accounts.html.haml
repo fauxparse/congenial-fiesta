@@ -1,5 +1,5 @@
 %section.oauth-accounts
   %h3= t('.title')
   %p= t('.explanation')
-  .configuration-options
+  .options.oauth-account-options
     = render partial: 'account', collection: oauth_accounts(current_participant)

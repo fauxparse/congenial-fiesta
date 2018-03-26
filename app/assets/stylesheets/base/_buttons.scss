@@ -14,7 +14,7 @@
   line-height: 1;
   padding: calc(#{$small-spacing} - 1px);
   text-decoration: none;
-  transition: all $base-duration $base-timing;
+  transition: all $fast-duration $base-timing;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;

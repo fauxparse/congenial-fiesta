@@ -1,0 +1,23 @@
+@mixin horizontal-padding($padding) {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+@mixin vertical-padding($padding) {
+  padding-bottom: $padding;
+  padding-top: $padding;
+}
+
+@mixin full-width {
+  @include horizontal-padding($base-spacing);
+
+  @media (screen and min-width: #{$line-width + $base-spacing * 2}) {
+    @include horizontal-padding(calc((100vw - #{$line-width}) / 2));
+  }
+}
+
+@mixin center-content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

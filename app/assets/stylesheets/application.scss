@@ -2,10 +2,12 @@
 @import 'bourbon';
 @import 'base/base';
 
+@import 'mixins';
+
+@import 'avatars';
+@import 'footer';
 @import 'icons';
 @import 'login';
 @import 'layout';
-@import 'avatars';
 @import 'navigation';
-@import 'footer';
 @import 'profile';

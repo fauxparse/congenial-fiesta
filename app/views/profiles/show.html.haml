@@ -22,14 +22,14 @@
           = form.error_messages_for :email
 
       .form-buttons
-        = form.submit t('.submit'), class: 'primary'
+        = form.submit t('.submit'), class: 'primary submit-profile-changes'
 
   %section.password
-    .configuration-options
-      .configuration-option
-        = icon('password')
-        .configuration-option-name= t('.password')
-        .configuration-option-value
+    .options
+      .option
+        = icon('password', class: 'option-icon')
+        .option-name= t('.password')
+        .option-value
           = link_to edit_password_path, class: class_string('button', { primary: !current_participant.password? }) do
             = t(current_participant.password? ? 'change_password' : 'add_password')
 

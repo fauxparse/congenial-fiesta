@@ -1,5 +1,6 @@
-%section.login-form
-  %h2= t('.reset')
-  %p= t('.check_email')
-  .form-buttons
-    = link_to t('.back'), root_path, class: 'button'
+%main.login-dialog
+  .login-form
+    %h2= t('.reset')
+    %p= t('.check_email')
+    .form-buttons.login-form-buttons
+      = link_to t('.back'), root_path, class: 'button'

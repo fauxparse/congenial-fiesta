@@ -1,8 +1,8 @@
-%section.login-form.password
-  = form_tag password_path, method: :post do
+%main.login-dialog
+  = form_tag password_path, method: :post, class: 'login-form password-reset-form' do
     %h2= t('.title')
     .form-field
       = label_tag :email
     = email_field_tag :email, nil, autocomplete: :off
-    .form-buttons
+    .form-buttons.login-form-buttons
       = submit_tag t('.submit'), class: 'primary'

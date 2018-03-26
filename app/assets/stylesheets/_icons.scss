@@ -2,11 +2,11 @@
   @include size($icon-size);
   display: inline-block;
 
-  svg {
+  a & {
     display: block;
   }
 
-  a & {
+  svg {
     display: block;
   }
 }

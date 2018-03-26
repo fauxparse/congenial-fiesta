@@ -1,5 +1,5 @@
-%section.login-form
-  = form_for password_form, as: :password, url: password_path do |form|
+%main.login-dialog
+  = form_for password_form, as: :password, url: password_path, html: { class: 'login-form' } do |form|
     %h2= t('.title')
     = form.hidden_field :token if password_form.token.present?
     - if password_form.requires_current_password?
@@ -15,5 +15,5 @@
       = form.label :password_confirmation
       = form.password_field :password_confirmation
       = form.error_messages_for :password_confirmation
-    .form-buttons
+    .form-buttons.login-form-buttons
       = form.submit t(password_form.existing_password? ? '.update' : '.add'), class: 'primary'

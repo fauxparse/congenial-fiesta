@@ -2,18 +2,8 @@
 %html
   = render 'shared/head'
   %body
-    %header.page-header
-      = link_to root_path, class: 'logo' do
-        = t('festival.name.short')
-      .login
-        - if logged_in?
-          = link_to profile_path do
-            = avatar(current_participant)
-            .name= current_participant
-          = link_to 'Log out', logout_path, method: :delete if logged_in?
-        - else
-          = link_to_unless_current t('sessions.log_in'), login_path
-          = link_to_unless_current t('accounts.sign_up'), signup_path
+    = render 'shared/navigation'
+
     = yield
 
     %footer.page-footer

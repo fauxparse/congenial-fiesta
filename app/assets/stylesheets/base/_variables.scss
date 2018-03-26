@@ -44,7 +44,7 @@ $twitter: #1da1f2;
 
 // Font Colors
 $base-font-color: $dark-grey;
-$action-color: $plum;
+$action-color: $tomato;
 $action-color-hover: shade($action-color, 25%);
 $hover-color: $grape;
 $error-color: $tomato;
@@ -68,8 +68,13 @@ $focus-outline: $focus-outline-width solid $focus-outline-color;
 $focus-outline-offset: 2px;
 
 // Animations
-$base-duration: 150ms;
-$base-timing: ease;
+$fast-duration: 300ms;
+$base-duration: 300ms;
+$standard-timing: cubic-bezier(0.4, 0.0, 0.2, 1);
+$deceleration-timing: cubic-bezier(0.0, 0.0, 0.2, 1);
+$acceleration-timing: cubic-bezier(0.4, 0.0, 1, 1);
+$sharp-timing: cubic-bezier(0.4, 0.0, 0.6, 1);
+$base-timing: $standard-timing;
 
 @mixin shadow($depth: 1) {
   box-shadow: 0 ($depth * 0.25em) ($depth * 1em) rgba($dark-grey, 0.25);
