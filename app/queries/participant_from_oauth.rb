@@ -30,13 +30,21 @@ class ParticipantFromOauth
 
   def participant_with_avatar
     identity.participant.tap do |participant|
-      if participant.avatar.blank? && avatar.present?
-        participant.avatar.attach(
-          io: File.open(avatar),
-          filename: File.basename(avatar),
-          content_type: 'image/jpg'
-        )
-      end
+      attach_avatar_to(participant) \
+        if avatar.present? && !participant.avatar.attached?
+    end
+  end
+
+  def attach_avatar_to(participant)
+    open(avatar) do |file|
+      participant.avatar.attach(
+        io: file,
+        filename: File.basename(avatar),
+        content_type:
+          file.respond_to?(:content_type) &&
+          file.content_type ||
+          Rack::Mime.mime_type(File.extname(avatar))
+      )
     end
   end
 

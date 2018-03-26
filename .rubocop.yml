@@ -24,6 +24,10 @@ Metrics/MethodLength:
   Exclude:
     - 'db/**/*'
 
+Security/Open:
+  Exclude:
+    - 'app/queries/participant_from_oauth.rb'
+
 Style/BlockComments:
   Exclude:
     - 'spec/spec_helper.rb'

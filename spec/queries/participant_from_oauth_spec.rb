@@ -13,7 +13,8 @@ RSpec.describe ParticipantFromOauth, type: :query do
       uid: uid,
       info: {
         name: 'participant',
-        email: email
+        email: email,
+        image: Rails.root.join('spec/support/files/avatar.jpg')
       }
     }
   end

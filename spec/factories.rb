@@ -30,6 +30,16 @@ FactoryBot.define do
         participant.identities << build(:oauth_identity)
       end
     end
+
+    trait :with_avatar do
+      after(:build) do |participant|
+        File.open('spec/support/files/avatar.jpg') do |file|
+          participant.avatar.attach(
+            io: file, filename: 'avatar.jpg', content_type: 'image/jpeg'
+          )
+        end
+      end
+    end
   end
 
   factory :oauth_identity, class: 'Identity::Oauth' do
