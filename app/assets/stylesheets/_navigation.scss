@@ -17,7 +17,8 @@
     transition: background-color $fast-duration $base-timing;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &.drop-enabled {
       background-color: $medium-grey;
       outline: none;
     }
@@ -28,18 +29,70 @@
   color: white;
   font-family: $hero-font-family;
   font-weight: $bold-font-weight;
-  font-size: modular-scale(1);
+  font-size: modular-scale(2);
   text-decoration: none;
   margin-left: -$small-spacing;
 }
 
 .navbar-login {
-  display: flex;
   align-items: stretch;
+  display: flex;
   margin-right: -$small-spacing;
 
   .avatar {
-    margin-right: $small-spacing;
     background: rgba($light-grey, 0.5);
+    margin-right: $small-spacing;
+  }
+}
+
+.navbar-menu-target {
+  .icon-chevron-down {
+    margin-left: $small-spacing;
+    transition: transform $base-duration $base-timing;
+  }
+
+  &.drop-enabled {
+    .icon-chevron-down {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.navbar-menu-content {
+  @include shadow;
+  background: rgba($dark-grey, 0.9);
+  color: $white;
+  min-width: 15em;
+  opacity: 0;
+  pointer-events: none;
+  touch-action: none;
+  transition: all $base-duration $acceleration-timing;
+  transform: translateY(-4em);
+
+  a {
+    align-items: center;
+    color: $white;
+    display: flex;
+    justify-content: flex-start;
+    padding: $small-spacing;
+    text-decoration: none;
+
+    .icon:first-child {
+      margin-right: $small-spacing;
+    }
+
+    &:hover,
+    &:focus {
+      background: $medium-grey;
+      outline: none;
+    }
+  }
+
+  .drop-open & {
+    opacity: 1;
+    pointer-events: auto;
+    touch-action: auto;
+    transition-timing-function: $deceleration-timing;
+    transform: translateY(0);
   }
 }
