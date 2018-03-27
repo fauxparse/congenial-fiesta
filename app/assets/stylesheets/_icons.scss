@@ -1,0 +1,12 @@
+.icon {
+  @include size($icon-size);
+  display: inline-block;
+
+  a & {
+    display: block;
+  }
+
+  svg {
+    display: block;
+  }
+}

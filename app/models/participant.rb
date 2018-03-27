@@ -6,6 +6,8 @@ class Participant < ApplicationRecord
   has_many :identities, dependent: :destroy, autosave: true
   has_many :password_resets
 
+  has_one_attached :avatar
+
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, if: :email?
   validates :email, email: { allow_blank: true }

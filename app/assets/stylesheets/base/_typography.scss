@@ -1,6 +1,14 @@
+@mixin all-caps {
+  font-weight: $light-font-weight;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: $base-line-height * 1rem;
+}
+
 html {
   color: $base-font-color;
   font-family: $base-font-family;
+  font-weight: $base-font-weight;
   font-size: 100%;
   line-height: $base-line-height;
 }
@@ -17,6 +25,11 @@ h6 {
   margin: 0 0 $small-spacing;
 }
 
+h1 {
+  font-family: $hero-font-family;
+  text-transform: uppercase;
+}
+
 p {
   margin: 0 0 $small-spacing;
 }
@@ -24,15 +37,15 @@ p {
 a {
   color: $action-color;
   text-decoration-skip: ink;
-  transition: color $base-duration $base-timing;
+  transition: all $fast-duration $base-timing;
 
   &:hover {
-    color: shade($action-color, 25%);
+    color: $action-color-hover;
   }
 
   &:focus {
     outline: $focus-outline;
-    outline-offset: $focus-outline-offset;
+    background: $focus-outline-color;
   }
 }
 

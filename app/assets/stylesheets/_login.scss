@@ -1,0 +1,104 @@
+body.login {
+  align-items: center;
+  background: linear-gradient(to bottom right, $mandarin 0%, $tomato 100%);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: $base-spacing;
+}
+
+.login-dialog {
+  @include shadow;
+  background: rgba($white, 0.9);
+  border-radius: $base-border-radius;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  max-width: calc(100vw - #{$base-spacing * 2});
+  overflow: hidden;
+  width: 20em;
+
+  section {
+    border: none;
+    padding: $base-spacing;
+    position: relative;
+  }
+}
+
+.login-form {
+  @include shadow(0.5);
+  background: white;
+  border-radius: $base-border-radius;
+  padding: $base-spacing;
+  position: relative;
+
+  h1 {
+    font-size: modular-scale(6);
+    line-height: 1;
+  }
+
+  h2 {
+    font-family: $hero-font-family;
+    font-size: modular-scale(2);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+}
+
+.login-form-buttons {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    order: 1;
+    text-decoration: none;
+  }
+
+  > :first-child:last-child {
+    flex: 1;
+  }
+}
+
+.login-social {
+  &::before {
+    @include size(2.5em);
+    @include position(absolute, 0 null null 50%);
+    @include center-content;
+    background: $tomato;
+    border-radius: 50%;
+    color: $white;
+    content: 'or';
+    font-size: modular-scale(-1);
+    font-weight: $light-font-weight;
+    letter-spacing: 0.1em;
+    margin: -1.25em;
+    text-transform: uppercase;
+  }
+}
+
+.login-social-links {
+  display: flex;
+  align-items: center;
+
+  p {
+    flex: 1;
+    margin: 0;
+  }
+
+  a {
+    border-radius: 50%;
+    color: $base-font-color;
+    margin: 0 0.25em;
+    padding: 0.5em;
+
+    &:focus {
+      background-color: $focus-outline-color;
+      outline: none;
+    }
+
+    &:last-child {
+      margin-right: -0.5em;
+    }
+  }
+}

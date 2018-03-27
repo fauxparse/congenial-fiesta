@@ -1,0 +1,4 @@
+%section.login-social
+  .login-social-links
+    %p= t('.log_in_with')
+    = render partial: 'accounts/provider', collection: Identity.providers.except(:developer).keys

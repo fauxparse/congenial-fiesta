@@ -22,7 +22,8 @@ module ErrorMessagesHelper
 
     def form_group_class(field, options)
       @template.class_string(
-        'form-field', options[:class],
+        'form-field',
+        options[:class],
         'with-errors' => errors_on?(field)
       )
     end

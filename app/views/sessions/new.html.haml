@@ -1,15 +1,17 @@
-= form_for login_form, url: login_path do |form|
-  = form.group :email do
-    = form.label :email
-    = form.email_field :email
-    = form.error_messages_for :email
-  = form.group :password do
-    = form.label :password
-    = form.password_field :password
-    = form.error_messages_for :password
-  .form-buttons
-    = form.submit t('.submit')
-%section.social
-  %h3= t('.log_in_with')
-  .social-links
-    = render partial: 'provider', collection: Identity.providers.except(:developer).keys
+%main.login-dialog
+  = form_for login_form, url: login_path, html: { class: 'login-form' } do |form|
+    %h1= t('festival.name.short')
+    - if login_form.errors.any?
+      .form-errors= t('.error')
+    = form.group :email do
+      = form.label :email
+      = form.email_field :email, autocomplete: :off
+    = form.group :password do
+      = form.label :password do
+        = form.object.class.human_attribute_name :password
+        = link_to t('.forgot'), new_password_path
+      = form.password_field :password, autocomplete: :off
+    .form-buttons.login-form-buttons
+      = form.submit t('.submit'), class: 'primary'
+      = link_to t('.sign_up'), signup_path
+  = render 'accounts/social'

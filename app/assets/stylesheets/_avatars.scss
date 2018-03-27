@@ -1,0 +1,12 @@
+.avatar {
+  @include center-content;
+  @include size($avatar-size);
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+}

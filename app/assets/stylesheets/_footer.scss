@@ -1,0 +1,8 @@
+.page-footer {
+  @include full-width;
+  @include vertical-padding($base-spacing);
+  align-items: flex-start;
+  background: $medium-grey;
+  color: $white;
+  display: flex;
+}

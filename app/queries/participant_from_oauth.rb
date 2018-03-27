@@ -7,7 +7,7 @@ class ParticipantFromOauth
   end
 
   def participant
-    identity.participant
+    participant_with_avatar
   end
 
   private
@@ -26,6 +26,26 @@ class ParticipantFromOauth
       uid: uid,
       participant: find_or_create_participant
     )
+  end
+
+  def participant_with_avatar
+    identity.participant.tap do |participant|
+      attach_avatar_to(participant) \
+        if avatar.present? && !participant.avatar.attached?
+    end
+  end
+
+  def attach_avatar_to(participant)
+    open(avatar) do |file|
+      participant.avatar.attach(
+        io: file,
+        filename: File.basename(avatar),
+        content_type:
+          file.respond_to?(:content_type) &&
+          file.content_type ||
+          Rack::Mime.mime_type(File.extname(avatar))
+      )
+    end
   end
 
   def find_or_create_participant
@@ -48,5 +68,9 @@ class ParticipantFromOauth
 
   def email
     oauth_hash[:info][:email]
+  end
+
+  def avatar
+    oauth_hash[:info][:image]
   end
 end

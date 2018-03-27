@@ -6,8 +6,19 @@ RSpec.describe AccountsController, type: :request do
   subject { response }
 
   describe 'get /signup' do
-    before { get signup_path }
-    it { is_expected.to be_successful }
+    context 'when not logged in' do
+      before { get signup_path }
+      it { is_expected.to be_successful }
+    end
+
+    context 'when logged in' do
+      before do
+        log_in_as create(:participant, :with_password)
+        get signup_path
+      end
+
+      it { is_expected.to redirect_to root_path }
+    end
   end
 
   describe 'post /signup' do

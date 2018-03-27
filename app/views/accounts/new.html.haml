@@ -1,19 +1,23 @@
-= form_for signup_form, url: signup_path do |form|
-  = form.group :name do
-    = form.label :name
-    = form.text_field :name
-    = form.error_messages_for :name
-  = form.group :email do
-    = form.label :email
-    = form.email_field :email
-    = form.error_messages_for :email
-  = form.group :password do
-    = form.label :password
-    = form.password_field :password
-    = form.error_messages_for :password
-  = form.group :password_confirmation do
-    = form.label :password_confirmation, t('.password_confirmation')
-    = form.password_field :password_confirmation
-    = form.error_messages_for :password_confirmation
-  .form-buttons
-    = form.submit t('.submit')
+%main.login-dialog
+  = form_for signup_form, url: signup_path, html: { class: 'login-form' } do |form|
+    %h1= t('festival.name.short')
+    = form.group :name do
+      = form.label :name
+      = form.text_field :name
+      = form.error_messages_for :name
+    = form.group :email do
+      = form.label :email
+      = form.email_field :email
+      = form.error_messages_for :email
+    = form.group :password do
+      = form.label :password
+      = form.password_field :password
+      = form.error_messages_for :password
+    = form.group :password_confirmation do
+      = form.label :password_confirmation, t('.password_confirmation')
+      = form.password_field :password_confirmation
+      = form.error_messages_for :password_confirmation
+    .form-buttons.login-form-buttons
+      = form.submit t('.submit'), class: 'primary'
+      = link_to t('.log_in'), login_path
+  = render 'social'

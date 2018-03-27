@@ -1,19 +1,36 @@
-%section.details
-  %h3= t('.details')
-  = form_for current_participant, url: profile_path do |form|
-    = form.group :name do
-      = form.label :name
-      = form.text_field :name
-      = form.error_messages_for :name
-    = form.group :email do
-      = form.label :email
-      = form.email_field :email
-      = form.error_messages_for :email
-    .form-buttons
-      = form.submit t('.submit')
+%main.profile
+  %header.hero
+    %h1= t('.title')
+  %section.details
+    = form_for current_participant, url: profile_path, html: { class: 'profile-form' } do |form|
+      .profile-avatar
+        = form.label :avatar do
+          %span.profile-avatar-upload
+            = icon :upload
+          = avatar(form.object, size: 128)
+          %svg.upload-progress{width: 80, height: 80, viewbox: '-40 -40 80 80'}
+            %path{d: 'M0 -38 A 38 38 0 0 1 0 38 A 38 38 0 0 1 0 -38', pathLength: 100}
+        = form.file_field :avatar, direct_upload: true
+      .profile-details
+        = form.group :name do
+          = form.label :name
+          = form.text_field :name
+          = form.error_messages_for :name
+        = form.group :email do
+          = form.label :email
+          = form.email_field :email
+          = form.error_messages_for :email
 
-%section.password
-  %h3= t('.password')
-  = link_to t(current_participant.password? ? 'change_password' : 'add_password'), edit_password_path, class: 'button'
+      .form-buttons
+        = form.submit t('.submit'), class: 'primary submit-profile-changes'
 
-= render 'oauth_accounts'
+  %section.password
+    .options
+      .option
+        = icon('password', class: 'option-icon')
+        .option-name= t('.password')
+        .option-value
+          = link_to edit_password_path, class: class_string('button', { primary: !current_participant.password? }) do
+            = t(current_participant.password? ? 'change_password' : 'add_password')
+
+  = render 'oauth_accounts'

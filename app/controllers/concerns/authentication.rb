@@ -11,6 +11,10 @@ module Authentication
     def authenticate(*options)
       before_action :require_authentication, *options
     end
+
+    def must_be_logged_out(*options)
+      before_action :require_no_authentication, *options
+    end
   end
 
   private
@@ -48,5 +52,9 @@ module Authentication
 
   def require_authentication
     store_and_redirect_to(login_path) unless logged_in?
+  end
+
+  def require_no_authentication
+    redirect_to(root_path) if logged_in?
   end
 end

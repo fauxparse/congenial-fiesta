@@ -1,4 +1,10 @@
 en:
+  festival:
+    name:
+      full: 'New Zealand Improv Festival'
+      short: 'NZIF'
+      tagline: 'A Festival of Moments'
+
   date:
     formats:
       long: '%d %B, %Y'
@@ -39,20 +45,30 @@ en:
       twitter: 'Twitter'
 
   accounts:
-    sign_up: 'Sign up'
     new:
+      log_in: 'Log in'
       password_confirmation: 'Confirm password'
       submit: 'Create account'
+    sign_up: 'Sign up'
+    social:
+      log_in_with: 'Log in with'
 
   passwords:
     create:
+      back: 'Back to home page'
       check_email: 'Check your email for a link to reset your password.'
+      reset: 'Reset password'
     edit:
-      submit: 'Change password'
+      add: 'Add password'
+      title: 'Password'
+      update: 'Update password'
     invalid:
-      sorry: 'Maybe the token you tried to use was invalid or has expired.'
+      invalid: 'Maybe the token you tried to use was invalid or has expired.'
+      sorry: 'Sorry…'
     new:
+      email: 'Email address'
       submit: 'Request password reset'
+      title: 'Reset password'
     update:
       created: 'Password added successfully'
       changed: 'Password changed successfully'
@@ -63,15 +79,20 @@ en:
       reset_link: 'Click here to reset your password'
 
   profiles:
+    oauth_accounts:
+      title: 'Other ways to log in'
+      explanation: 'Connect these other accounts to use them to log in instead of remembering a separate password. We will never post to your other accounts or access data other than your name, email address, and photo.'
     show:
       add_password: 'Add a password'
       details: 'Your details'
       change_password: 'Change password'
       password: 'Password'
       submit: 'Save changes'
+      title: 'Edit profile'
 
   sessions:
     log_in: 'Log in'
     new:
+      error: 'Hmm, those details don’t look quite right.'
+      forgot: 'Forgot?'
       submit: 'Log in'
-      log_in_with: 'Or log in with'

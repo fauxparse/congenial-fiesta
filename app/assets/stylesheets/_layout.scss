@@ -1,0 +1,37 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+
+  > section {
+    @include full-width;
+    @include vertical-padding($base-spacing);
+    border-top: $base-border;
+  }
+}
+
+header.hero {
+  @include full-width;
+  @include vertical-padding($base-spacing);
+  background: linear-gradient(to bottom right, $mandarin, $tomato);
+  color: $white;
+
+  h1 {
+    font-family: $base-font-family;
+    font-size: modular-scale(6);
+    font-weight: 100;
+    text-transform: none;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  + section {
+    border-top: none;
+  }
+}

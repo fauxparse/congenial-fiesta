@@ -7,7 +7,6 @@ class LoginForm
 
   attr_reader :email
 
-  validates :email, presence: true
   validate :authenticates_participant
 
   def initialize(email: nil, password: nil)
