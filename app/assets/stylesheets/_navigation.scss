@@ -4,9 +4,23 @@
   flex: 0 0 auto;
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: flex-end;
   background: $dark-grey;
   color: $white;
+
+  &::before {
+    content: '';
+    flex: 1;
+    order: 0;
+  }
+
+  > :first-child {
+    margin-left: -$small-spacing;
+  }
+
+  > :last-child {
+    margin-right: -$small-spacing;
+  }
 
   a {
     display: flex;
@@ -31,23 +45,32 @@
   font-weight: $bold-font-weight;
   font-size: modular-scale(2);
   text-decoration: none;
-  margin-left: -$small-spacing;
+  order: -1;
 }
 
-.navbar-login {
-  align-items: stretch;
-  display: flex;
-  margin-right: -$small-spacing;
+.navbar-login-avatar {
+  background: rgba($light-grey, 0.5);
+  flex: 0 0 auto;
+  margin-right: $small-spacing;
+}
 
-  .avatar {
-    background: rgba($light-grey, 0.5);
-    margin-right: $small-spacing;
+.navbar-login-name {
+  @include ellipsis;
+  display: none;
+  flex: 1;
+  margin-right: $small-spacing;
+
+  @media(screen and min-width: #{$line-width / 3}) {
+    display: block;
   }
 }
 
 .navbar-menu-target {
+  flex: 0 1 auto;
+  min-width: 0;
+
   .icon-chevron-down {
-    margin-left: $small-spacing;
+    flex: 0 0 auto;
     transition: transform $base-duration $base-timing;
   }
 
@@ -66,8 +89,8 @@
   opacity: 0;
   pointer-events: none;
   touch-action: none;
-  transition: all $base-duration $acceleration-timing;
-  transform: translateY(-4em);
+  transition: all $fast-duration $acceleration-timing;
+  transform: translateY(-2em);
 
   a {
     align-items: center;
