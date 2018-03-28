@@ -13,6 +13,10 @@
             = icon :user
             = t('profiles.show.link')
         %li
+          = link_to pitches_path do
+            = icon :pitch
+            = t('pitches.index.link')
+        %li
           = link_to logout_path, method: :delete do
             = icon :log_out
             = t('sessions.log_out')

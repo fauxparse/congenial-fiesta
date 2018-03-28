@@ -22,12 +22,20 @@ header.hero {
 
   h1 {
     font-family: $base-font-family;
-    font-size: modular-scale(6);
+    font-size: modular-scale(4);
     font-weight: 100;
     text-transform: none;
 
     &:last-child {
       margin: 0;
+    }
+
+    @media(screen and min-width: #{$line-width / 2}) {
+      font-size: modular-scale(5);
+    }
+
+    @media(screen and min-width: #{$line-width}) {
+      font-size: modular-scale(6);
     }
   }
 

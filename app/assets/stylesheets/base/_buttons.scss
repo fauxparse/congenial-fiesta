@@ -34,7 +34,7 @@
     opacity: 0.5;
   }
 
-  &.primary {
+  &.button-primary {
     background-color: $action-color;
     color: $white;
 
@@ -45,6 +45,16 @@
 
     &:focus {
       @include shadow(0.5);
+    }
+  }
+
+  .icon {
+    &:first-child {
+      margin-right: $small-spacing;
+    }
+
+    &:last-child {
+      margin-left: $small-spacing;
     }
   }
 }

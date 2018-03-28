@@ -78,6 +78,14 @@ en:
       subject: 'Reset your NZIF password'
       reset_link: 'Click here to reset your password'
 
+  pitches:
+    index:
+      link: 'Pitches'
+      new: 'Pitch an idea'
+      title: 'Pitches'
+    new:
+      title: 'Pitch an idea'
+
   profiles:
     oauth_accounts:
       title: 'Other ways to log in'

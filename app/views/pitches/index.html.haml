@@ -1,0 +1,7 @@
+%main.pitches
+  %header.hero
+    %h1= t('.title')
+  %section
+    = link_to new_pitch_path, class: 'button button-primary' do
+      = icon :pitch
+      %span= t('.new')

@@ -16,4 +16,4 @@
       = form.password_field :password_confirmation
       = form.error_messages_for :password_confirmation
     .form-buttons.login-form-buttons
-      = form.submit t(password_form.existing_password? ? '.update' : '.add'), class: 'primary'
+      = form.submit t(password_form.existing_password? ? '.update' : '.add'), class: 'button-primary'
