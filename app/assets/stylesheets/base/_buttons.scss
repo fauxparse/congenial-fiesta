@@ -49,12 +49,14 @@
   }
 
   .icon {
+    margin: -0.25em;
+
     &:first-child {
-      margin-right: $small-spacing;
+      margin-right: calc(#{$small-spacing} - 0.25em);
     }
 
     &:last-child {
-      margin-left: $small-spacing;
+      margin-left: calc(#{$small-spacing} - 0.25em);
     }
   }
 }

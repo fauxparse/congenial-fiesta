@@ -54,7 +54,7 @@ class PasswordForm
 
   def identity
     @identity ||=
-      participant.identities.detect(&:password_digest?) ||
+      participant.identities.detect(&:password?) ||
       new_password_identity
   end
 

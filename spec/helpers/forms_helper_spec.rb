@@ -2,15 +2,33 @@
 
 require 'rails_helper'
 
-RSpec.describe ErrorMessagesHelper, type: :helper do
-  class ErrorMessageDummy < Struct.new(:field)
+RSpec.describe FormsHelper, type: :helper do
+  class DummyFormObject < Struct.new(:field)
     include ActiveModel::Validations
     validates :field, presence: true
   end
 
-  let(:object) { ErrorMessageDummy.new(field_value).tap(&:validate) }
+  let(:object) { DummyFormObject.new(field_value).tap(&:validate) }
   let(:form) do
     ActionView::Base.default_form_builder.new(:form, object, helper, {})
+  end
+
+  describe '#check_box_field' do
+    let(:field_value) { true }
+
+    context 'when no block is given' do
+      subject { form.check_box_field(:field) }
+      it { is_expected.not_to include('check-box-field-content') }
+    end
+
+    context 'when a block is given' do
+      subject do
+        form.check_box_field(:field) do
+          'text'
+        end
+      end
+      it { is_expected.to include('text') }
+    end
   end
 
   describe '#group' do

@@ -44,8 +44,9 @@ textarea {
   border-width: 0 0 1px;
   border-radius: 0;
   box-sizing: border-box;
+  line-height: $base-line-height;
   margin-bottom: $small-spacing;
-  padding: ($base-spacing / 3) 0;
+  padding: ($base-spacing / 3) 0 calc(#{$base-spacing / 3} - 1px);
   transition: border-color $base-duration $base-timing;
   width: 100%;
 
@@ -59,11 +60,12 @@ textarea {
   }
 
   &:disabled {
-    background-color: shade($_form-background-color, 5%);
+    color: rgba($base-font-color, 0.5);
     cursor: not-allowed;
+    border-bottom-style: dashed;
 
     &:hover {
-      border: $base-border;
+      border-color: $base-border-color;
     }
   }
 
@@ -80,7 +82,7 @@ textarea {
 
 @-webkit-keyframes autofill {
   to {
-    color: #666;
+    color: $base-font-color;
     background: transparent;
   }
 }
@@ -126,4 +128,96 @@ select {
   font-size: modular-scale(-1);
   margin: 0 0 $small-spacing;
   color: $error-color;
+}
+
+.form-information {
+  color: $medium-grey;
+  font-size: modular-scale(-1);
+  margin: 0 0 $small-spacing;
+}
+
+.check-box-field {
+  align-items: flex-start;
+  display: flex;
+  justify-content: flex-start;
+
+  > input[type="checkbox"] {
+    display: none;
+  }
+}
+
+.check-box-field-icon,
+.check-box-field-content {
+  font-size: 1em;
+  font-weight: $base-font-weight;
+}
+
+.check-box-field-icon {
+  margin: 0 $small-spacing $small-spacing 0;
+
+  .checkbox {
+    @include size(2em);
+    cursor: pointer;
+    flex: 0 0 auto;
+
+    circle {
+      stroke: $medium-grey;
+    }
+
+    path {
+      stroke: $action-color;
+      stroke-dasharray: 100;
+      stroke-dashoffset: -100;
+
+      :checked ~ & {
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset $base-duration $base-timing;
+      }
+    }
+  }
+}
+
+.check-box-field-content {
+  display: block;
+  flex: 1;
+  padding-top: j;
+  letter-spacing: normal;
+  margin: (1em - $base-line-height * 0.5em) 0 $small-spacing;
+  text-transform: none;
+
+  .form-errors {
+    margin-bottom: 0;
+  }
+}
+
+.text-area-word-count {
+  --progress: 0;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+
+  svg {
+    @include size(1em);
+    margin-right: 0.5em;
+
+    circle {
+      fill: none;
+      stroke: rgba($light-grey, 0.5);
+      stroke-width: 2px;
+    }
+
+    path {
+      fill: none;
+      stroke: $dark-grey;
+      stroke-dasharray: 100;
+      stroke-dashoffset: calc(100 - var(--progress));
+      stroke-linecap: round;
+      stroke-width: 2px;
+    }
+  }
+
+  &.word-limit-exceeded svg path {
+    stroke: $error-color;
+    stroke-dashoffset: 0;
+  }
 }

@@ -43,9 +43,11 @@ gem 'autoprefixer-rails'
 gem 'aws-sdk-s3', require: false
 gem 'bitters', github: 'thoughtbot/bitters'
 gem 'bourbon', github: 'thoughtbot/bourbon'
+gem 'country_select', github: 'stefanpenner/country_select'
 gem 'css-class-string'
 gem 'figaro'
 gem 'haml-rails'
+gem 'hashie'
 gem 'inline_svg'
 gem 'letter_opener'
 gem 'letter_opener_web'
@@ -56,6 +58,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'premailer-rails'
+gem 'wannabe_bool'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,134 @@
+.select-select {
+  display: none;
+  opacity: 0;
+  /* For when we are on a small touch device and want to use native controls */
+  pointer-events: none;
+  position: absolute;
+}
+
+.select-element {
+  display: none;
+  position: absolute;
+
+  &.select-open {
+    display: block;
+  }
+}
+
+.select.select-theme-default {
+  user-select: none;
+
+  .select-content {
+    @include shadow(0.5);
+    background: $white;
+    border-radius: $base-border-radius;
+    max-height: 18rem;
+    max-width: 18rem;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    @media (max-width: 27rem), (max-height: 27rem) {
+      max-width: 11.25rem;
+      max-height: 11.25rem;
+    }
+  }
+
+  .select-options {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+
+    .select-option {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      cursor: pointer;
+      display: block;
+      line-height: $base-line-height;
+      list-style: none;
+      margin: 0;
+      overflow: hidden;
+      padding: 0.5rem 1em 0.5rem 2.5em;
+      position: relative;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.select-option-selected:before {
+        @include position(absolute, 50% null null 0.5em);
+        @include size($icon-size);
+        content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='#{$medium-grey}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'><path d='M20 6L9 17l-5-5'/></svg>");
+        margin: ($icon-size / -2) 0;
+      }
+
+      &:hover,
+      &.select-option-highlight {
+        background: $highlight-color;
+        color: $white;
+
+        &.select-option-selected::before {
+          content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='#{$white}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'><path d='M20 6L9 17l-5-5'/></svg>");
+        }
+      }
+
+      &:first-child {
+        @include border-top-radius($base-border-radius);
+      }
+
+      &:last-child {
+        @include border-bottom-radius($base-border-radius);
+      }
+    }
+
+    .select-option-disabled[data-value^="---"] {
+      border-top: $base-border;
+      height: 0;
+      margin: $small-spacing 0;
+      overflow: hidden;
+    }
+  }
+}
+
+.select-target {
+  @include ellipsis;
+  border-bottom: $base-border;
+  color: $base-font-color;
+  cursor: pointer;
+  max-width: 100%;
+  position: relative;
+  padding: ($base-spacing / 3) calc(#{$icon-size} + #{$small-spacing}) ($base-spacing / 3) 0;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  user-select: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+
+  &:hover {
+    border-color: #aaa;
+    border-color: $action-color;
+    color: $base-font-color;
+  }
+
+  &.select-target-focused,
+  &:focus {
+    background: none;
+    border-color: $action-color;
+    color: $base-font-color;
+    outline: none;
+  }
+
+  b {
+    @include position(absolute, 50% 0 0 null);
+    @include size($icon-size);
+    margin: ($icon-size / -2) 0;
+    transition: transform $base-duration $base-timing;
+
+    &::after {
+      content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='#{$base-font-color}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'><path d='M6 9l6 6 6-6'/></svg>");
+    }
+  }
+
+  &.select-open b {
+    transform: rotate(180deg);
+  }
+}

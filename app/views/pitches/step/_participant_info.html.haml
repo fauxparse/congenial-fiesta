@@ -1,0 +1,66 @@
+%section.pitch-participant-info
+  %section.pitch-participant-info-login
+    - if logged_in?
+      %h3= t('.login.title')
+    - else
+      %h3= t('.login.must_log_in')
+      %p= t('.login.existing', path: login_path(return_to: request.path)).html_safe
+    = form.group :name do
+      = form.label :name
+      = form.text_field :name
+      = form.error_messages_for :name
+    = form.fields_for step.participant do |f|
+      = f.group :email do
+        = f.label :email
+        = f.email_field :email, disabled: f.object.persisted?
+        = f.error_messages_for :email
+      - unless f.object.persisted?
+        = f.group :password do
+          = f.label :password
+          = f.password_field :password
+          = f.error_messages_for :password
+        = f.group :password_confirmation do
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation
+          = f.error_messages_for :password_confirmation
+  - unless logged_in?
+    %section.pitch-participant-info-new-login
+      %h3= t('.new_login.title')
+      %p= t('.new_login.explanation')
+  %section.pitch-participant-info-demographics
+    = form.group :city do
+      = form.label :city
+      = form.text_field :city
+      = form.error_messages_for :city
+    = form.group :country_code do
+      = form.label :country_code
+      = form.country_select :country_code, priority_countries: %w(NZ AU)
+      = form.error_messages_for :country_code
+
+  %section.pitch-participant-company
+    = form.group :company do
+      = form.label :company
+      = form.text_field :company, placeholder: t('.company.placeholder')
+      = form.error_messages_for :company
+    = form.group :presented_before do
+      %p.label= t('.presented_before.label')
+      = form.text_area :presented_before, rows: 1, placeholder: t('.presented_before.placeholder'), data: { autosize: true }
+      = form.error_messages_for :presented_before
+
+  %section.pitch-participant-bio
+    = form.group :bio do
+      %p.label= t('.bio.label')
+      = form.text_area :bio, rows: 1, data: { autosize: true }
+      %p.form-information.text-area-word-count{data: { min: 100, max: 150 }}
+        %svg{viewbox: '-8 -8 16 16'}
+          %circle{cx: 0, cy: 0, r: 7}
+          %path{d: 'M0 -7 A 7 7 0 0 1 0 7 A 7 7 0 0 1 0 -7', pathLength: 100}
+        = t('.bio.word_count')
+      = form.error_messages_for :bio
+
+  %section.pitch-participant-info-code-of-conduct
+    %h3= t('.code_of_conduct.title')
+    %p= t('.code_of_conduct.explanation', link: 'http://nzif.info/2017/code-of-conduct').html_safe
+    = form.check_box_field(:code_of_conduct) do
+      %span= t('.code_of_conduct.accept')
+      = form.error_messages_for :code_of_conduct

@@ -1,5 +1,7 @@
 (() => {
   addEventListener('turbolinks:load', () => {
+    Select.init()
+
     Array.from(document.querySelectorAll('.drop-target')).forEach(target => {
       // const content = target.parentNode.querySelector('.drop-content')
       const content = target.nextSibling

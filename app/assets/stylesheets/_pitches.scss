@@ -1,0 +1,151 @@
+.pitch-progress {
+  @include full-width;
+  @include vertical-padding($small-spacing);
+  background: linear-gradient(to bottom right, $mandarin, $tomato);
+  color: $white;
+}
+
+.pitch-progress-steps {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.pitch-progress-step {
+  color: currentColor;
+  flex: 1 0 6em;
+  max-width: 8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: $white;
+  }
+
+  &::before,
+  &::after {
+    border-top: 2px solid white;
+    content: '';
+    margin-top: -1px;
+  }
+
+  &::before {
+    @include position(absolute, 1.25em 50% null 0);
+    margin-right: 1.25em;
+  }
+
+  &::after {
+    @include position(absolute, 1.25em 0 null 50%);
+    margin-left: 1.25em;
+  }
+
+  &:first-child::before,
+  &:last-child::after {
+    display: none;
+  }
+}
+
+.pitch-progress-step-current {
+  flex-basis: auto;
+
+  .pitch-progress-step-icon {
+    background: $white;
+    color: $action-color;
+  }
+}
+
+.pitch-progress-step-pending {
+  pointer-events: none;
+  touch-action: none;
+}
+
+.pitch-progress-step-icon {
+  @include center-content;
+  @include size(2.5rem);
+  border: 2px solid $white;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.pitch-progress-step-title {
+  font-size: modular-scale(-1);
+  line-height: 1rem;
+}
+
+.pitch-form {
+  > section {
+    @include full-width;
+    @include vertical-padding($base-spacing);
+  }
+
+  h3 {
+    font-size: modular-scale(2);
+    font-weight: $light-font-weight;
+    margin: 0 0 $small-spacing;
+  }
+
+  section:not(:first-of-type) h3 {
+    margin-top: $base-spacing;
+  }
+
+  p.label {
+    margin: $base-spacing 0 $small-spacing;
+  }
+
+  .form-field {
+    margin-bottom: $small-spacing;
+  }
+}
+
+.pitch-buttons {
+  @include full-width;
+  @include vertical-padding($base-spacing);
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+
+  > :not(:first-child) {
+    margin-left: $small-spacing;
+  }
+}
+
+.pitch-participant-info-new-login {
+  background: $secondary-background-color;
+  border-radius: $base-border-radius;
+  margin: 0 (-$small-spacing) $base-spacing;
+  padding: $small-spacing;
+
+  h3 {
+    font-size: modular-scale(1);
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.pitch-participant-info-login,
+.pitch-participant-info-demographics {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 (-$small-spacing);
+
+  > h3,
+  > p {
+    flex: 1 0 100%;
+    margin: 0 $small-spacing $small-spacing;
+  }
+
+  .form-field {
+    flex: 1 1 40%;
+    margin: 0 $small-spacing $small-spacing;
+    min-width: 20em;
+  }
+
+  .select-target {
+    width: 100%;
+  }
+}

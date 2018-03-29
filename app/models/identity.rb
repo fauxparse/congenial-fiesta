@@ -19,4 +19,8 @@ class Identity < ApplicationRecord
   def last_identity_destroyed?
     participant.identities.reload.empty?
   end
+
+  def password?
+    false
+  end
 end

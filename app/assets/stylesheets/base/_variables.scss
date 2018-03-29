@@ -17,7 +17,7 @@ $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
 // Other Sizes
-$base-border-radius: 0.1875em;
+$base-border-radius: 0.25em;
 $base-spacing: 1.5rem;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
@@ -46,7 +46,7 @@ $twitter: #1da1f2;
 $base-font-color: $dark-grey;
 $action-color: $tomato;
 $action-color-hover: shade($action-color, 25%);
-$hover-color: $grape;
+$highlight-color: $mandarin;
 $error-color: $tomato;
 $success-color: $apple;
 
@@ -60,6 +60,7 @@ $base-border: 1px solid $base-border-color;
 
 // Background Colors
 $viewport-background-color: $white;
+$secondary-background-color: transparentize($light-grey, 0.5);
 
 // Focus
 $focus-outline-color: transparentize($action-color, 0.75);
