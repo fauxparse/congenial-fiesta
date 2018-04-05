@@ -194,7 +194,6 @@ select {
   --progress: 0;
   align-items: center;
   display: flex;
-  justify-content: flex-end;
 
   svg {
     @include size(1em);

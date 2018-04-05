@@ -111,7 +111,7 @@
   }
 }
 
-.pitch-participant-info-new-login {
+.pitch-presenter-info-new-login {
   background: $secondary-background-color;
   border-radius: $base-border-radius;
   margin: 0 (-$small-spacing) $base-spacing;
@@ -126,8 +126,8 @@
   }
 }
 
-.pitch-participant-info-login,
-.pitch-participant-info-demographics {
+.pitch-presenter-info-login,
+.pitch-presenter-info-demographics {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -147,5 +147,18 @@
 
   .select-target {
     width: 100%;
+  }
+}
+
+.pitch-presenter-bio-after {
+  @media(screen and min-width: #{$line-width / 2}) {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    p {
+      margin-bottom: 0;
+    }
   }
 }

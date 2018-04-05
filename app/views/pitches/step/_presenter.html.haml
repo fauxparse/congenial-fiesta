@@ -1,5 +1,5 @@
-%section.pitch-participant-info
-  %section.pitch-participant-info-login
+%section.pitch-presenter-info
+  %section.pitch-presenter-info-login
     - if logged_in?
       %h3= t('.login.title')
     - else
@@ -25,11 +25,11 @@
           = f.password_field :password_confirmation
           = f.error_messages_for :password_confirmation
   - unless logged_in?
-    %section.pitch-participant-info-new-login
+    %section.pitch-presenter-info-new-login
       %h3= t('.new_login.title')
       %p= t('.new_login.explanation')
   = form.fields_for step.to_sym, step do |f|
-    %section.pitch-participant-info-demographics
+    %section.pitch-presenter-info-demographics
       = f.group :city do
         = f.label :city
         = f.text_field :city
@@ -39,7 +39,7 @@
         = f.country_select :country_code, priority_countries: %w(NZ AU)
         = f.error_messages_for :country_code
 
-    %section.pitch-participant-company
+    %section.pitch-presenter-company
       = f.group :company do
         = f.label :company
         = f.text_field :company, placeholder: t('.company.placeholder')
@@ -49,18 +49,19 @@
         = f.text_area :presented_before, rows: 1, placeholder: t('.presented_before.placeholder'), data: { autosize: true }
         = f.error_messages_for :presented_before
 
-    %section.pitch-participant-bio
+    %section.pitch-presenter-bio
       = f.group :bio do
         %p.label= t('.bio.label')
         = f.text_area :bio, rows: 1, data: { autosize: true }
-        %p.form-information.text-area-word-count{data: { min: 100, max: 150 }}
-          %svg{viewbox: '-8 -8 16 16'}
-            %circle{cx: 0, cy: 0, r: 7}
-            %path{d: 'M0 -7 A 7 7 0 0 1 0 7 A 7 7 0 0 1 0 -7', pathLength: 100}
-          = t('.bio.word_count')
-        = f.error_messages_for :bio
+        .pitch-presenter-bio-after
+          %p.form-information.text-area-word-count{data: { min: 100, max: 150 }}
+            %svg{viewbox: '-8 -8 16 16'}
+              %circle{cx: 0, cy: 0, r: 7}
+              %path{d: 'M0 -7 A 7 7 0 0 1 0 7 A 7 7 0 0 1 0 -7', pathLength: 100}
+            = t('.bio.word_count')
+          = f.error_messages_for :bio
 
-    %section.pitch-participant-info-code-of-conduct
+    %section.pitch-presenter-info-code-of-conduct
       %h3= t('.code_of_conduct.title')
       %p= t('.code_of_conduct.explanation', link: 'http://nzif.info/2017/code-of-conduct').html_safe
       = f.check_box_field(:code_of_conduct) do

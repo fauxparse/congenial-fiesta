@@ -20,11 +20,18 @@
       .match(/\b[a-z\d]+\b/g) || []
     ).length
 
+  const parentField = element => {
+    while (element && !element.classList.contains('form-field')) {
+      element = element.parentElement
+    }
+    return element
+  }
+
   addEventListener('turbolinks:load', () => {
     Array
       .from(document.querySelectorAll('.text-area-word-count'))
       .forEach(counter => {
-        const textArea = counter.parentElement.querySelector('textarea')
+        const textArea = parentField(counter).querySelector('textarea')
         const updater = () => updateWordCount(textArea, counter)
         textArea.addEventListener('change', updater)
         textArea.addEventListener('input', updater)
