@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
   must_be_logged_out only: %i[new create]
 
   def new
-    logger.info params[:return_to] if params.include?(:return_to)
     @login_form = LoginForm.new
   end
 

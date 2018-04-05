@@ -8,6 +8,7 @@ class PitchesController < ApplicationController
   def index; end
 
   def new
+    store_location unless logged_in?
     render :edit
   end
 
