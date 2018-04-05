@@ -2,28 +2,28 @@
 
 class PitchForm
   class Step
-    class ParticipantInfo < Step
+    class Presenter < Step
       FIELDS = %i[city country_code company presented_before bio].freeze
 
       validate :valid_participant, if: :new_participant?
       validates :name, :city, :country_code, :bio, presence: true
       validates :code_of_conduct, acceptance: true
 
-      def participant_info
-        info.participant
+      def presenter_info
+        info.presenter
       end
 
-      def participant=(attributes)
+      def presenter=(attributes)
         self.attributes = attributes
       end
 
       def name
-        participant_info.name.presence || participant.name
+        presenter_info.name.presence || participant.name
       end
 
       def name=(value)
         participant.name = value if new_participant?
-        participant_info.name = value
+        presenter_info.name = value
       end
 
       def email=(value)
@@ -40,7 +40,7 @@ class PitchForm
 
       delegate(
         *FIELDS.flat_map { |f| [f, :"#{f}="] },
-        to: :participant_info
+        to: :presenter_info
       )
 
       def code_of_conduct
@@ -54,7 +54,7 @@ class PitchForm
       def permit(params)
         params.permit(
           :code_of_conduct,
-          participant:
+          presenter:
             [:name, :email, :password, :password_confirmation, *FIELDS]
         )
       end

@@ -12,9 +12,9 @@ RSpec.describe Pitch, type: :model do
     it { is_expected.to be_a Pitch::Info }
 
     it 'is serialized correctly' do
-      pitch.info.participant.name = 'Test'
+      pitch.info.presenter.name = 'Test'
       pitch.save
-      expect { pitch.reload }.not_to change { pitch.info.participant.name }
+      expect { pitch.reload }.not_to change { pitch.info.presenter.name }
     end
   end
 end

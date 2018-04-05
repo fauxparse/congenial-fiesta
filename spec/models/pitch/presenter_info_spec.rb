@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Pitch::ParticipantInfo do
-  subject(:info) { Pitch::ParticipantInfo.new(data) }
+RSpec.describe Pitch::PresenterInfo do
+  subject(:info) { Pitch::PresenterInfo.new(data) }
   let(:data) { {} }
 
   describe '#country_code' do

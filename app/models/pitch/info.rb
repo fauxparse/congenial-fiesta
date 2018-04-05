@@ -5,9 +5,9 @@ class Pitch
     include Hashie::Extensions::Dash::Coercion
 
     property :code_of_conduct_accepted, default: false
-    property :participant,
-      coerce: ParticipantInfo,
-      default: -> { ParticipantInfo.new }
+    property :presenter,
+      coerce: PresenterInfo,
+      default: -> { PresenterInfo.new }
 
     def self.dump(obj)
       ActiveSupport::JSON.encode(obj.to_h)

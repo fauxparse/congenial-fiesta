@@ -2,7 +2,7 @@
 
 class PitchForm
   class Step
-    class ActivityInfo < Step
+    class Idea < Step
       validates :name, presence: true
 
       def name

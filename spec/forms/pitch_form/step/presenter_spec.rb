@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe PitchForm::Step::ParticipantInfo do
-  subject(:step) { PitchForm::Step::ParticipantInfo.new(pitch) }
+RSpec.describe PitchForm::Step::Presenter do
+  subject(:step) { PitchForm::Step::Presenter.new(pitch) }
 
   let(:pitch) do
     create(:pitch, info: Pitch::Info.new(info))
@@ -11,7 +11,7 @@ RSpec.describe PitchForm::Step::ParticipantInfo do
 
   let(:info) do
     {
-      participant: {
+      presenter: {
         name: 'Matt',
         city: 'Wellington',
         country_code: 'NZ',
@@ -26,7 +26,7 @@ RSpec.describe PitchForm::Step::ParticipantInfo do
   describe '#attributes=' do
     it 'assigns attributes' do
       expect { step.attributes = { name: 'Jen' } }
-        .to change { pitch.info.participant.name }
+        .to change { pitch.info.presenter.name }
         .from('Matt')
         .to('Jen')
     end
@@ -55,7 +55,7 @@ RSpec.describe PitchForm::Step::ParticipantInfo do
     let(:pitch) { Pitch.new }
     before do
       step.attributes = {
-        participant: {
+        presenter: {
           name: 'Matt',
           email: 'fauxparse@gmail.com',
           password: 'p4$$w0rd',

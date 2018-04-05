@@ -23,7 +23,7 @@ RSpec.describe PitchesController, type: :request do
       before { post new_pitch_path, params: { pitch: pitch_params } }
       let(:pitch_params) do
         {
-          participant: {
+          presenter: {
             name: participant.name,
             city: 'Wellington',
             country_code: 'NZ',
@@ -33,7 +33,7 @@ RSpec.describe PitchesController, type: :request do
         }
       end
       let(:pitch) { participant.pitches.last }
-      let(:next_step) { pitch_step_path(pitch, :activity_info) }
+      let(:next_step) { pitch_step_path(pitch, :idea) }
 
       it 'creates a pitch' do
         expect(pitch).not_to be_nil
@@ -45,7 +45,6 @@ RSpec.describe PitchesController, type: :request do
         let(:pitch_params) do
           { participant: { city: 'Melbourne' } }
         end
-        let(:same_step) { pitch_step_path(pitch, :participant_info) }
 
         it 'still creates a pitch' do
           expect(pitch).not_to be_nil
@@ -57,21 +56,21 @@ RSpec.describe PitchesController, type: :request do
       end
     end
 
-    describe 'get /pitch/:id/participant_info' do
-      before { get pitch_step_path(pitch, :participant_info) }
+    describe 'get /pitch/:id/presenter' do
+      before { get pitch_step_path(pitch, :presenter) }
       let(:pitch) { create(:pitch, participant: participant) }
 
       it { is_expected.to be_successful }
     end
 
-    describe 'get /pitch/:id/activity_info' do
+    describe 'get /pitch/:id/idea' do
       before do
         post new_pitch_path, params: { pitch: pitch_params }
-        get pitch_step_path(pitch, :activity_info)
+        get pitch_step_path(pitch, :idea)
       end
       let(:pitch_params) do
         {
-          participant: {
+          presenter: {
             name: participant.name,
             city: 'Wellington',
             country_code: 'NZ',
@@ -85,19 +84,19 @@ RSpec.describe PitchesController, type: :request do
       it { is_expected.to be_successful }
     end
 
-    describe 'put /pitch/:id/participant_info' do
-      before { put pitch_step_path(pitch, :participant_info), params: params }
+    describe 'put /pitch/:id/presenter' do
+      before { put pitch_step_path(pitch, :presenter), params: params }
       let(:pitch) { create(:pitch, participant: participant) }
       let(:params) do
         {
-          pitch: { participant: { name: 'Updated' } }
+          pitch: { presenter: { name: 'Updated' } }
         }
       end
 
       it { is_expected.to be_successful }
 
       it 'updates the pitch' do
-        expect(pitch.reload.info.participant.name).to eq 'Updated'
+        expect(pitch.reload.info.presenter.name).to eq 'Updated'
       end
     end
   end
@@ -117,7 +116,7 @@ RSpec.describe PitchesController, type: :request do
       before { post new_pitch_path, params: { pitch: pitch_params } }
       let(:pitch_params) do
         {
-          participant: {
+          presenter: {
             name: 'Test participant',
             email: 'test@example.com',
             password: 'p4$$w0rd',
@@ -130,7 +129,7 @@ RSpec.describe PitchesController, type: :request do
         }
       end
       let(:pitch) { Pitch.last }
-      let(:next_step) { pitch_step_path(pitch, :activity_info) }
+      let(:next_step) { pitch_step_path(pitch, :idea) }
 
       it 'creates a pitch' do
         expect(pitch).not_to be_nil

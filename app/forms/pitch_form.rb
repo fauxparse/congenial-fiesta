@@ -17,8 +17,8 @@ class PitchForm
 
   def steps
     @steps ||= build_steps(
-      PitchForm::Step::ParticipantInfo,
-      PitchForm::Step::ActivityInfo
+      PitchForm::Step::Presenter,
+      PitchForm::Step::Idea
     )
   end
 

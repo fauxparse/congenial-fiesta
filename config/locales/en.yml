@@ -98,7 +98,7 @@ en:
     form:
       next: 'Next'
     step:
-      participant_info:
+      presenter:
         title: 'About you'
         icon: 'user'
         login:
@@ -120,7 +120,7 @@ en:
         new_login:
           title: 'Why do I need a new password?'
           explanation: 'Unfortunately, even if you’ve been to NZIF before, you’ll need to create a new account for this year. We’ve made some exciting changes to the system, but for security reasons we can’t import existing login information.'
-      activity_info:
+      idea:
         title: 'Your idea'
         icon: 'pitch'
 

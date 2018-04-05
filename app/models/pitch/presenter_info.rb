@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Pitch
-  class ParticipantInfo < Hashie::Dash
+  class PresenterInfo < Hashie::Dash
     property :name
     property :city
     property :country_code, default: 'NZ'
