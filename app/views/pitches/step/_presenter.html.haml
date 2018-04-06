@@ -61,9 +61,9 @@
             = t('.bio.word_count')
           = f.error_messages_for :bio
 
-    %section.pitch-presenter-info-code-of-conduct
-      %h3= t('.code_of_conduct.title')
-      %p= t('.code_of_conduct.explanation', link: 'http://nzif.info/2017/code-of-conduct').html_safe
-      = f.check_box_field(:code_of_conduct) do
-        %span= t('.code_of_conduct.accept')
-        = f.error_messages_for :code_of_conduct
+  %section.pitch-presenter-info-code-of-conduct
+    %h3= t('.code_of_conduct.title')
+    %p= t('.code_of_conduct.explanation', link: 'http://nzif.info/2017/code-of-conduct').html_safe
+    = form.check_box_field(:code_of_conduct) do
+      %span= t('.code_of_conduct.accept')
+      = form.error_messages_for :code_of_conduct
