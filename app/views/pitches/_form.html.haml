@@ -1,9 +1,14 @@
 %header.pitch-progress
   .pitch-progress-steps
     - pitch_form.each_step do |step, step_number:, state:|
-      = link_to '#', class: "pitch-progress-step pitch-progress-step-#{state}" do
-        %span.pitch-progress-step-icon= icon(t('icon', scope: step.i18n_scope))
-        %span.pitch-progress-step-title= step.title
+      - if state === :complete
+        = link_to pitch_step_path(pitch, step), class: "pitch-progress-step pitch-progress-step-#{state}" do
+          %span.pitch-progress-step-icon= icon(t('icon', scope: step.i18n_scope))
+          %span.pitch-progress-step-title= step.title
+      - else
+        = content_tag :div, class: "pitch-progress-step pitch-progress-step-#{state}" do
+          %span.pitch-progress-step-icon= icon(t('icon', scope: step.i18n_scope))
+          %span.pitch-progress-step-title= step.title
 
 = form_for pitch_form.current_step, url: pitch_form.url, html: { class: 'pitch-form' } do |form|
   = render partial: pitch_form.current_step.to_partial_path, locals: { form: form, step: pitch_form.current_step }
@@ -14,6 +19,6 @@
         = icon('back')
         %span= t('.back')
     - unless pitch_form.current_step.last?
-      %button.button-primary{type: 'submit', rel: :next}
+      %button.button-primary{type: 'submit', name: 'submit', value: 'next', rel: :next}
         %span= [t('.next'), pitch_form.current_step.next.title].join(': ')
         = icon('next')

@@ -14,7 +14,7 @@ legend {
   padding: 0;
 }
 
-label {
+.form-field label {
   @include all-caps;
   display: block;
   color: $medium-grey;
@@ -144,6 +144,10 @@ select {
   > input[type="checkbox"] {
     display: none;
   }
+
+  .check-box-field-icon {
+    margin: 0 $small-spacing $small-spacing 0;
+  }
 }
 
 .check-box-field-icon,
@@ -153,27 +157,28 @@ select {
 }
 
 .check-box-field-icon {
-  margin: 0 $small-spacing $small-spacing 0;
+  @include size(2.5em);
+  align-items: center;
+  border: 2px solid $base-border-color;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
 
-  .checkbox {
-    @include size(2em);
-    cursor: pointer;
-    flex: 0 0 auto;
+  path {
+    stroke: $success-color;
+    stroke-dasharray: 100;
+    stroke-dashoffset: -100;
 
-    circle {
-      stroke: $medium-grey;
+    :checked ~ & {
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset $base-duration $base-timing;
     }
+  }
 
-    path {
-      stroke: $action-color;
-      stroke-dasharray: 100;
-      stroke-dashoffset: -100;
-
-      :checked ~ & {
-        stroke-dashoffset: 0;
-        transition: stroke-dashoffset $base-duration $base-timing;
-      }
-    }
+  :disabled ~ & {
+    opacity: 0.5;
   }
 }
 
@@ -182,7 +187,7 @@ select {
   flex: 1;
   padding-top: j;
   letter-spacing: normal;
-  margin: (1em - $base-line-height * 0.5em) 0 $small-spacing;
+  margin: (1.25em - $base-line-height * 0.5em) 0 $small-spacing;
   text-transform: none;
 
   .form-errors {

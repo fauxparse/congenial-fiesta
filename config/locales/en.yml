@@ -123,6 +123,86 @@ en:
       idea:
         title: 'Your idea'
         icon: 'pitch'
+        types:
+          standalone_workshop:
+            name: 'Standalone workshop'
+            description: 'Single 3-hour slot'
+          full_day_workshop:
+            name: 'Full-day workshop'
+            description: '2 × 3-hour slots'
+          weekend_workshop:
+            name: 'Weekend workshop'
+            description: '4 × 3-hour slots'
+          directed_performance:
+            name: 'Directed performance'
+            description: '+ 3-hour workshop'
+          experimental_performance:
+            name: 'Experimental performance'
+            description: '+ 3-hour workshop'
+      workshop_details:
+        the_workshop: 'Your workshop'
+        name:
+          label: 'What is the name of your workshop?'
+        workshop_description:
+          label: 'Please describe the workshop you wish to teach: something we would publish to advertise your workshop'
+          hint: 'What is the content? What will participants get out of the workshop?'
+        participation:
+          label: 'Who is your workshop aimed at? Select as many as are applicable:'
+          levels:
+            rookie:
+              level: 'Rookie'
+              experience: '< 1 year'
+              description: 'Has learned the basics, limited performance experience'
+            intermediate:
+              level: 'Intermediate'
+              experience: '1–4 years'
+              description: 'Strong foundation, general performance experience'
+            advanced:
+              level: 'Advanced'
+              experience: '5+ years'
+              description: 'Extensive performance experience, director/teacher'
+        prerequisites:
+          label: 'Are there any other prerequisites for your workshop?'
+          placeholder: 'Previous skills/training required; specific accessibility notes (e.g. mobility, vision, hearing)'
+        number_of_participants:
+          label: 'What is the maximum number of participants?'
+          hint: 'We recommend 16 but are open to smaller or larger class sizes if appropriate for the content. Workshops will have a minimum of 6 participants.'
+        previously_taught:
+          label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
+          placeholder: 'No, this is my first time teaching this workshop'
+        comments:
+          label: 'Anything else we should know?'
+          placeholder: 'Feedback from previous participants, room requirements, etc'
+      performance_details:
+        the_show: 'Your show'
+        the_workshop: 'Your workshop'
+        name:
+          label: 'What is the name of your show?'
+        show_description:
+          label: 'Please describe the show you wish to direct'
+        cast_size:
+          label: 'What is the ideal cast size?'
+          hint: 'We will favour shows with at least 6–8 players'
+        previously_performed:
+          label: 'Will you have directed or performed this show/format prior to the Festival? If so, please give details:'
+          placeholder: 'No, this is my first time directing this show'
+          hint: 'Quotes or links to reviews are helpful here if you have them'
+        technical_requirements:
+          label: 'Does your show have technical or set requirements beyond the usual improv setup?'
+          hint: 'Provided: general lighting rig, chairs/boxes, musician'
+        workshop_description:
+          label: 'Please describe the accompanying workshop'
+          hint: 'What are you hoping participants will get out of it? It should provide something of value to participants who do not perform in the show'
+        previously_taught:
+          label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
+          placeholder: 'No, this is my first time teaching this workshop'
+        comments:
+          label: 'Anything else we should know about this show and workshop?'
+          placeholder: 'Feedback from previous participants, room requirements, etc'
+
+      finish:
+        title: 'Finish & send'
+        icon: 'send'
 
   profiles:
     oauth_accounts:

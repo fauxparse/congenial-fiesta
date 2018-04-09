@@ -1,0 +1,13 @@
+%section.pitch-form-section.pitch-activity-types
+  - step.types.each do |type|
+    %button.pitch-activity-type{type: :submit, name: 'pitch[activity][type]', value: type, 'aria-selected': step.activity.type == type}
+      .pitch-activity-type-check.check-box-field-icon
+        = icon :check
+      .pitch-activity-type-details
+        .pitch-activity-type-name= t('name', scope: "pitches.step.idea.types.#{type}")
+        .pitch-activity-type-description= t('description', scope: "pitches.step.idea.types.#{type}")
+
+%section.pitch-form-section.pitch-activity-details
+  = form.fields_for :activity, pitch_form.current_step do |f|
+    = render 'pitches/step/workshop_details', form: f if step.activity.is_a?(Pitch::WorkshopInfo)
+    = render 'pitches/step/performance_details', form: f if step.activity.is_a?(Pitch::PerformanceInfo)

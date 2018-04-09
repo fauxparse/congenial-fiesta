@@ -6,8 +6,11 @@ class Pitch
 
     property :code_of_conduct_accepted, default: false
     property :presenter,
-      coerce: PresenterInfo,
-      default: -> { PresenterInfo.new }
+      default: -> { PresenterInfo.new },
+      coerce: PresenterInfo
+    property :activity,
+      default: -> { StandaloneWorkshopInfo.new },
+      coerce: ->(v) { Pitch.const_get("#{v[:type]}_info".camelize).new(v) }
 
     def self.dump(obj)
       ActiveSupport::JSON.encode(obj.to_h)

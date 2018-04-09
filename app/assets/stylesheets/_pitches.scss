@@ -75,39 +75,49 @@
 }
 
 .pitch-form {
-  > section {
-    @include full-width;
-    @include vertical-padding($base-spacing);
-  }
-
-  h3 {
-    font-size: modular-scale(2);
-    font-weight: $light-font-weight;
-    margin: 0 0 $small-spacing;
-  }
-
-  section:not(:first-of-type) h3 {
-    margin-top: $base-spacing;
-  }
-
   p.label {
     margin: $base-spacing 0 $small-spacing;
   }
 
   .form-field {
-    margin-bottom: $small-spacing;
+    margin-bottom: $base-spacing;
+
+    p {
+      color: $secondary-font-color;
+      margin: 0;
+    }
   }
+}
+
+.pitch-form-section {
+  @include full-width;
+  @include vertical-padding($base-spacing);
+}
+
+.pitch-form-section-heading {
+  font-size: modular-scale(2);
+  font-weight: $light-font-weight;
+  margin: 0 0 $small-spacing;
 }
 
 .pitch-buttons {
   @include full-width;
   @include vertical-padding($base-spacing);
-  align-items: center;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column-reverse;
 
   > :not(:first-child) {
-    margin-left: $small-spacing;
+    margin: 0 0 $small-spacing;
+  }
+
+  @media(screen and min-width: #{$line-width / 2}) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    > :not(:first-child) {
+      margin: 0 0 0 $small-spacing;
+    }
   }
 }
 
@@ -161,4 +171,138 @@
       margin-bottom: 0;
     }
   }
+}
+
+.pitch-activity-type-hidden {
+  display: none;
+}
+
+.pitch-activity-types {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+.pitch-activity-type {
+  align-items: center;
+  border: none;
+  border-radius: $base-border-radius;
+  display: flex;
+  font-size: 100%;
+  font-weight: $base-font-weight;
+  letter-spacing: 0;
+  padding: $small-spacing;
+  text-align: left;
+  text-transform: none;
+  white-space: normal;
+
+  &,
+  &:not(:disabled):hover,
+  &:not(:disabled):focus {
+    background: none;
+    color: $base-font-color;
+  }
+
+  &[aria-selected] {
+    &,
+    &:hover,
+    &:focus {
+      background: $secondary-background-color;
+    }
+
+    .pitch-activity-type-check {
+      background: $white;
+      border-color: $white;
+
+      path {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+}
+
+.pitch-activity-type-check {
+  flex: 0 0 auto;
+  margin-right: $small-spacing;
+}
+
+.pitch-activity-type-details {
+  flex: 1;
+}
+
+.pitch-activity-type-description {
+  color: $secondary-font-color;
+  font-size: modular-scale(-1);
+  line-height: modular-scale(1);
+}
+
+@media(screen and min-width: #{$line-width * 0.75}) {
+  .pitch-activity-types {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .pitch-activity-type {
+    flex: 1 0 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+  }
+
+  .pitch-activity-type-check {
+    margin: 0 0 $small-spacing;
+  }
+
+  .pitch-activity-type-name {
+    font-size: modular-scale(1);
+    margin-bottom: $small-spacing / 2;
+  }
+}
+
+.pitch-activity-participants {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: $base-spacing;
+}
+
+.pitch-activity-participant {
+  align-items: center;
+  display: flex;
+  flex: 1 0 #{$line-width / 3};
+  margin-bottom: $small-spacing;
+  padding-right: $base-spacing;
+
+  [type="checkbox"] {
+    display: none;
+  }
+}
+
+.pitch-activity-participant-check {
+  margin-right: $small-spacing;
+  flex: 0 0 auto;
+}
+
+.pitch-activity-participant-details {
+  flex: 1;
+
+  p {
+    margin: 0;
+  }
+}
+
+.pitch-activity-participant-level {
+  color: $base-font-color;
+}
+
+.pitch-activity-participant-description {
+  color: $secondary-font-color;
+  font-size: modular-scale(-1);
+}
+
+.pitch-activity-participant-experience {
+  @include all-caps;
+  font-size: modular-scale(-1);
+  margin-left: 0.5em;
 }

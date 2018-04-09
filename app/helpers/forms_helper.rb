@@ -56,7 +56,7 @@ module FormsHelper
 
     def check_box_icon(field)
       label field, class: 'check-box-field-icon' do
-        @template.concat @template.inline_svg('icons/checkbox')
+        @template.concat @template.icon(:check)
       end
     end
 

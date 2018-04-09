@@ -30,7 +30,7 @@ class PitchesController < ApplicationController
     if current_step.errors.empty?
       redirect_to_current_step
     else
-      render :edit
+      render_current_step
     end
   end
 
@@ -40,6 +40,11 @@ class PitchesController < ApplicationController
 
   def current_step
     pitch_form.current_step
+  end
+
+  def render_current_step
+    current_step.errors.clear unless params[:submit].present?
+    render :edit
   end
 
   def redirect_to_current_step
