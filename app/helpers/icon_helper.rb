@@ -2,7 +2,10 @@
 
 module IconHelper
   def icon(name, options = {})
-    inline_svg("icons/#{name}", options.merge(class: icon_class(name, options)))
+    inline_svg(
+      "icons/#{name}.svg",
+      options.merge(class: icon_class(name, options))
+    )
   end
 
   private
