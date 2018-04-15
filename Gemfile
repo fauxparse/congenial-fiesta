@@ -40,6 +40,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'auto_strip_attributes', '~> 2.3'
 gem 'autoprefixer-rails'
+gem 'aws-sdk-s3', require: false
 gem 'bitters', github: 'thoughtbot/bitters'
 gem 'bourbon', github: 'thoughtbot/bourbon'
 gem 'css-class-string'
