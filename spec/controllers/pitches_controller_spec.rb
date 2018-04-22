@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe PitchesController, type: :request do
   subject { response }
+  let!(:festival) { create(:festival) }
+  let(:pitch) { create(:pitch, participant: participant, festival: festival) }
 
   context 'when logged in' do
     before { log_in_as(participant) }
@@ -58,8 +60,6 @@ RSpec.describe PitchesController, type: :request do
 
     describe 'get /pitch/:id/presenter' do
       before { get pitch_step_path(pitch, :presenter) }
-      let(:pitch) { create(:pitch, participant: participant) }
-
       it { is_expected.to be_successful }
     end
 
@@ -86,7 +86,6 @@ RSpec.describe PitchesController, type: :request do
 
     describe 'put /pitch/:id/presenter' do
       before { put pitch_step_path(pitch, :presenter), params: params }
-      let(:pitch) { create(:pitch, participant: participant) }
       let(:params) do
         {
           pitch: { presenter: { name: 'Updated' } }

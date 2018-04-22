@@ -59,6 +59,7 @@ FactoryBot.define do
   end
 
   factory :pitch do
+    festival
     participant
   end
 end

@@ -57,7 +57,12 @@ class PitchesController < ApplicationController
   end
 
   def pitch
-    @pitch ||= Pitch.new(participant: current_participant || Participant.new)
+    @pitch ||=
+      festival.pitches.new(participant: current_participant || Participant.new)
+  end
+
+  def festival
+    @festival ||= Festival.current
   end
 
   def load_pitch

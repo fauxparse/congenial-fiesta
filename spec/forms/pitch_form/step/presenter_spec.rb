@@ -52,7 +52,7 @@ RSpec.describe PitchForm::Step::Presenter do
   end
 
   context 'for a new participant' do
-    let(:pitch) { Pitch.new }
+    let(:pitch) { build(:pitch, participant: nil) }
     before do
       step.attributes = {
         presenter: {
