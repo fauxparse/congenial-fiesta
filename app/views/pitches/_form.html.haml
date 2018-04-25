@@ -18,7 +18,11 @@
       = link_to pitch_step_path(pitch, pitch_form.current_step.previous), class: 'button', rel: :prev do
         = icon('back')
         %span= t('.back')
-    - unless pitch_form.current_step.last?
+    - if pitch_form.current_step.last?
+      %button.button-primary{type: 'submit', name: 'submit', value: 'submit', rel: :next}
+        = icon('done')
+        %span= t('.submit')
+    - else
       %button.button-primary{type: 'submit', name: 'submit', value: 'next', rel: :next}
         %span= [t('.next'), pitch_form.current_step.next.title].join(': ')
         = icon('next')

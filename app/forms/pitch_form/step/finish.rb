@@ -6,7 +6,11 @@ class PitchForm
       validates :finished, presence: true
 
       def finished
-        false
+        pitch.submitted?
+      end
+
+      def apply!
+        pitch.submitted!
       end
     end
   end

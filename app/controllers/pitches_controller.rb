@@ -53,7 +53,11 @@ class PitchesController < ApplicationController
   end
 
   def redirect_to_current_step
-    redirect_to pitch_step_path(pitch, current_step)
+    if pitch.draft?
+      redirect_to pitch_step_path(pitch, current_step)
+    else
+      redirect_to pitches_path
+    end
   end
 
   def pitch
@@ -66,10 +70,11 @@ class PitchesController < ApplicationController
   end
 
   def load_pitch
-    @pitch = current_participant.pitches.find(params[:id])
+    @pitch = current_participant.pitches.draft.find(params[:id])
   end
 
   def pitch_attributes
+    return {} unless params.include?(:pitch)
     pitch_form.current_step.permit(params.require(:pitch))
   end
 

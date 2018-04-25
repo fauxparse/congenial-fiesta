@@ -104,6 +104,8 @@ en:
       title: 'Pitch an idea'
     form:
       next: 'Next'
+      back: 'Go back'
+      submit: 'Submit my pitch'
     step:
       presenter:
         title: 'About you'
@@ -217,6 +219,7 @@ en:
       finish:
         title: 'Finish & send'
         icon: 'send'
+        ready: 'When you’re ready to submit your pitch, click the button below. You won’t be able to edit your pitch after you’ve submitted it.'
 
   profiles:
     oauth_accounts:
