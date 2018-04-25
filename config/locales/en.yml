@@ -57,6 +57,10 @@ en:
       facebook: 'Facebook'
       twitter: 'Twitter'
 
+  shared:
+    head:
+      title: 'New Zealand Improv Festival: A Festival of Moments'
+
   accounts:
     new:
       log_in: 'Log in'
@@ -96,7 +100,7 @@ en:
       link: 'Pitches'
       new: 'Pitch an idea'
       title: 'Pitches'
-    new:
+    edit:
       title: 'Pitch an idea'
     form:
       next: 'Next'
