@@ -38,6 +38,7 @@ module FormsHelper
       @template.class_string(
         'form-field',
         options[:class],
+        'required' => options[:required],
         'with-errors' => errors_on?(field)
       )
     end

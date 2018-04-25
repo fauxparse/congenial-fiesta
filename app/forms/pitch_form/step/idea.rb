@@ -3,8 +3,6 @@
 class PitchForm
   class Step
     class Idea < Step
-      validates :name, presence: true
-
       def attributes=(attributes)
         info.activity = activity_specific_attributes(attributes)
       end
@@ -40,6 +38,8 @@ class PitchForm
         activity.class.properties.include?(name.to_s.sub(/=$/, '').to_sym) ||
           super
       end
+
+      delegate :valid?, :errors, to: :activity
 
       private
 

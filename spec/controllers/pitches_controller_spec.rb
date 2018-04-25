@@ -29,7 +29,8 @@ RSpec.describe PitchesController, type: :request do
             name: participant.name,
             city: 'Wellington',
             country_code: 'NZ',
-            bio: 'clear eyes, full heart, can’t sleep'
+            bio: 'clear eyes, full heart, can’t sleep',
+            availability: 'yes'
           },
           code_of_conduct: '1'
         }
@@ -74,7 +75,8 @@ RSpec.describe PitchesController, type: :request do
             name: participant.name,
             city: 'Wellington',
             country_code: 'NZ',
-            bio: 'clear eyes, full heart, can’t sleep'
+            bio: 'clear eyes, full heart, can’t sleep',
+            availability: 'yes'
           },
           code_of_conduct: '1'
         }
@@ -122,7 +124,8 @@ RSpec.describe PitchesController, type: :request do
             password_confirmation: 'p4$$w0rd',
             city: 'Wellington',
             country_code: 'NZ',
-            bio: 'clear eyes, full heart, can’t sleep'
+            bio: 'clear eyes, full heart, can’t sleep',
+            availability: 'yes'
           },
           code_of_conduct: '1'
         }

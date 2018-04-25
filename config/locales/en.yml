@@ -7,7 +7,10 @@ en:
 
   date:
     formats:
-      long: '%d %B, %Y'
+      same_day: ''
+      same_month: '%-d'
+      same_year: '%-d %B'
+      long: '%-d %B, %Y'
 
   errors:
     messages:
@@ -113,6 +116,9 @@ en:
         bio:
           label: 'Please provide a brief bio: something we could publish if we were bragging about you'
           word_count: '100–150 words'
+        availability:
+          label: 'Do you plan to be in Wellington for all of NZIF, or are there restrictions on when you can participate?'
+          hint: 'Festival dates are %{dates}'
         code_of_conduct:
           title: 'Code of conduct'
           explanation: 'We ask all participants to adhere to the Festival’s <a href="%{link}">Code of Conduct</a>. Please take a moment now to familiarise yourself with the Code now, even if you’ve been to NZIF before.'
@@ -174,8 +180,12 @@ en:
           label: 'Anything else we should know?'
           placeholder: 'Feedback from previous participants, room requirements, etc'
       performance_details:
+        your_experience: 'Your experience'
         the_show: 'Your show'
         the_workshop: 'Your workshop'
+        experience:
+          label: 'Tell us about your directing/show creating history'
+          hint: 'What is your track record with shows in general and experimental opportunities like this?'
         name:
           label: 'What is the name of your show?'
         show_description:

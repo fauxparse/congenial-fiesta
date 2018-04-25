@@ -29,6 +29,23 @@ legend {
   }
 }
 
+.form-field.required {
+  label,
+  .label {
+    position: relative;
+
+    &::before {
+      @include position(absolute, 50% 100% null null);
+      color: $error-color;
+      content: '*';
+      font-size: 1rem;
+      font-weight: $bold-font-weight;
+      line-height: 1;
+      margin: -0.375em 0.25em 0 0;
+    }
+  }
+}
+
 input,
 select,
 textarea {

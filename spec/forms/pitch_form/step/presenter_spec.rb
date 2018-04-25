@@ -15,7 +15,8 @@ RSpec.describe PitchForm::Step::Presenter do
         name: 'Matt',
         city: 'Wellington',
         country_code: 'NZ',
-        bio: 'clear eyes, full heart, can’t sleep'
+        bio: 'clear eyes, full heart, can’t sleep',
+        availability: 'yes'
       },
       code_of_conduct_accepted: true
     }

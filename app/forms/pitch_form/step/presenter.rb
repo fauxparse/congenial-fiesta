@@ -3,10 +3,17 @@
 class PitchForm
   class Step
     class Presenter < Step
-      FIELDS = %i[city country_code company presented_before bio].freeze
+      FIELDS = %i[
+        city
+        country_code
+        company
+        presented_before
+        bio
+        availability
+      ].freeze
 
       validate :valid_participant, if: :new_participant?
-      validates :name, :city, :country_code, :bio, presence: true
+      validates :name, :city, :country_code, :bio, :availability, presence: true
       validates :code_of_conduct, acceptance: true
 
       def presenter_info

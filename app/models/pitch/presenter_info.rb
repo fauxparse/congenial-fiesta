@@ -8,6 +8,7 @@ class Pitch
     property :company
     property :presented_before
     property :bio
+    property :availability
 
     def country
       country = ISO3166::Country[country_code]
