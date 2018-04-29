@@ -30,12 +30,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pitches, except: %i[new edit create]
-
-  get '/pitches/:id/:step', to: 'pitches#edit', as: :pitch_step
-  match '/pitches/:id/:step', to: 'pitches#update', via: %i[put patch]
-  get '/pitch', to: 'pitches#new', as: :new_pitch
-  post '/pitch', to: 'pitches#create'
+  constraints(step: /presenter|idea|finish/) do
+    resources :pitches, except: %i[new create]
+    get '/pitches/:id/:step', to: 'pitches#edit', as: :pitch_step
+    match '/pitches/:id/:step', to: 'pitches#update', via: %i[put patch]
+    get '/pitch', to: 'pitches#new', as: :new_pitch
+    post '/pitch', to: 'pitches#create'
+  end
 
   root to: 'festivals#show'
 

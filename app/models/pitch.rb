@@ -12,4 +12,7 @@ class Pitch < ApplicationRecord
   }
 
   serialize :info, Pitch::Info
+
+  scope :newest_first, -> { order(created_at: :desc) }
+  scope :to, ->(festival) { where(festival: festival) }
 end

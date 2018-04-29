@@ -41,4 +41,16 @@ header.hero {
       font-size: modular-scale(6);
     }
   }
+
+  button,
+  .button {
+    color: white;
+    border-color: white;
+
+    &:hover {
+      color: white;
+      border-color: white;
+      background-color: rgba(white, 0.15);
+    }
+  }
 }

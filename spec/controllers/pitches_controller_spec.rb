@@ -100,6 +100,27 @@ RSpec.describe PitchesController, type: :request do
         expect(pitch.reload.info.presenter.name).to eq 'Updated'
       end
     end
+
+    describe 'delete /pitches/:id' do
+      before { pitch }
+
+      it 'deletes the pitch' do
+        expect { delete pitch_path(pitch) }.to change(Pitch, :count).by(-1)
+      end
+
+      it 'redirects to the pitches page' do
+        delete pitch_path(pitch)
+        expect(response).to redirect_to pitches_path
+      end
+
+      context 'when the pitch has been submitted' do
+        it 'does not delete the pitch' do
+          pitch.submitted!
+          expect { delete pitch_path(pitch) }
+            .to raise_error ActiveRecord::RecordNotFound
+        end
+      end
+    end
   end
 
   context 'when not logged in' do

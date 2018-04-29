@@ -3,9 +3,11 @@
 class PitchesController < ApplicationController
   authenticate except: %i[new create]
 
-  before_action :load_pitch, only: %i[edit update]
+  before_action :load_pitch, only: %i[edit update destroy]
 
-  def index; end
+  def index
+
+  end
 
   def new
     store_location unless logged_in?
@@ -16,10 +18,17 @@ class PitchesController < ApplicationController
     update_pitch_form
   end
 
-  def edit; end
+  def edit
+    redirect_to_current_step unless params.include?(:step)
+  end
 
   def update
     update_pitch_form
+  end
+
+  def destroy
+    pitch.destroy
+    redirect_to pitches_path
   end
 
   private
@@ -65,6 +74,10 @@ class PitchesController < ApplicationController
       festival.pitches.new(participant: current_participant || Participant.new)
   end
 
+  def pitches
+    @pitches ||= current_participant.pitches.to(festival).newest_first
+  end
+
   def festival
     @festival ||= Festival.current
   end
@@ -78,5 +91,5 @@ class PitchesController < ApplicationController
     pitch_form.current_step.permit(params.require(:pitch))
   end
 
-  helper_method :pitch, :pitch_form
+  helper_method :pitch, :pitches, :pitch_form
 end

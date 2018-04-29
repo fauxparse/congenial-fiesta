@@ -100,12 +100,18 @@ en:
       link: 'Pitches'
       new: 'Pitch an idea'
       title: 'Pitches'
+    draft_actions:
+      edit: 'Edit'
+      delete: 'Delete'
+      confirm_delete: 'Really delete this pitch?'
     edit:
       title: 'Pitch an idea'
     form:
       next: 'Next'
       back: 'Go back'
       submit: 'Submit my pitch'
+    pitch:
+      unnamed: '(new %{type})'
     step:
       presenter:
         title: 'About you'

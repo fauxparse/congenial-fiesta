@@ -306,3 +306,33 @@
   font-size: modular-scale(-1);
   margin-left: 0.5em;
 }
+
+.pitch-list {
+  table-layout: auto;
+
+  td:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.pitch-name {
+  width: 100%;
+
+  b, small {
+    display: block;
+    font-weight: $base-font-weight;
+  }
+
+  small {
+    @include all-caps;
+    color: $secondary-font-color;
+  }
+}
+
+.pitch-actions {
+  display: flex;
+
+  .button:not(:last-of-type) {
+    margin-right: 0.5em;
+  }
+}
