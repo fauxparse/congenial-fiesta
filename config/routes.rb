@@ -2,11 +2,11 @@
 
 Rails.application.routes.draw do
   namespace :admin do
-    scope ':year' do
+    resources :festivals, only: %i[new create]
+
+    scope ':year', constraints: { year: /2\d{3}/ } do
       get '/' => 'festivals#show', as: :festival
     end
-
-    resources :festivals, only: %i[new, create]
 
     root to: 'festivals#index'
   end

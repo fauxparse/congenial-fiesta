@@ -6,4 +6,8 @@ class Festival < ApplicationRecord
   validates :end_date,
     date: { on_or_after: :start_date },
     if: %i[start_date end_date]
+
+  def to_param
+    year.to_s
+  end
 end

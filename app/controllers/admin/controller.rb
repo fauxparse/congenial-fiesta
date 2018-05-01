@@ -13,5 +13,12 @@ module Admin
     def require_admin
       render(status: :unauthorized) unless current_participant&.admin?
     end
+
+    def festival
+      @festival ||=
+        Festival.find_by!(year: params[:year] || Time.zone.today.year)
+    end
+
+    helper_method :festival
   end
 end
