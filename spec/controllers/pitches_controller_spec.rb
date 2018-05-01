@@ -69,6 +69,7 @@ RSpec.describe PitchesController, type: :request do
         post new_pitch_path, params: { pitch: pitch_params }
         get pitch_step_path(pitch, :idea)
       end
+
       let(:pitch_params) do
         {
           presenter: {
@@ -81,6 +82,7 @@ RSpec.describe PitchesController, type: :request do
           code_of_conduct: '1'
         }
       end
+
       let(:pitch) { participant.pitches.last }
 
       it { is_expected.to be_successful }
@@ -98,6 +100,33 @@ RSpec.describe PitchesController, type: :request do
 
       it 'updates the pitch' do
         expect(pitch.reload.info.presenter.name).to eq 'Updated'
+      end
+    end
+
+    describe 'put /pitch/:id/idea' do
+      before do
+        pitch.info.presenter = {
+          name: participant.name,
+          city: 'Wellington',
+          country_code: 'NZ',
+          bio: 'clear eyes, full heart, can’t sleep',
+          availability: 'yes'
+        }
+        pitch.info.code_of_conduct_accepted = true
+        pitch.save!
+        put pitch_step_path(pitch, :idea), params: params
+      end
+
+      let(:params) do
+        {
+          pitch: { activity: { name: 'Updated' } }
+        }
+      end
+
+      it { is_expected.to be_successful }
+
+      it 'updates the pitch' do
+        expect(pitch.reload.info.activity.name).to eq 'Updated'
       end
     end
 
