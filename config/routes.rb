@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :admin do
+    scope ':year' do
+      get '/' => 'festivals#show', as: :festival
+    end
+
+    resources :festivals, only: %i[new, create]
+
+    root to: 'festivals#index'
+  end
+
   get    '/login'  => 'sessions#new', as: :login
   post   '/login'  => 'sessions#create'
   delete '/logout' => 'sessions#destroy', as: :logout
