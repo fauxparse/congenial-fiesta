@@ -3,13 +3,7 @@
 module Admin
   class FestivalsController < Controller
     def index
-      redirect_to admin_festival_path(festival)
-    rescue ActiveRecord::RecordNotFound
-      if Festival.exists?
-        render :index
-      else
-        redirect_to new_admin_festival_path
-      end
+      redirect_to admin_festival_path(festival) if festival.present?
     end
 
     def show; end

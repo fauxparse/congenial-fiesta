@@ -10,4 +10,8 @@ class Festival < ApplicationRecord
   def to_param
     year.to_s
   end
+
+  def to_s
+    "#{I18n.t('festival.name.short')} #{year}"
+  end
 end

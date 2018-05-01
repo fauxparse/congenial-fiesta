@@ -1,0 +1,9 @@
+%input#show-navigation{type: 'checkbox', checked: false, tabindex: -1, autocomplete: 'off'}
+
+.navigation
+  = link_to profile_path, class: 'navigation__link navigation__link--profile' do
+    = avatar(current_participant, class: 'navigation__avatar')
+    .navigation__name= current_participant.to_s
+
+  = navigation_link 'Home', admin_root_path
+

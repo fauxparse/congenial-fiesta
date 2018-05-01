@@ -1,5 +1,9 @@
 !!!
 %html
-  = render 'shared/head'
+  = render partial: 'shared/head', locals: { view: 'admin' }
   %body
-    = yield
+    = render 'shared/admin/navigation'
+    %main
+      = render 'shared/admin/page_header'
+
+      = yield

@@ -23,7 +23,7 @@ RSpec.describe Admin::FestivalsController, type: :request do
       end
 
       context 'when logged in as an admin user' do
-        it { is_expected.to redirect_to new_admin_festival_path }
+        it { is_expected.to be_successful }
       end
     end
 
