@@ -3,6 +3,7 @@ SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
@@ -21,8 +22,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
-SET search_path = public, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -31,7 +30,7 @@ SET default_with_oids = false;
 -- Name: active_storage_attachments; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE active_storage_attachments (
+CREATE TABLE public.active_storage_attachments (
     id bigint NOT NULL,
     name character varying NOT NULL,
     record_type character varying NOT NULL,
@@ -45,7 +44,7 @@ CREATE TABLE active_storage_attachments (
 -- Name: active_storage_attachments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE active_storage_attachments_id_seq
+CREATE SEQUENCE public.active_storage_attachments_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -57,14 +56,14 @@ CREATE SEQUENCE active_storage_attachments_id_seq
 -- Name: active_storage_attachments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE active_storage_attachments_id_seq OWNED BY active_storage_attachments.id;
+ALTER SEQUENCE public.active_storage_attachments_id_seq OWNED BY public.active_storage_attachments.id;
 
 
 --
 -- Name: active_storage_blobs; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE active_storage_blobs (
+CREATE TABLE public.active_storage_blobs (
     id bigint NOT NULL,
     key character varying NOT NULL,
     filename character varying NOT NULL,
@@ -80,7 +79,7 @@ CREATE TABLE active_storage_blobs (
 -- Name: active_storage_blobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE active_storage_blobs_id_seq
+CREATE SEQUENCE public.active_storage_blobs_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -92,14 +91,14 @@ CREATE SEQUENCE active_storage_blobs_id_seq
 -- Name: active_storage_blobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE active_storage_blobs_id_seq OWNED BY active_storage_blobs.id;
+ALTER SEQUENCE public.active_storage_blobs_id_seq OWNED BY public.active_storage_blobs.id;
 
 
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE ar_internal_metadata (
+CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
     created_at timestamp without time zone NOT NULL,
@@ -111,7 +110,7 @@ CREATE TABLE ar_internal_metadata (
 -- Name: festivals; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE festivals (
+CREATE TABLE public.festivals (
     id bigint NOT NULL,
     year integer,
     start_date date,
@@ -123,7 +122,7 @@ CREATE TABLE festivals (
 -- Name: festivals_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE festivals_id_seq
+CREATE SEQUENCE public.festivals_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -135,14 +134,14 @@ CREATE SEQUENCE festivals_id_seq
 -- Name: festivals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE festivals_id_seq OWNED BY festivals.id;
+ALTER SEQUENCE public.festivals_id_seq OWNED BY public.festivals.id;
 
 
 --
 -- Name: identities; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE identities (
+CREATE TABLE public.identities (
     id bigint NOT NULL,
     participant_id bigint,
     type character varying,
@@ -158,7 +157,7 @@ CREATE TABLE identities (
 -- Name: identities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE identities_id_seq
+CREATE SEQUENCE public.identities_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -170,19 +169,20 @@ CREATE SEQUENCE identities_id_seq
 -- Name: identities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE identities_id_seq OWNED BY identities.id;
+ALTER SEQUENCE public.identities_id_seq OWNED BY public.identities.id;
 
 
 --
 -- Name: participants; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE participants (
+CREATE TABLE public.participants (
     id bigint NOT NULL,
     name character varying,
     email character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    admin boolean DEFAULT false
 );
 
 
@@ -190,7 +190,7 @@ CREATE TABLE participants (
 -- Name: participants_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE participants_id_seq
+CREATE SEQUENCE public.participants_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -202,14 +202,14 @@ CREATE SEQUENCE participants_id_seq
 -- Name: participants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE participants_id_seq OWNED BY participants.id;
+ALTER SEQUENCE public.participants_id_seq OWNED BY public.participants.id;
 
 
 --
 -- Name: password_resets; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE password_resets (
+CREATE TABLE public.password_resets (
     id bigint NOT NULL,
     participant_id bigint,
     token character varying,
@@ -222,7 +222,7 @@ CREATE TABLE password_resets (
 -- Name: password_resets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE password_resets_id_seq
+CREATE SEQUENCE public.password_resets_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -234,14 +234,14 @@ CREATE SEQUENCE password_resets_id_seq
 -- Name: password_resets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE password_resets_id_seq OWNED BY password_resets.id;
+ALTER SEQUENCE public.password_resets_id_seq OWNED BY public.password_resets.id;
 
 
 --
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE schema_migrations (
+CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
 
@@ -250,49 +250,49 @@ CREATE TABLE schema_migrations (
 -- Name: active_storage_attachments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY active_storage_attachments ALTER COLUMN id SET DEFAULT nextval('active_storage_attachments_id_seq'::regclass);
+ALTER TABLE ONLY public.active_storage_attachments ALTER COLUMN id SET DEFAULT nextval('public.active_storage_attachments_id_seq'::regclass);
 
 
 --
 -- Name: active_storage_blobs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY active_storage_blobs ALTER COLUMN id SET DEFAULT nextval('active_storage_blobs_id_seq'::regclass);
+ALTER TABLE ONLY public.active_storage_blobs ALTER COLUMN id SET DEFAULT nextval('public.active_storage_blobs_id_seq'::regclass);
 
 
 --
 -- Name: festivals id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY festivals ALTER COLUMN id SET DEFAULT nextval('festivals_id_seq'::regclass);
+ALTER TABLE ONLY public.festivals ALTER COLUMN id SET DEFAULT nextval('public.festivals_id_seq'::regclass);
 
 
 --
 -- Name: identities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY identities ALTER COLUMN id SET DEFAULT nextval('identities_id_seq'::regclass);
+ALTER TABLE ONLY public.identities ALTER COLUMN id SET DEFAULT nextval('public.identities_id_seq'::regclass);
 
 
 --
 -- Name: participants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY participants ALTER COLUMN id SET DEFAULT nextval('participants_id_seq'::regclass);
+ALTER TABLE ONLY public.participants ALTER COLUMN id SET DEFAULT nextval('public.participants_id_seq'::regclass);
 
 
 --
 -- Name: password_resets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY password_resets ALTER COLUMN id SET DEFAULT nextval('password_resets_id_seq'::regclass);
+ALTER TABLE ONLY public.password_resets ALTER COLUMN id SET DEFAULT nextval('public.password_resets_id_seq'::regclass);
 
 
 --
 -- Name: active_storage_attachments active_storage_attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY active_storage_attachments
+ALTER TABLE ONLY public.active_storage_attachments
     ADD CONSTRAINT active_storage_attachments_pkey PRIMARY KEY (id);
 
 
@@ -300,7 +300,7 @@ ALTER TABLE ONLY active_storage_attachments
 -- Name: active_storage_blobs active_storage_blobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY active_storage_blobs
+ALTER TABLE ONLY public.active_storage_blobs
     ADD CONSTRAINT active_storage_blobs_pkey PRIMARY KEY (id);
 
 
@@ -308,7 +308,7 @@ ALTER TABLE ONLY active_storage_blobs
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY ar_internal_metadata
+ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
@@ -316,7 +316,7 @@ ALTER TABLE ONLY ar_internal_metadata
 -- Name: festivals festivals_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY festivals
+ALTER TABLE ONLY public.festivals
     ADD CONSTRAINT festivals_pkey PRIMARY KEY (id);
 
 
@@ -324,7 +324,7 @@ ALTER TABLE ONLY festivals
 -- Name: identities identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY identities
+ALTER TABLE ONLY public.identities
     ADD CONSTRAINT identities_pkey PRIMARY KEY (id);
 
 
@@ -332,7 +332,7 @@ ALTER TABLE ONLY identities
 -- Name: participants participants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY participants
+ALTER TABLE ONLY public.participants
     ADD CONSTRAINT participants_pkey PRIMARY KEY (id);
 
 
@@ -340,7 +340,7 @@ ALTER TABLE ONLY participants
 -- Name: password_resets password_resets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY password_resets
+ALTER TABLE ONLY public.password_resets
     ADD CONSTRAINT password_resets_pkey PRIMARY KEY (id);
 
 
@@ -348,7 +348,7 @@ ALTER TABLE ONLY password_resets
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY schema_migrations
+ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
@@ -356,93 +356,93 @@ ALTER TABLE ONLY schema_migrations
 -- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_active_storage_attachments_on_blob_id ON active_storage_attachments USING btree (blob_id);
+CREATE INDEX index_active_storage_attachments_on_blob_id ON public.active_storage_attachments USING btree (blob_id);
 
 
 --
 -- Name: index_active_storage_attachments_uniqueness; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON active_storage_attachments USING btree (record_type, record_id, name, blob_id);
+CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON public.active_storage_attachments USING btree (record_type, record_id, name, blob_id);
 
 
 --
 -- Name: index_active_storage_blobs_on_key; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON active_storage_blobs USING btree (key);
+CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_blobs USING btree (key);
 
 
 --
 -- Name: index_festivals_on_year; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_festivals_on_year ON festivals USING btree (year);
+CREATE UNIQUE INDEX index_festivals_on_year ON public.festivals USING btree (year);
 
 
 --
 -- Name: index_identities_on_participant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_identities_on_participant_id ON identities USING btree (participant_id);
+CREATE INDEX index_identities_on_participant_id ON public.identities USING btree (participant_id);
 
 
 --
 -- Name: index_identities_on_participant_id_and_type_and_provider; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_identities_on_participant_id_and_type_and_provider ON identities USING btree (participant_id, type, provider);
+CREATE UNIQUE INDEX index_identities_on_participant_id_and_type_and_provider ON public.identities USING btree (participant_id, type, provider);
 
 
 --
 -- Name: index_identities_on_provider_and_uid; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_identities_on_provider_and_uid ON identities USING btree (provider, uid);
+CREATE UNIQUE INDEX index_identities_on_provider_and_uid ON public.identities USING btree (provider, uid);
 
 
 --
 -- Name: index_participants_on_lowercase_email; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_participants_on_lowercase_email ON participants USING btree (lower((email)::text));
+CREATE UNIQUE INDEX index_participants_on_lowercase_email ON public.participants USING btree (lower((email)::text));
 
 
 --
 -- Name: index_password_resets_on_participant_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_password_resets_on_participant_id ON password_resets USING btree (participant_id);
+CREATE INDEX index_password_resets_on_participant_id ON public.password_resets USING btree (participant_id);
 
 
 --
 -- Name: index_password_resets_on_token; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_password_resets_on_token ON password_resets USING btree (token);
+CREATE UNIQUE INDEX index_password_resets_on_token ON public.password_resets USING btree (token);
 
 
 --
 -- Name: index_password_resets_on_token_and_expires_at; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_password_resets_on_token_and_expires_at ON password_resets USING btree (token, expires_at);
+CREATE INDEX index_password_resets_on_token_and_expires_at ON public.password_resets USING btree (token, expires_at);
 
 
 --
 -- Name: identities fk_rails_27e74d7b52; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY identities
-    ADD CONSTRAINT fk_rails_27e74d7b52 FOREIGN KEY (participant_id) REFERENCES participants(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.identities
+    ADD CONSTRAINT fk_rails_27e74d7b52 FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
 
 
 --
 -- Name: password_resets fk_rails_286b6e4fd3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY password_resets
-    ADD CONSTRAINT fk_rails_286b6e4fd3 FOREIGN KEY (participant_id) REFERENCES participants(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.password_resets
+    ADD CONSTRAINT fk_rails_286b6e4fd3 FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
 
 
 --
@@ -458,6 +458,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180319225055'),
 ('20180320203311'),
 ('20180324023927'),
-('20180325021806');
+('20180325021806'),
+('20180501040856');
 
 

@@ -40,6 +40,10 @@ FactoryBot.define do
         end
       end
     end
+
+    factory :admin, traits: [:with_password] do
+      admin true
+    end
   end
 
   factory :oauth_identity, class: 'Identity::Oauth' do

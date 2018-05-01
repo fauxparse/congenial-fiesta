@@ -8,6 +8,8 @@ class Participant < ApplicationRecord
 
   has_one_attached :avatar
 
+  before_validation :remove_admin_if_cannot_log_in
+
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }, if: :email?
   validates :email, email: { allow_blank: true }
@@ -29,5 +31,15 @@ class Participant < ApplicationRecord
 
   def password?
     identities.any?(&:password_digest?)
+  end
+
+  private
+
+  def remove_admin_if_cannot_log_in
+    self.admin = false unless can_log_in?
+  end
+
+  def can_log_in?
+    identities.reject(&:marked_for_destruction?).any?
   end
 end
