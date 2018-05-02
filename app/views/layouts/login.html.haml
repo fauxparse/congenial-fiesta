@@ -1,6 +1,6 @@
 !!!
 %html
-  = render 'shared/head'
+  = render partial: 'shared/head', locals: { view: 'application' }
 
   %body.login
     = yield

@@ -8,6 +8,7 @@ RSpec.describe Participant, type: :model do
   it { is_expected.to be_valid }
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+  it { is_expected.not_to be_admin }
 
   context 'with a bad email address' do
     subject(:participant) { build(:participant, email: 'bad') }
@@ -31,6 +32,19 @@ RSpec.describe Participant, type: :model do
       it 'is valid' do
         expect(participant).to be_valid
       end
+    end
+  end
+
+  context 'as an administrator' do
+    subject(:participant) { create(:admin) }
+
+    it { is_expected.to be_valid }
+    it { is_expected.to be_admin }
+
+    context 'when all login methods are removed' do
+      before { participant.identities.destroy_all }
+
+      it { is_expected.not_to be_admin }
     end
   end
 

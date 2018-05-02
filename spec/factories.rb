@@ -11,8 +11,11 @@ FactoryBot.define do
 
   factory :festival do
     year 2018
-    start_date Date.new(2018, 10, 20)
-    end_date Date.new(2018, 10, 27)
+    start_date do
+      october = Date.new(year, 10, 14)
+      october + 6 - october.wday
+    end
+    end_date { start_date + 7 }
   end
 
   factory :participant do
@@ -39,6 +42,10 @@ FactoryBot.define do
           )
         end
       end
+    end
+
+    factory :admin, traits: [:with_password] do
+      admin true
     end
   end
 
