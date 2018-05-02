@@ -238,6 +238,40 @@ ALTER SEQUENCE public.password_resets_id_seq OWNED BY public.password_resets.id;
 
 
 --
+-- Name: pitches; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pitches (
+    id bigint NOT NULL,
+    participant_id bigint,
+    status character varying(16) DEFAULT 'draft'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    info json,
+    festival_id bigint
+);
+
+
+--
+-- Name: pitches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.pitches_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pitches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.pitches_id_seq OWNED BY public.pitches.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -286,6 +320,13 @@ ALTER TABLE ONLY public.participants ALTER COLUMN id SET DEFAULT nextval('public
 --
 
 ALTER TABLE ONLY public.password_resets ALTER COLUMN id SET DEFAULT nextval('public.password_resets_id_seq'::regclass);
+
+
+--
+-- Name: pitches id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pitches ALTER COLUMN id SET DEFAULT nextval('public.pitches_id_seq'::regclass);
 
 
 --
@@ -342,6 +383,14 @@ ALTER TABLE ONLY public.participants
 
 ALTER TABLE ONLY public.password_resets
     ADD CONSTRAINT password_resets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pitches pitches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pitches
+    ADD CONSTRAINT pitches_pkey PRIMARY KEY (id);
 
 
 --
@@ -430,6 +479,34 @@ CREATE INDEX index_password_resets_on_token_and_expires_at ON public.password_re
 
 
 --
+-- Name: index_pitches_on_festival_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pitches_on_festival_id ON public.pitches USING btree (festival_id);
+
+
+--
+-- Name: index_pitches_on_festival_id_and_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pitches_on_festival_id_and_participant_id ON public.pitches USING btree (festival_id, participant_id);
+
+
+--
+-- Name: index_pitches_on_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pitches_on_participant_id ON public.pitches USING btree (participant_id);
+
+
+--
+-- Name: index_pitches_on_status_and_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pitches_on_status_and_participant_id ON public.pitches USING btree (status, participant_id);
+
+
+--
 -- Name: identities fk_rails_27e74d7b52; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -446,6 +523,22 @@ ALTER TABLE ONLY public.password_resets
 
 
 --
+-- Name: pitches fk_rails_b8c4f77d16; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pitches
+    ADD CONSTRAINT fk_rails_b8c4f77d16 FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
+
+
+--
+-- Name: pitches fk_rails_faa4f9f838; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pitches
+    ADD CONSTRAINT fk_rails_faa4f9f838 FOREIGN KEY (festival_id) REFERENCES public.festivals(id) ON DELETE CASCADE;
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -459,6 +552,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180320203311'),
 ('20180324023927'),
 ('20180325021806'),
+('20180328195718'),
+('20180329202221'),
+('20180422030819'),
 ('20180501040856');
 
 
