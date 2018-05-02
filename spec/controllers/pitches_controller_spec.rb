@@ -12,7 +12,11 @@ RSpec.describe PitchesController, type: :request do
     let(:participant) { create(:participant, :with_password) }
 
     describe 'get /pitches' do
-      before { get pitches_path }
+      before do
+        pitch
+        get pitches_path
+      end
+
       it { is_expected.to be_successful }
     end
 
@@ -56,6 +60,22 @@ RSpec.describe PitchesController, type: :request do
         it 'renders the form' do
           expect(response).to be_successful
         end
+      end
+    end
+
+    describe 'get /pitch/:id' do
+      context 'for a draft pitch' do
+        before { get pitch_path(pitch) }
+        it { is_expected.to redirect_to pitch_step_path(pitch, :presenter) }
+      end
+
+      context 'for a submitted pitch' do
+        before do
+          pitch.submitted!
+          get pitch_path(pitch)
+        end
+
+        it { is_expected.to redirect_to pitches_path }
       end
     end
 
