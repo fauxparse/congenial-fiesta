@@ -10,6 +10,10 @@ class Identity < ApplicationRecord
 
   scope :password, -> { where(type: 'Identity::Password') }
 
+  def password?
+    false
+  end
+
   private
 
   def remove_admin_privileges

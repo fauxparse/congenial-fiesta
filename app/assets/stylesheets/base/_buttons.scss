@@ -34,7 +34,7 @@
     opacity: 0.5;
   }
 
-  &.primary {
+  &.button-primary {
     background-color: $action-color;
     color: $white;
 
@@ -45,6 +45,24 @@
 
     &:focus {
       @include shadow(0.5);
+    }
+  }
+
+  &.button-small {
+    @include all-caps;
+    font-size: modular-scale(-1);
+    padding: 0 0.5em;
+  }
+
+  > .icon {
+    margin: -0.25em;
+
+    &:first-child {
+      margin-right: calc(#{$small-spacing} - 0.25em);
+    }
+
+    &:last-child {
+      margin-left: calc(#{$small-spacing} - 0.25em);
     }
   }
 }

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Festival < ApplicationRecord
+  has_many :pitches
+
   validates :year, presence: true, uniqueness: true
   validates :start_date, :end_date, presence: true
   validates :end_date,
@@ -13,5 +15,9 @@ class Festival < ApplicationRecord
 
   def to_s
     "#{I18n.t('festival.name.short')} #{year}"
+  end
+
+  def self.current
+    order(start_date: :desc).first
   end
 end

@@ -1,22 +1,25 @@
 %header.navbar
   = link_to root_path, class: 'navbar-logo' do
     = t('festival.name.short')
-  .navbar-login
-    - if logged_in?
-      = link_to profile_path, class: 'drop-target navbar-menu-target', data: { 'drop-position': 'bottom right' } do
-        = avatar(current_participant, class: 'navbar-login-avatar')
-        .navbar-login-name= current_participant
-        = icon :chevron_down
-      .navbar-menu-content
-        %ul
-          %li
-            = link_to profile_path do
-              = icon :user
-              = t('profiles.show.link')
-          %li
-            = link_to logout_path, method: :delete do
-              = icon :log_out
-              = t('sessions.log_out')
-    - else
-      = link_to_unless_current t('sessions.log_in'), login_path
-      = link_to_unless_current t('accounts.sign_up'), signup_path
+  - if logged_in?
+    = link_to profile_path, class: 'drop-target navbar-menu-target', data: { 'drop-position': 'bottom right' } do
+      = avatar(current_participant, class: 'navbar-login-avatar')
+      .navbar-login-name= current_participant
+      = icon :chevron_down
+    .navbar-menu-content
+      %ul
+        %li
+          = link_to profile_path do
+            = icon :user
+            = t('profiles.show.link')
+        %li
+          = link_to pitches_path do
+            = icon :pitch
+            = t('pitches.index.link')
+        %li
+          = link_to logout_path, method: :delete do
+            = icon :log_out
+            = t('sessions.log_out')
+  - else
+    = link_to_unless_current t('sessions.log_in'), login_path
+    = link_to_unless_current t('accounts.sign_up'), signup_path

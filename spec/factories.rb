@@ -57,4 +57,9 @@ FactoryBot.define do
   factory :password_identity, class: 'Identity::Password' do
     password 'p4$$w0rd'
   end
+
+  factory :pitch do
+    festival
+    participant
+  end
 end

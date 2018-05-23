@@ -8,6 +8,7 @@ RSpec.describe Identity::Oauth, type: :model do
 
   it { is_expected.to be_valid }
   it { is_expected.to validate_absence_of(:password_digest) }
+  it { is_expected.not_to be_password }
 
   context 'with more than one account per participant/provider' do
     let(:participant) { create(:participant, :with_oauth) }

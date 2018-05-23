@@ -12,6 +12,6 @@
         = link_to t('.forgot'), new_password_path
       = form.password_field :password, autocomplete: :off
     .form-buttons.login-form-buttons
-      = form.submit t('.submit'), class: 'primary'
+      = form.submit t('.submit'), class: 'button-primary'
       = link_to t('.sign_up'), signup_path
   = render 'accounts/social'

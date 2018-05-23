@@ -7,6 +7,7 @@ RSpec.describe Identity::Password, type: :model do
   let(:participant) { create(:participant) }
 
   it { is_expected.to be_valid }
+  it { is_expected.to be_password }
 
   context 'when the participant already has a password' do
     before { create(:password_identity, participant: participant) }

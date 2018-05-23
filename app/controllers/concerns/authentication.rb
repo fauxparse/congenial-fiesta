@@ -46,8 +46,12 @@ module Authentication
   end
 
   def store_and_redirect_to(*url)
-    session[:redirect] = request.path
+    store_location
     redirect_to(*url)
+  end
+
+  def store_location
+    session[:redirect] = request.path
   end
 
   def require_authentication

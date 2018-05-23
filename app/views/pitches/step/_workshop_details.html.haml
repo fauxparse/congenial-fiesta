@@ -1,0 +1,39 @@
+%h3.pitch-form-section-heading= t('.the_workshop')
+= form.group :name, required: true do
+  %p.label= t('.name.label')
+  = form.text_field :name
+  = form.error_messages_for :name
+= form.group :workshop_description, required: true do
+  %p.label= t('.workshop_description.label')
+  = form.text_area :workshop_description, rows: 1, data: { autosize: true }
+  %p.form-information= t('.workshop_description.hint')
+  = form.error_messages_for :workshop_description
+.form-field.required
+  %p.label= t('.participation.label')
+  = form.error_messages_for :levels
+.pitch-activity-participants
+  - %w(rookie intermediate advanced).each do |level|
+    %label.pitch-activity-participant
+      = check_box_tag 'pitch[activity][levels][]', level, pitch_form.current_step.levels.include?(level)
+      .pitch-activity-participant-check.check-box-field-icon
+        = icon :check
+      .pitch-activity-participant-details
+        %p
+          %span.pitch-activity-participant-level= t(:level, scope: "pitches.step.workshop_details.participation.levels.#{level}")
+          %span.pitch-activity-participant-experience= t(:experience, scope: "pitches.step.workshop_details.participation.levels.#{level}")
+        %p.pitch-activity-participant-description= t(:description, scope: "pitches.step.workshop_details.participation.levels.#{level}")
+  = hidden_field_tag 'pitch[activity][levels][]', ''
+= form.group :prerequisites do
+  %p.label= t('.prerequisites.label')
+  = form.text_area :prerequisites, rows: 1, data: { autosize: true }, placeholder: t('.prerequisites.placeholder')
+= form.group :number_of_participants do
+  %p.label= t('.number_of_participants.label')
+  = form.number_field :number_of_participants, min: 6, max: 30
+  %p.form-information= t('.number_of_participants.hint')
+
+= form.group :previously_taught do
+  %p.label= t('.previously_taught.label')
+  = form.text_area :previously_taught, rows: 1, data: { autosize: true }, placeholder: t('.previously_taught.placeholder')
+= form.group :comments do
+  %p.label= t('.comments.label')
+  = form.text_area :comments, rows: 1, data: { autosize: true }, placeholder: t('.comments.placeholder')

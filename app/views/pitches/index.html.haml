@@ -1,0 +1,15 @@
+%main.pitches
+  %header.hero
+    %h1= t('.title')
+    = link_to new_pitch_path, class: 'button' do
+      = icon :pitch
+      %span= t('.new')
+  %section
+    %table.pitch-list
+      %thead
+        %tr
+          %th
+          %th= t('.name')
+          %th= t('.status')
+      %tbody
+        = render pitches

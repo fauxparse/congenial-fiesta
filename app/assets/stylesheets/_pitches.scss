@@ -1,0 +1,338 @@
+.pitch-progress {
+  @include full-width;
+  @include vertical-padding($small-spacing);
+  background: linear-gradient(to bottom right, $mandarin, $tomato);
+  color: $white;
+}
+
+.pitch-progress-steps {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.pitch-progress-step {
+  color: currentColor;
+  flex: 1 0 6em;
+  max-width: 8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: $white;
+  }
+
+  &::before,
+  &::after {
+    border-top: 2px solid white;
+    content: '';
+    margin-top: -1px;
+  }
+
+  &::before {
+    @include position(absolute, 1.25em 50% null 0);
+    margin-right: 1.25em;
+  }
+
+  &::after {
+    @include position(absolute, 1.25em 0 null 50%);
+    margin-left: 1.25em;
+  }
+
+  &:first-child::before,
+  &:last-child::after {
+    display: none;
+  }
+}
+
+.pitch-progress-step-current {
+  flex-basis: auto;
+
+  .pitch-progress-step-icon {
+    background: $white;
+    color: $action-color;
+  }
+}
+
+.pitch-progress-step-pending {
+  pointer-events: none;
+  touch-action: none;
+}
+
+.pitch-progress-step-icon {
+  @include center-content;
+  @include size(2.5rem);
+  border: 2px solid $white;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.pitch-progress-step-title {
+  font-size: modular-scale(-1);
+  line-height: 1rem;
+}
+
+.pitch-form {
+  p.label {
+    margin: $base-spacing 0 $small-spacing;
+  }
+
+  .form-field {
+    margin-bottom: $base-spacing;
+
+    p {
+      color: $secondary-font-color;
+      margin: 0;
+    }
+  }
+}
+
+.pitch-form-section {
+  @include full-width;
+  @include vertical-padding($base-spacing);
+}
+
+.pitch-form-section-heading {
+  font-size: modular-scale(2);
+  font-weight: $light-font-weight;
+  margin: 0 0 $small-spacing;
+}
+
+.pitch-buttons {
+  @include full-width;
+  @include vertical-padding($base-spacing);
+  display: flex;
+  flex-direction: column-reverse;
+
+  > :not(:first-child) {
+    margin: 0 0 $small-spacing;
+  }
+
+  @media(screen and min-width: #{$line-width / 2}) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    > :not(:first-child) {
+      margin: 0 0 0 $small-spacing;
+    }
+  }
+}
+
+.pitch-presenter-info-new-login {
+  background: $secondary-background-color;
+  border-radius: $base-border-radius;
+  margin: 0 (-$small-spacing) $base-spacing;
+  padding: $small-spacing;
+
+  h3 {
+    font-size: modular-scale(1);
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.pitch-presenter-info-login,
+.pitch-presenter-info-demographics {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 (-$small-spacing);
+
+  > h3,
+  > p {
+    flex: 1 0 100%;
+    margin: 0 $small-spacing $small-spacing;
+  }
+
+  .form-field {
+    flex: 1 1 40%;
+    margin: 0 $small-spacing $small-spacing;
+    min-width: 20em;
+  }
+
+  .select-target {
+    width: 100%;
+  }
+}
+
+.pitch-presenter-bio-after {
+  @media(screen and min-width: #{$line-width / 2}) {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.pitch-activity-type-hidden {
+  display: none;
+}
+
+.pitch-activity-types {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+.pitch-activity-type {
+  align-items: center;
+  border: none;
+  border-radius: $base-border-radius;
+  display: flex;
+  font-size: 100%;
+  font-weight: $base-font-weight;
+  letter-spacing: 0;
+  padding: $small-spacing;
+  text-align: left;
+  text-transform: none;
+  white-space: normal;
+
+  &,
+  &:not(:disabled):hover,
+  &:not(:disabled):focus {
+    background: none;
+    color: $base-font-color;
+  }
+
+  &[aria-selected] {
+    &,
+    &:hover,
+    &:focus {
+      background: $secondary-background-color;
+    }
+
+    .pitch-activity-type-check {
+      background: $white;
+      border-color: $white;
+
+      path {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+}
+
+.pitch-activity-type-check {
+  flex: 0 0 auto;
+  margin-right: $small-spacing;
+}
+
+.pitch-activity-type-details {
+  flex: 1;
+}
+
+.pitch-activity-type-description {
+  color: $secondary-font-color;
+  font-size: modular-scale(-1);
+  line-height: modular-scale(1);
+}
+
+@media(screen and min-width: #{$line-width * 0.75}) {
+  .pitch-activity-types {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .pitch-activity-type {
+    flex: 1 0 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+  }
+
+  .pitch-activity-type-check {
+    margin: 0 0 $small-spacing;
+  }
+
+  .pitch-activity-type-name {
+    font-size: modular-scale(1);
+    margin-bottom: $small-spacing / 2;
+  }
+}
+
+.pitch-activity-participants {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: $base-spacing;
+}
+
+.pitch-activity-participant {
+  align-items: center;
+  display: flex;
+  flex: 1 0 #{$line-width / 3};
+  margin-bottom: $small-spacing;
+  padding-right: $base-spacing;
+
+  [type="checkbox"] {
+    display: none;
+  }
+}
+
+.pitch-activity-participant-check {
+  margin-right: $small-spacing;
+  flex: 0 0 auto;
+}
+
+.pitch-activity-participant-details {
+  flex: 1;
+
+  p {
+    margin: 0;
+  }
+}
+
+.pitch-activity-participant-level {
+  color: $base-font-color;
+}
+
+.pitch-activity-participant-description {
+  color: $secondary-font-color;
+  font-size: modular-scale(-1);
+}
+
+.pitch-activity-participant-experience {
+  @include all-caps;
+  font-size: modular-scale(-1);
+  margin-left: 0.5em;
+}
+
+.pitch-list {
+  table-layout: auto;
+
+  td:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.pitch-name {
+  width: 100%;
+
+  b, small {
+    display: block;
+    font-weight: $base-font-weight;
+  }
+
+  small {
+    @include all-caps;
+    color: $secondary-font-color;
+  }
+}
+
+.pitch-actions {
+  display: flex;
+
+  .button:not(:last-of-type) {
+    margin-right: 0.5em;
+  }
+}

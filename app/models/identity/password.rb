@@ -6,5 +6,9 @@ class Identity
 
     validates :type, uniqueness: { scope: :participant_id }
     validates :provider, :uid, absence: true
+
+    def password?
+      true
+    end
   end
 end

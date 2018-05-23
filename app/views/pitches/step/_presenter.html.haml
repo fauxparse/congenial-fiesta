@@ -1,0 +1,76 @@
+%section.pitch-form-section.pitch-presenter-info
+  %section.pitch-presenter-info-login
+    - if logged_in?
+      %h3= t('.login.title')
+    - else
+      %h3= t('.login.must_log_in')
+      %p= t('.login.existing', path: login_path(return_to: request.path)).html_safe
+    = form.fields_for step.to_sym, step do |f|
+      = f.group :name, required: true do
+        = f.label :name
+        = f.text_field :name
+        = f.error_messages_for :name
+    = form.fields_for step.participant do |f|
+      = f.group :email, required: true do
+        = f.label :email
+        = f.email_field :email, disabled: f.object.persisted?
+        = f.error_messages_for :email
+      - unless f.object.persisted?
+        = f.group :password, required: true do
+          = f.label :password
+          = f.password_field :password
+          = f.error_messages_for :password
+        = f.group :password_confirmation, required: true do
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation
+          = f.error_messages_for :password_confirmation
+  - unless logged_in?
+    %section.pitch-presenter-info-new-login
+      %h3= t('.new_login.title')
+      %p= t('.new_login.explanation')
+  = form.fields_for step.to_sym, step do |f|
+    %section.pitch-presenter-info-demographics
+      = f.group :city, required: true do
+        = f.label :city
+        = f.text_field :city
+        = f.error_messages_for :city
+      = f.group :country_code, required: true do
+        = f.label :country_code
+        = f.country_select :country_code, priority_countries: %w(NZ AU)
+        = f.error_messages_for :country_code
+
+    %section.pitch-presenter-company
+      = f.group :company do
+        = f.label :company
+        = f.text_field :company, placeholder: t('.company.placeholder')
+        = f.error_messages_for :company
+      = f.group :presented_before do
+        %p.label= t('.presented_before.label')
+        = f.text_area :presented_before, rows: 1, placeholder: t('.presented_before.placeholder'), data: { autosize: true }
+        = f.error_messages_for :presented_before
+
+    %section.pitch-presenter-bio
+      = f.group :bio, required: true do
+        %p.label= t('.bio.label')
+        = f.text_area :bio, rows: 1, data: { autosize: true }
+        .pitch-presenter-bio-after
+          %p.form-information.text-area-word-count{data: { min: 100, max: 150 }}
+            %svg{viewbox: '-8 -8 16 16'}
+              %circle{cx: 0, cy: 0, r: 7}
+              %path{d: 'M0 -7 A 7 7 0 0 1 0 7 A 7 7 0 0 1 0 -7', pathLength: 100}
+            = t('.bio.word_count')
+          = f.error_messages_for :bio
+
+    %section.pitch-presenter-availability
+      = f.group :availability, required: true do
+        %p.label= t('.availability.label')
+        = f.text_area :availability, rows: 1, data: { autosize: true }
+        = f.error_messages_for :availability
+        %p.form-information= t('.availability.hint', dates: date_range(pitch.festival.start_date, pitch.festival.end_date))
+
+  %section.pitch-presenter-info-code-of-conduct
+    %h3= t('.code_of_conduct.title')
+    %p= t('.code_of_conduct.explanation', link: 'http://nzif.info/2017/code-of-conduct').html_safe
+    = form.check_box_field(:code_of_conduct) do
+      %span= t('.code_of_conduct.accept')
+      = form.error_messages_for :code_of_conduct
