@@ -247,7 +247,7 @@ CREATE TABLE public.pitches (
     status character varying(16) DEFAULT 'draft'::character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    info json,
+    info jsonb,
     festival_id bigint
 );
 
@@ -399,6 +399,13 @@ ALTER TABLE ONLY public.pitches
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: by_activity_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX by_activity_type ON public.pitches USING btree ((((info -> 'activity'::text) ->> 'type'::text)));
 
 
 --
@@ -555,6 +562,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180328195718'),
 ('20180329202221'),
 ('20180422030819'),
-('20180501040856');
+('20180501040856'),
+('20180523225441');
 
 

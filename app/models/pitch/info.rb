@@ -13,12 +13,11 @@ class Pitch
       coerce: ->(v) { Pitch.const_get("#{v[:type]}_info".camelize).new(v) }
 
     def self.dump(obj)
-      ActiveSupport::JSON.encode(obj.to_h)
+      obj.to_h
     end
 
     def self.load(raw_hash)
-      hash = raw_hash && ActiveSupport::JSON.decode(raw_hash) || {}
-      new(hash.deep_symbolize_keys)
+      new((raw_hash || {}).deep_symbolize_keys)
     end
   end
 end
