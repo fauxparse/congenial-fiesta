@@ -1,0 +1,14 @@
+%section.pitch-response__section.pitch-response__activity
+  %h2.pitch-response__section-title= t(activity.type, scope: 'pitch.type')
+
+  %p.pitch-response__participants= t('.count', count: activity.number_of_participants, levels: activity.levels.map { |level| t("pitches.step.workshop_details.participation.levels.#{level}.level").downcase }.join('/')).html_safe
+
+  .pitch-response__activity-description= m activity.workshop_description
+
+  %dl.pitch-response__questions
+    %dt.pitch-response__question= t('pitches.step.workshop_details.prerequisites.label')
+    %dd.pitch-response__answer= activity.prerequisites.presence || t('admin.pitches.show.no_response')
+    %dt.pitch-response__question= t('pitches.step.workshop_details.previously_taught.label')
+    %dd.pitch-response__answer= activity.previously_taught.presence || t('admin.pitches.show.no_response')
+    %dt.pitch-response__question= t('pitches.step.workshop_details.comments.label')
+    %dd.pitch-response__answer= activity.comments.presence || t('admin.pitches.show.no_response')

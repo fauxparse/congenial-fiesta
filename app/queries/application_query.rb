@@ -11,7 +11,7 @@ class ApplicationQuery
 
   def each
     return enum_for(:each) unless block_given?
-    scope.in_batches.each_record do |result|
+    scope.all.each do |result|
       yield result
     end
   end

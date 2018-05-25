@@ -32,3 +32,34 @@
   color: $secondary-font-color;
   font-size: modular-scale(-1);
 }
+
+.pitch-response {
+
+}
+
+.pitch-response__header,
+.pitch-response__section {
+  margin: 0 $base-spacing 0 $keyline;
+  padding: $base-spacing 0;
+}
+
+.pitch-response__activity-name {
+  font-size: modular-scale(3);
+  line-height: modular-scale(1);
+}
+
+.pitch-response__section {
+  border-top: $base-border;
+}
+
+.pitch-response__question {
+  margin: $base-spacing 0 $small-spacing;
+  color: $secondary-font-color;
+  font-size: modular-scale(-1);
+  font-weight: $base-font-weight;
+}
+
+.pitch-response__answer {
+  margin: 0;
+  padding: 0;
+}

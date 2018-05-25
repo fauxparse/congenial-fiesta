@@ -4,8 +4,14 @@ en:
       draft: 'Draft'
       submitted: 'Submitted'
       accepted: 'Accepted'
-      rejected: 'Rejected'
+      declined: 'Declined'
     type:
+      standalone_workshop: 'Standalone workshop'
+      full_day_workshop: 'Full-day workshop'
+      weekend_workshop: 'Weekend workshop'
+      directed_performance: 'Directed performance'
+      experimental_performance: 'Experimental performance'
+    short_type:
       standalone_workshop: 'Standalone'
       full_day_workshop: 'Full-day'
       weekend_workshop: 'Weekend'
@@ -17,3 +23,10 @@ en:
       index:
         title: 'Pitches'
         all: 'All'
+      show:
+        about: 'About %{name}'
+        no_response: '(no response)'
+      workshop_details:
+        count: '<b>%{count}</b> %{levels} participants'
+      performance_details:
+        accompanying_workshop: 'Accompanying workshop'

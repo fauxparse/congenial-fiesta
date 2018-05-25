@@ -1,0 +1,17 @@
+.pitch-response
+  %section.pitch-response__header
+    %h1.pitch-response__activity-name= pitch.info.activity.name
+    .pitch-response__presenter-summary= [pitch.info.presenter.name, pitch.info.presenter.company, pitch.info.presenter.city].reject(&:blank?).join(', ')
+
+  = render "admin/pitches/#{pitch.info.activity.type}", activity: pitch.info.activity
+
+  %section.pitch-response__section.pitch-response__presenter
+    %h2.pitch-response__section-title= t('.about', name: pitch.info.presenter.name)
+    .presenter__bio= m pitch.info.presenter.bio
+    %dl.pitch-response__questions
+      %dt.pitch-response__question= t('pitches.step.presenter.presented_before.label')
+      %dd.pitch-response__answer= pitch.info.presenter.presented_before.presence || t('.no_response')
+      %dt.pitch-response__question= t('pitches.step.presenter.availability.label')
+      %dd.pitch-response__answer= pitch.info.presenter.availability.presence || t('.no_response')
+      %dt.pitch-response__question= t('.email')
+      %dd.pitch-response__answer= mail_to pitch.participant.email

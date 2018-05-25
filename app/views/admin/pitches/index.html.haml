@@ -5,7 +5,7 @@
     .filter__text= t('.all')
   - pitches.types.each do |type|
     = link_to admin_pitches_path(pitches.parameters.merge(type: type)), class: 'filter', role: 'tab', aria: { selected: pitches.parameters[:type] == type } do
-      .filter__text= t(type, scope: 'pitch.type')
+      .filter__text= t(type, scope: 'pitch.short_type')
 
 .filters{role: 'tablist'}
   - pitches.statuses.each do |status|
