@@ -1,0 +1,19 @@
+en:
+  pitch:
+    status:
+      draft: 'Draft'
+      submitted: 'Submitted'
+      accepted: 'Accepted'
+      rejected: 'Rejected'
+    type:
+      standalone_workshop: 'Standalone'
+      full_day_workshop: 'Full-day'
+      weekend_workshop: 'Weekend'
+      directed_performance: 'Directed'
+      experimental_performance: 'Experimental'
+
+  admin:
+    pitches:
+      index:
+        title: 'Pitches'
+        all: 'All'

@@ -14,6 +14,7 @@ Lint/AmbiguousBlockAssociation:
 Metrics/BlockLength:
   Exclude:
     - 'config/environments/*'
+    - 'config/routes.rb'
     - 'spec/**/*'
 
 Metrics/LineLength:

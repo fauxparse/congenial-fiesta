@@ -15,12 +15,17 @@
 .page-header__hamburger {
   color: inherit;
   font-size: 100%;
-  margin-left: -$small-spacing;
+  margin-left: -0.25em;
   order: -1;
   padding: 1em;
 
-  &, path {
+  &,
+  path {
     transition: transform $base-duration $base-timing;
+  }
+
+  svg {
+    display: block;
   }
 
   path:nth-child(1) {
@@ -59,4 +64,9 @@
   padding: $small-spacing;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+.page-title {
+  font-size: modular-scale(3);
+  padding: $base-spacing $base-spacing $small-spacing;
 }

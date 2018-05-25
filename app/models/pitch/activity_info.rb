@@ -5,6 +5,14 @@ class Pitch
     include Hashie::Extensions::Dash::Coercion
     include ActiveModel::Validations
 
+    TYPES = %w[
+      standalone_workshop
+      full_day_workshop
+      weekend_workshop
+      directed_performance
+      experimental_performance
+    ].freeze
+
     property :type
     property :name
     property :workshop_description

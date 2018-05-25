@@ -5,9 +5,7 @@ class PitchesController < ApplicationController
 
   before_action :load_pitch, only: %i[edit update destroy]
 
-  def index
-
-  end
+  def index; end
 
   def new
     store_location unless logged_in?

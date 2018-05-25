@@ -2,7 +2,7 @@
 %html
   = render partial: 'shared/head', locals: { view: 'admin' }
   %body
-    = render 'shared/admin/navigation'
+    = render 'shared/admin/navigation', festival: festival&.persisted? && festival
     %main
       = render 'shared/admin/page_header'
 

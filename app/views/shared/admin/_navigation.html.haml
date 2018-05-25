@@ -5,5 +5,6 @@
     = avatar(current_participant, class: 'navigation__avatar')
     .navigation__name= current_participant.to_s
 
-  = navigation_link 'Home', admin_root_path
-
+  = navigation_link 'home', (festival ? admin_festival_path(festival) : admin_root_path)
+  - if festival
+    = navigation_link 'pitches', admin_pitches_path(festival), icon: 'pitch'

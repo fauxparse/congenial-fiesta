@@ -17,13 +17,7 @@ class PitchForm
       end
 
       def types
-        %w[
-          standalone_workshop
-          full_day_workshop
-          weekend_workshop
-          directed_performance
-          experimental_performance
-        ]
+        Pitch::ActivityInfo::TYPES
       end
 
       def method_missing(name, *args)

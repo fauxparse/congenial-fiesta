@@ -1,0 +1,17 @@
+%h1.page-title= t('.title')
+
+.filters{role: 'tablist'}
+  = link_to admin_pitches_path(pitches.parameters.except(:type)), class: 'filter', role: 'tab', aria: { selected: pitches.parameters[:type].blank? } do
+    .filter__text= t('.all')
+  - pitches.types.each do |type|
+    = link_to admin_pitches_path(pitches.parameters.merge(type: type)), class: 'filter', role: 'tab', aria: { selected: pitches.parameters[:type] == type } do
+      .filter__text= t(type, scope: 'pitch.type')
+
+.filters{role: 'tablist'}
+  - pitches.statuses.each do |status|
+    = link_to admin_pitches_path(pitches.parameters.merge(status: status)), class: 'filter', role: 'tab', aria: { selected: pitches.parameters[:status] == status } do
+      .filter__text= t(status, scope: 'pitch.status')
+      = badge festival.pitches.send(status).count
+
+.pitches
+  = render(pitches.to_a) || content_tag(:div, t('.empty'), class: 'pitches--empty')

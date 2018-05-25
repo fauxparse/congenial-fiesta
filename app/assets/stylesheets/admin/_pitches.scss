@@ -1,0 +1,34 @@
+.pitches {
+  margin-top: $base-spacing;
+  border-top: $base-border;
+}
+
+.pitch {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.5em $base-spacing;
+  border-bottom: $base-border;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+    background: $pale-grey;
+  }
+}
+
+.pitch__name {
+  flex: 1;
+  margin: 0 $small-spacing;
+}
+
+.pitch__presenter {
+  color: $secondary-font-color;
+  font-size: modular-scale(-1);
+}
+
+.pitch__type {
+  @include all-caps;
+  color: $secondary-font-color;
+  font-size: modular-scale(-1);
+}

@@ -1,0 +1,73 @@
+.tabs {
+  display: flex;
+  border-bottom: $base-border;
+}
+
+.tab {
+  display: flex;
+  margin-bottom: -1px;
+  border-bottom: 0.25em solid transparent;
+  padding: $small-spacing $small-spacing 0.5em;
+  text-decoration: none;
+  background: none;
+  color: $secondary-font-color;
+  white-space: nowrap;
+  min-width: 0;
+
+  &:focus,
+  &:hover {
+    background: transparent;
+    color: $action-color;
+    outline: none;
+  }
+
+  &:active,
+  &[aria-selected='true'] {
+    border-bottom-color: $action-color;
+    color: $base-font-color;
+  }
+
+  .badge {
+    margin-left: 0.5em;
+  }
+}
+
+.tab__text {
+  @include ellipsis;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 $base-spacing;
+}
+
+.filter {
+  display: flex;
+  padding: 0.5em;
+  text-decoration: none;
+  background: none;
+  color: $secondary-font-color;
+  white-space: nowrap;
+  min-width: 0;
+  margin: 0 0.5em 0.5em 0;
+  border-radius: $base-border-radius;
+
+  &:focus,
+  &:hover {
+    background: transparent;
+    color: $action-color;
+    outline: none;
+  }
+
+  &:active,
+  &[aria-selected='true'] {
+    background: $pale-grey;
+    color: $base-font-color;
+  }
+
+  .badge {
+    margin-left: 0.5em;
+  }
+}

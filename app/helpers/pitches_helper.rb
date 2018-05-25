@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 module PitchesHelper
-  def pitch_icon(pitch)
-    icon(:pitch)
-  end
-
   def pitch_name(pitch)
     [pitch.info.activity.name, t('.unnamed', type: pitch_type(pitch).downcase)]
       .detect(&:present?)
