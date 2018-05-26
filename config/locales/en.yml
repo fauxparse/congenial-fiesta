@@ -60,6 +60,8 @@ en:
   shared:
     head:
       title: 'New Zealand Improv Festival: A Festival of Moments'
+    navigation:
+      festival_admin_link: 'Festival admin'
 
   accounts:
     new:

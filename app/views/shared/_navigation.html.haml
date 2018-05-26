@@ -8,6 +8,11 @@
       = icon :chevron_down
     .navbar-menu-content
       %ul
+        - if current_participant.admin?
+          %li
+            = link_to admin_root_path do
+              = icon :admin
+              = t('.festival_admin_link')
         %li
           = link_to profile_path do
             = icon :user
