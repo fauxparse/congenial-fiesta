@@ -61,5 +61,23 @@ FactoryBot.define do
   factory :pitch do
     festival
     participant
+
+    trait :for_workshop do
+      info do
+        {
+          presenter: {
+            name: participant.name,
+            city: 'Wellington',
+            bio: Faker::Hipster.paragraph
+          },
+          code_of_conduct_accepted: true,
+          activity: {
+            type: 'standalone_workshop',
+            name: 'Workshop',
+            workshop_description: Faker::Hipster.paragraph
+          }
+        }
+      end
+    end
   end
 end
