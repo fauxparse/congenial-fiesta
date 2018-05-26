@@ -79,12 +79,12 @@ main {
 
   &:focus {
     background: rgba($white, 0.25);
+    outline: none;
   }
 
-  .navigation__link--active,
+  &.navigation__link--current,
   &:active {
     background: rgba($white, 0.25);
-    color: $plum;
   }
 }
 

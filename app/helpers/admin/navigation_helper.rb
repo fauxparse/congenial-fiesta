@@ -15,7 +15,7 @@ module Admin
     def navigation_link_class(url_options)
       class_string(
         'navigation__link',
-        'navigation__link--current': current_page?(url_options)
+        'navigation__link--current': current_section?(url_options)
       )
     end
 
@@ -29,6 +29,14 @@ module Admin
         t(name, scope: 'admin.navigation'),
         class: 'navigation__link-text'
       )
+    end
+
+    def current_section?(url_options)
+      current_page?(url_options) || inside_section?(url_for(url_options))
+    end
+
+    def inside_section?(url)
+      url.split('/').size > 3 && request.path.starts_with?(url)
     end
   end
 end
