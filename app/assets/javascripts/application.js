@@ -5,3 +5,7 @@
 //= require drop.min.js
 //= require select.js
 //= require autosize.js
+
+//= require ./dropdown_menus
+//= require ./textareas
+//= require ./upload_progress
