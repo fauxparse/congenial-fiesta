@@ -248,7 +248,8 @@ CREATE TABLE public.pitches (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     info jsonb,
-    festival_id bigint
+    festival_id bigint,
+    pile character varying DEFAULT 'unsorted'::character varying
 );
 
 
@@ -563,6 +564,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180329202221'),
 ('20180422030819'),
 ('20180501040856'),
-('20180523225441');
+('20180523225441'),
+('20180526000102');
 
 

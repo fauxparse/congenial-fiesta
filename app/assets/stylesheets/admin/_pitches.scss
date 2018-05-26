@@ -3,6 +3,12 @@
   border-top: $base-border;
 }
 
+.pitches--empty {
+  padding: 10vh $base-spacing;
+  color: $secondary-font-color;
+  text-align: center;
+}
+
 .pitch {
   display: flex;
   align-items: flex-start;
@@ -14,6 +20,11 @@
   &:hover {
     color: inherit;
     background: $pale-grey;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
   }
 }
 
@@ -41,6 +52,15 @@
 .pitch-response__section {
   margin: 0 $base-spacing 0 $keyline;
   padding: $base-spacing 0;
+}
+
+.pitch-response__piles {
+  margin-top: $small-spacing;
+  padding: 0;
+}
+
+.pitch-response__pile {
+  border: 0;
 }
 
 .pitch-response__activity-name {

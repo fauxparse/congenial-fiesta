@@ -4,6 +4,7 @@ class Pitches < ApplicationQuery
   class Parameters < QueryParameters
     property :status, default: 'submitted'
     property :type
+    property :pile
   end
 
   attr_reader :festival
@@ -15,6 +16,10 @@ class Pitches < ApplicationQuery
 
   def statuses
     Pitch.statuses.except(:draft).values
+  end
+
+  def piles
+    Pitch.piles.values
   end
 
   def types

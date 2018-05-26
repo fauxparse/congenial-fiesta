@@ -3,6 +3,11 @@
     %h1.pitch-response__activity-name= pitch.info.activity.name
     .pitch-response__presenter-summary= [pitch.info.presenter.name, pitch.info.presenter.company, pitch.info.presenter.city].reject(&:blank?).join(', ')
 
+    = form_for pitch, url: admin_pitch_path(pitch.festival, pitch), html: { class: 'filters pitch-response__piles' } do |form|
+      - Pitch.piles.values.each do |pile|
+        %button{name: 'pitch[pile]', value: pile, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.pile == pile}
+          .button__text= t(pile, scope: 'pitch.pile')
+
   = render "admin/pitches/#{pitch.info.activity.type}", activity: pitch.info.activity
 
   %section.pitch-response__section.pitch-response__presenter

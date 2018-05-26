@@ -1,5 +1,5 @@
 = link_to admin_pitch_path(pitch.festival, pitch), class: 'pitch' do
-  = icon('pitch')
+  = icon(pitch.pile)
   .pitch__name
     .pitch__activity-name= pitch.info.activity.name
     .pitch__presenter= pitch.info.presenter.name

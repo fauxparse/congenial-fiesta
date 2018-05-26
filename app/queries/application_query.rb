@@ -11,9 +11,13 @@ class ApplicationQuery
 
   def each
     return enum_for(:each) unless block_given?
-    scope.all.each do |result|
+    scope(parameters).all.each do |result|
       yield result
     end
+  end
+
+  def count(extra_parameters = {})
+    scope(parameters.merge(extra_parameters)).count
   end
 
   private
@@ -22,7 +26,7 @@ class ApplicationQuery
     self.class.name.singularize.constantize
   end
 
-  def scope
+  def scope(parameters)
     parameters.inject(default_scope) do |scope, (parameter, value)|
       value.present? ? refine_scope(scope, parameter, value) : scope
     end

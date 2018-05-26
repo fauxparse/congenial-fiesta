@@ -5,4 +5,3 @@
 //= require drop.min.js
 //= require select.js
 //= require autosize.js
-//= require_tree .

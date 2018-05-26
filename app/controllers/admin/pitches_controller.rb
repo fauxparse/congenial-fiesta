@@ -6,6 +6,11 @@ module Admin
 
     def show; end
 
+    def update
+      pitch.update!(pitch_params)
+      redirect_to admin_pitches_path
+    end
+
     private
 
     def pitch
@@ -14,6 +19,10 @@ module Admin
 
     def pitches
       @pitches ||= Pitches.new(festival, params)
+    end
+
+    def pitch_params
+      params.require(:pitch).permit(:pile)
     end
 
     helper_method :pitch, :pitches

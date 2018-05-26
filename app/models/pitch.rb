@@ -11,6 +11,13 @@ class Pitch < ApplicationRecord
     declined: 'declined'
   }
 
+  enum pile: {
+    unsorted: 'unsorted',
+    no: 'no',
+    maybe: 'maybe',
+    yes: 'yes'
+  }
+
   serialize :info, Pitch::Info
 
   scope :newest_first, -> { order(created_at: :desc) }

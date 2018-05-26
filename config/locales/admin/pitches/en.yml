@@ -17,12 +17,18 @@ en:
       weekend_workshop: 'Weekend'
       directed_performance: 'Directed'
       experimental_performance: 'Experimental'
+    pile:
+      unsorted: 'Unsorted'
+      'no': 'No'
+      maybe: 'Maybe'
+      'yes': 'Yes'
 
   admin:
     pitches:
       index:
         title: 'Pitches'
         all: 'All'
+        empty: '(no results)'
       show:
         about: 'About %{name}'
         no_response: '(no response)'
