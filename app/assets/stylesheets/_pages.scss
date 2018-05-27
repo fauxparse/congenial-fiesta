@@ -1,0 +1,17 @@
+.static-page__content {
+  h3 {
+    margin-top: $base-spacing;
+    font-weight: $bold-font-weight;
+    color: $dark-grey;
+  }
+
+  ul {
+    margin-bottom: $small-spacing;
+  }
+
+  li {
+    padding-left: 2.5em;
+    margin-bottom: $small-spacing;
+    background: image_url('icons/bullet') no-repeat 0 0;
+  }
+}

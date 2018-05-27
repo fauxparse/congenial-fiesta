@@ -5,7 +5,7 @@
   font-style: normal;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,600');
 
 // Typography
 $base-font-family: 'Work Sans', $font-stack-system;
@@ -44,8 +44,8 @@ $google: #ea4335;
 $twitter: #1da1f2;
 
 // Font Colors
-$base-font-color: $dark-grey;
-$secondary-font-color: $medium-grey;
+$base-font-color: rgba($dark-grey, 0.875);
+$secondary-font-color: rgba($medium-grey, 0.625);
 $action-color: $tomato;
 $action-color-hover: shade($action-color, 25%);
 $highlight-color: $mandarin;
@@ -54,7 +54,7 @@ $success-color: $apple;
 
 $base-font-weight: 400;
 $light-font-weight: 300;
-$bold-font-weight: 700;
+$bold-font-weight: 600;
 
 // Border
 $base-border-color: transparentize($medium-grey, 0.75);

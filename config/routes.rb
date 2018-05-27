@@ -40,6 +40,11 @@ Rails.application.routes.draw do
     post '/pitch', to: 'pitches#create'
   end
 
+  get '/privacy',
+    to: 'high_voltage/pages#show',
+    id: 'privacy',
+    as: :privacy_policy
+
   root to: 'festivals#show'
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
