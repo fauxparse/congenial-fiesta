@@ -40,6 +40,12 @@ Rails.application.routes.draw do
     post '/pitch', to: 'pitches#create'
   end
 
+  get '/code-of-conduct',
+    to: 'high_voltage/pages#show',
+    id: 'code_of_conduct',
+    as: :code_of_conduct
+  get '/:year/code-of-conduct', to: redirect('/code-of-conduct')
+
   get '/privacy',
     to: 'high_voltage/pages#show',
     id: 'privacy',

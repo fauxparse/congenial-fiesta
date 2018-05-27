@@ -1,3 +1,5 @@
+- content_for :title, t('.title')
+
 %main
   %header.hero
     %h1= t('.title')
@@ -84,4 +86,4 @@
       us by emailing
       <a href="mailto:registrations@nzimprovfestival.org.nz">registrations@nzimprovfestival.org.nz</a>
 
-      Last edited on #{l File.mtime(__FILE__).to_date, format: :long}
+    = last_updated File.mtime(__FILE__)

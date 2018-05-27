@@ -1,4 +1,7 @@
 en:
   pages:
+    last_updated: 'Last updated: <b>%{date}</b>'
+    code_of_conduct:
+      title: 'NZIF Code of Conduct'
     privacy:
       title: 'Privacy policy'
