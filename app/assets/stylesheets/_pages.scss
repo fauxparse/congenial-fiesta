@@ -10,6 +10,12 @@
     margin: $base-spacing 0 $small-spacing;
     font-weight: $bold-font-weight;
     color: $bold-font-color;
+
+    b,
+    strong {
+      color: $secondary-font-color;
+      font-weight: $base-font-weight;
+    }
   }
 
   ol,
