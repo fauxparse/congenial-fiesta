@@ -5,7 +5,7 @@
     = form_for current_participant, url: profile_path, html: { class: 'profile-form' } do |form|
       .profile-avatar
         = form.label :avatar do
-          %span.profile-avatar-upload
+          .profile-avatar-upload
             = icon :upload
           = avatar(form.object, size: 128)
           %svg.upload-progress{width: 80, height: 80, viewbox: '-40 -40 80 80'}
