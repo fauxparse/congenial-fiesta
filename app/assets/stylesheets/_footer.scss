@@ -6,3 +6,24 @@
   color: $white;
   display: flex;
 }
+
+.page-footer__section {
+
+}
+
+.page-footer__links {
+  display: block;
+  font-size: modular-scale(-1);
+}
+
+.page-footer__link {
+  display: block;
+  color: $white;
+  opacity: 0.75;
+  text-decoration: none;
+
+  &:hover {
+    color: $white;
+    opacity: 1;
+  }
+}
