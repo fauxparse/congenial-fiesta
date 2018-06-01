@@ -29,6 +29,11 @@
   padding-top: 0.5em;
 }
 
+.oauth-account path {
+  fill: currentColor;
+  stroke: none;
+}
+
 @media(screen and min-width: $line-width) {
   .options {
     padding-left: 3.5rem;
@@ -116,14 +121,13 @@
     z-index: 2;
     pointer-events: none;
     touch-action: none;
-    --progress: 0;
 
     path {
       fill: none;
       stroke: $action-color;
       stroke-width: 4px;
-      stroke-dasharray: 100;
-      stroke-dashoffset: calc(100 - var(--progress));
+      stroke-dasharray: 0 100;
+      stroke-dashoffset: 100;
     }
   }
 

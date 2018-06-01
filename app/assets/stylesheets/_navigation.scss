@@ -21,25 +21,26 @@
   > :last-child {
     margin-right: -$small-spacing;
   }
+}
 
-  a {
-    display: flex;
-    align-items: center;
+.navbar__link {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 0 $small-spacing;
+  transition: background-color $fast-duration $base-timing;
+
+  &:hover,
+  &:focus,
+  &.drop-enabled {
+    background-color: $medium-grey;
     color: white;
-    text-decoration: none;
-    padding: 0 $small-spacing;
-    transition: background-color $fast-duration $base-timing;
-
-    &:hover,
-    &:focus,
-    &.drop-enabled {
-      background-color: $medium-grey;
-      outline: none;
-    }
+    outline: none;
   }
 }
 
-.navbar-logo {
+.navbar__logo {
   color: white;
   font-family: $hero-font-family;
   font-weight: $bold-font-weight;
@@ -48,13 +49,13 @@
   order: -1;
 }
 
-.navbar-login-avatar {
+.navbar__avatar {
   background: rgba($light-grey, 0.5);
   flex: 0 0 auto;
   margin-right: $small-spacing;
 }
 
-.navbar-login-name {
+.navbar__name {
   @include ellipsis;
   display: none;
   flex: 1;
@@ -65,8 +66,13 @@
   }
 }
 
-.navbar-menu-target {
+.navbar__user {
   flex: 0 1 auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.navbar__menu-target {
   min-width: 0;
 
   .icon-chevron-down {
@@ -81,7 +87,7 @@
   }
 }
 
-.navbar-menu-content {
+.navbar__menu {
   @include shadow;
   background: rgba($dark-grey, 0.9);
   color: $white;
@@ -117,5 +123,9 @@
     touch-action: auto;
     transition-timing-function: $deceleration-timing;
     transform: translateY(0);
+  }
+
+  .navbar & {
+    display: none;
   }
 }
