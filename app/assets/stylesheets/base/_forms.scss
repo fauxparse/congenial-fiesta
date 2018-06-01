@@ -211,7 +211,6 @@ select {
 }
 
 .text-area-word-count {
-  --progress: 0;
   align-items: center;
   display: flex;
 
@@ -228,8 +227,6 @@ select {
     path {
       fill: none;
       stroke: $dark-grey;
-      stroke-dasharray: 100;
-      stroke-dashoffset: calc(100 - var(--progress));
       stroke-linecap: round;
       stroke-width: 2px;
     }

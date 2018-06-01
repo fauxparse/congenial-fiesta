@@ -2,11 +2,15 @@
   "name": "nzif",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.3.1",
-    "babel-preset-react": "^6.24.1",
-    "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "@rails/webpacker": "3.5.3",
+    "activestorage": "^5.2.0",
+    "autosize": "^4.0.2",
+    "lodash": "^4.17.10",
+    "rails-ujs": "^5.2.0",
+    "stimulus": "^1.0.1",
+    "tether-drop": "^1.4.2",
+    "tether-select": "^1.1.0",
+    "turbolinks": "^5.1.1"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"

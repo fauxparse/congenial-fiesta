@@ -1,30 +1,31 @@
 %header.navbar
-  = link_to root_path, class: 'navbar-logo' do
+  = link_to root_path, class: 'navbar__link navbar__logo' do
     = t('festival.name.short')
   - if logged_in?
-    = link_to profile_path, class: 'drop-target navbar-menu-target', data: { 'drop-position': 'bottom right' } do
-      = avatar(current_participant, class: 'navbar-login-avatar')
-      .navbar-login-name= current_participant
-      = icon :chevron_down
-    .navbar-menu-content
-      %ul
-        - if current_participant.admin?
+    .navbar__user{'data-controller': 'dropdown-menu'}
+      = link_to profile_path, class: 'navbar__link drop-target navbar__menu-target', data: { target: 'dropdown-menu.link', 'drop-position': 'bottom right' } do
+        = avatar(current_participant, class: 'navbar__avatar')
+        .navbar__name= current_participant
+        = icon :chevron_down
+      .navbar__menu{data: { target: 'dropdown-menu.menu' }}
+        %ul
+          - if current_participant.admin?
+            %li
+              = link_to admin_root_path do
+                = icon :admin
+                = t('.festival_admin_link')
           %li
-            = link_to admin_root_path do
-              = icon :admin
-              = t('.festival_admin_link')
-        %li
-          = link_to profile_path do
-            = icon :user
-            = t('profiles.show.link')
-        %li
-          = link_to pitches_path do
-            = icon :pitch
-            = t('pitches.index.link')
-        %li
-          = link_to logout_path, method: :delete do
-            = icon :log_out
-            = t('sessions.log_out')
+            = link_to profile_path do
+              = icon :user
+              = t('profiles.show.link')
+          %li
+            = link_to pitches_path do
+              = icon :pitch
+              = t('pitches.index.link')
+          %li
+            = link_to logout_path, method: :delete do
+              = icon :log_out
+              = t('sessions.log_out')
   - else
-    = link_to_unless_current t('sessions.log_in'), login_path
-    = link_to_unless_current t('accounts.sign_up'), signup_path
+    = link_to_unless_current t('sessions.log_in'), login_path, class: 'navbar__link'
+    = link_to_unless_current t('accounts.sign_up'), signup_path, class: 'navbar__link'
