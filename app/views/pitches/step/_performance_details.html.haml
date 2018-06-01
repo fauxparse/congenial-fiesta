@@ -11,9 +11,11 @@
   %p.label= t('.name.label')
   = form.text_field :name
   = form.error_messages_for :name
-= form.group :show_description, required: true do
+= form.group :show_description, required: true, data: { controller: 'word-count', 'word-count-min': 100, 'word-count-max': 150 } do
   %p.label= t('.show_description.label')
-  = form.text_area :show_description, rows: 1, data: { autosize: true }
+  = form.text_area :show_description, rows: 1, data: { autosize: true, target: 'word-count.editor' }
+  %p.form-information.text-area-word-count{data: { target: 'word-count.counter' }}
+    = t('.show_description.hint')
   = form.error_messages_for :show_description
 = form.group :cast_size, required: true do
   %p.label= t('.cast_size.label')
@@ -32,10 +34,11 @@
   %p.form-information= t('.technical_requirements.hint')
 
 %h3.pitch-form-section-heading= t('.the_workshop')
-= form.group :workshop_description, required: true do
+= form.group :workshop_description, required: true, data: { controller: 'word-count', 'word-count-min': 100, 'word-count-max': 150 } do
   %p.label= t('.workshop_description.label')
-  = form.text_area :workshop_description, rows: 1, data: { autosize: true }
-  %p.form-information= t('.workshop_description.hint')
+  = form.text_area :workshop_description, rows: 1, data: { autosize: true, target: 'word-count.editor' }
+  %p.form-information.text-area-word-count{data: { target: 'word-count.counter' }}
+    = t('.workshop_description.hint')
   = form.error_messages_for :workshop_description
 = form.group :previously_taught do
   %p.label= t('.previously_taught.label')

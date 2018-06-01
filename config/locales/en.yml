@@ -165,7 +165,7 @@ en:
           label: 'What is the name of your workshop?'
         workshop_description:
           label: 'Please describe the workshop you wish to teach: something we would publish to advertise your workshop'
-          hint: 'What is the content? What will participants get out of the workshop?'
+          hint: '(50–100 words) What are you covering? Why is it useful? Who will find it most relevant?'
         participation:
           label: 'Who is your workshop aimed at? Select as many as are applicable:'
           levels:
@@ -204,6 +204,7 @@ en:
           label: 'What is the name of your show?'
         show_description:
           label: 'Please describe the show you wish to direct'
+          hint: '(50–100 words)'
         cast_size:
           label: 'What is the ideal cast size?'
           hint: 'We will favour shows with at least 6–8 players'
@@ -216,7 +217,7 @@ en:
           hint: 'Provided: general lighting rig, chairs/boxes, musician'
         workshop_description:
           label: 'Please describe the accompanying workshop'
-          hint: 'What are you hoping participants will get out of it? It should provide something of value to participants who do not perform in the show'
+          hint: '(50–100 words) What are you hoping participants will get out of it? It should provide something of value to participants who do not perform in the show'
         previously_taught:
           label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
           placeholder: 'No, this is my first time teaching this workshop'

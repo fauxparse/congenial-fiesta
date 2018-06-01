@@ -53,10 +53,9 @@
       = f.group :bio, required: true do
         %p.label= t('.bio.label')
         = f.text_area :bio, rows: 1, data: { autosize: true, target: 'word-count.editor' }
-        .pitch-presenter-bio-after
-          %p.form-information.text-area-word-count{data: { target: 'word-count.counter' }}
-            = t('.bio.word_count')
-          = f.error_messages_for :bio
+        %p.form-information.text-area-word-count{data: { target: 'word-count.counter' }}
+          = t('.bio.word_count')
+        = f.error_messages_for :bio
 
     %section.pitch-presenter-availability
       = f.group :availability, required: true do

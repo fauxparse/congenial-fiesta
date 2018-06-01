@@ -160,19 +160,6 @@
   }
 }
 
-.pitch-presenter-bio-after {
-  @media(screen and min-width: #{$line-width / 2}) {
-    align-items: center;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-
-    p {
-      margin-bottom: 0;
-    }
-  }
-}
-
 .pitch-activity-type-hidden {
   display: none;
 }
