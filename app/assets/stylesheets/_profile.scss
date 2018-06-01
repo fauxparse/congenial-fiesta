@@ -29,6 +29,11 @@
   padding-top: 0.5em;
 }
 
+.oauth-account path {
+  fill: currentColor;
+  stroke: none;
+}
+
 @media(screen and min-width: $line-width) {
   .options {
     padding-left: 3.5rem;
