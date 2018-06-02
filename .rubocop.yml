@@ -11,6 +11,10 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
     - 'spec/**/*'
 
+# This cop is removed in master
+Lint/SplatKeywordArguments:
+  Enabled: false
+
 Metrics/BlockLength:
   Exclude:
     - 'config/environments/*'
