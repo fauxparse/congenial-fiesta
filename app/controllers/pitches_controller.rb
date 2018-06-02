@@ -68,8 +68,11 @@ class PitchesController < ApplicationController
   end
 
   def pitch
-    @pitch ||=
-      festival.pitches.new(participant: current_participant || Participant.new)
+    @pitch ||= new_pitch
+  end
+
+  def new_pitch
+    NewPitch.new(festival, current_participant || Participant.new).pitch
   end
 
   def pitches
