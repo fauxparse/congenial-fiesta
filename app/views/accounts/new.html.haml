@@ -18,6 +18,6 @@
       = form.password_field :password_confirmation
       = form.error_messages_for :password_confirmation
     .form-buttons.login-form-buttons
-      = form.submit t('.submit'), class: 'button-primary'
+      = form.submit t('.submit'), class: 'button--primary'
       = link_to t('.log_in'), login_path
   = render 'social'

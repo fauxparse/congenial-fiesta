@@ -1,0 +1,9 @@
+.pitches-open {
+  h1 {
+    font-size: modular-scale(4);
+  }
+
+  ul {
+    @include bulleted-list;
+  }
+}

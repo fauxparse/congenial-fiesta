@@ -1,0 +1,193 @@
+en:
+  pitches:
+    index:
+      link: 'Pitches'
+      new: 'Pitch an idea'
+      title: 'Pitches'
+    draft_actions:
+      edit: 'Edit'
+      delete: 'Delete'
+      confirm_delete: 'Really delete this pitch?'
+    edit:
+      title: 'Pitch an idea'
+    form:
+      next: 'Next'
+      back: 'Go back'
+      submit: 'Submit my pitch'
+    pitch:
+      unnamed: '(new %{type})'
+    step:
+      presenter:
+        title: 'About you'
+        icon: 'user'
+        login:
+          title: 'About you'
+          must_log_in: 'First, you need an account…'
+          existing: 'If you already have an account, you can <a href="%{path}">log in</a>.'
+        company:
+          placeholder: 'None/I’m applying as an individual'
+        presented_before:
+          label: 'Have you/your company presented at NZIF before? If so, please provide details below:'
+          placeholder: 'No, this is my first time'
+        bio:
+          label: 'Please provide a brief bio: something we could publish if we were bragging about you'
+          word_count: '100–150 words'
+        availability:
+          label: 'Do you plan to be in Wellington for all of NZIF, or are there restrictions on when you can participate?'
+          hint: 'Festival dates are %{dates}'
+        code_of_conduct:
+          title: 'Code of conduct'
+          explanation: 'We ask all participants to adhere to the Festival’s <a href="%{link}">Code of Conduct</a>. Please take a moment now to familiarise yourself with the Code now, even if you’ve been to NZIF before.'
+          accept: 'I agree to abide by the NZIF Code of Conduct'
+        new_login:
+          title: 'Why do I need a new password?'
+          explanation: 'Unfortunately, even if you’ve been to NZIF before, you’ll need to create a new account for this year. We’ve made some exciting changes to the system, but for security reasons we can’t import existing login information.'
+      idea:
+        title: 'Your idea'
+        icon: 'pitch'
+        types:
+          standalone_workshop:
+            name: 'Standalone workshop'
+            description: 'Single 3-hour slot'
+          full_day_workshop:
+            name: 'Full-day workshop'
+            description: '2 × 3-hour slots'
+          weekend_workshop:
+            name: 'Weekend workshop'
+            description: '4 × 3-hour slots'
+          directed_performance:
+            name: 'Directed performance'
+            description: '+ 3-hour workshop'
+          experimental_performance:
+            name: 'Experimental performance'
+            description: '+ 3-hour workshop'
+          return_performance:
+            name: 'Return performance'
+            description: 'Past NZIF work'
+      workshop_details:
+        looking_for: 'What we’re looking for'
+        looking_for_details: |
+          Well structured workshops with clear aims and outcomes, offering one of the following:
+
+          * Targeted scene work / skill development
+          * New approaches to improvisation
+          * Associated skills: mime, dance, scenography, other
+          * Company specific expertise in a shareable form
+          * Something new we haven't thought of!
+
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
+        the_workshop: 'Your workshop'
+        name:
+          label: 'What is the name of your workshop?'
+        workshop_description:
+          label: 'Please describe the workshop you wish to teach: something we would publish to advertise your workshop'
+          hint: '(50–100 words) What are you covering? Why is it useful? Who will find it most relevant?'
+        participation:
+          label: 'Who is your workshop aimed at? Select as many as are applicable:'
+          levels:
+            rookie:
+              level: 'Rookie'
+              experience: '< 1 year'
+              description: 'Has learned the basics, limited performance experience'
+            intermediate:
+              level: 'Intermediate'
+              experience: '1–4 years'
+              description: 'Strong foundation, general performance experience'
+            advanced:
+              level: 'Advanced'
+              experience: '5+ years'
+              description: 'Extensive performance experience, director/teacher'
+        prerequisites:
+          label: 'Are there any other prerequisites for your workshop?'
+          placeholder: 'Previous skills/training required; specific accessibility notes (e.g. mobility, vision, hearing)'
+        number_of_participants:
+          label: 'What is the maximum number of participants?'
+          hint: 'We recommend 16 but are open to smaller or larger class sizes if appropriate for the content. Workshops will have a minimum of 6 participants.'
+        previously_taught:
+          label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
+          placeholder: 'No, this is my first time teaching this workshop'
+        comments:
+          label: 'Anything else we should know?'
+          placeholder: 'Feedback from previous participants, room requirements, etc'
+      performance_details:
+        looking_for: 'What we’re looking for'
+        looking_for_directed_performance: |
+          * 50–75 minute performances for a black box theatre (the Heyday Dome or Propeller Stage at BATS) led by one or two directors
+          * Recently developed shows that have not been performed at NZIF previously, that would suit intermediate improvisors
+          * An accompanying workshop teaching participants the relevant skills and techniques needed (from which you will cast the performance)
+
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
+        looking_for_experimental_performance: |
+          * 50–75 minute performances for a black box theatre (the Heyday Dome or Propeller Stage at BATS) led by one or two directors
+          * Experimental show concepts that you can workshop with experienced improvisors and present at NZIF
+          * An accompanying workshop teaching participants the relevant skills and techniques needed (from which you will cast the performance)
+
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
+        your_experience: 'Your experience'
+        the_show: 'Your show'
+        the_workshop: 'Your workshop'
+        experience:
+          label: 'Tell us about your directing/show creating history'
+          hint: 'What is your track record with shows in general and experimental opportunities like this?'
+        name:
+          label: 'What is the name of your show?'
+        show_description:
+          label: 'Please describe the show you wish to direct'
+          hint: '(50–100 words)'
+        cast_size:
+          label: 'What is the ideal cast size?'
+          hint: 'We will favour shows with at least 6–8 players'
+        previously_performed:
+          label: 'Will you have directed or performed this show/format prior to the Festival? If so, please give details:'
+          placeholder: 'No, this is my first time directing this show'
+          hint: 'Quotes or links to reviews are helpful here if you have them'
+        technical_requirements:
+          label: 'Does your show have technical or set requirements beyond the usual improv setup?'
+          hint: 'Provided: general lighting rig, chairs/boxes, musician'
+        workshop_description:
+          label: 'Please describe the accompanying workshop'
+          hint: '(50–100 words) What are you hoping participants will get out of it? It should provide something of value to participants who do not perform in the show'
+        previously_taught:
+          label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
+          placeholder: 'No, this is my first time teaching this workshop'
+        comments:
+          label: 'Anything else we should know about this show and workshop?'
+          placeholder: 'Feedback from previous participants, room requirements, etc'
+      return_performance_details:
+        looking_for: 'What we’re looking for'
+        looking_for_details: |
+          * 50–75 minute performances by NZ companies or ensembles that previously presented at NZIF 2008–2017
+          * The ability to bring all or most of the original cast at NZIF 2018
+          * The ability to rehearse/rework to a high standard (note: we are able to offer $100 towards rehearsal costs)
+
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
+        the_show: 'Return performance'
+        name:
+          label: 'What is the name of your show?'
+        show_description:
+          label: 'Please describe the show you wish to direct'
+          hint: '(50–100 words)'
+        cast_size:
+          label: 'What is the cast size?'
+        original_cast:
+          label: 'Will most or all of the original cast be available?'
+          placeholder: 'Yes, I’ve checked and they’re keen in principle'
+          hint: 'If not, do you have an idea of how you’ll source replacements?'
+        previously_performed:
+          label: 'When did you present this show previously at NZIF?'
+          placeholder: 'A year is helpful (if you can remember)'
+          hint: ''
+        technical_requirements:
+          label: 'Does your show have technical or set requirements beyond the usual improv setup?'
+          hint: 'Provided: general lighting rig, chairs/boxes, musician'
+        previously_taught:
+          label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
+          placeholder: 'No, this is my first time teaching this workshop'
+        comments:
+          label: 'Anything else we should know about this show and workshop?'
+          placeholder: 'Feedback from previous participants, room requirements, etc'
+
+      finish:
+        title: 'Finish & send'
+        icon: 'send'
+        ready: 'When you’re ready to submit your pitch, click the button below. You won’t be able to edit your pitch after you’ve submitted it.'

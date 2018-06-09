@@ -19,10 +19,10 @@
         = icon('back')
         %span= t('.back')
     - if pitch_form.current_step.last?
-      %button.button-primary{type: 'submit', name: 'submit', value: 'submit', rel: :next}
+      %button.button--primary{type: 'submit', name: 'submit', value: 'submit', rel: :next}
         = icon('done')
         %span= t('.submit')
     - else
-      %button.button-primary{type: 'submit', name: 'submit', value: 'next', rel: :next}
+      %button.button--primary{type: 'submit', name: 'submit', value: 'next', rel: :next}
         %span= [t('.next'), pitch_form.current_step.next.title].join(': ')
         = icon('next')
