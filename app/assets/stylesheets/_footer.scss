@@ -5,6 +5,10 @@
   background: $medium-grey;
   color: $white;
   display: flex;
+  flex: 0 0 auto;
+  position: relative;
+  transform: translate3d(0, 0, 0);
+  -webkit-font-smoothing: antialiased;
 }
 
 .page-footer__section {
@@ -17,13 +21,14 @@
 }
 
 .page-footer__link {
-  display: block;
   color: $white;
-  opacity: 0.75;
+  opacity: 0.625;
   text-decoration: none;
+  transition: opacity $fast-duration $base-timing;
 
   &:hover {
     color: $white;
     opacity: 1;
+    border-bottom: 0.25em solid $accent-color;
   }
 }
