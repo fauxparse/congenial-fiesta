@@ -7,8 +7,6 @@ class Pitch
 
     TYPES = %w[
       standalone_workshop
-      full_day_workshop
-      weekend_workshop
       directed_performance
       experimental_performance
     ].freeze
