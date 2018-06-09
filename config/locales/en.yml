@@ -159,6 +159,9 @@ en:
           experimental_performance:
             name: 'Experimental performance'
             description: '+ 3-hour workshop'
+          return_performance:
+            name: 'Return performance'
+            description: 'Past NZIF work'
       workshop_details:
         the_workshop: 'Your workshop'
         name:
@@ -218,6 +221,32 @@ en:
         workshop_description:
           label: 'Please describe the accompanying workshop'
           hint: '(50–100 words) What are you hoping participants will get out of it? It should provide something of value to participants who do not perform in the show'
+        previously_taught:
+          label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
+          placeholder: 'No, this is my first time teaching this workshop'
+        comments:
+          label: 'Anything else we should know about this show and workshop?'
+          placeholder: 'Feedback from previous participants, room requirements, etc'
+      return_performance_details:
+        the_show: 'Return performance'
+        name:
+          label: 'What is the name of your show?'
+        show_description:
+          label: 'Please describe the show you wish to direct'
+          hint: '(50–100 words)'
+        cast_size:
+          label: 'What is the cast size?'
+        original_cast:
+          label: 'Will most or all of the original cast be available?'
+          placeholder: 'Yes, I’ve checked and they’re keen in principle'
+          hint: 'If not, do you have an idea of how you’ll source replacements?'
+        previously_performed:
+          label: 'When did you present this show previously at NZIF?'
+          placeholder: 'A year is helpful (if you can remember)'
+          hint: ''
+        technical_requirements:
+          label: 'Does your show have technical or set requirements beyond the usual improv setup?'
+          hint: 'Provided: general lighting rig, chairs/boxes, musician'
         previously_taught:
           label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
           placeholder: 'No, this is my first time teaching this workshop'

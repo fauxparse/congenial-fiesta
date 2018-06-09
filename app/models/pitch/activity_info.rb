@@ -9,6 +9,7 @@ class Pitch
       standalone_workshop
       directed_performance
       experimental_performance
+      return_performance
     ].freeze
 
     property :type
@@ -17,7 +18,7 @@ class Pitch
     property :comments
     property :previously_taught
 
-    validates :type, :name, :workshop_description, presence: true
+    validates :type, :name, presence: true
 
     def initialize(*args)
       super

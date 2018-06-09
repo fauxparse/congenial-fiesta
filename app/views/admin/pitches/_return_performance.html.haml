@@ -1,0 +1,19 @@
+%section.pitch-response__section.pitch-response__activity
+  %h2.pitch-response__section-title= t(activity.type, scope: 'pitch.type')
+
+  .pitch-response__activity-description= m activity.show_description
+
+  %dl.pitch-response__questions
+    - if activity.respond_to?(:experience)
+      %dt.pitch-response__question= t('pitches.step.return_performance_details.experience.label')
+      %dd.pitch-response__answer= activity.experience.presence || t('admin.pitches.show.no_response')
+    %dt.pitch-response__question= t('pitches.step.return_performance_details.previously_performed.label')
+    %dd.pitch-response__answer= activity.previously_performed.presence || t('admin.pitches.show.no_response')
+    %dt.pitch-response__question= t('pitches.step.return_performance_details.cast_size.label')
+    %dd.pitch-response__answer= activity.cast_size.presence || t('admin.pitches.show.no_response')
+    %dt.pitch-response__question= t('pitches.step.return_performance_details.original_cast.label')
+    %dd.pitch-response__answer= activity.original_cast.presence || t('admin.pitches.show.no_response')
+    %dt.pitch-response__question= t('pitches.step.return_performance_details.technical_requirements.label')
+    %dd.pitch-response__answer= activity.technical_requirements.presence || t('admin.pitches.show.no_response')
+    %dt.pitch-response__question= t('pitches.step.return_performance_details.comments.label')
+    %dd.pitch-response__answer= activity.comments.presence || t('admin.pitches.show.no_response')
