@@ -1,3 +1,7 @@
+.pitch-form__blurb
+  %h3.pitch-form-section-heading= t('.looking_for')
+  = m t(".looking_for_#{form.object.activity.type}")
+
 - if form.object.respond_to?(:experience)
   %h3.pitch-form-section-heading= t('.your_experience')
   = form.group :experience, required: true do

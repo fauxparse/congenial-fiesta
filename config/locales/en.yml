@@ -163,6 +163,17 @@ en:
             name: 'Return performance'
             description: 'Past NZIF work'
       workshop_details:
+        looking_for: 'What we’re looking for'
+        looking_for_details: |
+          Well structured workshops with clear aims and outcomes, offering one of the following:
+
+          * Targeted scene work / skill development
+          * New approaches to improvisation
+          * Associated skills: mime, dance, scenography, other
+          * Company specific expertise in a shareable form
+          * Something new we haven't thought of!
+
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
         the_workshop: 'Your workshop'
         name:
           label: 'What is the name of your workshop?'
@@ -197,6 +208,19 @@ en:
           label: 'Anything else we should know?'
           placeholder: 'Feedback from previous participants, room requirements, etc'
       performance_details:
+        looking_for: 'What we’re looking for'
+        looking_for_directed_performance: |
+          * 50–75 minute performances for a black box theatre (the Heyday Dome or Propeller Stage at BATS) led by one or two directors
+          * Recently developed shows that have not been performed at NZIF previously, that would suit intermediate improvisors
+          * An accompanying workshop teaching participants the relevant skills and techniques needed (from which you will cast the performance)
+
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
+        looking_for_experimental_performance: |
+          * 50–75 minute performances for a black box theatre (the Heyday Dome or Propeller Stage at BATS) led by one or two directors
+          * Experimental show concepts that you can workshop with experienced improvisors and present at NZIF
+          * An accompanying workshop teaching participants the relevant skills and techniques needed (from which you will cast the performance)
+
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
         your_experience: 'Your experience'
         the_show: 'Your show'
         the_workshop: 'Your workshop'
@@ -228,6 +252,13 @@ en:
           label: 'Anything else we should know about this show and workshop?'
           placeholder: 'Feedback from previous participants, room requirements, etc'
       return_performance_details:
+        looking_for: 'What we’re looking for'
+        looking_for_details: |
+          * 50–75 minute performances by NZ companies or ensembles that previously presented at NZIF 2008–2017
+          * The ability to bring all or most of the original cast at NZIF 2018
+          * The ability to rehearse/rework to a high standard (note: we are able to offer $100 towards rehearsal costs)
+
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
         the_show: 'Return performance'
         name:
           label: 'What is the name of your show?'
