@@ -1,3 +1,5 @@
+- content_for :title, t('.title')
+
 %main
   %header.hero
     %h1= t('.title')
@@ -82,6 +84,6 @@
 
       If there are any questions regarding this privacy policy, you may contact
       us by emailing
-      <a href="mailto:registrations@nzimprovfestival.org.nz">registrations@nzimprovfestival.org.nz</a>
+      <a href="mailto:registrations@nzimprovfestival.co.nz">registrations@nzimprovfestival.co.nz</a>
 
-      Last edited on #{l File.mtime(__FILE__).to_date, format: :long}
+    = last_updated File.mtime(__FILE__)

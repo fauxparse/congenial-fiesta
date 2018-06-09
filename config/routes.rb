@@ -40,10 +40,18 @@ Rails.application.routes.draw do
     post '/pitch', to: 'pitches#create'
   end
 
-  get '/privacy',
-    to: 'high_voltage/pages#show',
-    id: 'privacy',
-    as: :privacy_policy
+  def static_page(name)
+    get "/#{name.gsub('_', '-')}",
+      to: 'high_voltage/pages#show',
+      id: name,
+      as: name
+  end
+
+  static_page 'code_of_conduct'
+  get '/:year/code-of-conduct', to: redirect('/code-of-conduct')
+
+  static_page 'terms_and_conditions'
+  static_page 'privacy'
 
   root to: 'festivals#show'
 
