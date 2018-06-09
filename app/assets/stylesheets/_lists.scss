@@ -1,0 +1,10 @@
+@mixin bulleted-list {
+  margin: 0 0 $small-spacing;
+  list-style: none;
+
+  li {
+    margin: 0 0 $small-spacing;
+    padding-left: 2.5em;
+    background: image_url('icons/bullet') no-repeat 0 0;
+  }
+}

@@ -7,10 +7,9 @@ class Pitch
 
     TYPES = %w[
       standalone_workshop
-      full_day_workshop
-      weekend_workshop
       directed_performance
       experimental_performance
+      return_performance
     ].freeze
 
     property :type
@@ -19,7 +18,7 @@ class Pitch
     property :comments
     property :previously_taught
 
-    validates :type, :name, :workshop_description, presence: true
+    validates :type, :name, presence: true
 
     def initialize(*args)
       super

@@ -4,6 +4,6 @@ class Pitch
   class ExperimentalPerformanceInfo < PerformanceInfo
     property :experience
 
-    validates :experience, presence: true
+    validates :experience, :workshop_description, presence: true
   end
 end

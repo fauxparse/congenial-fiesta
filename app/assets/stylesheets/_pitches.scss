@@ -99,6 +99,14 @@
   margin: 0 0 $small-spacing;
 }
 
+.pitch-form__blurb {
+  margin: 0 0 $base-spacing;
+
+  ul {
+    @include bulleted-list;
+  }
+}
+
 .pitch-buttons {
   @include full-width;
   @include vertical-padding($base-spacing);

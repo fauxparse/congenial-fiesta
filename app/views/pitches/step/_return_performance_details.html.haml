@@ -1,14 +1,6 @@
 .pitch-form__blurb
   %h3.pitch-form-section-heading= t('.looking_for')
-  = m t(".looking_for_#{form.object.activity.type}")
-
-- if form.object.respond_to?(:experience)
-  %h3.pitch-form-section-heading= t('.your_experience')
-  = form.group :experience, required: true do
-    %p.label= t('.experience.label')
-    = form.text_area :experience, rows: 1, data: { autosize: true }
-    = form.error_messages_for :experience
-    %p.form-information= t('.experience.hint')
+  = m t('.looking_for_details')
 
 %h3.pitch-form-section-heading= t('.the_show')
 = form.group :name, required: true do
@@ -21,32 +13,25 @@
   %p.form-information.text-area-word-count{data: { target: 'word-count.counter' }}
     = t('.show_description.hint')
   = form.error_messages_for :show_description
-= form.group :cast_size, required: true do
-  %p.label= t('.cast_size.label')
-  = form.number_field :cast_size, min: 1
-  %p.form-information= t('.cast_size.hint')
-  = form.error_messages_for :cast_size
 = form.group :previously_performed do
   %p.label= t('.previously_performed.label')
   = form.text_area :previously_performed, rows: 1, data: { autosize: true }, placeholder: t('.previously_performed.placeholder')
   = form.error_messages_for :previously_performed
   %p.form-information= t('.previously_performed.hint')
+= form.group :cast_size, required: true do
+  %p.label= t('.cast_size.label')
+  = form.number_field :cast_size, min: 1
+  = form.error_messages_for :cast_size
+= form.group :original_cast, required: true do
+  %p.label= t('.original_cast.label')
+  = form.text_area :original_cast, rows: 1, data: { autosize: true }, placeholder: t('.original_cast.placeholder')
+  = form.error_messages_for :original_cast
+  %p.form-information= t('.original_cast.hint')
 = form.group :technical_requirements do
   %p.label= t('.technical_requirements.label')
   = form.text_area :technical_requirements, rows: 1, data: { autosize: true }
   = form.error_messages_for :technical_requirements
   %p.form-information= t('.technical_requirements.hint')
-
-%h3.pitch-form-section-heading= t('.the_workshop')
-= form.group :workshop_description, required: true, data: { controller: 'word-count', 'word-count-min': 100, 'word-count-max': 150 } do
-  %p.label= t('.workshop_description.label')
-  = form.text_area :workshop_description, rows: 1, data: { autosize: true, target: 'word-count.editor' }
-  %p.form-information.text-area-word-count{data: { target: 'word-count.counter' }}
-    = t('.workshop_description.hint')
-  = form.error_messages_for :workshop_description
-= form.group :previously_taught do
-  %p.label= t('.previously_taught.label')
-  = form.text_area :previously_taught, rows: 1, data: { autosize: true }, placeholder: t('.previously_taught.placeholder')
 = form.group :comments do
   %p.label= t('.comments.label')
   = form.text_area :comments, rows: 1, data: { autosize: true }, placeholder: t('.comments.placeholder')

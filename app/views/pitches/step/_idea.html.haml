@@ -9,5 +9,7 @@
 
 %section.pitch-form-section.pitch-activity-details
   = form.fields_for :activity, pitch_form.current_step do |f|
-    = render 'pitches/step/workshop_details', form: f if step.activity.is_a?(Pitch::WorkshopInfo)
-    = render 'pitches/step/performance_details', form: f if step.activity.is_a?(Pitch::PerformanceInfo)
+    - case step.activity
+      - when Pitch::ReturnPerformanceInfo then render 'pitches/step/return_performance_details', form: f
+      - when Pitch::PerformanceInfo then render 'pitches/step/performance_details', form: f
+      - when Pitch::WorkshopInfo then render 'pitches/step/workshop_details', form: f
