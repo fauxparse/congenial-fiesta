@@ -122,6 +122,15 @@
     flex-direction: row;
     justify-content: flex-end;
 
+    &::before {
+      content: '';
+      flex: 1;
+    }
+
+    [rel='save'] {
+      order: -1;
+    }
+
     > :not(:first-child) {
       margin: 0 0 0 $small-spacing;
     }

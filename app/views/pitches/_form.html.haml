@@ -14,15 +14,18 @@
   = render partial: pitch_form.current_step.to_partial_path, locals: { form: form, step: pitch_form.current_step }
 
   %footer.pitch-buttons
+    - unless pitch_form.current_step.last?
+      %button.button{type: 'submit', name: 'submit', value: 'save', rel: :save}
+        %span= t('.save_for_later')
     - unless pitch_form.current_step.first?
       = link_to pitch_step_path(pitch, pitch_form.current_step.previous), class: 'button', rel: :prev do
         = icon('back')
         %span= t('.back')
     - if pitch_form.current_step.last?
-      %button.button--primary{type: 'submit', name: 'submit', value: 'submit', rel: :next}
+      %button.button.button--primary{type: 'submit', name: 'submit', value: 'submit', rel: :next}
         = icon('done')
         %span= t('.submit')
     - else
-      %button.button--primary{type: 'submit', name: 'submit', value: 'next', rel: :next}
+      %button.button.button--primary{type: 'submit', name: 'submit', value: 'next', rel: :next}
         %span= [t('.next'), pitch_form.current_step.next.title].join(': ')
         = icon('next')

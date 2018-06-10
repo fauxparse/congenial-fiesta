@@ -14,6 +14,7 @@ en:
       next: 'Next'
       back: 'Go back'
       submit: 'Submit my pitch'
+      save_for_later: 'Save and work on this later'
     pitch:
       unnamed: '(new %{type})'
     step:
