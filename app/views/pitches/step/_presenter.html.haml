@@ -10,7 +10,7 @@
         = f.label :name
         = f.text_field :name
         = f.error_messages_for :name
-    = form.fields_for step.participant do |f|
+    = form.fields_for :presenter, step.participant do |f|
       = f.group :email, required: true do
         = f.label :email
         = f.email_field :email, disabled: f.object.persisted?
