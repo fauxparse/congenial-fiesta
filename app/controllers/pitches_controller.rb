@@ -14,6 +14,7 @@ class PitchesController < ApplicationController
 
   def create
     update_pitch_form
+    log_in_as pitch.participant unless logged_in?
   end
 
   def edit
