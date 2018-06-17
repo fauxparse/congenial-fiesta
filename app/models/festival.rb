@@ -9,6 +9,10 @@ class Festival < ApplicationRecord
     date: { on_or_after: :start_date },
     if: %i[start_date end_date]
 
+  def pitches_open?
+    pitches_open_at&.past? && !pitches_close_at&.past?
+  end
+
   def to_param
     year.to_s
   end

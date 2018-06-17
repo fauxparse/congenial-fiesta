@@ -1,9 +1,12 @@
 %main.home
   %header.hero
     = image_tag 'logo-white.svg', class: 'hero__logo', title: t('festival.name.full')
-  %section.pitches-open
-    %h1= t('.whats_up_pitches')
-    = m t('.pitches_now_open')
-    %p= link_to t('.pitch_now'), new_pitch_path, class: 'button button--primary'
+  - if festival.pitches_open?
+    %section.pitches-open
+      %h1= t('.whats_up_pitches')
+      = m t('.pitches_now_open')
+      %p= link_to t('.pitch_now'), new_pitch_path, class: 'button button--primary'
+      %p= t('.pitches_close', date: l(festival.pitches_close_at.to_date - 1, format: :same_year))
 
+  %section
     = m t('.hold_tight')

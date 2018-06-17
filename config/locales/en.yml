@@ -88,8 +88,10 @@ en:
         [Read more about our goals for this year’s Festival](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018),
         and then, when you’re ready...
       pitch_now: 'Pitch us your ideas!'
+      pitches_close: 'Pitches close at midnight on %{date}, so get cracking!'
       hold_tight: |
-        Waiting to register? We’ll have more information soon.
+        ## Waiting to register?
+        We’ll have more information soon.
         The best place to watch for updates is the
         [NZIF Green Room](https://www.facebook.com/groups/NZIFGreenRoom/) on Facebook.
 

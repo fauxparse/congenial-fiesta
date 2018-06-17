@@ -81,10 +81,6 @@ class PitchesController < ApplicationController
     @pitches ||= current_participant.pitches.to(festival).newest_first
   end
 
-  def festival
-    @festival ||= Festival.current
-  end
-
   def load_pitch
     @pitch = current_participant.pitches.find_by_hashid!(params[:id])
   end
