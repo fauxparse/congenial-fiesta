@@ -14,7 +14,7 @@ module Admin
     private
 
     def pitch
-      @pitch ||= festival.pitches.find(params[:id])
+      @pitch ||= festival.pitches.find_by_hashid!(params[:id])
     end
 
     def pitches

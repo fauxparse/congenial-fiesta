@@ -135,6 +135,6 @@ en:
     log_in: 'Log in'
     log_out: 'Log out'
     new:
-      error: 'Hmm, those details don’t look quite right.'
+      error: 'Hmm, those details don’t look quite right. Note: Your password from last year won’t work here. Maybe you need to create a new account?'
       forgot: 'Forgot?'
       submit: 'Log in'

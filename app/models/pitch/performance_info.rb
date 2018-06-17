@@ -2,6 +2,7 @@
 
 class Pitch
   class PerformanceInfo < ActivityInfo
+    property :co_director
     property :show_description
     property :cast_size,
       default: 6,

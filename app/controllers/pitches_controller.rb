@@ -25,7 +25,7 @@ class PitchesController < ApplicationController
   end
 
   def destroy
-    current_participant.pitches.draft.find(params[:id]).destroy
+    current_participant.pitches.draft.find_by_hashid!(params[:id]).destroy
     redirect_to pitches_path
   end
 
@@ -86,7 +86,7 @@ class PitchesController < ApplicationController
   end
 
   def load_pitch
-    @pitch = current_participant.pitches.find(params[:id])
+    @pitch = current_participant.pitches.find_by_hashid!(params[:id])
   end
 
   def pitch_attributes

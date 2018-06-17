@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Pitch < ApplicationRecord
+  include Hashid::Rails
+
   belongs_to :participant
   belongs_to :festival
 

@@ -9,7 +9,7 @@
   = form.error_messages_for :name
 = form.group :workshop_description, required: true, data: { controller: 'word-count', 'word-count-min': 100, 'word-count-max': 150 } do
   %p.label= t('.workshop_description.label')
-  = form.text_area :workshop_description, rows: 1, data: { autosize: true, target: 'word-count.editor' }
+  = form.text_area :workshop_description, rows: 1, placeholder: t('.workshop_description.placeholder'), data: { autosize: true, target: 'word-count.editor' }
   %p.form-information.text-area-word-count{data: { target: 'word-count.counter' }}
     = t('.workshop_description.hint')
   = form.error_messages_for :workshop_description

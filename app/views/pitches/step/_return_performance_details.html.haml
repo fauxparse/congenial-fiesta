@@ -26,7 +26,6 @@
   %p.label= t('.original_cast.label')
   = form.text_area :original_cast, rows: 1, data: { autosize: true }, placeholder: t('.original_cast.placeholder')
   = form.error_messages_for :original_cast
-  %p.form-information= t('.original_cast.hint')
 = form.group :technical_requirements do
   %p.label= t('.technical_requirements.label')
   = form.text_area :technical_requirements, rows: 1, data: { autosize: true }

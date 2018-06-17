@@ -26,12 +26,12 @@ en:
           must_log_in: 'First, you need an account…'
           existing: 'If you already have an account, you can <a href="%{path}">log in</a>.'
         company:
-          placeholder: 'None/I’m applying as an individual'
+          placeholder: 'Leave blank if you’re applying as an individual'
         presented_before:
           label: 'Have you/your company presented at NZIF before? If so, please provide details below:'
-          placeholder: 'No, this is my first time'
+          placeholder: 'Leave blank if this is your first time'
         bio:
-          label: 'Please provide a brief bio: something we could publish if we were bragging about you'
+          label: 'Please provide a brief bio: something we could publish while promoting your workshop or show.'
           word_count: '100–150 words'
         availability:
           label: 'Do you plan to be in Wellington for all of NZIF, or are there restrictions on when you can participate?'
@@ -41,7 +41,7 @@ en:
           explanation: 'We ask all participants to adhere to the Festival’s <a href="%{link}">Code of Conduct</a>. Please take a moment now to familiarise yourself with the Code now, even if you’ve been to NZIF before.'
           accept: 'I agree to abide by the NZIF Code of Conduct'
         new_login:
-          title: 'Why do I need a new password?'
+          title: 'Why do I need a new account?'
           explanation: 'Unfortunately, even if you’ve been to NZIF before, you’ll need to create a new account for this year. We’ve made some exciting changes to the system, but for security reasons we can’t import existing login information.'
       idea:
         title: 'Your idea'
@@ -68,21 +68,22 @@ en:
       workshop_details:
         looking_for: 'What we’re looking for'
         looking_for_details: |
-          Well structured workshops with clear aims and outcomes, offering one of the following:
+          Well-structured workshops with clear aims and outcomes, offering one of the following:
 
-          * Targeted scene work / skill development
+          * Targeted scene work or skill development
           * New approaches to improvisation
-          * Associated skills: mime, dance, scenography, other
+          * Associated performance or presentation skills: mime, dance, scenography, other
           * Company specific expertise in a shareable form
           * Something new we haven't thought of!
 
-          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after (and what we can offer you).
         the_workshop: 'Your workshop'
         name:
           label: 'What is the name of your workshop?'
         workshop_description:
           label: 'Please describe the workshop you wish to teach: something we would publish to advertise your workshop'
-          hint: '(50–100 words) What are you covering? Why is it useful? Who will find it most relevant?'
+          placeholder: 'What are you covering? Why is it useful? Who will find it most relevant?'
+          hint: '(50–100 words)'
         participation:
           label: 'Who is your workshop aimed at? Select as many as are applicable:'
           levels:
@@ -106,7 +107,7 @@ en:
           hint: 'We recommend 16 but are open to smaller or larger class sizes if appropriate for the content. Workshops will have a minimum of 6 participants.'
         previously_taught:
           label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
-          placeholder: 'No, this is my first time teaching this workshop'
+          placeholder: 'Leave blank if you haven’t taught it before'
         comments:
           label: 'Anything else we should know?'
           placeholder: 'Feedback from previous participants, room requirements, etc'
@@ -117,51 +118,56 @@ en:
           * Recently developed shows that have not been performed at NZIF previously, that would suit intermediate improvisors
           * An accompanying workshop teaching participants the relevant skills and techniques needed (from which you will cast the performance)
 
-          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after (and what we can offer you).
         looking_for_experimental_performance: |
           * 50–75 minute performances for a black box theatre (the Heyday Dome or Propeller Stage at BATS) led by one or two directors
           * Experimental show concepts that you can workshop with experienced improvisors and present at NZIF
           * An accompanying workshop teaching participants the relevant skills and techniques needed (from which you will cast the performance)
 
-          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after (and what we can offer you).
         your_experience: 'Your experience'
         the_show: 'Your show'
         the_workshop: 'Your workshop'
         experience:
           label: 'Tell us about your directing/show creating history'
-          hint: 'What is your track record with shows in general and experimental opportunities like this?'
+          placeholder: 'What is your track record with shows in general and experimental opportunities like this?'
         name:
           label: 'What is the name of your show?'
         show_description:
           label: 'Please describe the show you wish to direct'
+          placeholder: 'Just describe what the show is and how it works; this is not the marketing blurb'
           hint: '(50–100 words)'
+        co_director:
+          label: 'Do you have a co-director?'
+          placeholder: 'If so, please give us their name and a brief bio'
         cast_size:
           label: 'What is the ideal cast size?'
           hint: 'We will favour shows with at least 6–8 players'
         previously_performed:
           label: 'Will you have directed or performed this show/format prior to the Festival? If so, please give details:'
-          placeholder: 'No, this is my first time directing this show'
+          placeholder: 'Leave blank if this is your first time directing this show'
           hint: 'Quotes or links to reviews are helpful here if you have them'
         technical_requirements:
           label: 'Does your show have technical or set requirements beyond the usual improv setup?'
           hint: 'Provided: general lighting rig, chairs/boxes, musician'
         workshop_description:
           label: 'Please describe the accompanying workshop'
-          hint: '(50–100 words) What are you hoping participants will get out of it? It should provide something of value to participants who do not perform in the show'
+          placeholder: 'What are you hoping participants will get out of it? It should provide something of value to participants who do not perform in the show'
+          hint: '(50–100 words)'
         previously_taught:
           label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
-          placeholder: 'No, this is my first time teaching this workshop'
+          placeholder: 'Leave blank if this is your first time teaching this workshop'
         comments:
           label: 'Anything else we should know about this show and workshop?'
-          placeholder: 'Feedback from previous participants, room requirements, etc'
+          placeholder: 'Feedback from previous participants, room requirements, specific accessibility notes (e.g. mobility, vision, hearing), etc'
       return_performance_details:
         looking_for: 'What we’re looking for'
         looking_for_details: |
-          * 50–75 minute performances by NZ companies or ensembles that previously presented at NZIF 2008–2017
-          * The ability to bring all or most of the original cast at NZIF 2018
+          * 50–75 minute performances by NZ companies or ensembles of works previously presented at NZIF 2008–2017
+          * The ability to bring all or most of the original cast back at NZIF 2018
           * The ability to rehearse/rework to a high standard (note: we are able to offer $100 towards rehearsal costs)
 
-          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after.
+          [Check out this blog post](http://nzimprovfestival.co.nz/news/2018/6/5/ten-years-of-moments-nzif-2018) for more about what we're after (and what we can offer you).
         the_show: 'Return performance'
         name:
           label: 'What is the name of your show?'
@@ -172,8 +178,7 @@ en:
           label: 'What is the cast size?'
         original_cast:
           label: 'Will most or all of the original cast be available?'
-          placeholder: 'Yes, I’ve checked and they’re keen in principle'
-          hint: 'If not, do you have an idea of how you’ll source replacements?'
+          placeholder: 'Have you checked if they’re keen in principle? Do you have an idea of how you’ll source any replacements necessary?'
         previously_performed:
           label: 'When did you present this show previously at NZIF?'
           placeholder: 'A year is helpful (if you can remember)'
@@ -181,14 +186,12 @@ en:
         technical_requirements:
           label: 'Does your show have technical or set requirements beyond the usual improv setup?'
           hint: 'Provided: general lighting rig, chairs/boxes, musician'
-        previously_taught:
-          label: 'Will you have taught this workshop prior to the Festival? If so, please give details:'
-          placeholder: 'No, this is my first time teaching this workshop'
         comments:
-          label: 'Anything else we should know about this show and workshop?'
-          placeholder: 'Feedback from previous participants, room requirements, etc'
+          label: 'Anything else we should know about this show?'
+          placeholder: 'Feedback from previous performances, room requirements, specific accessibility notes (e.g. mobility, vision, hearing), etc'
 
       finish:
         title: 'Finish & send'
         icon: 'send'
         ready: 'When you’re ready to submit your pitch, click the button below. You won’t be able to edit your pitch after you’ve submitted it.'
+        go_back: 'You can click ‘go back’ or click on the step icons above to review and edit your information.'
