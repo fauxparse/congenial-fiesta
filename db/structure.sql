@@ -96,6 +96,42 @@ ALTER SEQUENCE active_storage_blobs_id_seq OWNED BY active_storage_blobs.id;
 
 
 --
+-- Name: activities; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE activities (
+    id bigint NOT NULL,
+    festival_id bigint,
+    pitch_id bigint,
+    type character varying,
+    name character varying,
+    slug character varying,
+    description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: activities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE activities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -299,6 +335,13 @@ ALTER TABLE ONLY active_storage_blobs ALTER COLUMN id SET DEFAULT nextval('activ
 
 
 --
+-- Name: activities id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_seq'::regclass);
+
+
+--
 -- Name: festivals id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -347,6 +390,14 @@ ALTER TABLE ONLY active_storage_attachments
 
 ALTER TABLE ONLY active_storage_blobs
     ADD CONSTRAINT active_storage_blobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: activities activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY activities
+    ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
 
 
 --
@@ -431,6 +482,27 @@ CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON active_storag
 --
 
 CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON active_storage_blobs USING btree (key);
+
+
+--
+-- Name: index_activities_on_festival_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activities_on_festival_id ON activities USING btree (festival_id);
+
+
+--
+-- Name: index_activities_on_festival_id_and_type_and_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_activities_on_festival_id_and_type_and_slug ON activities USING btree (festival_id, type, slug);
+
+
+--
+-- Name: index_activities_on_pitch_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_activities_on_pitch_id ON activities USING btree (pitch_id);
 
 
 --
@@ -542,6 +614,14 @@ ALTER TABLE ONLY pitches
 
 
 --
+-- Name: activities fk_rails_d55f2d8599; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY activities
+    ADD CONSTRAINT fk_rails_d55f2d8599 FOREIGN KEY (festival_id) REFERENCES festivals(id) ON DELETE CASCADE;
+
+
+--
 -- Name: pitches fk_rails_faa4f9f838; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -569,6 +649,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180501040856'),
 ('20180523225441'),
 ('20180526000102'),
-('20180617013242');
+('20180617013242'),
+('20180622212758');
 
 

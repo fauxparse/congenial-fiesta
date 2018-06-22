@@ -80,4 +80,14 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :show do
+    festival
+    name 'A show'
+  end
+
+  factory :workshop do
+    festival
+    name 'A workshop'
+  end
 end
