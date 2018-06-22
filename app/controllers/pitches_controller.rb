@@ -35,7 +35,7 @@ class PitchesController < ApplicationController
   def update_pitch_form
     current_step.attributes = pitch_attributes
     pitch_form.save!
-    if params[:submit] === 'save'
+    if params[:submit] == 'save'
       redirect_to pitches_path
     elsif should_redirect?
       redirect_to_current_step

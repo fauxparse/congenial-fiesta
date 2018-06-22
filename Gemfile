@@ -89,7 +89,6 @@ end
 group :test do
   gem 'email_spec'
   gem 'rspec-collection_matchers'
-  gem 'rspec-rainbow'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'zonebie'

@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   end
 
   def static_page(name)
-    get "/#{name.gsub('_', '-')}",
+    get "/#{name.tr('_', '-')}",
       to: 'high_voltage/pages#show',
       id: name,
       as: name
