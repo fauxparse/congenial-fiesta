@@ -221,7 +221,11 @@ CREATE TABLE participants (
     email character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    admin boolean DEFAULT false
+    admin boolean DEFAULT false,
+    company character varying,
+    city character varying,
+    country_code character varying DEFAULT 'NZ'::character varying,
+    bio text
 );
 
 
@@ -312,6 +316,36 @@ ALTER SEQUENCE pitches_id_seq OWNED BY pitches.id;
 
 
 --
+-- Name: presenters; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE presenters (
+    id bigint NOT NULL,
+    activity_id bigint,
+    participant_id bigint
+);
+
+
+--
+-- Name: presenters_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE presenters_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: presenters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE presenters_id_seq OWNED BY presenters.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -374,6 +408,13 @@ ALTER TABLE ONLY password_resets ALTER COLUMN id SET DEFAULT nextval('password_r
 --
 
 ALTER TABLE ONLY pitches ALTER COLUMN id SET DEFAULT nextval('pitches_id_seq'::regclass);
+
+
+--
+-- Name: presenters id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY presenters ALTER COLUMN id SET DEFAULT nextval('presenters_id_seq'::regclass);
 
 
 --
@@ -446,6 +487,14 @@ ALTER TABLE ONLY password_resets
 
 ALTER TABLE ONLY pitches
     ADD CONSTRAINT pitches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: presenters presenters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY presenters
+    ADD CONSTRAINT presenters_pkey PRIMARY KEY (id);
 
 
 --
@@ -590,6 +639,27 @@ CREATE INDEX index_pitches_on_status_and_participant_id ON pitches USING btree (
 
 
 --
+-- Name: index_presenters_on_activity_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_presenters_on_activity_id ON presenters USING btree (activity_id);
+
+
+--
+-- Name: index_presenters_on_activity_id_and_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_presenters_on_activity_id_and_participant_id ON presenters USING btree (activity_id, participant_id);
+
+
+--
+-- Name: index_presenters_on_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_presenters_on_participant_id ON presenters USING btree (participant_id);
+
+
+--
 -- Name: identities fk_rails_27e74d7b52; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -606,11 +676,27 @@ ALTER TABLE ONLY password_resets
 
 
 --
+-- Name: presenters fk_rails_51807902f4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY presenters
+    ADD CONSTRAINT fk_rails_51807902f4 FOREIGN KEY (participant_id) REFERENCES participants(id);
+
+
+--
 -- Name: pitches fk_rails_b8c4f77d16; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY pitches
     ADD CONSTRAINT fk_rails_b8c4f77d16 FOREIGN KEY (participant_id) REFERENCES participants(id) ON DELETE CASCADE;
+
+
+--
+-- Name: presenters fk_rails_c1df69d950; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY presenters
+    ADD CONSTRAINT fk_rails_c1df69d950 FOREIGN KEY (activity_id) REFERENCES activities(id);
 
 
 --
@@ -650,6 +736,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180523225441'),
 ('20180526000102'),
 ('20180617013242'),
-('20180622212758');
+('20180622212758'),
+('20180623025041');
 
 
