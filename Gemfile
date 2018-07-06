@@ -61,6 +61,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'premailer-rails'
 gem 'redcarpet'
+gem 'stringex'
 gem 'wannabe_bool'
 
 group :development, :test do

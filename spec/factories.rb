@@ -79,5 +79,79 @@ FactoryBot.define do
         }
       end
     end
+
+    trait :for_directed_performance do
+      info do
+        {
+          presenter: {
+            name: participant.name,
+            city: 'Wellington',
+            bio: Faker::Hipster.paragraph
+          },
+          code_of_conduct_accepted: true,
+          activity: {
+            type: 'directed_performance',
+            name: 'Directed Performance',
+            workshop_description: Faker::Hipster.paragraph,
+            show_description: Faker::Hipster.paragraph,
+            cast_size: 6
+          }
+        }
+      end
+    end
+
+    trait :for_experimental_performance do
+      info do
+        {
+          presenter: {
+            name: participant.name,
+            city: 'Wellington',
+            bio: Faker::Hipster.paragraph
+          },
+          code_of_conduct_accepted: true,
+          activity: {
+            type: 'experimental_performance',
+            name: 'Experimental Performance',
+            workshop_description: Faker::Hipster.paragraph,
+            show_description: Faker::Hipster.paragraph,
+            cast_size: 6
+          }
+        }
+      end
+    end
+
+    trait :for_return_performance do
+      info do
+        {
+          presenter: {
+            name: participant.name,
+            city: 'Wellington',
+            bio: Faker::Hipster.paragraph
+          },
+          code_of_conduct_accepted: true,
+          activity: {
+            type: 'return_performance',
+            name: 'Return Performance',
+            show_description: Faker::Hipster.paragraph,
+            cast_size: 6
+          }
+        }
+      end
+    end
+  end
+
+  factory :presenter do
+    activity { create(:workshop) }
+    participant
+  end
+
+  factory :show do
+    festival
+    name 'A show'
+  end
+
+  factory :workshop do
+    festival
+    name 'A workshop'
   end
 end

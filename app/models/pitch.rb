@@ -5,6 +5,7 @@ class Pitch < ApplicationRecord
 
   belongs_to :participant
   belongs_to :festival
+  has_many :activities
 
   enum status: {
     draft: 'draft',

@@ -11,12 +11,14 @@ en:
       weekend_workshop: 'Weekend workshop'
       directed_performance: 'Directed performance'
       experimental_performance: 'Experimental performance'
+      return_performance: 'Return Performance'
     short_type:
-      standalone_workshop: 'Standalone'
+      standalone_workshop: 'Workshop'
       full_day_workshop: 'Full-day'
       weekend_workshop: 'Weekend'
       directed_performance: 'Directed'
       experimental_performance: 'Experimental'
+      return_performance: 'Return'
     pile:
       unsorted: 'Unsorted'
       'no': 'No'

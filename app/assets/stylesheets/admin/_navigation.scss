@@ -41,17 +41,17 @@ main {
     }
   }
 
-  @media(screen and min-width: #{$line-width}) {
-    margin-left: $menu-width;
+  // @media(screen and min-width: #{$line-width}) {
+  //   margin-left: $menu-width;
 
-    #show-navigation:checked ~ & {
-      transform: translateX(0);
-    }
+  //   #show-navigation:checked ~ & {
+  //     transform: translateX(0);
+  //   }
 
-    label[for="show-navigation"] {
-      display: none;
-    }
-  }
+  //   label[for="show-navigation"] {
+  //     display: none;
+  //   }
+  // }
 }
 
 .navigation {
