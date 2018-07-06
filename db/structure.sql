@@ -345,6 +345,39 @@ ALTER SEQUENCE public.presenters_id_seq OWNED BY public.presenters.id;
 
 
 --
+-- Name: schedules; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.schedules (
+    id bigint NOT NULL,
+    activity_id bigint,
+    starts_at timestamp without time zone,
+    ends_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: schedules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.schedules_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: schedules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.schedules_id_seq OWNED BY public.schedules.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -496,6 +529,13 @@ ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id
 
 
 --
+-- Name: schedules id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules ALTER COLUMN id SET DEFAULT nextval('public.schedules_id_seq'::regclass);
+
+
+--
 -- Name: active_storage_attachments active_storage_attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -573,6 +613,14 @@ ALTER TABLE ONLY public.pitches
 
 ALTER TABLE ONLY public.presenters
     ADD CONSTRAINT presenters_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schedules schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules
+    ADD CONSTRAINT schedules_pkey PRIMARY KEY (id);
 
 
 --
@@ -824,6 +872,28 @@ CREATE INDEX taggings_idy ON public.taggings USING btree (taggable_id, taggable_
 
 
 --
+-- Name: index_schedules_on_activity_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_schedules_on_activity_id ON public.schedules USING btree (activity_id);
+
+
+--
+-- Name: index_schedules_on_starts_at_and_ends_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_schedules_on_starts_at_and_ends_at ON public.schedules USING btree (starts_at, ends_at);
+
+
+--
+-- Name: schedules fk_rails_26cbb5018a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules
+    ADD CONSTRAINT fk_rails_26cbb5018a FOREIGN KEY (activity_id) REFERENCES public.activities(id);
+
+
+--
 -- Name: identities fk_rails_27e74d7b52; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -902,6 +972,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180617013242'),
 ('20180622212758'),
 ('20180623025041'),
+('20180706031108'),
 ('20180714012643'),
 ('20180714012644'),
 ('20180714012645'),
