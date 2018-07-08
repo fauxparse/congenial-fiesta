@@ -1,0 +1,16 @@
+.timetable{data: { controller: 'admin--timetable' }}
+  %header.timetable__header
+    - days.each.with_index do |day, i|
+      %header{class: class_string('timetable__header-day', 'timetable__header-day--active': i.zero?), data: { target: 'admin--timetable.header' }}
+        %span.date= day.day
+        %span.day= day.strftime('%A')
+    .timetable__buttons
+      %button.timetable__button{rel: :prev, disabled: true, data: { target: 'admin--timetable.back', action: 'admin--timetable#back' }}= icon(:back)
+      %button.timetable__button{rel: :next, data: { target: 'admin--timetable.next', action: 'admin--timetable#next' }}= icon(:next)
+
+  %section.grid.timetable__body{data: { controller: 'admin--grid', action: 'mousedown->admin--grid#mouseDown touchstart->admin--grid#touchStart grid:select->admin--timetable#selected', 'admin--grid-selection-style': 'column' }}
+    .timetable__days{data: { action: 'mousedown->admin--timetable#dragStart touchstart->admin--timetable#dragStart' }}
+      - days.each.with_index do |day, i|
+        %section{class: class_string('grid__column', 'timetable__day', 'timetable__day--active': i.zero?), data: { day: day.to_s, target: 'admin--timetable.day' }}
+          - times(day).each.with_index do |time, j|
+            .grid__cell.timetable__slot{data: { time: time.iso8601, row: j, column: i, label: l(time, format: :timetable), target: 'admin--timetable.slot' }}

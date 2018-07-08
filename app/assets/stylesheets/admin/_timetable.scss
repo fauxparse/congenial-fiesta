@@ -1,0 +1,183 @@
+.timetable {
+  $min_day_width: 8em;
+
+  max-height: calc(100vh - 3.5em);
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    flex: 0 0 auto;
+    padding-left: $keyline;
+    display: flex;
+    border-bottom: $base-border;
+    position: relative;
+
+    &-day {
+      flex: 1 0 $min_day_width;
+      padding-top: $small-spacing;
+      padding-left: .25em;
+      display: none;
+
+      &--active {
+        display: initial;
+      }
+
+      .date {
+        display: block;
+        font-size: modular-scale(3);
+        line-height: 1;
+        color: $secondary-font-color;
+      }
+
+      .day {
+        @include all-caps;
+        display: block;
+        font-size: modular-scale(-2);
+      }
+    }
+  }
+
+  &__buttons {
+    @include position(absolute, null $small-spacing $small-spacing null);
+  }
+
+  &__button {
+    border: 0;
+    padding: .5em 0;
+    margin: 0;
+
+    .icon {
+      margin: 0;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  &__days {
+    display: flex;
+    padding-left: $keyline;
+  }
+
+  &__day {
+    flex: 1 0 $min_day_width;
+    display: none;
+    border-left: $base-border;
+
+    &--active {
+      display: initial;
+    }
+
+    &--active,
+    &:first-child {
+      .timetable__slot:nth-child(odd):not(:first-child)::before {
+        content: attr(data-label);
+        font-size: modular-scale(-1);
+        color: $secondary-font-color;
+        position: absolute;
+        right: 100%;
+        top: -.5em;
+        line-height: 1;
+        margin-right: .5em;
+      }
+    }
+  }
+
+  &__slot {
+    height: 1em;
+    position: relative;
+    cursor: cell;
+    margin-left: -1px;
+    padding-right: .5em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background: linear-gradient(to top, $pale-grey 1px, transparent 1px);
+
+    &:nth-child(odd) {
+      background: linear-gradient(to top, rgba($pale-grey, .25) 1px, transparent 1px);
+    }
+  }
+
+  &__block {
+    position: relative;
+    background: $tomato;
+    border-radius: .25em;
+    z-index: 1;
+    cursor: move;
+
+    &::after {
+      @include position(absolute, null 0 0 0);
+      height: .5em;
+      content: '';
+      cursor: ns-resize;
+    }
+
+    &--moving {
+      opacity: .25;
+    }
+
+    &--resizing {
+      cursor: ns-resize;
+    }
+
+    &--ghost {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      touch-action: none;
+      box-shadow: 0 0 .5em rgba(0, 0, 0, .15);
+    }
+  }
+
+  @for $columns from 1 through 6 {
+    .timetable__slot[data-columns='#{$columns}'] {
+      .timetable__block {
+        flex-basis: percentage(1 / $columns);
+      }
+
+      @for $column from 0 through 5 {
+        .timetable__block[data-order='#{$column}'] {
+          &:first-child {
+            margin-left: percentage($column / $columns);
+          }
+
+          @if ($column < 4) {
+            @for $sibling from $column + 2 through 5 {
+              + [data-order='#{$sibling}'] {
+                margin-left: percentage(($sibling - $column - 1) / $columns);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media(screen and min-width: #{$min_day_width * 8 + $keyline * 2}) {
+    &__header-day,
+    &__day {
+      display: initial;
+    }
+
+    &__buttons {
+      display: none;
+    }
+
+    &__day--active:not(:first-child) {
+      .timetable__slot::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.grid__selection {
+  @include position(absolute, 0 0 null 0);
+  background: $pale-grey;
+  border-radius: .25em;
+}
+

@@ -5,9 +5,9 @@ Rails.application.routes.draw do
     resources :festivals, only: %i[new create]
 
     scope ':year', constraints: { year: /2\d{3}/ } do
-      resources :pitches do
-        resources :tags, only: %i[create destroy], controller: 'pitch_tags'
-      end
+      resources :pitches
+      resources :schedules, except: :index
+      get '/timetable' => 'schedules#index', as: :timetable
       get '/' => 'festivals#show', as: :festival
     end
 

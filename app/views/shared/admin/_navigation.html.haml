@@ -7,4 +7,5 @@
 
   = navigation_link 'home', (festival ? admin_festival_path(festival) : admin_root_path)
   - if festival
+    = navigation_link 'timetable', admin_timetable_path(festival), icon: 'schedule'
     = navigation_link 'pitches', admin_pitches_path(festival), icon: 'pitch'

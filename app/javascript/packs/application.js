@@ -9,5 +9,5 @@ Turbolinks.start()
 ActiveStorage.start()
 
 const application = Application.start()
-const context = require.context('../controllers', true, /\.js$/)
+const context = require.context('../controllers', false, /\.js$/)
 application.load(definitionsFromContext(context))
