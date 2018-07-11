@@ -1,6 +1,6 @@
 = render 'shared/modal', controller: 'admin--schedule', target: 'admin--timetable.modal admin--schedule.modal' do
   = render 'shared/modal_header', title: 'Scheduled activity' do
-    %button.modal__header-button{data: { target: 'admin--schedule.delete', action: 'admin--schedule#delete' }}= icon :delete
+    %button.modal__header-button{aria: { label: t('.delete') }, data: { target: 'admin--schedule.delete', action: 'admin--schedule#delete' }}= icon :delete
   .modal__body
     = yield
   .modal__footer

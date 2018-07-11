@@ -1,4 +1,6 @@
 import { Controller } from 'stimulus'
+import kebabCase from 'lodash/kebabCase'
+
 import { EVENTS, eventPosition, absolutePosition } from '../../lib/events'
 import fetch from '../../lib/fetch'
 import BlockManager from './block_manager'
@@ -80,7 +82,14 @@ export default class extends Controller {
   load() {
     fetch(this.url)
       .then(response => response.json())
-      .then(({ schedules }) => schedules.forEach(this.addBlock))
+      .then(({ schedules, activities }) => {
+        this.activities = activities.reduce((memo, activity) => ({
+          ...memo,
+          [activity.id]: activity
+        }), {})
+        this.editor.activities = this.activities
+        schedules.forEach(this.addBlock)
+      })
   }
 
   scheduleCreated({ detail: schedule }) {
@@ -106,7 +115,7 @@ export default class extends Controller {
     this.blocks.delete(id)
   }
 
-  addBlock = ({ id, starts_at, ends_at }) => {
+  addBlock = ({ id, starts_at, ends_at, activity_id }) => {
     const startSlot = this.slotStartingAt(starts_at)
     const endSlot =
       this.slotEndingAt(ends_at) ||
@@ -118,10 +127,25 @@ export default class extends Controller {
       const block = document.createElement('div')
       block.classList.add(BLOCK_CLASS)
       block.style.height = `${height * 100}%`
+      block.appendChild(this.renderActivity(this.activities[activity_id]))
       startSlot.appendChild(block)
       block.setAttribute('data-id', id)
       this.blocks.insert({ id, x, y, height, data: block })
     }
+  }
+
+  renderActivity(activity) {
+    const div = document.createElement('div')
+    div.classList.add('timetable__activity')
+    if (activity) {
+      div.classList.add(`timetable__activity--${kebabCase(activity.type)}`)
+      div.dataset.id = activity.id
+      const name = document.createElement('div')
+      name.classList.add('timetable__activity-name')
+      name.innerText = activity.name
+      div.appendChild(name)
+    }
+    return div
   }
 
   selected({ detail: { start, end } }) {

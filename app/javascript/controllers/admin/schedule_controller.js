@@ -57,6 +57,8 @@ export default class extends Controller {
 
   set activityId(id) {
     this.activityIdTarget.value = id
+    const activity = this.activities[id] || {}
+    this.title = activity.name || 'Scheduled activity'
   }
 
   get startTime() {
@@ -94,6 +96,14 @@ export default class extends Controller {
         moment(day.dataset.date).isSame(date, 'day')
       )
     )
+  }
+
+  get activities() {
+    return this._activities || {}
+  }
+
+  set activities(activities) {
+    this._activities = activities
   }
 
   startTimeChanged({ detail: { hours, minutes } }) {
@@ -139,6 +149,7 @@ export default class extends Controller {
   }
 
   load(id) {
+    this.title = 'Loading…'
     this.modal.show()
     this.id = id
     fetch(this.url)

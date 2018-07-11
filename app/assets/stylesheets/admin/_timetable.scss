@@ -103,8 +103,6 @@
 
   &__block {
     position: relative;
-    background: $tomato;
-    border-radius: .25em;
     z-index: 1;
     cursor: move;
 
@@ -125,12 +123,31 @@
     }
 
     &--ghost {
-      @include shadow(1);
       position: absolute;
       top: 0;
       left: 0;
       pointer-events: none;
       touch-action: none;
+
+      .timetable__activity {
+        @include shadow(1);
+        opacity: 1;
+      }
+    }
+  }
+
+  &__activity {
+    @include position(absolute, 0px 0px 1px 1px);
+    color: $tomato;
+    background-color: currentColor;
+    border-radius: $base-border-radius;
+    overflow: hidden;
+    padding: .25em;
+    opacity: .875;
+
+    &-name {
+      font-size: modular-scale(-2);
+      color: $base-font-white;
     }
   }
 

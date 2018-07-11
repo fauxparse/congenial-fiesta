@@ -81,6 +81,7 @@ export default class extends Controller {
   }
 
   click = e => {
+    e && e.preventDefault()
     const row = e.target.closest('[data-index]')
     if (row) {
       const index = parseInt(row.dataset.index, 10)

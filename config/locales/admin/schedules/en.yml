@@ -1,5 +1,10 @@
 en:
   admin:
     schedules:
+      index:
+        prev: 'Previous day'
+        next: 'Next day'
       form:
         to: 'to'
+      modal:
+        delete: 'Delete'

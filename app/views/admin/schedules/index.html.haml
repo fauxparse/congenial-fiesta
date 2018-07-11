@@ -5,8 +5,8 @@
         %span.date= day.day
         %span.day= day.strftime('%A')
     .timetable__buttons
-      %button.timetable__button{rel: :prev, disabled: true, data: { target: 'admin--timetable.back', action: 'admin--timetable#back' }}= icon(:back)
-      %button.timetable__button{rel: :next, data: { target: 'admin--timetable.next', action: 'admin--timetable#next' }}= icon(:next)
+      %button.timetable__button{rel: :prev, disabled: true, aria: { label: t('.prev') }, data: { target: 'admin--timetable.back', action: 'admin--timetable#back' }}= icon(:back)
+      %button.timetable__button{rel: :next, aria: { label: t('.next') }, data: { target: 'admin--timetable.next', action: 'admin--timetable#next' }}= icon(:next)
 
   %section.grid.timetable__body{data: { controller: 'admin--grid', action: 'mousedown->admin--grid#mouseDown touchstart->admin--grid#touchStart grid:select->admin--timetable#selected', 'admin--grid-selection-style': 'column' }}
     .timetable__days{data: { action: 'mousedown->admin--timetable#dragStart touchstart->admin--timetable#dragStart block:clicked->admin--timetable#click' }}

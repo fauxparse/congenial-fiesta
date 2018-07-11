@@ -5,7 +5,11 @@ module Admin
     def index
       respond_to do |format|
         format.json do
-          render json: TimetableSerializer.new(schedules: schedules).call
+          serializer = TimetableSerializer.new(
+            schedules: schedules,
+            activities: festival.activities.all
+          )
+          render json: serializer.call
         end
         format.html
       end
