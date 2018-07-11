@@ -43,9 +43,14 @@ $facebook: #4267b2;
 $google: #ea4335;
 $twitter: #1da1f2;
 
+$base-font-opacity: .875;
+$secondary-font-opacity: .625;
+
 // Font Colors
-$base-font-color: rgba($dark-grey, 0.875);
-$secondary-font-color: rgba($medium-grey, 0.625);
+$base-font-color: rgba($dark-grey, $base-font-opacity);
+$secondary-font-color: rgba($medium-grey, $secondary-font-opacity);
+$base-font-white: rgba($white, 1);
+$secondary-font-white: rgba($white, $secondary-font-opacity);
 $bold-font-color: $dark-grey;
 $accent-color: $tomato;
 $action-color: $tomato;

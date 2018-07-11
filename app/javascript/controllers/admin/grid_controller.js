@@ -30,6 +30,7 @@ export default class extends Controller {
 
   touchStart(e) {
     this.startSelection(e, 'touch')
+    this._selection && e.preventDefault()
   }
 
   startSelection(e, method) {

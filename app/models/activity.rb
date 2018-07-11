@@ -6,6 +6,7 @@ class Activity < ApplicationRecord
   belongs_to :festival
   belongs_to :pitch, optional: true
   has_many :presenters
+  has_many :schedules
 
   validates :name, presence: true
 end

@@ -1,0 +1,8 @@
+= render 'shared/modal', controller: 'admin--schedule', target: 'admin--timetable.modal admin--schedule.modal' do
+  = render 'shared/modal_header', title: 'Scheduled activity' do
+    %button.modal__header-button{data: { target: 'admin--schedule.delete', action: 'admin--schedule#delete' }}= icon :delete
+  .modal__body
+    = yield
+  .modal__footer
+    %button.button{data: { action: 'modal#close' }}= t('modal.cancel')
+    %button.button.button--primary{data: { action: 'admin--schedule#submit' }}= t('modal.save')

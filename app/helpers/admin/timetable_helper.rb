@@ -9,11 +9,14 @@ module Admin
     def times(day = festival.start_date)
       return enum_for(:times, day) unless block_given?
       time = day.beginning_of_day
-      (START_OF_DAY...END_OF_DAY).each do |hour|
-        (0...GRID_SIZE).each do |minute|
-          yield time.change(hour: hour, min: 60 * minute / GRID_SIZE)
-        end
+      times = [
+        *(START_OF_DAY...END_OF_DAY).to_a.product((0...GRID_SIZE).to_a),
+        [END_OF_DAY, 0]
+      ].map do |hour, minute|
+        time.change(hour: hour, min: 60 * minute / GRID_SIZE)
       end
+
+      times.each_cons(2) { |start_time, end_time| yield [start_time, end_time] }
     end
 
     def days

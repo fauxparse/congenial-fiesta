@@ -115,7 +115,8 @@
       cursor: ns-resize;
     }
 
-    &--moving {
+    &--moving,
+    &--resizing {
       opacity: .25;
     }
 
@@ -124,12 +125,12 @@
     }
 
     &--ghost {
+      @include shadow(1);
       position: absolute;
       top: 0;
       left: 0;
       pointer-events: none;
       touch-action: none;
-      box-shadow: 0 0 .5em rgba(0, 0, 0, .15);
     }
   }
 

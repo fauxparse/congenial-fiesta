@@ -1,0 +1,103 @@
+.modal {
+  @include position(fixed, 0 0 0 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none;
+  touch-action: none;
+
+  &::before {
+    @include position(absolute, 0 0 0 0);
+    background: rgba($dark-grey, .5);
+    content: '';
+    opacity: 0;
+    transition: opacity $base-duration $base-timing;
+  }
+
+  &__content {
+    @include shadow(2);
+    width: 100%;
+    max-width: $line-width / 2;
+    height: 100%;
+    max-height: 42em;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100vh);
+    transition: transform $base-duration $acceleration-timing;
+    background: $viewport-background-color;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: $accent-color;
+    color: $base-font-white;
+    min-height: 8em;
+    padding: $small-spacing 1em;
+
+    &::after {
+      content: '';
+      flex: 1;
+    }
+
+    &-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .modal__header-button {
+      @include size(2.5em);
+      font-size: 1em;
+      padding: .5em;
+      order: 1;
+      appearance: none;
+      border: none;
+      margin: 0;
+      color: $secondary-font-white;
+
+      &:last-child {
+        margin-right: -.5em;
+      }
+
+      .icon {
+        display: block;
+      }
+    }
+  }
+
+  &__title {
+    order: 1;
+    font-size: modular-scale(2);
+    font-weight: $light-font-weight;
+    margin: 0;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: $small-spacing 1em;
+  }
+
+  &--in {
+    pointer-events: auto;
+    touch-action: auto;
+
+    &::before {
+      opacity: 1;
+    }
+
+    .modal__content {
+      transform: translateY(0);
+      transition-timing-function: $deceleration-timing;
+    }
+  }
+
+  @media screen and (min-width: #{$line-width / 2}) {
+    &__content {
+      height: auto;
+    }
+  }
+}

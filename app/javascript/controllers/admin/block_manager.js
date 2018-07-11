@@ -40,12 +40,20 @@ export default class BlockManager {
     }
   }
 
+  delete(id) {
+    const block = this.block(id)
+    if (block) {
+      delete this._blocks[id]
+      this.layoutColumn(block.x)
+      this.dispatch('deleted', block)
+    }
+  }
+
   layoutColumn(column) {
     const blocks = this.blocks.filter(({ x }) => x == column)
     const groups = this.groupBlocks(blocks)
     const laidOut = groups.reduce((memo, group) => [...memo, ...this.layoutGroup(group)], [])
-    const event = new CustomEvent('blocks:layout', { detail: laidOut })
-    this._eventTarget.dispatchEvent(event)
+    this.dispatch('layout', laidOut)
   }
 
   sortBlocks(blocks) {
@@ -90,5 +98,10 @@ export default class BlockManager {
 
   removeEventListener(...args) {
     this._eventTarget.removeEventListener(...args)
+  }
+
+  dispatch(eventName, detail) {
+    const event = new CustomEvent(`block:${eventName}`, { detail })
+    this._eventTarget.dispatchEvent(event)
   }
 }
