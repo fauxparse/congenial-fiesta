@@ -1,9 +1,13 @@
-!!!
-%html
-  = render partial: 'shared/head', locals: { view: 'admin' }
-  %body
-    = render 'shared/admin/navigation', festival: festival&.persisted? && festival
-    %main
-      = render 'shared/admin/page_header'
+- prepend_content_for :stylesheets do
+  = stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload'
 
-      = yield
+- prepend_content_for :scripts do
+  = javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload'
+
+- content_for :main do
+  = render('shared/admin/navigation')
+  %main
+    = render('shared/admin/page_header')
+    = yield
+
+= render template: 'layouts/common'

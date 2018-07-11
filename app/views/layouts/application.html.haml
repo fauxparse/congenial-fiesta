@@ -1,9 +1,14 @@
-!!!
-%html
-  = render partial: 'shared/head', locals: { view: 'application' }
-  %body
-    = render 'shared/navigation'
+- prepend_content_for :stylesheets do
+  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 
-    = yield
+- prepend_content_for :scripts do
+  = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
-    = render 'shared/footer'
+- content_for :main do
+  = render 'shared/navigation'
+
+  = yield
+
+  = render 'shared/footer'
+
+= render template: 'layouts/common'
