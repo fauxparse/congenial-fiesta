@@ -1,0 +1,5 @@
+en:
+  admin:
+    schedules:
+      form:
+        to: 'to'

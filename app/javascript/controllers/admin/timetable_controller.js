@@ -19,6 +19,17 @@ export default class extends Controller {
     this.load()
   }
 
+  get columns() {
+    return this.dayTargets.length
+  }
+
+  get rows() {
+    if (this._rows === undefined) {
+      this._rows = this.dayTargets[0].querySelectorAll('[data-row]').length
+    }
+    return this._rows
+  }
+
   get editor() {
     return this.application.getControllerForElementAndIdentifier(
       this.modalTarget,
@@ -77,7 +88,18 @@ export default class extends Controller {
   }
 
   scheduleUpdated({ detail: schedule }) {
-
+    const { id, starts_at, ends_at } = schedule
+    const block = this.blocks.block(id)
+    const startSlot = this.slotStartingAt(starts_at)
+    const endSlot =
+      this.slotEndingAt(ends_at) ||
+      this.slotAt(startSlot.dataset.column, this.rows - 1)
+    if (startSlot && endSlot) {
+      const x = parseInt(startSlot.dataset.column, 10)
+      const y = parseInt(startSlot.dataset.row, 10)
+      const height = parseInt(endSlot.dataset.row, 10) - y + 1
+      this.blocks.update(id, { x, y, height })
+    }
   }
 
   scheduleDeleted({ detail: { id } }) {
@@ -86,7 +108,9 @@ export default class extends Controller {
 
   addBlock = ({ id, starts_at, ends_at }) => {
     const startSlot = this.slotStartingAt(starts_at)
-    const endSlot = this.slotEndingAt(ends_at)
+    const endSlot =
+      this.slotEndingAt(ends_at) ||
+      this.slotAt(startSlot.dataset.column, this.rows - 1)
     if (startSlot && endSlot) {
       const x = parseInt(startSlot.dataset.column, 10)
       const y = parseInt(startSlot.dataset.row, 10)
@@ -101,28 +125,28 @@ export default class extends Controller {
   }
 
   selected({ detail: { start, end } }) {
-    const cell = this.cellAt(start.x, start.y)
-    const endCell = this.cellAt(end.x, end.y)
+    const slot = this.slotAt(start.x, start.y)
+    const endSlot = this.slotAt(end.x, end.y)
     const y = Math.min(start.y, end.y)
     const height = Math.abs(end.y - start.y) + 1
     const { modal, editor } = this
 
     editor.title = 'New event'
     editor.id = undefined
-    editor.startTime = cell.dataset.startTime
-    editor.endTime = endCell.dataset.endTime
+    editor.startTime = slot.dataset.startTime
+    editor.endTime = endSlot.dataset.endTime
     modal.show()
   }
 
-  cellAt(x, y) {
+  slotAt(x, y) {
     return this.element.querySelector(`[data-column="${x}"][data-row="${y}"]`)
   }
 
   updateLayout = ({ detail: blocks }) => {
     blocks.forEach(({ x, y, height, column, columns, data: block }) => {
-      const cell = this.cellAt(x, y)
-      cell.setAttribute('data-columns', columns)
-      cell.appendChild(block)
+      const slot = this.slotAt(x, y)
+      slot.setAttribute('data-columns', columns)
+      slot.appendChild(block)
       block.style.order = column
       block.style.height = `${height * 100}%`
       block.setAttribute('data-order', column)
@@ -311,22 +335,19 @@ export default class extends Controller {
 
   updateBlock(id, { x, y, height }) {
     this.blocks.update(id, { x, y, height })
-    const startCell = this.cellAt(x, y)
-    const endCell = this.cellAt(x, y + height - 1)
-    const starts_at = startCell.dataset.startTime
-    const ends_at = endCell.dataset.endTime
-    fetch(
-      `${this.url}/${id}`,
-      {
-        method: 'PUT',
-        body: {
-          schedule: {
-            starts_at,
-            ends_at
-          }
+    const startSlot = this.slotAt(x, y)
+    const endSlot = this.slotAt(x, y + height - 1)
+    const starts_at = startSlot.dataset.startTime
+    const ends_at = endSlot.dataset.endTime
+    fetch(`${this.url}/${id}`, {
+      method: 'PUT',
+      body: {
+        schedule: {
+          starts_at,
+          ends_at
         }
       }
-    )
+    })
   }
 
   blockFromTarget(el) {
@@ -353,10 +374,25 @@ export default class extends Controller {
   }
 
   slotStartingAt(startTime) {
-    return this.element.querySelector(`[data-start-time="${startTime}"]`)
+    return (
+      this.element.querySelector(`[data-start-time="${startTime}"]`) ||
+      this.firstSlotForDay(startTime)
+    )
   }
 
   slotEndingAt(endTime) {
     return this.element.querySelector(`[data-end-time="${endTime}"]`)
+  }
+
+  firstSlotForDay(day) {
+    return this.element.querySelector(
+      `[data-day="${day.substr(0, 10)}"] [data-row]:first-child`
+    )
+  }
+
+  lastSlotForDay(day) {
+    return this.element.querySelector(
+      `[data-day="${day.substr(0, 10)}"] [data-row]:last-child`
+    )
   }
 }

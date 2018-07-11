@@ -182,3 +182,80 @@
   border-radius: .25em;
 }
 
+.schedule-editor {
+  display: block;
+  margin: 0;
+  padding: 1em;
+}
+
+.day-picker {
+  display: flex;
+  margin: 0 0 $small-spacing;
+
+  &__day {
+    flex: 1 1 0;
+    border: none;
+    padding: $small-spacing 0;
+
+    &--selected {
+      border-radius: $base-border-radius;
+      background: $secondary-background-color;
+    }
+  }
+
+  &__weekday {
+    font-size: modular-scale(-2);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  &__date {
+    font-size: modular-scale(1);
+  }
+}
+
+.time-pickers {
+  display: flex;
+  align-items: center;
+
+  &__separator {
+    margin: 0 $base-spacing;
+  }
+
+  .time-picker {
+    flex: 1;
+  }
+}
+
+.time-picker {
+  height: 8em;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+
+  &::before {
+    @include position(absolute, 50% 0 null 0);
+    height: 2em;
+    margin-top: -1em;
+    background: $secondary-background-color;
+    border-radius: $base-border-radius;
+    content: '';
+  }
+
+  &::after {
+    @include position(absolute, 0 0 0 0);
+    content: '';
+    pointer-events: none;
+    touch-action: none;
+    background: linear-gradient(to bottom, white, transparent 25%, transparent 75%, white);
+  }
+
+  &__time {
+    @include position(absolute, 50% 0 null 0);
+    margin-top: -1em;
+    text-align: center;
+    line-height: 2em;
+    font-feature-settings: 'tnum';
+    cursor: pointer;
+  }
+}

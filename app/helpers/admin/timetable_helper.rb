@@ -6,17 +6,21 @@ module Admin
     END_OF_DAY = 24
     GRID_SIZE = 2
 
-    def times(day = festival.start_date)
-      return enum_for(:times, day) unless block_given?
+    def time_slots(day = festival.start_date)
+      return enum_for(:time_slots, day) unless block_given?
+      times(day).each_cons(2) do |start_time, end_time|
+        yield [start_time, end_time]
+      end
+    end
+
+    def times(day)
       time = day.beginning_of_day
-      times = [
+      [
         *(START_OF_DAY...END_OF_DAY).to_a.product((0...GRID_SIZE).to_a),
         [END_OF_DAY, 0]
       ].map do |hour, minute|
-        time.change(hour: hour, min: 60 * minute / GRID_SIZE)
+        time.change(hour: hour, min: minute * 60 / GRID_SIZE)
       end
-
-      times.each_cons(2) { |start_time, end_time| yield [start_time, end_time] }
     end
 
     def days

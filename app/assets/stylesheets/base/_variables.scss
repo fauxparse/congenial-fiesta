@@ -65,7 +65,8 @@ $bold-font-weight: 600;
 
 // Border
 $base-border-color: transparentize($medium-grey, 0.75);
-$base-border: 1px solid $base-border-color;
+$base-border-width: 1px;
+$base-border: $base-border-width solid $base-border-color;
 
 // Background Colors
 $viewport-background-color: $white;

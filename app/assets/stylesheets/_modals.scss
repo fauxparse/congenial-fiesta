@@ -75,6 +75,10 @@
     margin: 0;
   }
 
+  &__body {
+    flex: 1;
+  }
+
   &__footer {
     display: flex;
     justify-content: flex-end;

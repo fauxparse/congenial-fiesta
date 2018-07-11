@@ -1,3 +1,5 @@
+import 'mdn-polyfills/Element.prototype.closest'
+
 import Rails from 'rails-ujs'
 import Turbolinks from 'turbolinks'
 import * as ActiveStorage from 'activestorage'

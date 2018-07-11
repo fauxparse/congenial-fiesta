@@ -1,4 +1,13 @@
-= form_for schedule, url: admin_schedules_path(festival), html: { data: { target: 'admin--schedule.form', action: 'admin--schedule#submit' } } do |form|
+= form_for schedule, url: admin_schedules_path(festival), html: { class: 'schedule-editor', data: { target: 'admin--schedule.form', action: 'admin--schedule#submit' } } do |form|
   = form.hidden_field :activity_id, data: { target: 'admin--schedule.activityId' }
-  = form.text_field :starts_at, value: form.object.starts_at&.iso8601, data: { target: 'admin--schedule.startTime' }
-  = form.text_field :ends_at, value: form.object.ends_at&.iso8601, data: { target: 'admin--schedule.endTime' }
+
+  .day-picker
+    - days.each do |day|
+      %button.day-picker__day{data: { date: day.to_s(:db), target: 'admin--schedule.day', action: 'admin--schedule#dayClicked' }}
+        .day-picker__weekday= day.strftime('%a')
+        .day-picker__date= day.strftime('%-e')
+
+  .time-pickers
+    .time-picker{data: { controller: 'time-picker', target: 'admin--schedule.startTime', action: 'change->admin--schedule#startTimeChanged' }}
+    .time-pickers__separator= t('.to')
+    .time-picker{data: { controller: 'time-picker', target: 'admin--schedule.endTime', action: 'change->admin--schedule#endTimeChanged' }}
