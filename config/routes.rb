@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     resources :festivals, only: %i[new create]
 
     scope ':year', constraints: { year: /2\d{3}/ } do
-      resources :pitches
+      resources :pitches do
+        resources :tags, only: %i[create destroy], controller: 'pitch_tags'
+      end
       get '/' => 'festivals#show', as: :festival
     end
 

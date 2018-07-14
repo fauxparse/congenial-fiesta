@@ -16,5 +16,21 @@
       .filter__text= t(pile, scope: 'pitch.pile')
       = badge pitches.count(pile: pile)
 
+.filters{role: 'tablist'}
+  = link_to admin_pitches_path(pitches.parameters.except(:gender)), class: 'filter', role: 'tab', aria: { selected: pitches.parameters[:gender].blank? } do
+    .filter__text= t('.all')
+  - Pitch.genders.each do |gender|
+    = link_to admin_pitches_path(pitches.parameters.merge(gender: gender)), class: 'filter', role: 'tab', aria: { selected: pitches.parameters[:gender] == gender } do
+      .filter__text= t(gender, scope: 'pitch.gender')
+      = badge pitches.count(gender: gender)
+
+.filters{role: 'tablist'}
+  = link_to admin_pitches_path(pitches.parameters.except(:origin)), class: 'filter', role: 'tab', aria: { selected: pitches.parameters[:origin].blank? } do
+    .filter__text= t('.all')
+  - Pitch.origins.each do |origin|
+    = link_to admin_pitches_path(pitches.parameters.merge(origin: origin)), class: 'filter', role: 'tab', aria: { selected: pitches.parameters[:origin] == origin } do
+      .filter__text= t(origin, scope: 'pitch.origin')
+      = badge pitches.count(origin: origin)
+
 .pitches
   = render(pitches.to_a) || content_tag(:div, t('.empty'), class: 'pitches--empty')

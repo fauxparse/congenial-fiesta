@@ -43,7 +43,7 @@ RSpec.describe Admin::PitchesController, type: :request do
           .to change { pitch.reload.pile }
           .from('unsorted')
           .to('yes')
-        expect(response).to redirect_to admin_pitches_path(festival)
+        expect(response).to redirect_to admin_pitch_path(festival, pitch)
       end
     end
   end

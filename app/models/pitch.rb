@@ -7,6 +7,16 @@ class Pitch < ApplicationRecord
   belongs_to :festival
   has_many :activities
 
+  acts_as_taggable_on :gender, :origin
+
+  def self.genders
+    %w[men women mixed]
+  end
+
+  def self.origins
+    %w[nz australia overseas]
+  end
+
   enum status: {
     draft: 'draft',
     submitted: 'submitted',
