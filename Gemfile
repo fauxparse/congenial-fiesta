@@ -38,6 +38,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'auto_strip_attributes', '~> 2.3'
 gem 'autoprefixer-rails'
 gem 'aws-sdk-s3', require: false

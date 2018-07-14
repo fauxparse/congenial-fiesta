@@ -5,6 +5,8 @@ class Pitches < ApplicationQuery
     property :status, default: 'submitted'
     property :type
     property :pile
+    property :gender
+    property :origin
   end
 
   attr_reader :festival
@@ -30,5 +32,13 @@ class Pitches < ApplicationQuery
 
   def default_scope
     festival.pitches.includes(:participant).newest_first
+  end
+
+  def gender(scope, gender)
+    scope.tagged_with(gender, on: :gender)
+  end
+
+  def origin(scope, origin)
+    scope.tagged_with(origin, on: :origin)
   end
 end

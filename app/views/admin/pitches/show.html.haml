@@ -7,6 +7,12 @@
       - Pitch.piles.values.each do |pile|
         %button{name: 'pitch[pile]', value: pile, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.pile == pile}
           .button__text= t(pile, scope: 'pitch.pile')
+      - Pitch.genders.each do |gender|
+        %button{name: 'pitch[gender_list]', value: gender, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.gender_list.include?(gender)}
+          .button__text= t(gender, scope: 'pitch.gender')
+      - Pitch.origins.each do |origin|
+        %button{name: 'pitch[origin_list]', value: origin, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.origin_list.include?(origin)}
+          .button__text= t(origin, scope: 'pitch.origin')
 
   = render "admin/pitches/#{pitch.info.activity.type}", activity: pitch.info.activity
 

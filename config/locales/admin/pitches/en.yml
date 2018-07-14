@@ -24,6 +24,14 @@ en:
       'no': 'No'
       maybe: 'Maybe'
       'yes': 'Yes'
+    gender:
+      men: 'Men'
+      women: 'Women'
+      mixed: 'Mixed'
+    origin:
+      nz: 'NZ'
+      australia: 'Australia'
+      overseas: 'Overseas'
 
   admin:
     pitches:
