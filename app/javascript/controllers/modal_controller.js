@@ -1,5 +1,7 @@
 import { Controller } from 'stimulus'
 
+import { KEYS } from '../lib/events'
+
 const TRANSITION_DURATION = 300
 
 export default class extends Controller {
@@ -14,6 +16,7 @@ export default class extends Controller {
     if (!event.defaultPrevented) {
       this.element.classList.add('modal--in')
       setTimeout(() => this.dispatchEvent('opened'), TRANSITION_DURATION)
+      this.element.focus()
     }
   }
 
@@ -29,6 +32,14 @@ export default class extends Controller {
 
   click(e) {
     e.stopPropagation()
+  }
+
+  keyDown(e) {
+    if (e.which === KEYS.ESCAPE) {
+      e.preventDefault()
+      e.stopPropagation()
+      this.close()
+    }
   }
 
   dispatchEvent(eventName) {

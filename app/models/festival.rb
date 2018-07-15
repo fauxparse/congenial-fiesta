@@ -16,7 +16,7 @@ class Festival < ApplicationRecord
   end
 
   def to_param
-    year.to_s
+    year&.to_s
   end
 
   def to_s

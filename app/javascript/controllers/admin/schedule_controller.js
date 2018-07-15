@@ -27,7 +27,8 @@ export default class extends Controller {
     'day',
     'startTime',
     'endTime',
-    'activityName'
+    'activityName',
+    'submit'
   ]
 
   connect() {
@@ -87,8 +88,9 @@ export default class extends Controller {
 
   set activityId(id) {
     this.activityIdTarget.value = id || null
-    const activity = this.activities.get(id) || {}
+    const activity = this.activities.get(id)
     this.title = (activity && activity.name) || ''
+    this.submitTarget.disabled = !activity
   }
 
   get startTime() {
@@ -133,7 +135,15 @@ export default class extends Controller {
   }
 
   set activities(activities) {
-    this._activities = new ActivityCollection(activities)
+    this._activities = activities
+  }
+
+  get activityTypes() {
+    return this.activities.types
+  }
+
+  set activityTypes(types) {
+    this.activities.types = types
   }
 
   startTimeChanged({ detail: { hours, minutes } }) {
@@ -198,9 +208,7 @@ export default class extends Controller {
   }
 
   modalOpened() {
-    if (!this.activityId) {
-      setTimeout(() => this.autocomplete.show())
-    }
+    this.autocomplete.toggle(!this.activityId)
   }
 
   delete() {
@@ -211,21 +219,25 @@ export default class extends Controller {
 
   submit(e) {
     e && e.preventDefault()
-    this.formTarget.disabled = true
-    const method = this.id ? 'PUT' : 'POST'
-    fetch(this.url, {
-      method,
-      body: {
-        authenticity_token: this.authenticityToken,
-        schedule: {
-          activity_id: this.activityId,
-          starts_at: this.startTime.toISOString(),
-          ends_at: this.endTime.toISOString()
+    if (this.activityId) {
+      this.formTarget.disabled = true
+      const method = this.id ? 'PUT' : 'POST'
+      fetch(this.url, {
+        method,
+        body: {
+          authenticity_token: this.authenticityToken,
+          schedule: {
+            activity_id: this.activityId,
+            starts_at: this.startTime.toISOString(),
+            ends_at: this.endTime.toISOString()
+          }
         }
-      }
-    })
-      .then(response => response.json())
-      .then(this.id ? this.updated : this.created)
+      })
+        .then(response => response.json())
+        .then(this.id ? this.updated : this.created)
+    } else {
+      e && e.target.blur()
+    }
   }
 
   created = schedule => {
@@ -264,24 +276,50 @@ export default class extends Controller {
           data: activity
         }))
     results.push(...activities)
+    if (query) {
+      results.push(...this.activities.types.map(type => ({
+        id: type.name,
+        name: `New ${type.label}`,
+        data: {
+          id: type.name,
+          new: true,
+          type: type.name,
+          name: this.activityNameTarget.value
+        }
+      })))
+    }
   }
 
-  selectActivity({ detail: { id } }) {
-    this.activityId = id
-    this.autocomplete.hide()
+  selectActivity({ detail: { data } }) {
+    if (data.new) {
+      this.activities.create(data).then(activity => {
+        this.activityId = activity.id
+        this.autocomplete.hide()
+      })
+    } else {
+      this.activityId = data.id
+      this.autocomplete.hide()
+    }
   }
 
   renderActivity({ detail: { result, query, data: activity } }) {
-    const presenters = sentence(activity.presenters.map(p => p.name))
-    result.innerHTML =
-      '<div class="autocomplete__text">' +
-        this.highlight(activity.name, query) +
-      '</div>' +
-      '<div class="autocomplete__subtext">' +
-        activity.type +
-        ' • ' +
-        this.highlight(presenters, query) +
-      '</div>'
+    if (activity.new) {
+      result.dataset.type = activity.type
+    } else {
+      const presenters = sentence(activity.presenters.map(p => p.name))
+      const sub = [
+        activity.type,
+        this.highlight(presenters, query)
+      ].filter(x => x).join(' • ')
+      result.dataset.id = activity.id
+      result.innerHTML =
+        '<div class="autocomplete__text">' +
+          this.highlight(activity.name, query) +
+        '</div>' +
+        '<div class="autocomplete__subtext">' +
+          sub +
+        '</div>'
+    }
   }
 
   highlight(text, query) {

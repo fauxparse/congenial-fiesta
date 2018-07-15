@@ -2,7 +2,7 @@
 
 class ActivitySerializer < Primalize::Single
   attributes(
-    id: integer,
+    id: optional(integer),
     name: string,
     type: string,
     presenters: array(primalize(PresenterSerializer))

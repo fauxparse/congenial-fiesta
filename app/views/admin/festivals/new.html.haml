@@ -1,4 +1,4 @@
-= form_for festival, url: admin_festivals_path do |form|
+= form_for @festival, url: admin_festivals_path do |form|
   = form.group :year do
     = form.label :year
     = form.number_field :year, min: Time.zone.today.year

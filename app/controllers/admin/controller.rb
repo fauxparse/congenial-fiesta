@@ -15,7 +15,7 @@ module Admin
     end
 
     def festival
-      @festival ||=
+      @current_festival ||=
         Festival.find_by(year: params[:year] || Time.zone.today.year)
     end
 

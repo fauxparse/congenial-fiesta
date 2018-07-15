@@ -515,6 +515,13 @@ ALTER TABLE ONLY public.presenters ALTER COLUMN id SET DEFAULT nextval('public.p
 
 
 --
+-- Name: schedules id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules ALTER COLUMN id SET DEFAULT nextval('public.schedules_id_seq'::regclass);
+
+
+--
 -- Name: taggings id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -526,13 +533,6 @@ ALTER TABLE ONLY public.taggings ALTER COLUMN id SET DEFAULT nextval('public.tag
 --
 
 ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
-
-
---
--- Name: schedules id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.schedules ALTER COLUMN id SET DEFAULT nextval('public.schedules_id_seq'::regclass);
 
 
 --
@@ -802,6 +802,20 @@ CREATE INDEX index_presenters_on_participant_id ON public.presenters USING btree
 
 
 --
+-- Name: index_schedules_on_activity_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_schedules_on_activity_id ON public.schedules USING btree (activity_id);
+
+
+--
+-- Name: index_schedules_on_starts_at_and_ends_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_schedules_on_starts_at_and_ends_at ON public.schedules USING btree (starts_at, ends_at);
+
+
+--
 -- Name: index_taggings_on_context; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -869,20 +883,6 @@ CREATE UNIQUE INDEX taggings_idx ON public.taggings USING btree (tag_id, taggabl
 --
 
 CREATE INDEX taggings_idy ON public.taggings USING btree (taggable_id, taggable_type, tagger_id, context);
-
-
---
--- Name: index_schedules_on_activity_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_schedules_on_activity_id ON public.schedules USING btree (activity_id);
-
-
---
--- Name: index_schedules_on_starts_at_and_ends_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_schedules_on_starts_at_and_ends_at ON public.schedules USING btree (starts_at, ends_at);
 
 
 --

@@ -8,7 +8,10 @@ class Activity < ApplicationRecord
   has_many :presenters
   has_many :schedules
 
-  validates :name, presence: true
+  validates :name, :type, presence: true
 
   scope :with_presenters, -> { includes(presenters: :participant) }
 end
+
+require_dependency 'workshop'
+require_dependency 'show'

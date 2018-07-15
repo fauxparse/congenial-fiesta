@@ -3,6 +3,7 @@ import kebabCase from 'lodash/kebabCase'
 
 import { EVENTS, eventPosition, absolutePosition } from '../../lib/events'
 import fetch from '../../lib/fetch'
+import ActivityCollection from '../../lib/activity_collection'
 import BlockManager from './block_manager'
 
 const ACTIVE_HEADER_CLASS = 'timetable__header-day--active'
@@ -82,11 +83,14 @@ export default class extends Controller {
   load() {
     fetch(this.url)
       .then(response => response.json())
-      .then(({ schedules, activities }) => {
-        this.activities = activities.reduce((memo, activity) => ({
-          ...memo,
-          [activity.id]: activity
-        }), {})
+      .then(({ schedules, activities, activity_types }) => {
+        this.activities = new ActivityCollection(
+          activities.reduce((memo, activity) => ({
+            ...memo,
+            [activity.id]: activity
+          }), {}),
+          activity_types
+        )
         this.editor.activities = this.activities
         schedules.forEach(this.addBlock)
       })
@@ -127,7 +131,7 @@ export default class extends Controller {
       const block = document.createElement('div')
       block.classList.add(BLOCK_CLASS)
       block.style.height = `${height * 100}%`
-      block.appendChild(this.renderActivity(this.activities[activity_id]))
+      block.appendChild(this.renderActivity(this.activities.get(activity_id)))
       startSlot.appendChild(block)
       block.setAttribute('data-id', id)
       this.blocks.insert({ id, x, y, height, data: block })

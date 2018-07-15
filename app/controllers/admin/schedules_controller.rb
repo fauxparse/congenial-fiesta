@@ -7,7 +7,8 @@ module Admin
         format.json do
           serializer = TimetableSerializer.new(
             schedules: schedules,
-            activities: festival.activities.with_presenters.all
+            activities: festival.activities.with_presenters.all,
+            activity_types: Activity.subclasses
           )
           render json: serializer.call
         end

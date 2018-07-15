@@ -1,0 +1,6 @@
+en:
+  activity:
+    types:
+      workshop: 'Workshop'
+      show: 'Show'
+      social_event: 'Social Event'

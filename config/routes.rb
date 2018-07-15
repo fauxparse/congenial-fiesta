@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
     scope ':year', constraints: { year: /2\d{3}/ } do
       resources :pitches
+      resources :activities, only: :create
       resources :schedules, path: 'timetable', except: :index
       get '/timetable' => 'schedules#index', as: :timetable
       get '/' => 'festivals#show', as: :festival

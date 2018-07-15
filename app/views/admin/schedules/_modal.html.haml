@@ -15,5 +15,5 @@
   .modal__footer
     %button.button{data: { action: 'modal#close' }}
       = t('modal.cancel')
-    %button.button.button--primary{data: { action: 'admin--schedule#submit' }}
+    %button.button.button--primary{data: { target: 'admin--schedule.submit', action: 'admin--schedule#submit' }}
       = t('modal.save')

@@ -1,15 +1,10 @@
 import { Controller } from 'stimulus'
 
+import { KEYS } from '../lib/events'
+
 const VISIBLE_CLASS = 'autocomplete--visible'
 const RESULT_CLASS = 'autocomplete__result'
 const SELECTED_CLASS = 'autocomplete__result--selected'
-
-const KEYS = {
-  ESCAPE: 27,
-  ENTER: 13,
-  UP: 38,
-  DOWN: 40
-}
 
 export default class extends Controller {
   static targets = ['input', 'results', 'list']
@@ -17,6 +12,7 @@ export default class extends Controller {
   connect() {
     this.inputTarget.addEventListener('change', this.textChanged)
     this.inputTarget.addEventListener('keydown', this.keyDown)
+    this.listTarget.addEventListener('click', this.resultClicked)
   }
 
   get results() {
@@ -39,18 +35,26 @@ export default class extends Controller {
       Array.from(items).forEach((item, i) =>
         item.classList.toggle(SELECTED_CLASS, index === i)
       )
+      this.ensureVisible(items[this.index])
+      this.dispatch('highlight', this.results[this.index])
     }
   }
 
   get selectedId() {
     const { index, results } = this
-    if (results.length && index !== undefined) {
+    if (results.length && index !== undefined && results[index]) {
       return results[index].id
     }
   }
 
   set selectedId(id) {
-    this.index = id && this.results.findIndex(result => result.id === id) || 0
+    if (id) {
+      const str = id && id.toString()
+      this.index =
+        this.results.findIndex(result => result.id.toString() === str) || 0
+    } else {
+      this.index = 0
+    }
   }
 
   get visible() {
@@ -59,22 +63,35 @@ export default class extends Controller {
 
   set visible(visible) {
     this.element.classList.toggle(VISIBLE_CLASS, visible)
+    if (visible) {
+      this._results = []
+      setTimeout(() => this.inputTarget.focus())
+    } else {
+      this.inputTarget.blur()
+    }
   }
 
   show() {
     this.visible = true
-    this.inputTarget.focus()
   }
 
   hide() {
     this.visible = false
-    this.inputTarget.blur()
+  }
+
+  toggle(visible) {
+    if (arguments.length) {
+      this.visible = !!visible
+    } else {
+      this.visible = !this.visible
+    }
   }
 
   focus() {
     if (!this.visible) {
       this.show()
     }
+    this.textChanged()
   }
 
   blur() {}
@@ -147,5 +164,26 @@ export default class extends Controller {
     result.appendChild(text)
     this.dispatch('render', { query, name, data, result })
     return result
+  }
+
+  resultClicked = e => {
+    const row = e.target.closest(`.${RESULT_CLASS}`)
+    if (row) {
+      this.selectedId = row.dataset.id
+      this.confirmSelection()
+    }
+  }
+
+  ensureVisible(element) {
+    const top = element.offsetTop
+    const height = element.offsetHeight
+    const scrollable = this.resultsTarget.closest('.modal__body')
+    const viewportHeight = scrollable.offsetHeight
+
+    if (top < scrollable.scrollTop) {
+      scrollable.scrollTop = top
+    } else if (top + height - scrollable.scrollTop > viewportHeight) {
+      scrollable.scrollTop = top + height - viewportHeight
+    }
   }
 }

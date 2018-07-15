@@ -14,8 +14,8 @@ module Admin
 
     def create
       @festival = Festival.new(festival_params)
-      if festival.save
-        redirect_to admin_festival_path(festival)
+      if @festival.save
+        redirect_to admin_festival_path(@festival)
       else
         render :new
       end

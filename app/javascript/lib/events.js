@@ -11,6 +11,13 @@ export const EVENTS = {
   }
 }
 
+export const KEYS = {
+  ESCAPE: 27,
+  ENTER: 13,
+  UP: 38,
+  DOWN: 40
+}
+
 export const eventPosition = event => {
   const action = event.touches && event.touches[0] || event
   return { x: action.clientX, y: action.clientY }
