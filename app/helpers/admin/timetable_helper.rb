@@ -37,15 +37,19 @@ module Admin
         rows: 1,
         autocomplete: 'off',
         placeholder: t('admin.schedules.modal.autocomplete_instructions'),
-        data: {
-          target: 'admin--schedule.activityName autocomplete.input',
-          action: [
-            'focus->autocomplete#focus',
-            'blur->autocomplete#blur',
-            'input->autocomplete#textChanged'
-          ].join(' ')
-        }
+        data: activity_name_editor_data
       )
+    end
+
+    def activity_name_editor_data
+      {
+        target: 'admin--schedule.activityName autocomplete.input',
+        action: [
+          'focus->autocomplete#focus',
+          'blur->autocomplete#blur',
+          'input->autocomplete#textChanged'
+        ].join(' ')
+      }
     end
   end
 end

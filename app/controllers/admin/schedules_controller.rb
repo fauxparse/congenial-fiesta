@@ -4,14 +4,7 @@ module Admin
   class SchedulesController < Controller
     def index
       respond_to do |format|
-        format.json do
-          serializer = TimetableSerializer.new(
-            schedules: schedules,
-            activities: festival.activities.with_presenters.all,
-            activity_types: Activity.subclasses
-          )
-          render json: serializer.call
-        end
+        format.json { render json: serialized_timetable }
         format.html
       end
     end
@@ -56,6 +49,14 @@ module Admin
           render json: ScheduleSerializer.new(schedule).call
         end
       end
+    end
+
+    def serialized_timetable
+      TimetableSerializer.new(
+        schedules: schedules,
+        activities: festival.activities.with_presenters.all,
+        activity_types: Activity.subclasses
+      ).call
     end
   end
 end

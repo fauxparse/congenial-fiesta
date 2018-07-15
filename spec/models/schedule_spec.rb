@@ -17,7 +17,4 @@ RSpec.describe Schedule, type: :model do
   it { is_expected.to validate_presence_of(:starts_at) }
   it { is_expected.to validate_presence_of(:ends_at) }
   it { is_expected.to validate_presence_of(:activity_id) }
-  it {
-    is_expected.to validate_uniqueness_of(:activity_id).scoped_to(:starts_at)
-  }
 end
