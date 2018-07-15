@@ -220,11 +220,7 @@ CREATE TABLE public.participants (
     email character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    admin boolean DEFAULT false,
-    company character varying,
-    city character varying,
-    country_code character varying,
-    bio text
+    admin boolean DEFAULT false
 );
 
 
@@ -321,7 +317,12 @@ ALTER SEQUENCE public.pitches_id_seq OWNED BY public.pitches.id;
 CREATE TABLE public.presenters (
     id bigint NOT NULL,
     activity_id bigint,
-    participant_id bigint
+    participant_id bigint,
+    name character varying,
+    company character varying,
+    city character varying,
+    country_code character varying DEFAULT 'NZ'::character varying,
+    bio text
 );
 
 
@@ -407,6 +408,7 @@ CREATE TABLE public.taggings (
 --
 
 CREATE SEQUENCE public.taggings_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -437,6 +439,7 @@ CREATE TABLE public.tags (
 --
 
 CREATE SEQUENCE public.tags_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -449,6 +452,38 @@ CREATE SEQUENCE public.tags_id_seq
 --
 
 ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
+
+
+--
+-- Name: venues; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.venues (
+    id bigint NOT NULL,
+    name character varying,
+    address character varying,
+    latitude numeric(15,10),
+    longitude numeric(15,10)
+);
+
+
+--
+-- Name: venues_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.venues_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: venues_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.venues_id_seq OWNED BY public.venues.id;
 
 
 --
@@ -533,6 +568,13 @@ ALTER TABLE ONLY public.taggings ALTER COLUMN id SET DEFAULT nextval('public.tag
 --
 
 ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
+
+
+--
+-- Name: venues id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.venues ALTER COLUMN id SET DEFAULT nextval('public.venues_id_seq'::regclass);
 
 
 --
@@ -645,6 +687,14 @@ ALTER TABLE ONLY public.taggings
 
 ALTER TABLE ONLY public.tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: venues venues_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.venues
+    ADD CONSTRAINT venues_pkey PRIMARY KEY (id);
 
 
 --
@@ -872,6 +922,13 @@ CREATE UNIQUE INDEX index_tags_on_name ON public.tags USING btree (name);
 
 
 --
+-- Name: index_venues_on_latitude_and_longitude; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_venues_on_latitude_and_longitude ON public.venues USING btree (latitude, longitude);
+
+
+--
 -- Name: taggings_idx; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -978,6 +1035,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180714012645'),
 ('20180714012646'),
 ('20180714012647'),
-('20180714012648');
+('20180714012648'),
+('20180715212859');
 
 
