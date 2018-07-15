@@ -3,6 +3,7 @@
 class PitchesController < ApplicationController
   authenticate except: %i[new create]
 
+  before_action :check_pitches_open, only: %i[new create edit update]
   before_action :load_pitch, only: %i[edit update destroy]
 
   def index; end
@@ -31,6 +32,10 @@ class PitchesController < ApplicationController
   end
 
   private
+
+  def check_pitches_open
+    redirect_to root_path unless festival.pitches_open?
+  end
 
   def update_pitch_form
     current_step.attributes = pitch_attributes
@@ -79,7 +84,8 @@ class PitchesController < ApplicationController
   end
 
   def pitches
-    @pitches ||= current_participant.pitches.to(festival).newest_first
+    @pitches ||=
+      festival.pitches.from_participant(current_participant).newest_first
   end
 
   def load_pitch

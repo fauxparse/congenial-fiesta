@@ -6,7 +6,7 @@
       %h1= t('.whats_up_pitches')
       = m t('.pitches_now_open')
       %p= link_to t('.pitch_now'), new_pitch_path, class: 'button button--primary'
-      %p= t('.pitches_close', date: l(festival.pitches_close_at.to_date - 1, format: :same_year))
+      %p= t('.pitches_close', date: l(festival.pitches_close_at.to_date - 1, format: :same_year)) if festival.pitches_close_at?
 
   %section
     = m t('.hold_tight')
