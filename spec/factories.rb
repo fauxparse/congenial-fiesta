@@ -16,6 +16,7 @@ FactoryBot.define do
       october + 6 - october.wday
     end
     end_date { start_date + 7 }
+    pitches_open_at { Time.zone.now }
   end
 
   factory :participant do

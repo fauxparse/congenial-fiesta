@@ -35,5 +35,6 @@ class Pitch < ApplicationRecord
 
   scope :newest_first, -> { order(created_at: :desc) }
   scope :to, ->(festival) { where(festival: festival) }
+  scope :from_participant, ->(participant) { where(participant: participant) }
   scope :type, ->(type) { where("info->'activity'->>'type' = ?", type) }
 end

@@ -1,7 +1,7 @@
 = content_tag :tr, class: class_string('pitch', pitch.status) do
   %td.pitch-icon= icon(:pitch)
   %td.pitch-name
-    %b= link_to_if pitch.draft?, pitch_name(pitch), edit_pitch_path(pitch)
+    %b= link_to_if pitch.draft? && pitch.festival.pitches_open?, pitch_name(pitch), edit_pitch_path(pitch)
     %small= [pitch_type(pitch), pitch_date(pitch)].join(' • ')
   %td
     .pitch-status= pitch_status(pitch)
