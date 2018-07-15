@@ -29,5 +29,23 @@ module Admin
         yield date
       end
     end
+
+    def activity_name_editor
+      text_area_tag(
+        'schedule[activity][name]',
+        '',
+        rows: 1,
+        autocomplete: 'off',
+        placeholder: t('admin.schedules.modal.autocomplete_instructions'),
+        data: {
+          target: 'admin--schedule.activityName autocomplete.input',
+          action: [
+            'focus->autocomplete#focus',
+            'blur->autocomplete#blur',
+            'input->autocomplete#textChanged'
+          ].join(' ')
+        }
+      )
+    end
   end
 end

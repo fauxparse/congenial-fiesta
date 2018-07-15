@@ -203,6 +203,10 @@
   display: block;
   margin: 0;
   padding: 1em;
+
+  &--modal {
+
+  }
 }
 
 .day-picker {
@@ -274,5 +278,54 @@
     line-height: 2em;
     font-feature-settings: 'tnum';
     cursor: pointer;
+  }
+}
+
+.schedule-editor {
+  &__activities {
+    @include position(absolute, 0 0 null 0);
+    min-height: 100%;
+    background: rgba($viewport-background-color, .75);
+    opacity: 0;
+    pointer-events: none;
+    touch-action: none;
+    transition: opacity $base-duration $base-timing;
+
+    .autocomplete--visible & {
+      opacity: 1;
+      pointer-events: auto;
+      touch-action: auto;
+    }
+  }
+
+  &__autocomplete-instructions {
+    padding: 1em;
+  }
+
+  &__activity-list {
+    .autocomplete__result {
+      padding: $small-spacing 1em;
+      background: rgba($viewport-background-color, .75);
+
+      &--selected {
+        background-color: rgba($secondary-background-color, .75);
+      }
+    }
+
+    .autocomplete__text,
+    .autocomplete__subtext {
+      @include ellipsis;
+      display: block;
+    }
+
+    .autocomplete__text {
+      font-size: modular-scale(1);
+      font-weight: $light-font-weight;
+    }
+
+    .autocomplete__subtext {
+      font-size: modular-scale(-1);
+      color: $secondary-font-color;
+    }
   }
 }

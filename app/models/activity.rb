@@ -9,4 +9,6 @@ class Activity < ApplicationRecord
   has_many :schedules
 
   validates :name, presence: true
+
+  scope :with_presenters, -> { includes(presenters: :participant) }
 end

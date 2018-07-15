@@ -4,6 +4,7 @@ class ActivitySerializer < Primalize::Single
   attributes(
     id: integer,
     name: string,
-    type: string
+    type: string,
+    presenters: array(primalize(PresenterSerializer))
   )
 end

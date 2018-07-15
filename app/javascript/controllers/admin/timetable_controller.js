@@ -155,8 +155,8 @@ export default class extends Controller {
     const height = Math.abs(end.y - start.y) + 1
     const { modal, editor } = this
 
-    editor.title = 'New event'
     editor.id = undefined
+    editor.activityId = undefined
     editor.startTime = slot.dataset.startTime
     editor.endTime = endSlot.dataset.endTime
     modal.show()

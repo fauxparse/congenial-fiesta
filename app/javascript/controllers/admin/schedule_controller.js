@@ -1,19 +1,51 @@
 import { Controller } from 'stimulus'
+import autosize from 'autosize'
 
 import fetch from '../../lib/fetch'
 import moment from '../../lib/moment'
+import ActivityCollection from '../../lib/activity_collection'
+
+const sentence = (items) => {
+  if (!items.length) {
+    return ''
+  } else if (items.length === 1) {
+    return items[0]
+  } else if (items.length === 2) {
+    return items.join(' and ')
+  } else {
+    const rest = items.slice(0, items.length - 1)
+    const last = items[items.length - 1]
+    return [rest.join(', '), last].join(', and ')
+  }
+}
 
 export default class extends Controller {
-  static targets = ['form', 'delete', 'activityId', 'day', 'startTime', 'endTime']
+  static targets = [
+    'form',
+    'delete',
+    'activityId',
+    'day',
+    'startTime',
+    'endTime',
+    'activityName'
+  ]
 
   connect() {
     this.baseURL = this.formTarget.getAttribute('action')
+    autosize(this.activityNameTarget)
   }
 
   get modal() {
     return this.application.getControllerForElementAndIdentifier(
       this.element,
       'modal'
+    )
+  }
+
+  get autocomplete() {
+    return this.application.getControllerForElementAndIdentifier(
+      this.element,
+      'autocomplete'
     )
   }
 
@@ -32,10 +64,8 @@ export default class extends Controller {
   }
 
   set title(title) {
-    const modal = this.modal
-    if (modal) {
-      modal.title = title
-    }
+    this.activityNameTarget.value = title
+    autosize.update(this.activityNameTarget)
   }
 
   get id() {
@@ -56,9 +86,9 @@ export default class extends Controller {
   }
 
   set activityId(id) {
-    this.activityIdTarget.value = id
-    const activity = this.activities[id] || {}
-    this.title = activity.name || 'Scheduled activity'
+    this.activityIdTarget.value = id || null
+    const activity = this.activities.get(id) || {}
+    this.title = (activity && activity.name) || ''
   }
 
   get startTime() {
@@ -99,20 +129,26 @@ export default class extends Controller {
   }
 
   get activities() {
-    return this._activities || {}
+    return this._activities || new ActivityCollection()
   }
 
   set activities(activities) {
-    this._activities = activities
+    this._activities = new ActivityCollection(activities)
   }
 
   startTimeChanged({ detail: { hours, minutes } }) {
-    this._startTime = this.startTime.clone().hours(hours).minutes(minutes)
+    this._startTime = this.startTime
+      .clone()
+      .hours(hours)
+      .minutes(minutes)
     this.endTime = this.endTime
   }
 
   endTimeChanged({ detail: { hours, minutes } }) {
-    this._endTime = this.startTime.clone().hours(hours).minutes(minutes)
+    this._endTime = this.startTime
+      .clone()
+      .hours(hours)
+      .minutes(minutes)
     while (this._endTime.isBefore(this._startTime)) {
       this._endTime.add(1, 'day')
     }
@@ -159,6 +195,12 @@ export default class extends Controller {
         this.startTime = starts_at
         this.endTime = ends_at
       })
+  }
+
+  modalOpened() {
+    if (!this.activityId) {
+      setTimeout(() => this.autocomplete.show())
+    }
   }
 
   delete() {
@@ -211,5 +253,42 @@ export default class extends Controller {
     })
     this.element.dispatchEvent(event)
     this.modal.close()
+  }
+
+  searchActivities = ({ detail: { query, results } }) => {
+    const activities =
+      this.activities.find(query)
+        .map(activity => ({
+          id: activity.id,
+          name: activity.name,
+          data: activity
+        }))
+    results.push(...activities)
+  }
+
+  selectActivity({ detail: { id } }) {
+    this.activityId = id
+    this.autocomplete.hide()
+  }
+
+  renderActivity({ detail: { result, query, data: activity } }) {
+    const presenters = sentence(activity.presenters.map(p => p.name))
+    result.innerHTML =
+      '<div class="autocomplete__text">' +
+        this.highlight(activity.name, query) +
+      '</div>' +
+      '<div class="autocomplete__subtext">' +
+        activity.type +
+        ' • ' +
+        this.highlight(presenters, query) +
+      '</div>'
+  }
+
+  highlight(text, query) {
+    if (query) {
+      return text.replace(query, match => `<u>${match}</u>`)
+    } else {
+      return text
+    }
   }
 }

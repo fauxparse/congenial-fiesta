@@ -8,3 +8,5 @@ en:
         to: 'to'
       modal:
         delete: 'Delete'
+        title: 'Scheduled activity'
+        autocomplete_instructions: 'Activity name…'
