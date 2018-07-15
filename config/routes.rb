@@ -2,6 +2,9 @@
 
 Rails.application.routes.draw do
   namespace :admin do
+    get 'venues/index'
+  end
+  namespace :admin do
     resources :festivals, only: %i[new create]
 
     scope ':year', constraints: { year: /2\d{3}/ } do
