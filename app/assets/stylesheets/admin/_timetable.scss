@@ -306,6 +306,7 @@
     .autocomplete__result {
       padding: $small-spacing 1em;
       background: rgba($viewport-background-color, .75);
+      cursor: pointer;
 
       &--selected {
         background-color: rgba($secondary-background-color, .75);
@@ -316,16 +317,19 @@
     .autocomplete__subtext {
       @include ellipsis;
       display: block;
+      color: $secondary-font-color;
+
+      u {
+        color: $base-font-color;
+      }
     }
 
     .autocomplete__text {
       font-size: modular-scale(1);
-      font-weight: $light-font-weight;
     }
 
     .autocomplete__subtext {
       font-size: modular-scale(-1);
-      color: $secondary-font-color;
     }
   }
 }

@@ -102,6 +102,7 @@
     display: flex;
     justify-content: flex-end;
     padding: $small-spacing 1em;
+    border-top: $base-border;
   }
 
   &--in {

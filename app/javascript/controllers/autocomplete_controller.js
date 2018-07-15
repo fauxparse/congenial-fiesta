@@ -175,15 +175,17 @@ export default class extends Controller {
   }
 
   ensureVisible(element) {
-    const top = element.offsetTop
-    const height = element.offsetHeight
-    const scrollable = this.resultsTarget.closest('.modal__body')
-    const viewportHeight = scrollable.offsetHeight
+    if (element) {
+      const top = element.offsetTop
+      const height = element.offsetHeight
+      const scrollable = this.resultsTarget.closest('.modal__body')
+      const viewportHeight = scrollable.offsetHeight
 
-    if (top < scrollable.scrollTop) {
-      scrollable.scrollTop = top
-    } else if (top + height - scrollable.scrollTop > viewportHeight) {
-      scrollable.scrollTop = top + height - viewportHeight
+      if (top < scrollable.scrollTop) {
+        scrollable.scrollTop = top
+      } else if (top + height - scrollable.scrollTop > viewportHeight) {
+        scrollable.scrollTop = top + height - viewportHeight
+      }
     }
   }
 }

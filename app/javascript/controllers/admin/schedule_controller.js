@@ -291,6 +291,7 @@ export default class extends Controller {
   }
 
   selectActivity({ detail: { data } }) {
+    console.log(data)
     if (data.new) {
       this.activities.create(data).then(activity => {
         this.activityId = activity.id
@@ -305,6 +306,7 @@ export default class extends Controller {
   renderActivity({ detail: { result, query, data: activity } }) {
     if (activity.new) {
       result.dataset.type = activity.type
+      result.dataset.id = activity.type
     } else {
       const presenters = sentence(activity.presenters.map(p => p.name))
       const sub = [
