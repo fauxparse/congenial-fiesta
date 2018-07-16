@@ -34,6 +34,11 @@ class Pitch < ApplicationRecord
   serialize :info, Pitch::Info
 
   scope :newest_first, -> { order(created_at: :desc) }
+  scope :by_participant, lambda {
+    includes(:participant)
+      .references(:participant)
+      .order(Arel.sql('UPPER(participants.name)'))
+  }
   scope :to, ->(festival) { where(festival: festival) }
   scope :from_participant, ->(participant) { where(participant: participant) }
   scope :type, ->(type) { where("info->'activity'->>'type' = ?", type) }
