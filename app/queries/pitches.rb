@@ -31,7 +31,7 @@ class Pitches < ApplicationQuery
   private
 
   def default_scope
-    festival.pitches.includes(:participant).newest_first
+    festival.pitches.by_participant
   end
 
   def gender(scope, gender)
