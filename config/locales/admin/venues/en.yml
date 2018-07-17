@@ -1,0 +1,5 @@
+en:
+  admin:
+    venues:
+      modal:
+        instructions: 'Venue name'

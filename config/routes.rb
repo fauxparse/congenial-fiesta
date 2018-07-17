@@ -2,9 +2,6 @@
 
 Rails.application.routes.draw do
   namespace :admin do
-    get 'venues/index'
-  end
-  namespace :admin do
     resources :festivals, only: %i[new create]
 
     scope ':year', constraints: { year: /2\d{3}/ } do
@@ -12,6 +9,7 @@ Rails.application.routes.draw do
       resources :activities, only: :create
       resources :schedules, path: 'timetable', except: :index
       get '/timetable' => 'schedules#index', as: :timetable
+      resources :venues, only: %i[index create update destroy]
       get '/' => 'festivals#show', as: :festival
     end
 

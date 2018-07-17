@@ -75,7 +75,8 @@
     font-weight: $light-font-weight;
     margin: 0;
 
-    textarea {
+    textarea,
+    input[type='text'] {
       appearance: none;
       background: none;
       color: inherit;
