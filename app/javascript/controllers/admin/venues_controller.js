@@ -1,6 +1,6 @@
 import { Controller } from 'stimulus'
 import fetch from '../../lib/fetch'
-import VenueCollection from '../../lib/venue_collection'
+import VenueCollection from '../../collections/venues'
 
 const LOADING_CLASS = 'venues--loading'
 

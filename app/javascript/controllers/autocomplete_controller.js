@@ -1,6 +1,8 @@
 import { Controller } from 'stimulus'
+import escapeRegExp from 'lodash/escapeRegExp'
 
 import { KEYS } from '../lib/events'
+import normalize from '../lib/normalize'
 
 const VISIBLE_CLASS = 'autocomplete--visible'
 const RESULT_CLASS = 'autocomplete__result'
@@ -132,10 +134,18 @@ export default class extends Controller {
     this.dispatch('select', this.results[this.index])
   }
 
+  searchRegExp = query =>
+    new RegExp(query.trim().split(/\s+/).join('|'), 'gi')
+
   search = () => {
-    const query = this.inputTarget.value
+    const query = normalize(this.inputTarget.value)
     const selectedId = this.selectedId
-    const re = query && new RegExp(query.trim().split(/\s+/).join('|'), 'gi')
+    let re
+    try {
+      re = query && this.searchRegExp(query)
+    } catch(_) {
+      re = query && this.searchRegExp(escapeRegExp(query))
+    }
     const {
       detail: { results }
     } = this.dispatch('search', { query: re, results: [] })

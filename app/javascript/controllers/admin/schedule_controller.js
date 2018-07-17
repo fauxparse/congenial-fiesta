@@ -3,7 +3,7 @@ import autosize from 'autosize'
 
 import fetch from '../../lib/fetch'
 import moment from '../../lib/moment'
-import ActivityCollection from '../../lib/activity_collection'
+import ActivityCollection from '../../collections/activities'
 
 const sentence = (items) => {
   if (!items.length) {
@@ -291,9 +291,9 @@ export default class extends Controller {
   }
 
   selectActivity({ detail: { data } }) {
-    console.log(data)
     if (data.new) {
-      this.activities.create(data).then(activity => {
+      const { id: type, name } = data
+      this.activities.create({ type, name }).then(activity => {
         this.activityId = activity.id
         this.autocomplete.hide()
       })

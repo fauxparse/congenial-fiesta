@@ -3,7 +3,7 @@ import kebabCase from 'lodash/kebabCase'
 
 import { EVENTS, eventPosition, absolutePosition } from '../../lib/events'
 import fetch from '../../lib/fetch'
-import ActivityCollection from '../../lib/activity_collection'
+import ActivityCollection from '../../collections/activities'
 import BlockManager from './block_manager'
 
 const ACTIVE_HEADER_CLASS = 'timetable__header-day--active'
