@@ -5,12 +5,15 @@ $menu-width: 20em;
 }
 
 main {
-  @include shadow(2);
   background: $viewport-background-color;
   min-height: 100vh;
   position: relative;
   transition: transform $base-duration $deceleration-timing;
   z-index: 1;
+
+  @media screen {
+    @include shadow(2);
+  }
 
   #show-navigation:checked ~ & {
     transition: transform $base-duration $base-timing;
@@ -33,7 +36,7 @@ main {
     }
   }
 
-  @media(screen and min-width: #{$line-width / 2}) {
+  @media screen and (min-width: #{$line-width / 2}) {
     margin-left: $keyline;
 
     #show-navigation:checked ~ & {
@@ -41,7 +44,7 @@ main {
     }
   }
 
-  // @media(screen and min-width: #{$line-width}) {
+  // @media screen and (min-width: #{$line-width}) {
   //   margin-left: $menu-width;
 
   //   #show-navigation:checked ~ & {
@@ -55,6 +58,7 @@ main {
 }
 
 .navigation {
+  @include screen-only;
   @include position(fixed, 0 null 0 0);
   background: linear-gradient(to bottom, $plum, $grape);
   color: $white;
