@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Presenter < ApplicationRecord
+  include Nationalisable
+
   belongs_to :activity
   belongs_to :participant
 
