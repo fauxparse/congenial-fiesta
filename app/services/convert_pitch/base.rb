@@ -19,7 +19,9 @@ class ConvertPitch
     def participant
       @participant ||= pitch.participant.tap do |participant|
         participant.update!(
-          {}
+          bio: participant.bio || presenter_info.bio,
+          city: participant.bio || presenter_info.city,
+          country: participant.country || presenter_info.country
         )
       end
     end
@@ -51,12 +53,7 @@ class ConvertPitch
     private
 
     def add_presenters(activity)
-      activity.presenters.create!(
-        participant: participant,
-        bio: presenter_info.bio,
-        city: presenter_info.city,
-        country: presenter_info.country
-      )
+      activity.presenters.create!(participant: participant)
       activity
     end
 

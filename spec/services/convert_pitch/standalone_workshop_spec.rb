@@ -37,5 +37,9 @@ RSpec.describe ConvertPitch::StandaloneWorkshop, type: :service do
     it 'has the correct activity' do
       expect(presenter.activity.name).to eq pitch.info.activity.name
     end
+
+    it 'updates the participant’s info' do
+      expect(presenter.participant.bio).to eq pitch.info.presenter.bio
+    end
   end
 end
