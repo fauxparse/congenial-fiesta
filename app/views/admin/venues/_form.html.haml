@@ -1,0 +1,9 @@
+= form_for venue, url: admin_venues_path(festival),
+  html: { class: 'venue-editor', data: { target: 'admin--venue.form', action: 'admin--venue#submit' } } do |form|
+
+  = form.hidden_field :latitude, data: { target: 'admin--venue.latitude' }
+  = form.hidden_field :longitude, data: { target: 'admin--venue.longitude' }
+
+  .form-field
+    = form.label :address
+    = form.text_area :address, data: { target: 'admin--venue.address' }

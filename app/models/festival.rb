@@ -2,6 +2,8 @@
 
 class Festival < ApplicationRecord
   has_many :pitches
+  has_many :activities
+  has_many :schedules, through: :activities
 
   validates :year, presence: true, uniqueness: true
   validates :start_date, :end_date, presence: true
@@ -14,7 +16,7 @@ class Festival < ApplicationRecord
   end
 
   def to_param
-    year.to_s
+    year&.to_s
   end
 
   def to_s

@@ -1,0 +1,20 @@
+= render 'shared/modal',
+  controller: 'admin--venue',
+  target: 'admin--venues.modal admin--venue.modal',
+  action: 'modal:open->admin--venue#modalOpened',
+  class: 'venue-editor--modal' do
+
+  = render 'shared/modal_header', title: venue_name_editor do
+    %button.modal__header-button{aria: { label: t('admin.venues.modal.delete') },
+      data: { target: 'admin--venue.delete', action: 'admin--venue#deleteClicked' }}
+      = icon :delete
+  .modal__body
+    = yield
+  .modal__footer
+    %button.button{data: { target: 'admin--venue.cancel', action: 'modal#close' }}
+      %span.button__text= t('modal.cancel')
+    %button.button.button--primary{data: { target: 'admin--venue.submit',
+      action: 'admin--venue#submit' }}
+      %span.button__text{data: { target: 'admin--venue.submitText',
+        'save-text': t('modal.save'), 'create-text': t('modal.create') }}
+        = t('modal.save')

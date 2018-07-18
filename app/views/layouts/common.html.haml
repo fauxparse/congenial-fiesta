@@ -1,0 +1,13 @@
+!!!
+%html{lang: I18n.locale}
+  %head
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'}
+    %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
+    = page_title
+    = csrf_meta_tags
+    = favicon_link_tag
+    = yield :stylesheets
+    = yield :scripts
+
+  %body{class: class_string(local_assigns[:body_class])}
+    = content_for?(:main) ? yield(:main) : yield

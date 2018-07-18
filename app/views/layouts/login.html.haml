@@ -1,6 +1,10 @@
-!!!
-%html
-  = render partial: 'shared/head', locals: { view: 'application' }
+- prepend_content_for :stylesheets do
+  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 
-  %body.login
-    = yield
+- prepend_content_for :scripts do
+  = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+- content_for :main do
+  = yield
+
+= render template: 'layouts/common', locals: { body_class: 'login' }

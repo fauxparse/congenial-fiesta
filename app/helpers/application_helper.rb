@@ -8,7 +8,7 @@ module ApplicationHelper
           .reject(&:blank?)
           .join(' ⋮ ')
       else
-        t('.title')
+        t('.title', default: t('festival.name.short'))
       end
     end
   end

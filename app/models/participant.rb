@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Participant < ApplicationRecord
-  include Nationalisable
-
   auto_strip_attributes :name, :email
 
   has_many :identities, dependent: :destroy, autosave: true

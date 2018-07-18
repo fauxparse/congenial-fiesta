@@ -17,7 +17,7 @@
   color: inherit;
   cursor: pointer;
   font-size: 100%;
-  margin-left: -0.25em;
+  margin-left: -0.75em;
   order: -1;
   padding: 1em;
   will-change: transform;
@@ -64,7 +64,7 @@
   font-size: modular-scale(1);
   line-height: 2rem;
   order: -1;
-  padding: $small-spacing;
+  padding: $small-spacing 1rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }

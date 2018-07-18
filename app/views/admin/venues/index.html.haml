@@ -1,0 +1,20 @@
+- content_for :stylesheets do
+  = stylesheet_link_tag 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css',
+    'data-turbolinks-track': 'reload'
+  = stylesheet_link_tag 'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css',
+    'data-turbolinks-track': 'reload'
+
+- content_for :scripts do
+  = javascript_include_tag 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js',
+    async: true, 'data-turbolinks-track': 'reload'
+  = javascript_include_tag 'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js',
+    async: true, 'data-turbolinks-track': 'reload'
+
+.venues{data: { controller: 'admin--venues' }}
+  .venues__geocoder{data: { target: 'admin--venues.geocoder' }}
+  .venues__map{data: { target: 'admin--venues.map', 'api-key': mapbox_api_key,
+    action: 'click->admin--venues#click',
+    latitude: Venue.origin.lat, longitude: Venue.origin.lng,
+    style: mapbox_style }}
+
+  = render partial: 'form', layout: 'modal', locals: { venue: Venue.new }

@@ -220,11 +220,7 @@ CREATE TABLE public.participants (
     email character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    admin boolean DEFAULT false,
-    company character varying,
-    city character varying,
-    country_code character varying,
-    bio text
+    admin boolean DEFAULT false
 );
 
 
@@ -321,7 +317,12 @@ ALTER SEQUENCE public.pitches_id_seq OWNED BY public.pitches.id;
 CREATE TABLE public.presenters (
     id bigint NOT NULL,
     activity_id bigint,
-    participant_id bigint
+    participant_id bigint,
+    name character varying,
+    company character varying,
+    city character varying,
+    country_code character varying DEFAULT 'NZ'::character varying,
+    bio text
 );
 
 
@@ -342,6 +343,40 @@ CREATE SEQUENCE public.presenters_id_seq
 --
 
 ALTER SEQUENCE public.presenters_id_seq OWNED BY public.presenters.id;
+
+
+--
+-- Name: schedules; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.schedules (
+    id bigint NOT NULL,
+    activity_id bigint,
+    starts_at timestamp without time zone,
+    ends_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    venue_id bigint
+);
+
+
+--
+-- Name: schedules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.schedules_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: schedules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.schedules_id_seq OWNED BY public.schedules.id;
 
 
 --
@@ -374,6 +409,7 @@ CREATE TABLE public.taggings (
 --
 
 CREATE SEQUENCE public.taggings_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -404,6 +440,7 @@ CREATE TABLE public.tags (
 --
 
 CREATE SEQUENCE public.tags_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -416,6 +453,38 @@ CREATE SEQUENCE public.tags_id_seq
 --
 
 ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
+
+
+--
+-- Name: venues; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.venues (
+    id bigint NOT NULL,
+    name character varying,
+    address character varying,
+    latitude numeric(15,10),
+    longitude numeric(15,10)
+);
+
+
+--
+-- Name: venues_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.venues_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: venues_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.venues_id_seq OWNED BY public.venues.id;
 
 
 --
@@ -482,6 +551,13 @@ ALTER TABLE ONLY public.presenters ALTER COLUMN id SET DEFAULT nextval('public.p
 
 
 --
+-- Name: schedules id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules ALTER COLUMN id SET DEFAULT nextval('public.schedules_id_seq'::regclass);
+
+
+--
 -- Name: taggings id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -493,6 +569,13 @@ ALTER TABLE ONLY public.taggings ALTER COLUMN id SET DEFAULT nextval('public.tag
 --
 
 ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
+
+
+--
+-- Name: venues id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.venues ALTER COLUMN id SET DEFAULT nextval('public.venues_id_seq'::regclass);
 
 
 --
@@ -576,6 +659,14 @@ ALTER TABLE ONLY public.presenters
 
 
 --
+-- Name: schedules schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules
+    ADD CONSTRAINT schedules_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -597,6 +688,14 @@ ALTER TABLE ONLY public.taggings
 
 ALTER TABLE ONLY public.tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: venues venues_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.venues
+    ADD CONSTRAINT venues_pkey PRIMARY KEY (id);
 
 
 --
@@ -754,6 +853,27 @@ CREATE INDEX index_presenters_on_participant_id ON public.presenters USING btree
 
 
 --
+-- Name: index_schedules_on_activity_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_schedules_on_activity_id ON public.schedules USING btree (activity_id);
+
+
+--
+-- Name: index_schedules_on_starts_at_and_ends_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_schedules_on_starts_at_and_ends_at ON public.schedules USING btree (starts_at, ends_at);
+
+
+--
+-- Name: index_schedules_on_venue_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_schedules_on_venue_id ON public.schedules USING btree (venue_id);
+
+
+--
 -- Name: index_taggings_on_context; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -810,6 +930,13 @@ CREATE UNIQUE INDEX index_tags_on_name ON public.tags USING btree (name);
 
 
 --
+-- Name: index_venues_on_latitude_and_longitude; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_venues_on_latitude_and_longitude ON public.venues USING btree (latitude, longitude);
+
+
+--
 -- Name: taggings_idx; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -821,6 +948,14 @@ CREATE UNIQUE INDEX taggings_idx ON public.taggings USING btree (tag_id, taggabl
 --
 
 CREATE INDEX taggings_idy ON public.taggings USING btree (taggable_id, taggable_type, tagger_id, context);
+
+
+--
+-- Name: schedules fk_rails_26cbb5018a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules
+    ADD CONSTRAINT fk_rails_26cbb5018a FOREIGN KEY (activity_id) REFERENCES public.activities(id);
 
 
 --
@@ -864,6 +999,14 @@ ALTER TABLE ONLY public.presenters
 
 
 --
+-- Name: schedules fk_rails_ce75c0542b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules
+    ADD CONSTRAINT fk_rails_ce75c0542b FOREIGN KEY (venue_id) REFERENCES public.venues(id) ON DELETE SET NULL;
+
+
+--
 -- Name: activities fk_rails_d55f2d8599; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -902,11 +1045,14 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180617013242'),
 ('20180622212758'),
 ('20180623025041'),
+('20180706031108'),
 ('20180714012643'),
 ('20180714012644'),
 ('20180714012645'),
 ('20180714012646'),
 ('20180714012647'),
-('20180714012648');
+('20180714012648'),
+('20180715212859'),
+('20180718001951');
 
 

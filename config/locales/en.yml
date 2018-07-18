@@ -12,6 +12,11 @@ en:
       same_year: '%-d %B'
       long: '%-d %B, %Y'
 
+  time:
+    formats:
+      time: '%I:%M%p'
+      timetable: '%-l:%M'
+
   errors:
     messages:
       date:

@@ -1,0 +1,357 @@
+.timetable {
+  $min_day_width: 8em;
+
+  max-height: calc(100vh - 3.5em);
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    flex: 0 0 auto;
+    padding-left: $keyline;
+    display: flex;
+    border-bottom: $base-border;
+    position: relative;
+
+    &-day {
+      flex: 1 0 $min_day_width;
+      padding-top: $small-spacing;
+      padding-left: .25em;
+      display: none;
+
+      &--active {
+        display: initial;
+      }
+
+      .date {
+        display: block;
+        font-size: modular-scale(3);
+        line-height: 1;
+        color: $secondary-font-color;
+      }
+
+      .day {
+        @include all-caps;
+        display: block;
+        font-size: modular-scale(-2);
+      }
+    }
+  }
+
+  &__buttons {
+    @include position(absolute, null $small-spacing $small-spacing null);
+  }
+
+  &__button {
+    border: 0;
+    padding: .5em 0;
+    margin: 0;
+
+    .icon {
+      margin: 0;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  &__days {
+    display: flex;
+    padding-left: $keyline;
+  }
+
+  &__day {
+    flex: 1 0 $min_day_width;
+    display: none;
+    border-left: $base-border;
+
+    &--active {
+      display: initial;
+    }
+
+    &--active,
+    &:first-child {
+      .timetable__slot:nth-child(odd):not(:first-child)::before {
+        content: attr(data-label);
+        font-size: modular-scale(-1);
+        color: $secondary-font-color;
+        position: absolute;
+        right: 100%;
+        top: -.5em;
+        line-height: 1;
+        margin-right: .5em;
+      }
+    }
+  }
+
+  &__slot {
+    height: 1em;
+    position: relative;
+    cursor: cell;
+    margin-left: -1px;
+    padding-right: .5em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background: linear-gradient(to top, $pale-grey 1px, transparent 1px);
+
+    &:nth-child(odd) {
+      background: linear-gradient(to top, rgba($pale-grey, .25) 1px, transparent 1px);
+    }
+  }
+
+  &__block {
+    position: relative;
+    z-index: 1;
+    cursor: move;
+
+    &::after {
+      @include position(absolute, null 0 0 0);
+      height: .5em;
+      content: '';
+      cursor: ns-resize;
+    }
+
+    &--moving,
+    &--resizing {
+      opacity: .25;
+    }
+
+    &--resizing {
+      cursor: ns-resize;
+    }
+
+    &--ghost {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      touch-action: none;
+
+      .timetable__activity {
+        @include shadow(1);
+        opacity: 1;
+      }
+    }
+  }
+
+  &__activity {
+    @include position(absolute, 0px 0px 1px 1px);
+    color: $tomato;
+    background-color: currentColor;
+    border-radius: $base-border-radius;
+    overflow: hidden;
+    padding: .25em;
+    opacity: .875;
+
+    &-name {
+      font-size: modular-scale(-2);
+      color: $base-font-white;
+    }
+  }
+
+  @for $columns from 1 through 6 {
+    .timetable__slot[data-columns='#{$columns}'] {
+      .timetable__block {
+        flex-basis: percentage(1 / $columns);
+      }
+
+      @for $column from 0 through 5 {
+        .timetable__block[data-order='#{$column}'] {
+          &:first-child {
+            margin-left: percentage($column / $columns);
+          }
+
+          @if ($column < 4) {
+            @for $sibling from $column + 2 through 5 {
+              + [data-order='#{$sibling}'] {
+                margin-left: percentage(($sibling - $column - 1) / $columns);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media(screen and min-width: #{$min_day_width * 8 + $keyline * 2}) {
+    &__header-day,
+    &__day {
+      display: initial;
+    }
+
+    &__buttons {
+      display: none;
+    }
+
+    &__day--active:not(:first-child) {
+      .timetable__slot::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.grid__selection {
+  @include position(absolute, 0 0 null 0);
+  background: $pale-grey;
+  border-radius: .25em;
+}
+
+.schedule-editor {
+  display: block;
+  margin: 0;
+  padding: 1em;
+
+  &--modal {
+
+  }
+}
+
+.day-picker,
+.venue-picker {
+  display: flex;
+  margin: 0 0 $small-spacing;
+
+  .day-picker__day,
+  .venue-picker__venue {
+    flex: 1 1 0;
+    border: none;
+    padding: $small-spacing 0;
+    color: $secondary-font-color;
+
+    &--selected {
+      color: $base-font-color;
+      border-radius: $base-border-radius;
+      background: $secondary-background-color;
+    }
+  }
+}
+
+.day-picker {
+  &__weekday {
+    font-size: modular-scale(-2);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  &__date {
+    font-size: modular-scale(1);
+  }
+}
+
+.venue-picker {
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .venue-picker__venue {
+    flex: 0 1 50%;
+    font-size: modular-scale(-1);
+    padding: $small-spacing;
+
+    &[data-id=''] {
+      font-size: 100%;
+      flex-basis: 3em;
+    }
+  }
+}
+
+.time-pickers {
+  display: flex;
+  align-items: center;
+
+  &__separator {
+    margin: 0 $base-spacing;
+  }
+
+  .time-picker {
+    flex: 1;
+  }
+}
+
+.time-picker {
+  height: 8em;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+
+  &::before {
+    @include position(absolute, 50% 0 null 0);
+    height: 2em;
+    margin-top: -1em;
+    background: $secondary-background-color;
+    border-radius: $base-border-radius;
+    content: '';
+  }
+
+  &::after {
+    @include position(absolute, 0 0 0 0);
+    content: '';
+    pointer-events: none;
+    touch-action: none;
+    background: linear-gradient(to bottom, white, transparent 25%, transparent 75%, white);
+  }
+
+  &__time {
+    @include position(absolute, 50% 0 null 0);
+    margin-top: -1em;
+    text-align: center;
+    line-height: 2em;
+    font-feature-settings: 'tnum';
+    cursor: pointer;
+  }
+}
+
+.schedule-editor {
+  &__activities {
+    @include position(absolute, 0 0 null 0);
+    min-height: 100%;
+    background: rgba($viewport-background-color, .75);
+    opacity: 0;
+    pointer-events: none;
+    touch-action: none;
+    transition: opacity $base-duration $base-timing;
+
+    .autocomplete--visible & {
+      opacity: 1;
+      pointer-events: auto;
+      touch-action: auto;
+    }
+  }
+
+  &__autocomplete-instructions {
+    padding: 1em;
+  }
+
+  &__activity-list {
+    .autocomplete__result {
+      padding: $small-spacing 1em;
+      background: rgba($viewport-background-color, .75);
+      cursor: pointer;
+
+      &--selected {
+        background-color: rgba($secondary-background-color, .75);
+      }
+    }
+
+    .autocomplete__text,
+    .autocomplete__subtext {
+      @include ellipsis;
+      display: block;
+      color: $secondary-font-color;
+
+      u {
+        color: $base-font-color;
+      }
+    }
+
+    .autocomplete__text {
+      font-size: modular-scale(1);
+    }
+
+    .autocomplete__subtext {
+      font-size: modular-scale(-1);
+    }
+  }
+}

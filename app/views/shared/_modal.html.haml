@@ -1,0 +1,7 @@
+.modal{class: class_string('modal', *Array(local_assigns[:class])),
+  tabindex: 1,
+  data: { controller: class_string('modal', local_assigns[:controller]),
+  target: class_string(local_assigns[:target]),
+  action: class_string('click->modal#close keydown->modal#keyDown', local_assigns[:action]) }}
+  .modal__content{data: { target: 'modal.content', action: 'click->modal#click' }}
+    = yield

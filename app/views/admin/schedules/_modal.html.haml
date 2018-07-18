@@ -1,0 +1,19 @@
+= render 'shared/modal',
+  controller: 'admin--schedule autocomplete',
+  target: 'admin--timetable.modal admin--schedule.modal',
+  action: 'modal:open->admin--schedule#modalOpened autocomplete:search->admin--schedule#searchActivities autocomplete:select->admin--schedule#selectActivity autocomplete:render->admin--schedule#renderActivity',
+  class: 'schedule-editor--modal' do
+
+  = render 'shared/modal_header', title: activity_name_editor do
+    %button.modal__header-button{aria: { label: t('admin.schedules.modal.delete') },
+      data: { target: 'admin--schedule.delete', action: 'admin--schedule#delete' }}
+      = icon :delete
+  .modal__body
+    = yield
+    .autocomplete__results.schedule-editor__activities{data: { target: 'autocomplete.results' }}
+      %ul.autocomplete__list.schedule-editor__activity-list{data: { target: 'autocomplete.list' }}
+  .modal__footer
+    %button.button{data: { action: 'modal#close' }}
+      = t('modal.cancel')
+    %button.button.button--primary{data: { target: 'admin--schedule.submit', action: 'admin--schedule#submit' }}
+      = t('modal.save')

@@ -32,7 +32,7 @@ RSpec.describe Admin::PitchesController, type: :request do
     before { pitch.submitted! }
 
     def update
-      put admin_pitch_path(festival, pitch, params: { pitch: params })
+      put admin_pitch_path(festival, pitch), params: { pitch: params }
     end
 
     context 'changing piles' do

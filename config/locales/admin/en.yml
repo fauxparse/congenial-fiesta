@@ -3,3 +3,5 @@ en:
     navigation:
       home: 'Home'
       pitches: 'Pitches'
+      timetable: 'Timetable'
+      venues: 'Venues'

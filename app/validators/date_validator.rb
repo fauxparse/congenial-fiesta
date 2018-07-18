@@ -30,6 +30,7 @@ class DateValidator < ActiveModel::EachValidator
 
   def compare_dates(record, attribute, value, operator)
     other_date = fetch_date(record, options[operator])
+    return if !value || !other_date
     record.errors.add(attribute, error_message(operator, other_date)) \
       if other_date.present? && !value.send(OPERATORS[operator], other_date)
   end

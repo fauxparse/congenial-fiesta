@@ -1,0 +1,5 @@
+.modal__header
+  .modal__header-buttons
+    = yield
+    %button.modal__header-button{aria: { label: t('modal.close') }, data: { action: 'modal#close' }}= icon :close
+  .modal__title{data: { target: 'modal.title' }}= local_assigns[:title]
