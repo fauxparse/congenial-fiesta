@@ -31,7 +31,7 @@ class Pitches < ApplicationQuery
   private
 
   def default_scope
-    festival.pitches.by_participant
+    super.to(festival).by_participant
   end
 
   def gender(scope, gender)
