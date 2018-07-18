@@ -9,9 +9,19 @@ RSpec.describe Admin::VenuesController, type: :request do
   before { log_in_as(admin) }
 
   describe 'GET /admin/:year/venues' do
-    it 'returns http success' do
-      get admin_venues_path(festival)
-      expect(response).to be_successful
+    context 'as HTML' do
+      it 'returns http success' do
+        get admin_venues_path(festival)
+        expect(response).to be_successful
+      end
+    end
+
+    context 'as JSON' do
+      it 'returns JSON' do
+        get admin_venues_path(festival, format: :json)
+        json = JSON.parse(response.body).deep_symbolize_keys
+        expect(json.keys).to contain_exactly(:venues, :origin)
+      end
     end
   end
 
