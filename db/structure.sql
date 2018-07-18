@@ -220,7 +220,11 @@ CREATE TABLE public.participants (
     email character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    admin boolean DEFAULT false
+    admin boolean DEFAULT false,
+    company character varying,
+    city character varying,
+    country_code character varying,
+    bio text
 );
 
 
@@ -317,12 +321,7 @@ ALTER SEQUENCE public.pitches_id_seq OWNED BY public.pitches.id;
 CREATE TABLE public.presenters (
     id bigint NOT NULL,
     activity_id bigint,
-    participant_id bigint,
-    name character varying,
-    company character varying,
-    city character varying,
-    country_code character varying DEFAULT 'NZ'::character varying,
-    bio text
+    participant_id bigint
 );
 
 
