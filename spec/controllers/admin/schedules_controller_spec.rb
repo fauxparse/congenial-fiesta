@@ -6,7 +6,11 @@ RSpec.describe Admin::SchedulesController, type: :request do
   let(:festival) { create(:festival) }
   let(:admin) { create(:admin) }
   let(:venue) { create(:venue) }
-  let(:workshop) { create(:workshop, festival: festival) }
+  let(:workshop) do
+    create(:workshop, festival: festival).tap do |activity|
+      create(:presenter, activity: activity)
+    end
+  end
   let(:schedule) do
     workshop.schedules.create(
       starts_at: start_time,
@@ -30,7 +34,10 @@ RSpec.describe Admin::SchedulesController, type: :request do
     end
 
     context 'as JSON' do
-      before { get admin_timetable_path(festival, format: :json) }
+      before do
+        workshop
+        get admin_timetable_path(festival, format: :json)
+      end
 
       it 'is successful' do
         expect(response).to be_successful
