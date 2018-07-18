@@ -4,6 +4,7 @@ class TimetableSerializer < Primalize::Many
   attributes(
     schedules: enumerable(ScheduleSerializer),
     activities: enumerable(ActivitySerializer),
-    activity_types: enumerable(ActivityTypeSerializer)
+    activity_types: enumerable(ActivityTypeSerializer),
+    venues: enumerable(VenueSerializer)
   )
 end

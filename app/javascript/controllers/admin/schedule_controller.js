@@ -4,6 +4,7 @@ import autosize from 'autosize'
 import fetch from '../../lib/fetch'
 import moment from '../../lib/moment'
 import ActivityCollection from '../../collections/activities'
+import VenueCollection from '../../collections/venues'
 
 const sentence = (items) => {
   if (!items.length) {
@@ -25,6 +26,7 @@ export default class extends Controller {
     'delete',
     'activityId',
     'day',
+    'venue',
     'startTime',
     'endTime',
     'activityName',
@@ -66,6 +68,7 @@ export default class extends Controller {
 
   set title(title) {
     this.activityNameTarget.value = title
+    this.autocomplete.hide()
     autosize.update(this.activityNameTarget)
   }
 
@@ -130,6 +133,21 @@ export default class extends Controller {
     )
   }
 
+  get venueId() {
+    return this._venueId
+  }
+
+  set venueId(id) {
+    this._venueId = (id || '').toString()
+    this.venueTargets.forEach(venue =>
+      venue.classList.toggle(
+        'venue-picker__venue--selected',
+        this._venueId === (venue.dataset.id || '') ||
+          (!id && !venue.dataset.id)
+      )
+    )
+  }
+
   get activities() {
     return this._activities || new ActivityCollection()
   }
@@ -144,6 +162,14 @@ export default class extends Controller {
 
   set activityTypes(types) {
     this.activities.types = types
+  }
+
+  get venues() {
+    return this._venues || new VenueCollection()
+  }
+
+  set venues(venues) {
+    this._venues = new VenueCollection(venues)
   }
 
   startTimeChanged({ detail: { hours, minutes } }) {
@@ -194,14 +220,21 @@ export default class extends Controller {
     this.endTime = endTime
   }
 
+  venueClicked(e) {
+    e.preventDefault()
+    const target = e.target.closest('.venue-picker__venue')
+    this.venueId = target.dataset.id
+  }
+
   load(id) {
     this.title = 'Loading…'
     this.modal.show()
     this.id = id
     fetch(this.url)
       .then(response => response.json())
-      .then(({ activity_id, starts_at, ends_at }) => {
+      .then(({ activity_id, venue_id, starts_at, ends_at }) => {
         this.activityId = activity_id
+        this.venueId = venue_id
         this.startTime = starts_at
         this.endTime = ends_at
       })
@@ -228,6 +261,7 @@ export default class extends Controller {
           authenticity_token: this.authenticityToken,
           schedule: {
             activity_id: this.activityId,
+            venue_id: this.venueId || '',
             starts_at: this.startTime.toISOString(),
             ends_at: this.endTime.toISOString()
           }

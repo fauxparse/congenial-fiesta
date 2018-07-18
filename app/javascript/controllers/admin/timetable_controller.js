@@ -83,15 +83,10 @@ export default class extends Controller {
   load() {
     fetch(this.url)
       .then(response => response.json())
-      .then(({ schedules, activities, activity_types }) => {
-        this.activities = new ActivityCollection(
-          activities.reduce((memo, activity) => ({
-            ...memo,
-            [activity.id]: activity
-          }), {}),
-          activity_types
-        )
+      .then(({ schedules, activities, activity_types, venues }) => {
+        this.activities = new ActivityCollection(activities, activity_types)
         this.editor.activities = this.activities
+        this.editor.venues = venues
         schedules.forEach(this.addBlock)
       })
   }
@@ -154,16 +149,19 @@ export default class extends Controller {
 
   selected({ detail: { start, end } }) {
     const slot = this.slotAt(start.x, start.y)
-    const endSlot = this.slotAt(end.x, end.y)
-    const y = Math.min(start.y, end.y)
-    const height = Math.abs(end.y - start.y) + 1
-    const { modal, editor } = this
+    if (slot && end) {
+      const endSlot = this.slotAt(end.x, end.y)
+      const y = Math.min(start.y, end.y)
+      const height = Math.abs(end.y - start.y) + 1
+      const { modal, editor } = this
 
-    editor.id = undefined
-    editor.activityId = undefined
-    editor.startTime = slot.dataset.startTime
-    editor.endTime = endSlot.dataset.endTime
-    modal.show()
+      editor.id = undefined
+      editor.activityId = undefined
+      editor.venueId = undefined
+      editor.startTime = slot.dataset.startTime
+      editor.endTime = endSlot.dataset.endTime
+      modal.show()
+    }
   }
 
   slotAt(x, y) {
@@ -341,8 +339,10 @@ export default class extends Controller {
       id,
       row,
       column,
-      height
+      height,
+      updating
     } = this.dragging
+    cancelAnimationFrame(updating)
     this.removeListener(method, 'move', this.dragMove)
     this.removeListener(method, 'stop', this.dragStop)
     if (started) {

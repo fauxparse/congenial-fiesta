@@ -209,21 +209,27 @@
   }
 }
 
-.day-picker {
+.day-picker,
+.venue-picker {
   display: flex;
   margin: 0 0 $small-spacing;
 
-  &__day {
+  .day-picker__day,
+  .venue-picker__venue {
     flex: 1 1 0;
     border: none;
     padding: $small-spacing 0;
+    color: $secondary-font-color;
 
     &--selected {
+      color: $base-font-color;
       border-radius: $base-border-radius;
       background: $secondary-background-color;
     }
   }
+}
 
+.day-picker {
   &__weekday {
     font-size: modular-scale(-2);
     text-transform: uppercase;
@@ -232,6 +238,22 @@
 
   &__date {
     font-size: modular-scale(1);
+  }
+}
+
+.venue-picker {
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .venue-picker__venue {
+    flex: 0 1 50%;
+    font-size: modular-scale(-1);
+    padding: $small-spacing;
+
+    &[data-id=''] {
+      font-size: 100%;
+      flex-basis: 3em;
+    }
   }
 }
 

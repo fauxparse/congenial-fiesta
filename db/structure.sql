@@ -355,7 +355,8 @@ CREATE TABLE public.schedules (
     starts_at timestamp without time zone,
     ends_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    venue_id bigint
 );
 
 
@@ -866,6 +867,13 @@ CREATE INDEX index_schedules_on_starts_at_and_ends_at ON public.schedules USING 
 
 
 --
+-- Name: index_schedules_on_venue_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_schedules_on_venue_id ON public.schedules USING btree (venue_id);
+
+
+--
 -- Name: index_taggings_on_context; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -991,6 +999,14 @@ ALTER TABLE ONLY public.presenters
 
 
 --
+-- Name: schedules fk_rails_ce75c0542b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schedules
+    ADD CONSTRAINT fk_rails_ce75c0542b FOREIGN KEY (venue_id) REFERENCES public.venues(id) ON DELETE SET NULL;
+
+
+--
 -- Name: activities fk_rails_d55f2d8599; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1036,6 +1052,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180714012646'),
 ('20180714012647'),
 ('20180714012648'),
-('20180715212859');
+('20180715212859'),
+('20180718001951');
 
 

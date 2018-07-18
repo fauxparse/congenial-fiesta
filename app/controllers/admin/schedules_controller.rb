@@ -36,7 +36,9 @@ module Admin
     private
 
     def schedule_params
-      params.require(:schedule).permit(:activity_id, :starts_at, :ends_at)
+      params
+        .require(:schedule)
+        .permit(:activity_id, :venue_id, :starts_at, :ends_at)
     end
 
     def schedules
@@ -55,7 +57,8 @@ module Admin
       TimetableSerializer.new(
         schedules: schedules,
         activities: festival.activities.with_presenters.all,
-        activity_types: Activity.subclasses
+        activity_types: Activity.subclasses,
+        venues: Venue.all
       ).call
     end
   end

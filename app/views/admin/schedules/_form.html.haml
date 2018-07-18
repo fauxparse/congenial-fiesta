@@ -11,3 +11,8 @@
     .time-picker{data: { controller: 'time-picker', target: 'admin--schedule.startTime', action: 'change->admin--schedule#startTimeChanged' }}
     .time-pickers__separator= t('.to')
     .time-picker{data: { controller: 'time-picker', target: 'admin--schedule.endTime', action: 'change->admin--schedule#endTimeChanged' }}
+
+  .venue-picker
+    - Venue.all.sort_by(&:name).each do |venue|
+      %button.venue-picker__venue{data: { target: 'admin--schedule.venue', action: 'admin--schedule#venueClicked', id: venue.id }}= venue.name
+    %button.venue-picker__venue{data: { target: 'admin--schedule.venue', action: 'admin--schedule#venueClicked', id: '' }}= icon :no

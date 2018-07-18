@@ -2,6 +2,7 @@
 
 class Schedule < ApplicationRecord
   belongs_to :activity
+  belongs_to :venue, optional: true
   has_one :festival, through: :activity
 
   validates :starts_at, :ends_at, :activity_id, presence: true
