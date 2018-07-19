@@ -27,30 +27,30 @@ RSpec.describe TimetableSerializer, type: :serializer do
 
   it 'represents the object' do
     expect(json).to match(
-      schedules: a_collection_containing_exactly({
+      schedules: a_collection_containing_exactly(
         id: schedule.id,
         venue_id: venue.id,
         activity_id: activity.id,
         starts_at: start_time,
         ends_at: end_time
-      }),
-      activities: a_collection_containing_exactly({
+      ),
+      activities: a_collection_containing_exactly(
         id: activity.id,
         name: activity.name,
         type: 'Workshop',
         presenters: []
-      }),
+      ),
       activity_types: a_collection_containing_exactly(
         { name: 'Workshop', label: 'Workshop' },
-        { name: 'Show', label: 'Show' }
+        name: 'Show', label: 'Show'
       ),
-      venues: a_collection_containing_exactly({
+      venues: a_collection_containing_exactly(
         id: venue.id,
         name: venue.name,
         address: venue.address,
         latitude: venue.latitude,
         longitude: venue.longitude
-      })
+      )
     )
   end
 end
