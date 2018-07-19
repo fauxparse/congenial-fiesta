@@ -22,7 +22,7 @@ RSpec.describe TimeValidator, type: :validator do
   context 'validating a time is after a given constant' do
     subject(:instance) do
       test_instance do
-        validates :start_time, date: { after: Time.zone.local(2017, 12, 31) }
+        validates :start_time, time: { after: Time.zone.local(2017, 12, 31) }
       end
     end
 

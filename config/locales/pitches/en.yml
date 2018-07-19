@@ -50,12 +50,6 @@ en:
           standalone_workshop:
             name: 'Standalone workshop'
             description: 'Single 3-hour slot'
-          full_day_workshop:
-            name: 'Full-day workshop'
-            description: '2 × 3-hour slots'
-          weekend_workshop:
-            name: 'Weekend workshop'
-            description: '4 × 3-hour slots'
           directed_performance:
             name: 'Directed performance'
             description: '+ 3-hour workshop'

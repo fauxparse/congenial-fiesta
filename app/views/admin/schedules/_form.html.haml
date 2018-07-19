@@ -2,7 +2,7 @@
   = form.hidden_field :activity_id, data: { target: 'admin--schedule.activityId' }
 
   .day-picker
-    - days.each do |day|
+    - timetable.days.each do |day|
       %button.day-picker__day{data: { date: day.to_s(:db), target: 'admin--schedule.day', action: 'admin--schedule#dayClicked' }}
         .day-picker__weekday= day.strftime('%a')
         .day-picker__date= day.strftime('%-e')

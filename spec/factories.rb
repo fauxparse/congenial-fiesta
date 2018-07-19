@@ -63,6 +63,10 @@ FactoryBot.define do
     festival
     participant
 
+    trait :submitted do
+      status 'submitted'
+    end
+
     trait :for_workshop do
       info do
         {

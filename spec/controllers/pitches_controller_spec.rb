@@ -148,6 +148,19 @@ RSpec.describe PitchesController, type: :request do
       it 'updates the pitch' do
         expect(pitch.reload.info.activity.name).to eq 'Updated'
       end
+
+      context 'and save for later' do
+        let(:params) do
+          {
+            pitch: {},
+            submit: 'save'
+          }
+        end
+
+        it 'redirects' do
+          expect(response).to redirect_to pitches_path
+        end
+      end
     end
 
     describe 'delete /pitches/:id' do
