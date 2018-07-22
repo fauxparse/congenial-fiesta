@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Participant < ApplicationRecord
+  include Hashid::Rails
   include Nationalisable
 
   auto_strip_attributes :name, :email

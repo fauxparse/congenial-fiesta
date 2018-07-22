@@ -1,0 +1,17 @@
+= render 'shared/modal',
+  controller: 'admin--person',
+  target: 'admin--people.modal admin--person.modal',
+  action: 'modal:open->admin--person#modalOpened',
+  class: 'person-editor--modal' do
+
+  = render 'shared/modal_header', title: person_name_editor
+  .modal__body
+    = yield
+  .modal__footer
+    %button.button{data: { target: 'admin--person.cancel', action: 'modal#close' }}
+      %span.button__text= t('modal.cancel')
+    %button.button.button--primary{data: { target: 'admin--person.submit',
+      action: 'admin--person#submit' }}
+      %span.button__text{data: { target: 'admin--person.submitText',
+        'save-text': t('modal.save'), 'create-text': t('modal.create') }}
+        = t('modal.save')

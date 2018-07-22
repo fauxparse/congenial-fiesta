@@ -1,0 +1,70 @@
+.people {
+  > .icon {
+    display: none;
+  }
+
+  &__search {
+    border-bottom: $base-border;
+    display: flex;
+    padding-left: $keyline;
+    padding-right: $base-spacing;
+
+    input {
+      flex: 1;
+      border: 0;
+      margin: 0;
+    }
+  }
+}
+
+.person {
+  display: flex;
+
+  &.autocomplete__result--selected {
+    background: $secondary-background-color;
+  }
+
+  > label {
+    flex: 0 0 $keyline;
+    padding: $small-spacing ($keyline - 2.5em) $small-spacing 1em;
+
+    input {
+      display: none;
+    }
+
+    .icon {
+      circle {
+        display: none;
+      }
+
+      path {
+        stroke-width: 2.6666667px;
+      }
+    }
+  }
+
+  &__details {
+    flex: 1;
+    padding: .5em $base-spacing .5em 0;
+  }
+
+  &__name,
+  &__email {
+    @include ellipsis;
+    display: block;
+  }
+
+  &__name {
+  }
+
+  &__email {
+    font-size: modular-scale(-1);
+    color: $secondary-font-color;
+  }
+}
+
+.person-editor--modal {
+  .modal__body {
+    padding: 1em;
+  }
+}

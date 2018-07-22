@@ -14,11 +14,12 @@ module FormsHelper
     end
 
     def check_box_field(field, options = {}, &block)
-      options = options.merge(
+      data = options[:data]
+      options = options.except(:data).merge(
         class: @template.class_string('check-box-field', options[:class])
       )
       @template.content_tag(:div, options) do
-        @template.concat check_box(field)
+        @template.concat check_box(field, data: data)
         @template.concat check_box_icon(field)
         @template.concat check_box_field_content(field, &block) if block_given?
       end
