@@ -1,0 +1,9 @@
+= form_for person, as: :person, url: admin_people_path(festival),
+  html: { class: 'person-editor', data: { target: 'admin--person.form', action: 'admin--person#submit' } } do |form|
+
+  = form.group :email do
+    = form.label :email
+    = form.email_field :email, data: { target: 'admin--person.email' }
+
+  = form.check_box_field(:admin, data: { target: 'admin--person.admin' }) do
+    %span= t('.admin')

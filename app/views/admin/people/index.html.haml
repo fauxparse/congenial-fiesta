@@ -1,0 +1,12 @@
+%h1.page-title= t('.title')
+
+.people{data: { controller: 'admin--people autocomplete', action: 'autocomplete:search->admin--people#searchPeople autocomplete:select->admin--people#editPerson autocomplete:render->admin--people#renderPerson' }}
+  .people__search
+    = search_field_tag('query', '', placeholder: t('.search'), autocomplete: 'off',
+      data: { target: 'admin--people.search autocomplete.input', action: 'focus->autocomplete#focus blur->autocomplete#blur input->autocomplete#textChanged' })
+  .people__results{data: { target: 'autocomplete.results' }}
+    .people__list.people__list--loading{data: { target: 'admin--people.list autocomplete.list', action: 'change->admin--people#selectPerson' }}
+    .people__empty
+  = icon :checkbox, class: 'people__checkbox-icon check-box-field-icon', data: { target: 'admin--people.checkboxIcon' }
+
+  = render partial: 'form', layout: 'modal', locals: { person: Participant.new }

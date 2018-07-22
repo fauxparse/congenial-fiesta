@@ -71,5 +71,5 @@
 
 .page-title {
   font-size: modular-scale(3);
-  padding: $base-spacing $base-spacing $small-spacing;
+  padding: $base-spacing $base-spacing $small-spacing ($keyline / strip-unit(modular-scale(3)));
 }

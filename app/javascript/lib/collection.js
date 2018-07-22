@@ -62,7 +62,7 @@ export default class Collection {
     return this
   }
 
-  find(query) {
+  find(query, includeAllWhenBlank = false) {
     if (query) {
       const sorted = this.all()
         .sort((a, b) =>
@@ -79,7 +79,7 @@ export default class Collection {
         }, [[], sorted])
         .shift()
     } else {
-      return []
+      return includeAllWhenBlank ? this.all() : []
     }
   }
 
@@ -94,12 +94,12 @@ export default class Collection {
   }
 
   save(attributes) {
-    const { id } = attributes
+    const { id, ...attrs } = attributes
     return new Promise((resolve, reject) => {
       fetch(this.url(id), {
         method: id ? 'PUT' : 'POST',
         body: {
-          [this.name]: attributes
+          [this.name]: attrs
         }
       })
         .then(response => response.json())

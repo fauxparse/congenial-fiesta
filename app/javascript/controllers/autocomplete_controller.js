@@ -67,7 +67,10 @@ export default class extends Controller {
     this.element.classList.toggle(VISIBLE_CLASS, visible)
     if (visible) {
       this._results = []
-      setTimeout(() => this.inputTarget.focus())
+      setTimeout(() => {
+        this.search()
+        this.inputTarget.focus()
+      })
     } else {
       this.inputTarget.blur()
     }
@@ -108,6 +111,9 @@ export default class extends Controller {
   }
 
   textChanged = e => {
+    if (!this.inputTarget.value) {
+      this.index = this.selectedId = undefined
+    }
     clearTimeout(this.autocompleteTimeout)
     this.autocompleteTimeout = setTimeout(this.search, 150)
   }
@@ -130,8 +136,8 @@ export default class extends Controller {
     this.index = length && (this.index + length + direction) % length
   }
 
-  confirmSelection() {
-    this.dispatch('select', this.results[this.index])
+  confirmSelection(originalEvent) {
+    this.dispatch('select', { ...this.results[this.index], originalEvent })
   }
 
   searchRegExp = query =>
@@ -139,7 +145,6 @@ export default class extends Controller {
 
   search = () => {
     const query = normalize(this.inputTarget.value)
-    const selectedId = this.selectedId
     let re
     try {
       re = query && this.searchRegExp(query)
@@ -151,7 +156,7 @@ export default class extends Controller {
     } = this.dispatch('search', { query: re, results: [] })
     this.results = results
     this.renderResults(re)
-    this.selectedId = selectedId
+    this.index = 0
   }
 
   renderResults(query) {
@@ -171,6 +176,7 @@ export default class extends Controller {
     const text = document.createElement('div')
     text.classList.add('autocomplete__text')
     text.innerHTML = name
+    result.dataset.id = id
     result.appendChild(text)
     this.dispatch('render', { query, name, data, result })
     return result
@@ -180,7 +186,7 @@ export default class extends Controller {
     const row = e.target.closest(`.${RESULT_CLASS}`)
     if (row) {
       this.selectedId = row.dataset.id
-      this.confirmSelection()
+      this.confirmSelection(e)
     }
   }
 
@@ -188,7 +194,7 @@ export default class extends Controller {
     if (element) {
       const top = element.offsetTop
       const height = element.offsetHeight
-      const scrollable = this.resultsTarget.closest('.modal__body')
+      const scrollable = this.resultsTarget.closest('.modal__body') || document.documentElement
       const viewportHeight = scrollable.offsetHeight
 
       if (top < scrollable.scrollTop) {
