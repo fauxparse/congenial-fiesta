@@ -161,7 +161,7 @@ export default class extends Controller {
     new Promise(resolve => {
       const checker = setInterval(() => {
         if (window.mapboxgl && window.MapboxGeocoder) {
-          clearInterval(this.checker)
+          clearInterval(checker)
           resolve()
         }
       }, 100)
