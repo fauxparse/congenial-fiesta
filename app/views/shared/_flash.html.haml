@@ -1,0 +1,6 @@
+- flash.each do |kind, message|
+  = content_tag :div, class: class_string('flash', "flash--#{kind}"),
+    data: { controller: 'flash' } do
+    %p.flash__message= message
+    %button.flash__close-button= icon :close, class: 'button__icon',
+      data: { action: 'click->flash#close' }

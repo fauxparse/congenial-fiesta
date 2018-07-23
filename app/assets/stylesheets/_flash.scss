@@ -1,0 +1,39 @@
+.flash {
+  @include full-width;
+  display: flex;
+  align-items: flex-start;
+  background: $flash-background-color;
+  color: $flash-foreground-color;
+  padding-top: $small-spacing;
+  padding-bottom: $small-spacing;
+  transition: margin-top $base-duration $acceleration-timing;
+
+  &__message {
+    font-size: modular-scale(-1);
+    margin-bottom: 0;
+  }
+
+  &__close-button {
+    @include size(2.5em);
+    border: 0;
+    margin: -.5em -.5em 0 $base-spacing;
+    padding: .5em;
+    appearance: none;
+    outline: none;
+    color: $secondary-font-white;
+  }
+
+  &__message,
+  &__close-button {
+    transition: opacity $base-duration $base-timing;
+  }
+
+  &--closing {
+    will-change: margin-top;
+
+    .flash__message,
+    .flash__close-button {
+      opacity: 0;
+    }
+  }
+}

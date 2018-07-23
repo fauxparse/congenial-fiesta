@@ -72,6 +72,10 @@ $base-border: $base-border-width solid $base-border-color;
 $viewport-background-color: $white;
 $secondary-background-color: transparentize($light-grey, 0.5);
 
+// Flash
+$flash-background-color: darken($dark-grey, 10);
+$flash-foreground-color: $base-font-white;
+
 // Focus
 $focus-outline-color: transparentize($mandarin, 0.75);
 $focus-outline-width: 3px;
