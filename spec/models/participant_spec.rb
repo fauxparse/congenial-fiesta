@@ -64,4 +64,11 @@ RSpec.describe Participant, type: :model do
         .to include(participant)
     end
   end
+
+  describe '#role?' do
+    it 'returns true if the participant has the role' do
+      participant = create(:participant, role_list: 'programming')
+      expect(participant.role?(:programming)).to be true
+    end
+  end
 end

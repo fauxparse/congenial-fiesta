@@ -4,16 +4,21 @@ module Admin
   class FestivalsController < Controller
     def index
       redirect_to admin_festival_path(festival) if festival.present?
+      authorize Festival.new, :create?
     end
 
-    def show; end
+    def show
+      authorize festival
+    end
 
     def new
       @festival = Festival.new(default_dates)
+      authorize @festival, :create?
     end
 
     def create
       @festival = Festival.new(festival_params)
+      authorize @festival, :create?
       if @festival.save
         redirect_to admin_festival_path(@festival)
       else

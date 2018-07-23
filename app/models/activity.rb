@@ -11,6 +11,10 @@ class Activity < ApplicationRecord
   validates :name, :type, presence: true
 
   scope :with_presenters, -> { includes(presenters: :participant) }
+
+  def policy_class
+    ActivityPolicy
+  end
 end
 
 require_dependency 'workshop'

@@ -2,4 +2,5 @@ en:
   admin:
     festivals:
       new:
+        title: 'New festival'
         submit: 'Create festival'

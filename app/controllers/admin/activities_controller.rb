@@ -4,6 +4,7 @@ module Admin
   class ActivitiesController < Controller
     def create
       activity = festival.activities.build(activity_params)
+      authorize activity, :create?
       activity.save
       respond_to do |format|
         format.json { respond_with(activity) }

@@ -1,4 +1,6 @@
-= form_for @festival, url: admin_festivals_path do |form|
+%h1.page-title= t('.title')
+
+= form_for @festival, url: admin_festivals_path, html: { class: 'new-festival' } do |form|
   = form.group :year do
     = form.label :year
     = form.number_field :year, min: Time.zone.today.year
@@ -12,4 +14,4 @@
     = form.date_field :end_date
     = form.error_messages_for :end_date
 
-  = form.submit t('.submit')
+  = form.submit t('.submit'), class: 'button button--primary'

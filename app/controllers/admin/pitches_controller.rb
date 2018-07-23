@@ -2,11 +2,16 @@
 
 module Admin
   class PitchesController < Controller
-    def index; end
+    def index
+      authorize Pitch, :index?
+    end
 
-    def show; end
+    def show
+      authorize pitch, :show?
+    end
 
     def update
+      authorize pitch, :update?
       pitch.update!(pitch_params)
       redirect_to admin_pitch_path(pitch.festival, pitch)
     end

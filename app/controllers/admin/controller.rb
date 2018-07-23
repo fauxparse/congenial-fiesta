@@ -6,12 +6,18 @@ module Admin
 
     before_action :require_admin
 
+    after_action :verify_authorized
+
     layout 'admin'
 
     private
 
     def require_admin
-      render(status: :unauthorized) unless current_participant&.admin?
+      render(status: :unauthorized) unless authorized_user?
+    end
+
+    def authorized_user?
+      current_participant&.admin? || current_participant&.role_list.any?
     end
 
     # rubocop:disable Naming/MemoizedInstanceVariableName
