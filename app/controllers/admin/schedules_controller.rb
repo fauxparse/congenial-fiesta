@@ -3,6 +3,7 @@
 module Admin
   class SchedulesController < Controller
     def index
+      authorize Schedule, :index?
       respond_to do |format|
         format.json { render json: serialized_timetable }
         format.html
@@ -11,24 +12,29 @@ module Admin
 
     def show
       schedule = festival.schedules.find(params[:id])
+      authorize schedule, :show?
       respond_to do |format|
         format.json { render_schedule(schedule) }
       end
     end
 
     def create
-      schedule = Schedule.create!(schedule_params)
+      schedule = Schedule.new(schedule_params)
+      authorize schedule, :create?
+      schedule.save!
       render_schedule(schedule)
     end
 
     def update
       schedule = festival.schedules.find(params[:id])
+      authorize schedule, :update?
       schedule.update!(schedule_params)
       render_schedule(schedule)
     end
 
     def destroy
       schedule = festival.schedules.find(params[:id])
+      authorize schedule, :destroy?
       schedule.destroy
       render_schedule(schedule)
     end

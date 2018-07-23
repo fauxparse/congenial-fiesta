@@ -23,6 +23,8 @@ module Authentication
     @current_participant ||= Participant.find_by(id: session[:participant])
   end
 
+  alias current_user current_participant
+
   def logged_in?
     current_participant.present?
   end

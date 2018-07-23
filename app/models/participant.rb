@@ -12,6 +12,8 @@ class Participant < ApplicationRecord
 
   has_one_attached :avatar
 
+  acts_as_taggable_on :role
+
   before_validation :remove_admin_if_cannot_log_in
 
   validates :name, presence: true
@@ -35,6 +37,10 @@ class Participant < ApplicationRecord
 
   def password?
     identities.any?(&:password_digest?)
+  end
+
+  def role?(role)
+    role_list.include?(role.to_s)
   end
 
   private

@@ -3,6 +3,7 @@
 module Admin
   class VenuesController < Controller
     def index
+      authorize Venue, :index?
       respond_to do |format|
         format.json { render json: serialize_venues }
         format.html
@@ -10,26 +11,22 @@ module Admin
     end
 
     def create
-      venue = Venue.create!(venue_params)
-      respond_to do |format|
-        format.json { render json: VenueSerializer.new(venue).call }
-      end
+      @venue = Venue.new(venue_params)
+      authorize venue, :create?
+      venue.save!
+      render_venue
     end
 
     def update
-      venue = Venue.find(params[:id])
+      authorize venue, :update?
       venue.update!(venue_params)
-      respond_to do |format|
-        format.json { render json: VenueSerializer.new(venue).call }
-      end
+      render_venue
     end
 
     def destroy
-      venue = Venue.find(params[:id])
+      authorize venue, :destroy?
       venue.destroy
-      respond_to do |format|
-        format.json { render json: VenueSerializer.new(venue).call }
-      end
+      render_venue
     end
 
     private
@@ -42,6 +39,16 @@ module Admin
       params
         .require(:venue)
         .permit(:name, :address, :latitude, :longitude)
+    end
+
+    def venue
+      @venue ||= Venue.find(params[:id])
+    end
+
+    def render_venue
+      respond_to do |format|
+        format.json { render json: VenueSerializer.new(venue).call }
+      end
     end
   end
 end
