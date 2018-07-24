@@ -1,0 +1,12 @@
+%h1.page-title= t('.title')
+
+%p.page-intro= t('.intro')
+
+= form_tag convert_admin_pitches_path(festival), class: 'convert-pitches' do
+  %button.button.button--primary{type: 'submit'}
+    .button__text= t('.convert')
+  = link_to admin_pitches_path(festival), class: 'button' do
+    .button__text= t('modal.cancel')
+
+  .pitches
+    = render partial: 'selectable_pitch', collection: pitches, as: :pitch

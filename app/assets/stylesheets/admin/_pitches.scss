@@ -17,7 +17,7 @@
 .pitch {
   display: flex;
   align-items: flex-start;
-  padding: 0.5em $base-spacing;
+  padding: 0.5em 1em;
   border-bottom: $base-border;
   text-decoration: none;
   color: inherit;
@@ -32,11 +32,19 @@
   &:active {
     outline: none;
   }
+
+  [type="checkbox"] {
+    display: none;
+  }
 }
 
 .pitch__name {
   flex: 1;
-  margin: 0 $small-spacing;
+  margin: 0 $small-spacing 0 2em;
+
+  .check-box-field-icon + & {
+    margin-left: 1em;
+  }
 }
 
 .pitch__presenter,
@@ -89,4 +97,10 @@
 .pitch-response__answer {
   margin: 0;
   padding: 0;
+}
+
+.convert-pitches {
+  .button--primary {
+    margin-left: $keyline;
+  }
 }

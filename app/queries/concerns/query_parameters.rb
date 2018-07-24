@@ -11,9 +11,13 @@ class QueryParameters < Hashie::Dash
 
   def sanitize(options)
     if options.respond_to?(:permit)
-      options.permit(*self.class.properties)
+      options.permit(*properties_to_permit)
     else
       options
     end
+  end
+
+  def properties_to_permit
+    self.class.properties.to_a
   end
 end

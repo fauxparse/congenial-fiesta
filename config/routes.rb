@@ -10,7 +10,12 @@ Rails.application.routes.draw do
     scope ':year', constraints: { year: /2\d{3}/ } do
       resources :activities, only: :create
       resources :people, only: %i[index show update]
-      resources :pitches
+      resources :pitches, only: %i[index show update] do
+        collection do
+          get '/convert' => 'pitches#select', as: :select
+          post '/convert' => 'pitches#convert', as: :convert
+        end
+      end
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
       get '/timetable' => 'schedules#index', as: :timetable
