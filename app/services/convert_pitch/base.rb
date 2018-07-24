@@ -33,7 +33,9 @@ class ConvertPitch
           festival: pitch.festival,
           pitch: pitch,
           name: activity_info.name,
-          description: activity_info.workshop_description
+          description: activity_info.workshop_description,
+          level_list: activity_info.levels.to_a,
+          maximum: number_of_workshop_participants
         )
     end
 
@@ -44,7 +46,8 @@ class ConvertPitch
           festival: pitch.festival,
           pitch: pitch,
           name: activity_info.name,
-          description: activity_info.show_description
+          description: activity_info.show_description,
+          maximum: activity_info.cast_size
         )
     end
 
@@ -74,6 +77,14 @@ class ConvertPitch
 
     def activity_info
       info.activity
+    end
+
+    def number_of_workshop_participants
+      if activity_info.respond_to?(:number_of_participants)
+        activity_info.number_of_participants
+      else
+        16
+      end
     end
   end
 end

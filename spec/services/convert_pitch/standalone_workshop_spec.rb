@@ -24,6 +24,16 @@ RSpec.describe ConvertPitch::StandaloneWorkshop, type: :service do
     it 'belongs to the festival' do
       expect(workshop.festival).to eq festival
     end
+
+    describe '#levels' do
+      subject(:levels) { workshop.level_list }
+      it { is_expected.to include 'intermediate' }
+    end
+
+    describe '#maximum' do
+      subject(:maximum) { workshop.maximum }
+      it { is_expected.to eq 16 }
+    end
   end
 
   describe '#presenter' do

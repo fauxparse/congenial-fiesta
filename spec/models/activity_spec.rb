@@ -6,6 +6,13 @@ RSpec.describe Activity, type: :model do
   subject(:activity) { build(:show) }
 
   it { is_expected.to validate_presence_of :name }
+  it { is_expected.to validate_presence_of :maximum }
+  it {
+    is_expected
+      .to validate_numericality_of(:maximum)
+      .only_integer
+      .is_greater_than(0)
+  }
 
   describe '#slug' do
     subject(:slug) { activity.slug }

@@ -8,7 +8,8 @@ class Activity < ApplicationRecord
   has_many :presenters
   has_many :schedules
 
-  validates :name, :type, presence: true
+  validates :name, :type, :maximum, presence: true
+  validates :maximum, numericality: { greater_than: 0, only_integer: true }
 
   scope :with_presenters, -> { includes(presenters: :participant) }
 
