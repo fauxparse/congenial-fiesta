@@ -2,6 +2,14 @@
 
 module Admin
   class ActivitiesController < Controller
+    def index
+      authorize Activity, :index?
+      respond_to do |format|
+        format.json { render json: serialized_activities }
+        format.html
+      end
+    end
+
     def create
       activity = festival.activities.build(activity_params)
       authorize activity, :create?
@@ -26,6 +34,13 @@ module Admin
           status: :unprocessable_entity
         )
       end
+    end
+
+    def serialized_activities
+      ActivitiesSerializer.new(
+        activities: festival.activities.with_presenters.all,
+        activity_types: Activity.subclasses
+      ).call
     end
   end
 end
