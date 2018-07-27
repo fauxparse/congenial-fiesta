@@ -3,15 +3,15 @@
     %h1.pitch-response__activity-name= pitch.info.activity.name
     .pitch-response__presenter-summary= [pitch.info.presenter.name, pitch.info.presenter.company, pitch.info.presenter.city].reject(&:blank?).join(', ')
 
-    = form_for pitch, url: admin_pitch_path(pitch.festival, pitch), html: { class: 'filters pitch-response__piles' } do |form|
+    = form_for pitch, url: admin_pitch_path(pitch.festival, pitch), html: { class: 'filters pitch-response__piles', data: { controller: 'admin--pitch-editor', action: 'ajax:success->admin--pitch-editor#success' } }, remote: true do |form|
       - Pitch.piles.values.each do |pile|
-        %button{name: 'pitch[pile]', value: pile, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.pile == pile}
+        %button{name: 'pitch[pile]', value: pile, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.pile == pile, data: { target: 'admin--pitch-editor.pile' }}
           .button__text= t(pile, scope: 'pitch.pile')
       - Pitch.genders.each do |gender|
-        %button{name: 'pitch[gender_list]', value: gender, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.gender_list.include?(gender)}
+        %button{name: 'pitch[gender_list]', value: gender, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.gender_list.include?(gender), data: { target: 'admin--pitch-editor.gender' }}
           .button__text= t(gender, scope: 'pitch.gender')
       - Pitch.origins.each do |origin|
-        %button{name: 'pitch[origin_list]', value: origin, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.origin_list.include?(origin)}
+        %button{name: 'pitch[origin_list]', value: origin, type: :submit, class: 'filter pitch-response__pile', 'aria-selected': pitch.origin_list.include?(origin), data: { target: 'admin--pitch-editor.origin' }}
           .button__text= t(origin, scope: 'pitch.origin')
 
   = render "admin/pitches/#{pitch.info.activity.type}", activity: pitch.info.activity
