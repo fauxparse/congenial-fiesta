@@ -13,7 +13,10 @@ module Admin
     def update
       authorize pitch, :update?
       pitch.update!(pitch_params)
-      redirect_to admin_pitch_path(pitch.festival, pitch)
+      respond_to do |format|
+        format.json { render json: PitchSerializer.new(pitch).call }
+        format.html { redirect_to admin_pitch_path(pitch.festival, pitch) }
+      end
     end
 
     private
