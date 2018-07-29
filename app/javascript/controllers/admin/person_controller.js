@@ -67,17 +67,23 @@ export default class extends Controller {
   submit(e) {
     e && e.preventDefault()
     this.disabled = true
-    this.people.save({
-      id: this.id,
-      name: this.name,
-      email: this.email,
-      admin: this.admin
-    }).then(() => {
-      this.disabled = false
-      this.modal.close()
-    })
+    this.people
+      .save({
+        id: this.id,
+        name: this.name,
+        email: this.email,
+        admin: this.admin
+      })
+      .then(person => {
+        this.disabled = false
+        const event = new CustomEvent('person:saved', {
+          detail: { person },
+          bubbles: true
+        })
+        this.element.dispatchEvent(event)
+        this.modal.close()
+      })
   }
 
-  modalOpened() {
-  }
+  modalOpened() {}
 }

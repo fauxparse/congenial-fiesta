@@ -30,4 +30,22 @@ RSpec.describe Admin::PeopleController, type: :request do
       end
     end
   end
+
+  describe 'PUT /admin/:year/people/:id' do
+    let!(:participant) { create(:participant) }
+    let(:params) { { person: { name: 'Updated', email: 'updated@gmail.com' } } }
+
+    def do_update
+      put admin_person_path(festival, participant, format: :json),
+        params: params
+    end
+
+    it 'updates the participant' do
+      expect { do_update }
+        .to change { participant.reload.name }
+        .to('Updated')
+        .and change { participant.email }
+        .to('updated@gmail.com')
+    end
+  end
 end

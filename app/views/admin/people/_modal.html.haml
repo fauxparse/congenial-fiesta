@@ -1,7 +1,7 @@
 = render 'shared/modal',
   controller: 'admin--person',
   target: 'admin--people.modal admin--person.modal',
-  action: 'modal:open->admin--person#modalOpened',
+  action: 'modal:open->admin--person#modalOpened person:saved->admin--people#personSaved',
   class: 'person-editor--modal' do
 
   = render 'shared/modal_header', title: person_name_editor

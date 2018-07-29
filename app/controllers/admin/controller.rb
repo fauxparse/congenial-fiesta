@@ -17,7 +17,7 @@ module Admin
     end
 
     def authorized_user?
-      current_participant&.admin? || current_participant&.role_list.any?
+      current_participant&.admin? || current_participant&.role_list&.any?
     end
 
     # rubocop:disable Naming/MemoizedInstanceVariableName

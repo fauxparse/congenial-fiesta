@@ -13,8 +13,16 @@ export default class Collection {
     return _.snakeCase(this.constructor.name.replace(/Collection$/, ''))
   }
 
+  get plural() {
+    return _.pluralize(this.name)
+  }
+
+  get singular() {
+    return _.singularize(this.name)
+  }
+
   get baseURL() {
-    return this._baseURL || [this.urlPrefix, _.pluralize(this.name)].join('/')
+    return this._baseURL || [this.urlPrefix, this.plural].join('/')
   }
 
   set baseURL(url) {
@@ -99,7 +107,7 @@ export default class Collection {
       fetch(this.url(id), {
         method: id ? 'PUT' : 'POST',
         body: {
-          [this.name]: attrs
+          [this.singular]: attrs
         }
       })
         .then(response => response.json())

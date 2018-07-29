@@ -65,8 +65,11 @@ export default class extends Controller {
   }
 
   renderPerson({ detail: { result, query, data: person } }) {
+    let el
+    while (el = result.firstChild) {
+      el.remove()
+    }
     result.classList.add('person')
-    result.firstChild.remove()
     const element = this.createElementWithClass('person', 'li')
     const label = document.createElement('label')
     const checkbox = document.createElement('input')
@@ -83,6 +86,7 @@ export default class extends Controller {
     details.appendChild(name)
     details.appendChild(email)
     result.appendChild(details)
+    result.dataset.id = person.id
   }
 
   highlight(text, query) {
@@ -118,6 +122,18 @@ export default class extends Controller {
       this.selection.add(id)
     } else {
       this.selection.delete(id)
+    }
+  }
+
+  personSaved({ detail: { person } }) {
+    const listItem = this.element.querySelector(`[data-id="${person.id}"]`)
+    if (listItem) {
+      this.renderPerson({
+        detail: {
+          data: person,
+          result: listItem
+        }
+      })
     }
   }
 }

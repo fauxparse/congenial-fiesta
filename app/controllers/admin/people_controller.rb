@@ -10,10 +10,23 @@ module Admin
       end
     end
 
+    def update
+      person = Participant.find(params[:id])
+      authorize person, :update?
+      person.update!(person_params)
+      respond_to do |format|
+        format.json { render json: PersonSerializer.new(person).call }
+      end
+    end
+
     private
 
     def people
       @people ||= Participant.all
+    end
+
+    def person_params
+      params.require(:person).permit(:name, :email, :bio, :admin)
     end
 
     def serialized_people

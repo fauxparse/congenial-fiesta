@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
     scope ':year', constraints: { year: /2\d{3}/ } do
       resources :activities, only: :create
-      resources :people
+      resources :people, only: %i[index show update]
       resources :pitches
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
