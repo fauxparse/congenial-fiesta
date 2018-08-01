@@ -66,6 +66,7 @@ gem 'premailer-rails'
 gem 'primalize'
 gem 'pundit'
 gem 'redcarpet'
+gem 'scavenger'
 gem 'stringex'
 gem 'wannabe_bool'
 

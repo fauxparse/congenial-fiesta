@@ -21,7 +21,7 @@
     %label.pitch-activity-participant
       = check_box_tag 'pitch[activity][levels][]', level, pitch_form.current_step.levels.include?(level)
       .pitch-activity-participant-check.check-box-field-icon
-        = icon :check
+        = inline_icon :check
       .pitch-activity-participant-details
         %p
           %span.pitch-activity-participant-level= t(:level, scope: "pitches.step.workshop_details.participation.levels.#{level}")

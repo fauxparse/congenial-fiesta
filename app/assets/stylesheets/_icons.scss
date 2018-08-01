@@ -1,6 +1,11 @@
 .icon {
   @include size($icon-size);
   display: inline-block;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 
   a & {
     display: block;

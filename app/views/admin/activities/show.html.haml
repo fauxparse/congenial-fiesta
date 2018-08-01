@@ -1,0 +1,47 @@
+= form_for activity, as: :activity, url: polymorphic_path([:admin, activity], year: festival), disabled: !policy(activity).edit?, html: { class: 'activity-form', data: { controller: 'admin--activity-editor' } } do |form|
+  %section.activity-form__section
+    = form.group :name do
+      = form.label :name, t(activity.type, scope: 'activity.types')
+      = form.text_area :name
+      = form.error_messages_for :name
+      .activity-form__slug
+        %span= root_url + activity.class.to_param + '/'
+        = form.text_field :slug
+      = form.error_messages_for :slug
+
+  %section.activity-form__section
+    = form.group :description do
+      = form.label :description
+      = form.text_area :description
+
+    = form.group :maximum do
+      = form.label :maximum
+      = form.number_field :maximum, min: 0
+
+    - if activity.pitch
+      = link_to admin_pitches_path(festival, activity.pitch), class: 'button', target: :_blank do
+        .button__text= t('.view_pitch')
+
+  %section.activity-form__section
+    = form.group :presenters do
+      = form.label :presenters
+      = hidden_field_tag 'activity[presenter_participant_ids][]', nil
+      %ul.activity-form__presenters{data: { target: 'admin--activity-editor.presenters', action: 'click->admin--activity-editor#presenterClicked' }}
+        - form.object.presenters.each do |presenter|
+          %li.activity-form__presenter{data: { id: presenter.participant.to_param, target: 'admin--activity-editor.presenter' }}
+            = hidden_field_tag 'activity[presenter_participant_ids][]', presenter.participant.to_param
+            = avatar(presenter.participant)
+            .presenter__name= presenter
+            - if policy(activity).edit?
+              %button.button.button--icon{rel: :delete}= icon :delete, class: 'button__icon'
+      - if policy(activity).edit?
+        .autocomplete.activity-form__new-presenter{data: { target: 'admin--activity-editor.autocomplete',
+          controller: 'autocomplete', action: 'autocomplete:search->admin--activity-editor#searchPeople autocomplete:render->admin--activity-editor#renderPerson autocomplete:select->admin--activity-editor#addPresenter' }}
+          %input{type: 'search', placeholder: t('.add_presenter'), data: { target: 'autocomplete.input' }}
+          %button.button.button--icon{rel: :add, data: { action: 'click->autocomplete#confirmSelection' }}
+            = icon :add, class: 'button__icon'
+          .participants{data: { target: 'autocomplete.results' }}
+            %ul{data: { target: 'autocomplete.list' }}
+
+  %section.activity-form__section.buttons
+    = form.submit t('.save'), class: 'button button--primary'

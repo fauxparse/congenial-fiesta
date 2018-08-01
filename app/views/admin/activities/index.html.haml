@@ -1,0 +1,12 @@
+%h1.page-title= t('.title')
+
+.filters{role: 'tablist'}
+  = link_to admin_activities_path(activities.parameters.except(:type)), class: 'filter', role: 'tab', aria: { selected: activities.parameters[:type].blank? } do
+    .filter__text= t('.all')
+  - activities.types.each do |type|
+    = link_to admin_activities_path(activities.parameters.merge(type: type)), class: 'filter', role: 'tab', aria: { selected: activities.parameters[:type] == type } do
+      .filter__text= t(type.underscore, scope: 'activity.type')
+      = badge activities.count(type: type)
+
+.activities
+  = render(activities.to_a) || content_tag(:div, t('.empty'), class: 'activities--empty')

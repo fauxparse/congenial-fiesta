@@ -9,6 +9,7 @@
   transition: margin-top $base-duration $acceleration-timing;
 
   &__message {
+    flex: 1;
     font-size: modular-scale(-1);
     margin-bottom: 0;
   }
@@ -16,7 +17,7 @@
   &__close-button {
     @include size(2.5em);
     border: 0;
-    margin: -.5em -.5em 0 $base-spacing;
+    margin: -.5em -.5em 0-.5em $base-spacing;
     padding: .5em;
     appearance: none;
     outline: none;

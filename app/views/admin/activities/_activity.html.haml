@@ -1,0 +1,7 @@
+= link_to polymorphic_path([:admin, activity], year: festival),
+  class: class_string('activity', "activity--#{activity.type.underscore.dasherize}") do
+  = icon activity.type.underscore, class: 'activity__icon'
+  .activity__summary
+    .activity__name= activity.name
+    .activity__presenters= activity.presenters.map(&:to_s).sort.to_sentence
+  = icon :chevron_right

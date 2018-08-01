@@ -350,19 +350,11 @@ export default class extends Controller {
       result.dataset.id = activity.id
       result.innerHTML =
         '<div class="autocomplete__text">' +
-          this.highlight(activity.name, query) +
+          this.autocomplete.highlight(activity.name, query) +
         '</div>' +
         '<div class="autocomplete__subtext">' +
           sub +
         '</div>'
-    }
-  }
-
-  highlight(text, query) {
-    if (query) {
-      return text.replace(query, match => `<u>${match}</u>`)
-    } else {
-      return text
     }
   }
 }

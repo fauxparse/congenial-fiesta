@@ -1,0 +1,14 @@
+en:
+  admin:
+    activities:
+      index:
+        title: 'Activities'
+        all: 'All'
+      show:
+        title: 'Activity details'
+        save: 'Save changes'
+        view_pitch: 'View original pitch'
+        add_presenter: 'Add a presenter…'
+      update:
+        success: 'Activity details successfully updated.'
+        error: 'Something’s not quite right below.'

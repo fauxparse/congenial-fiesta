@@ -12,6 +12,7 @@ export default class extends Controller {
   static targets = ['input', 'results', 'list']
 
   connect() {
+    this.inputTarget.addEventListener('input', this.textChanged)
     this.inputTarget.addEventListener('change', this.textChanged)
     this.inputTarget.addEventListener('keydown', this.keyDown)
     this.listTarget.addEventListener('click', this.resultClicked)
@@ -64,14 +65,15 @@ export default class extends Controller {
   }
 
   set visible(visible) {
-    this.element.classList.toggle(VISIBLE_CLASS, visible)
     if (visible) {
+      this.element.classList.add(VISIBLE_CLASS)
       this._results = []
       setTimeout(() => {
         this.search()
         this.inputTarget.focus()
       })
     } else {
+      this.element.classList.remove(VISIBLE_CLASS)
       this.inputTarget.blur()
     }
   }
@@ -82,6 +84,11 @@ export default class extends Controller {
 
   hide() {
     this.visible = false
+  }
+
+  clear() {
+    this.inputTarget.value = ''
+    this.hide()
   }
 
   toggle(visible) {
@@ -144,6 +151,9 @@ export default class extends Controller {
     new RegExp(query.trim().split(/\s+/).join('|'), 'gi')
 
   search = () => {
+    if (!this.visible) {
+      this.show()
+    }
     const query = normalize(this.inputTarget.value)
     let re
     try {
@@ -194,7 +204,7 @@ export default class extends Controller {
     if (element) {
       const top = element.offsetTop
       const height = element.offsetHeight
-      const scrollable = this.resultsTarget.closest('.modal__body') || document.documentElement
+      const scrollable = this.findScrollParent(this.resultsTarget)
       const viewportHeight = scrollable.offsetHeight
 
       if (top < scrollable.scrollTop) {
@@ -202,6 +212,35 @@ export default class extends Controller {
       } else if (top + height - scrollable.scrollTop > viewportHeight) {
         scrollable.scrollTop = top + height - viewportHeight
       }
+    }
+  }
+
+  findScrollParent(el, includeHidden = false) {
+    let style = getComputedStyle(el)
+    const excludeStaticParent = style.position === 'absolute'
+    const re = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/
+
+    if (style.position === 'fixed') {
+      return document.body
+    }
+    for (let parent = el.parentElement; parent; parent = parent.parentElement) {
+      style = getComputedStyle(parent)
+      if (excludeStaticParent && style.position === 'static') {
+        continue
+      }
+      if (re.test(style.overflow + style.overflowY + style.overflowX)) {
+        return parent
+      }
+    }
+
+    return document.body
+  }
+
+  highlight(text, query) {
+    if (query) {
+      return text.replace(query, match => `<u>${match}</u>`)
+    } else {
+      return text
     }
   }
 }

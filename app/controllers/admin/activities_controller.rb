@@ -10,8 +10,12 @@ module Admin
       end
     end
 
+    def show
+      authorize activity, :show?
+    end
+
     def create
-      activity = festival.activities.build(activity_params)
+      @activity = festival.activities.build(activity_params)
       authorize activity, :create?
       activity.save
       respond_to do |format|
@@ -19,11 +23,46 @@ module Admin
       end
     end
 
+    def update
+      authorize activity, :update?
+      if activity.update(activity_params)
+        redirect_to polymorphic_path([:admin, activity], year: festival),
+          notice: I18n.t('admin.activities.update.success')
+      else
+        flash.now[:error] = I18n.t('admin.activities.update.error')
+        render :show
+      end
+    end
+
     private
 
-    def activity_params
-      params.require(:activity).permit(:name, :type)
+    def activities
+      @activities ||= Activities.new(festival, params.slice(:type))
     end
+    helper_method :activities
+
+    def activity_params
+      params
+        .require(:activity)
+        .permit(
+          :name,
+          :type,
+          :slug,
+          :description,
+          :maximum,
+          presenter_participant_ids: []
+        )
+    end
+
+    def activity
+      @activity ||=
+        festival
+          .activities
+          .with_presenters
+          .where(type: params[:type])
+          .find_by(slug: params[:id])
+    end
+    helper_method :activity
 
     def respond_with(activity)
       if activity.errors.empty?

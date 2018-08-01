@@ -1,7 +1,7 @@
 %label.pitch
   = check_box_tag 'id[]', pitch.to_param, true
   .check-box-field-icon
-    = icon :check
+    = inline_icon :check
   .pitch__name
     .pitch__activity-name= pitch.info.activity.name
     .pitch__presenter= pitch.info.presenter.name

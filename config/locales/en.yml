@@ -49,6 +49,11 @@ en:
             password_confirmation:
               confirmation: 'does not match'
 
+  activerecord:
+    attributes:
+      activity:
+        maximum: 'Maximum number of participants'
+
   helpers:
     label:
       participant:
@@ -76,6 +81,11 @@ en:
     sign_up: 'Sign up'
     social:
       log_in_with: 'Log in with'
+
+  activity:
+    type:
+      workshop: 'Workshop'
+      show: 'Show'
 
   festivals:
     show:

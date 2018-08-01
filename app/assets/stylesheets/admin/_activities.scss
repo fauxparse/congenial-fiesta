@@ -1,0 +1,153 @@
+.activities {
+
+}
+
+.activity {
+  border-top: $base-border;
+  display: flex;
+  margin: 0;
+  padding: $small-spacing $small-spacing $small-spacing 1em;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+    background: $pale-grey;
+  }
+
+  &__icon {
+    flex: 0 0 $icon-size;
+    margin-right: 2em;
+  }
+
+  &__summary {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    @include ellipsis;
+    display: block;
+  }
+
+  &__presenters {
+    color: $secondary-font-color;
+    display: block;
+  }
+
+  .icon:last-child {
+    align-self: center;
+    margin-left: $small-spacing;
+  }
+}
+
+.activity-form {
+  [name="activity\[name\]"] {
+    font-size: modular-scale(2);
+    border-bottom: 0;
+    resize: none;
+  }
+
+  [type="number"] {
+    width: 6em;
+  }
+
+  &__section {
+    padding: $base-spacing $base-spacing $base-spacing $keyline;
+
+    &:not(:first-of-type) {
+      border-top: $base-border;
+    }
+  }
+
+  &__slug {
+    display: flex;
+    align-items: flex-start;
+
+    span {
+      padding: ($base-spacing / 3) 0;
+      font-size: modular-scale(-1);
+    }
+
+    input {
+      flex: 1;
+      font-size: modular-scale(-1);
+      margin: 0;
+      border-bottom: 0;
+    }
+  }
+
+  &__presenters {
+    margin-left: -$keyline;
+  }
+
+  &__presenter {
+    margin-top: $small-spacing;
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      background: $pale-grey;
+      margin: 0 1em;
+    }
+
+    .presenter__name {
+      flex: 1 1 0;
+    }
+
+    .button {
+      margin-left: $small-spacing;
+    }
+  }
+
+  &__new-presenter {
+    display: grid;
+    grid-template-columns: 1fr 2.5em;
+    grid-template-rows: 2.5em auto;
+    grid-column-gap: $small-spacing;
+    grid-row-gap: $small-spacing;
+    grid-template-areas:
+      'input button'
+      'results none';
+
+    input {
+      grid-area: input;
+      margin: 0;
+    }
+
+    .button {
+      grid-area: button;
+    }
+
+    .participants {
+      display: none;
+      grid-area: results;
+
+      ul {
+        @include shadow(1);
+        border: $base-border;
+        border-radius: $base-border-radius;
+        max-height: 12.5em;
+        overflow-y: auto;
+
+        &:empty {
+          display: none;
+        }
+      }
+    }
+
+    &.autocomplete--visible .participants {
+      display: block;
+    }
+
+    .autocomplete__result {
+      .autocomplete__text {
+        padding: .5em $small-spacing;
+      }
+
+      &--selected {
+        background: $pale-grey;
+      }
+    }
+  }
+}
