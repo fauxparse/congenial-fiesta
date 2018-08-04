@@ -50,7 +50,8 @@ module Admin
           :slug,
           :description,
           :maximum,
-          presenter_participant_ids: []
+          presenter_participant_ids: [],
+          level_list: []
         )
     end
 

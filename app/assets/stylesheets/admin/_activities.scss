@@ -77,6 +77,14 @@
     }
   }
 
+  .form-field {
+    margin: $base-spacing 0;
+  }
+
+  &__levels {
+    margin: $base-spacing 0;
+  }
+
   &__presenters {
     margin-left: -$keyline;
   }
