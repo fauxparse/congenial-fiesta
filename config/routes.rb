@@ -9,9 +9,13 @@ Rails.application.routes.draw do
 
     scope ':year', constraints: { year: /2\d{3}/ } do
       resources :activities, only: %i[index create]
-      resources :shows, controller: 'activities', only: %i[show update],
+      resources :shows,
+        controller: 'activities',
+        only: %i[show update],
         defaults: { type: 'Show' }
-      resources :workshops, controller: 'activities', only: %i[show update],
+      resources :workshops,
+        controller: 'activities',
+        only: %i[show update],
         defaults: { type: 'Workshop' }
       resources :people, only: %i[index show update]
       resources :pitches, only: %i[index show update] do

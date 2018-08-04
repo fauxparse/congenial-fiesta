@@ -12,6 +12,10 @@ module Admin
 
     def show
       authorize activity, :show?
+      respond_to do |format|
+        format.json { render json: ActivitySerializer.new(activity).call }
+        format.html
+      end
     end
 
     def create
@@ -26,11 +30,9 @@ module Admin
     def update
       authorize activity, :update?
       if activity.update(activity_params)
-        redirect_to polymorphic_path([:admin, activity], year: festival),
-          notice: I18n.t('admin.activities.update.success')
+        updated_successfully
       else
-        flash.now[:error] = I18n.t('admin.activities.update.error')
-        render :show
+        not_updated_successfully
       end
     end
 
@@ -45,11 +47,7 @@ module Admin
       params
         .require(:activity)
         .permit(
-          :name,
-          :type,
-          :slug,
-          :description,
-          :maximum,
+          :name, :type, :slug, :description, :maximum,
           presenter_participant_ids: [],
           level_list: []
         )
@@ -58,10 +56,10 @@ module Admin
     def activity
       @activity ||=
         festival
-          .activities
-          .with_presenters
-          .where(type: params[:type])
-          .find_by(slug: params[:id])
+        .activities
+        .with_presenters
+        .where(type: params[:type])
+        .find_by(slug: params[:id])
     end
     helper_method :activity
 
@@ -81,6 +79,28 @@ module Admin
         activities: festival.activities.with_presenters.all,
         activity_types: Activity.subclasses
       ).call
+    end
+
+    def updated_successfully
+      respond_to do |format|
+        format.json { render json: ActivitySerializer.new(activity).call }
+        format.html do
+          redirect_to polymorphic_path([:admin, activity], year: festival),
+            notice: I18n.t('admin.activities.update.success')
+        end
+      end
+    end
+
+    def not_updated_successfully
+      respond_to do |format|
+        format.json do
+          head :unprocessable_entity
+        end
+        format.html do
+          flash.now[:error] = I18n.t('admin.activities.update.error')
+          render :show
+        end
+      end
     end
   end
 end

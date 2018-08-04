@@ -12,4 +12,9 @@ RSpec.describe Presenter, type: :model do
       .to validate_uniqueness_of(:participant_id)
       .scoped_to(:activity_id)
   }
+
+  describe '#to_s' do
+    subject { presenter.to_s }
+    it { is_expected.to eq presenter.participant.name }
+  end
 end
