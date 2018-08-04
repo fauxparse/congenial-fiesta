@@ -345,7 +345,7 @@ export default class extends Controller {
       const presenters = sentence(activity.presenters.map(p => p.name))
       const sub = [
         activity.type,
-        this.highlight(presenters, query)
+        this.autocomplete.highlight(presenters, query)
       ].filter(x => x).join(' • ')
       result.dataset.id = activity.id
       result.innerHTML =
