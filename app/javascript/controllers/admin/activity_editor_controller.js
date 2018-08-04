@@ -46,12 +46,8 @@ export default class extends Controller {
 
   searchPeople({ detail: { query, results } }) {
     const people =
-      this.people.find(query)
-        .map(person => ({
-          id: person.id,
-          name: person.name,
-          data: person
-        }))
+      this.autocomplete
+        .searchCollection(this.people, query)
         .filter(({ id }) => !this.presenters[id])
     results.push(...people)
   }

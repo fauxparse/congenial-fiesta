@@ -303,12 +303,7 @@ export default class extends Controller {
 
   searchActivities = ({ detail: { query, results } }) => {
     const activities =
-      this.activities.find(query)
-        .map(activity => ({
-          id: activity.id,
-          name: activity.name,
-          data: activity
-        }))
+      this.autocomplete.searchCollection(this.activities, query)
     results.push(...activities)
     if (query) {
       results.push(...this.activities.types.map(type => ({

@@ -215,6 +215,16 @@ export default class extends Controller {
     }
   }
 
+  searchCollection(collection, query) {
+    return collection
+      .find(query)
+      .map(item => ({
+        id: item.id,
+        name: item.name,
+        data: item
+      }))
+  }
+
   findScrollParent(el, includeHidden = false) {
     let style = getComputedStyle(el)
     const excludeStaticParent = style.position === 'absolute'
