@@ -1,57 +1,5 @@
 = form_for activity, as: :activity, url: polymorphic_path([:admin, activity], year: festival), disabled: !policy(activity).edit?, html: { class: 'activity-form', data: { controller: 'admin--activity-editor' } } do |form|
-  %section.activity-form__section
-    = form.group :name do
-      = form.label :name, t(form.object.type, scope: 'activity.types')
-      = form.text_area :name, rows: 1
-      = form.error_messages_for :name
-      .activity-form__slug
-        %span= root_url + form.object.class.to_param + '/'
-        = form.text_field :slug
-      = form.error_messages_for :slug
-
-  %section.activity-form__section
-    = form.group :description do
-      = form.label :description
-      = form.text_area :description, rows: 1
-
-    = form.group :maximum do
-      = form.label :maximum
-      = form.number_field :maximum, min: 0
-
-    - if form.object.respond_to?(:levels)
-      = hidden_field_tag 'activity[level_list][]'
-      %ul.activity-form__levels
-        - form.object.class.levels.each do |level|
-          %li.check-box-field
-            = check_box_tag 'activity[level_list][]', level, form.object.level_list.include?(level.to_s), id: "activity_level--#{level}"
-            %label.check-box-field-icon{for: "activity_level--#{level}"}= inline_icon :check
-            %label.check-box-field-content{for: "activity_level--#{level}"}
-              = level
-
-    - if form.object.pitch
-      = link_to admin_pitches_path(festival, form.object.pitch), class: 'button', target: :_blank do
-        .button__text= t('.view_pitch')
-
-  %section.activity-form__section
-    = form.group :presenters do
-      = form.label :presenters
-      = hidden_field_tag 'activity[presenter_participant_ids][]', nil
-      %ul.activity-form__presenters{data: { target: 'admin--activity-editor.presenters', action: 'click->admin--activity-editor#presenterClicked' }}
-        - form.object.presenters.each do |presenter|
-          %li.activity-form__presenter{data: { id: presenter.participant.to_param, target: 'admin--activity-editor.presenter' }}
-            = hidden_field_tag 'activity[presenter_participant_ids][]', presenter.participant.to_param
-            = avatar(presenter.participant)
-            .presenter__name= presenter
-            - if policy(form.object).edit?
-              %button.button.button--icon{rel: :delete}= icon :delete, class: 'button__icon'
-      - if policy(form.object).edit?
-        .autocomplete.activity-form__new-presenter{data: { target: 'admin--activity-editor.autocomplete',
-          controller: 'autocomplete', action: 'autocomplete:search->admin--activity-editor#searchPeople autocomplete:render->admin--activity-editor#renderPerson autocomplete:select->admin--activity-editor#addPresenter' }}
-          %input{type: 'search', placeholder: t('.add_presenter'), data: { target: 'autocomplete.input' }}
-          %button.button.button--icon{rel: :add, data: { action: 'click->autocomplete#confirmSelection' }}
-            = icon :add, class: 'button__icon'
-          .participants{data: { target: 'autocomplete.results' }}
-            %ul{data: { target: 'autocomplete.list' }}
+  = render 'form', form: form
 
   %section.activity-form__section.buttons
     = form.submit t('.save'), class: 'button button--primary'

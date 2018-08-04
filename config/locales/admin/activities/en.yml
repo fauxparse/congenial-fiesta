@@ -7,6 +7,7 @@ en:
       show:
         title: 'Activity details'
         save: 'Save changes'
+      form:
         view_pitch: 'View original pitch'
         add_presenter: 'Add a presenter…'
         levels:
