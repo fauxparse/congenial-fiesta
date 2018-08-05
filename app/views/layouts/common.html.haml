@@ -8,6 +8,7 @@
     = favicon_link_tag
     = yield :stylesheets
     = yield :scripts
+    = svg_sprite_sheet
 
   %body{class: class_string(local_assigns[:body_class])}
     = content_for?(:main) ? yield(:main) : yield

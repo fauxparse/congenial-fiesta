@@ -6,7 +6,7 @@ module Sluggable
   included do
     acts_as_url :name, sluggable_options
 
-    validates :name, presence: true
+    validates :name, :slug, presence: true
 
     alias_method :to_param, :slug
   end

@@ -15,6 +15,9 @@ Lint/AmbiguousBlockAssociation:
 Lint/SplatKeywordArguments:
   Enabled: false
 
+Metrics/AbcSize:
+  Max: 20
+
 Metrics/BlockLength:
   Exclude:
     - 'config/environments/*'

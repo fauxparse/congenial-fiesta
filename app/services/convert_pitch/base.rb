@@ -9,11 +9,11 @@ class ConvertPitch
     end
 
     def call
-      activities
+      activities.compact
     end
 
     def activities
-      @activities ||= create_activities.map(&method(:add_presenters))
+      @activities ||= create_activities
     end
 
     def participant
@@ -28,21 +28,26 @@ class ConvertPitch
 
     def workshop
       @workshop ||=
-        Workshop.create!(
+        create_unless_exists(
+          Workshop,
           festival: pitch.festival,
           pitch: pitch,
           name: activity_info.name,
-          description: activity_info.workshop_description
+          description: activity_info.workshop_description,
+          level_list: activity_info.levels.to_a,
+          maximum: number_of_workshop_participants
         )
     end
 
     def show
       @show ||=
-        Show.create!(
+        create_unless_exists(
+          Show,
           festival: pitch.festival,
           pitch: pitch,
           name: activity_info.name,
-          description: activity_info.show_description
+          description: activity_info.show_description,
+          maximum: activity_info.cast_size
         )
     end
 
@@ -51,6 +56,11 @@ class ConvertPitch
     end
 
     private
+
+    def create_unless_exists(klass, attributes)
+      add_presenters(klass.create!(attributes)) \
+        unless pitch.activities.where(type: klass.name).exists?
+    end
 
     def add_presenters(activity)
       activity.presenters.create!(participant: participant)
@@ -67,6 +77,14 @@ class ConvertPitch
 
     def activity_info
       info.activity
+    end
+
+    def number_of_workshop_participants
+      if activity_info.respond_to?(:number_of_participants)
+        activity_info.number_of_participants
+      else
+        16
+      end
     end
   end
 end

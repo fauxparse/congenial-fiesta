@@ -15,4 +15,9 @@ RSpec.describe Pitch::ExperimentalPerformanceInfo do
   end
 
   it { is_expected.to be_valid }
+
+  describe '#levels' do
+    subject(:levels) { info.levels.to_a }
+    it { is_expected.to eq %w[advanced] }
+  end
 end

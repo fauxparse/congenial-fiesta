@@ -1,0 +1,9 @@
+%label.pitch
+  = check_box_tag 'id[]', pitch.to_param, true
+  .check-box-field-icon
+    = inline_icon :check
+  .pitch__name
+    .pitch__activity-name= pitch.info.activity.name
+    .pitch__presenter= pitch.info.presenter.name
+    .pitch__extra= [*pitch.gender_list.map { |g| t(g, scope: 'pitch.gender') }, *pitch.origin_list.map { |o| t(o, scope: 'pitch.origin') }].join(' • ')
+  .pitch__type= t(pitch.info.activity.type, scope: 'pitch.short_type')

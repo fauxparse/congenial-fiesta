@@ -107,7 +107,8 @@ CREATE TABLE public.activities (
     slug character varying,
     description text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    maximum integer DEFAULT 16
 );
 
 
@@ -1052,6 +1053,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180714012647'),
 ('20180714012648'),
 ('20180715212859'),
-('20180718001951');
+('20180718001951'),
+('20180724212201');
 
 

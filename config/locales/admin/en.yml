@@ -2,6 +2,8 @@ en:
   admin:
     navigation:
       home: 'Home'
+      activities: 'Activities'
+      people: 'People'
       pitches: 'Pitches'
       timetable: 'Timetable'
       venues: 'Venues'

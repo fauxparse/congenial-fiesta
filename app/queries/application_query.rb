@@ -20,6 +20,10 @@ class ApplicationQuery
     scope(parameters.merge(extra_parameters)).count
   end
 
+  def empty?
+    count.zero?
+  end
+
   private
 
   def default_scope

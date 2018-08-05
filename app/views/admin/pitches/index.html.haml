@@ -32,5 +32,8 @@
       .filter__text= t(origin, scope: 'pitch.origin')
       = badge pitches.count(origin: origin)
 
+.filters
+  = link_to t('.convert', count: pitches.count), select_admin_pitches_path(pitches.parameters), class: 'button button--primary', disabled: pitches.empty?
+
 .pitches
   = render(pitches.to_a) || content_tag(:div, t('.empty'), class: 'pitches--empty')

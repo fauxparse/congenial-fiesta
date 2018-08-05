@@ -19,6 +19,22 @@ module Admin
       end
     end
 
+    def select
+      authorize Activity, :create?
+    end
+
+    def convert
+      authorize Activity, :create?
+      activities = []
+      if pitches.parameters.id.present?
+        activities = pitches.flat_map do |pitch|
+          ConvertPitch.new(pitch).call
+        end
+      end
+      redirect_to admin_pitches_path(festival),
+        notice: I18n.t('admin.pitches.convert.success', count: activities.size)
+    end
+
     private
 
     def pitch

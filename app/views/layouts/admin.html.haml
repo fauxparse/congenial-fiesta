@@ -5,9 +5,9 @@
   = javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload'
 
 - content_for :main do
-  = render 'shared/flash'
   = render('shared/admin/navigation')
   %main
+    = render 'shared/flash'
     = render('shared/admin/page_header')
     = yield
 

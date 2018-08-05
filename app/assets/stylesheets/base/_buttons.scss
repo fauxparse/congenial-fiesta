@@ -64,6 +64,24 @@
     padding: 0 0.5em;
   }
 
+  &.button--icon {
+    @include size(2.5em);
+    flex: 0 0 2.5em;
+    border: 0;
+    padding: .5em;
+    border-radius: 50%;
+    color: inherit;
+
+    &:hover {
+      color: inherit;
+    }
+
+    > .icon:first-child {
+      display: block;
+      margin: 0;
+    }
+  }
+
   > .icon {
     margin: -0.25em;
 

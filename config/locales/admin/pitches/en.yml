@@ -35,6 +35,10 @@ en:
         title: 'Pitches'
         all: 'All'
         empty: '(no results)'
+        convert:
+          zero: 'No pitches to convert'
+          one: 'Convert 1 pitch'
+          other: 'Convert %{count} pitches'
       show:
         about: 'About %{name}'
         no_response: '(no response)'
@@ -42,3 +46,12 @@ en:
         count: '<b>%{count}</b> %{levels} participants'
       performance_details:
         accompanying_workshop: 'Accompanying workshop'
+      select:
+        title: 'Convert pitches'
+        intro: 'You are about to convert the pitches selected below into activities for programming. They won’t be public until you’ve added them to the timetable, so you have a chance to correct any details on the Activities page before they’re live.'
+        convert: 'Convert selected'
+      convert:
+        success:
+          zero: 'Nothing was converted.'
+          one: '1 activity created.'
+          other: '%{count} activities created.'

@@ -145,6 +145,14 @@
     padding: .25em;
     opacity: .875;
 
+    &--workshop {
+      color: $workshop-color;
+    }
+
+    &--show {
+      color: $show-color;
+    }
+
     &-name {
       font-size: modular-scale(-2);
       color: $base-font-white;

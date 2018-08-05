@@ -47,4 +47,55 @@ RSpec.describe Admin::PitchesController, type: :request do
       end
     end
   end
+
+  describe 'GET /admin/:year/pitches/convert' do
+    let(:pitch) { create(:pitch, :for_workshop, festival: festival) }
+
+    it 'is successful' do
+      get select_admin_pitches_path(festival)
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'POST /admin/:year/pitches/convert' do
+    let!(:pitch) do
+      create(:pitch, :for_workshop, festival: festival, status: :submitted)
+    end
+
+    def do_convert
+      post select_admin_pitches_path(festival), params: params
+    end
+
+    context 'with ids' do
+      let(:params) { { id: [pitch.to_param] } }
+
+      it 'converts the pitch to a workshop' do
+        expect { do_convert }.to change(Workshop, :count).by(1)
+      end
+
+      it 'redirects to the pitches page' do
+        do_convert
+        expect(response).to redirect_to admin_pitches_path(festival)
+        expect(flash[:notice]).to match(/1 activity created/)
+      end
+
+      context 'when the pitch has already been converted' do
+        before { ConvertPitch.new(pitch).call }
+
+        it 'does not create a workshop' do
+          expect { do_convert }.not_to change(Workshop, :count)
+          expect(response).to redirect_to admin_pitches_path(festival)
+          expect(flash[:notice]).to match(/Nothing/)
+        end
+      end
+    end
+
+    context 'without ids' do
+      let(:params) { {} }
+
+      it 'does not create a workshop' do
+        expect { do_convert }.not_to change(Workshop, :count)
+      end
+    end
+  end
 end

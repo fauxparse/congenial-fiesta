@@ -79,7 +79,8 @@ FactoryBot.define do
           activity: {
             type: 'standalone_workshop',
             name: 'Workshop',
-            workshop_description: Faker::Hipster.paragraph
+            workshop_description: Faker::Hipster.paragraph,
+            levels: %w[intermediate advanced]
           }
         }
       end

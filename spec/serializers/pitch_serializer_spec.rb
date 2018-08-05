@@ -8,8 +8,8 @@ RSpec.describe PitchSerializer, type: :serializer do
     create(
       :pitch,
       :for_workshop,
-      gender_list: %w(women),
-      origin_list: %w(nz),
+      gender_list: %w[women],
+      origin_list: %w[nz],
       pile: 'maybe'
     )
   end

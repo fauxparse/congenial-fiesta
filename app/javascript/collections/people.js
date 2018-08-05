@@ -2,12 +2,16 @@ import Collection from '../lib/collection'
 import normalize from '../lib/normalize'
 
 export default class People extends Collection {
-  get singular() {
-    return 'person'
+  get name() {
+    return 'people'
   }
 
   get plural() {
     return 'people'
+  }
+
+  get singular() {
+    return 'person'
   }
 
   get self() {

@@ -303,12 +303,7 @@ export default class extends Controller {
 
   searchActivities = ({ detail: { query, results } }) => {
     const activities =
-      this.activities.find(query)
-        .map(activity => ({
-          id: activity.id,
-          name: activity.name,
-          data: activity
-        }))
+      this.autocomplete.searchCollection(this.activities, query)
     results.push(...activities)
     if (query) {
       results.push(...this.activities.types.map(type => ({
@@ -345,24 +340,16 @@ export default class extends Controller {
       const presenters = sentence(activity.presenters.map(p => p.name))
       const sub = [
         activity.type,
-        this.highlight(presenters, query)
+        this.autocomplete.highlight(presenters, query)
       ].filter(x => x).join(' • ')
       result.dataset.id = activity.id
       result.innerHTML =
         '<div class="autocomplete__text">' +
-          this.highlight(activity.name, query) +
+          this.autocomplete.highlight(activity.name, query) +
         '</div>' +
         '<div class="autocomplete__subtext">' +
           sub +
         '</div>'
-    }
-  }
-
-  highlight(text, query) {
-    if (query) {
-      return text.replace(query, match => `<u>${match}</u>`)
-    } else {
-      return text
     }
   }
 }

@@ -1,0 +1,5 @@
+= form_for activity, as: :activity, url: polymorphic_path([:admin, activity], year: festival), disabled: !policy(activity).edit?, html: { class: 'activity-form', data: { controller: 'admin--activity-editor' } } do |form|
+  = render 'form', form: form
+
+  %section.activity-form__section.buttons
+    = form.submit t('.save'), class: 'button button--primary'

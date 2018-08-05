@@ -117,4 +117,15 @@ export default class Collection {
         })
     })
   }
+
+  fetch() {
+    return new Promise((resolve, reject) => {
+      fetch(this.url())
+        .then(response => response.json())
+        .then(data => {
+          this.refresh(data[this.name] || data)
+          resolve(this)
+        })
+    })
+  }
 }

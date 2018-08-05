@@ -80,21 +80,13 @@ export default class extends Controller {
     result.appendChild(label)
     const details = this.createElementWithClass('person__details')
     const name = this.createElementWithClass('person__name')
-    name.innerHTML = this.highlight(person.name, query)
+    name.innerHTML = this.autocomplete.highlight(person.name, query)
     const email = this.createElementWithClass('person__email')
-    email.innerHTML = this.highlight(person.email, query)
+    email.innerHTML = this.autocomplete.highlight(person.email, query)
     details.appendChild(name)
     details.appendChild(email)
     result.appendChild(details)
     result.dataset.id = person.id
-  }
-
-  highlight(text, query) {
-    if (query) {
-      return text.replace(query, match => `<u>${match}</u>`)
-    } else {
-      return text
-    }
   }
 
   checkboxIcon() {

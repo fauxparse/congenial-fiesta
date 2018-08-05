@@ -7,6 +7,13 @@ class Pitches < ApplicationQuery
     property :pile
     property :gender
     property :origin
+    property :id
+
+    private
+
+    def properties_to_permit
+      super - %i[id] + [{ id: [] }]
+    end
   end
 
   attr_reader :festival
@@ -40,5 +47,9 @@ class Pitches < ApplicationQuery
 
   def origin(scope, origin)
     scope.tagged_with(origin, on: :origin)
+  end
+
+  def id(scope, id)
+    scope.where(id: Pitch.decode_id(id, fallback: true))
   end
 end

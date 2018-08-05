@@ -7,6 +7,6 @@
   .people__results{data: { target: 'autocomplete.results' }}
     .people__list.people__list--loading{data: { target: 'admin--people.list autocomplete.list', action: 'change->admin--people#selectPerson' }}
     .people__empty
-  = icon :checkbox, class: 'people__checkbox-icon check-box-field-icon', data: { target: 'admin--people.checkboxIcon' }
+  = inline_icon :checkbox, class: 'people__checkbox-icon check-box-field-icon', data: { target: 'admin--people.checkboxIcon' }
 
   = render partial: 'form', layout: 'modal', locals: { person: Participant.new }
