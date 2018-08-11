@@ -4,6 +4,7 @@ class Festival < ApplicationRecord
   has_many :pitches
   has_many :activities
   has_many :schedules, through: :activities
+  has_many :registrations, dependent: :destroy
 
   validates :year, presence: true, uniqueness: true
   validates :start_date, :end_date, presence: true
