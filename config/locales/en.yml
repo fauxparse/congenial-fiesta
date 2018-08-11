@@ -55,6 +55,8 @@ en:
         maximum: 'Maximum number of participants'
       participant:
         country_code: 'Country'
+      festival:
+        registrations_open_at: 'Registrations open'
 
   helpers:
     label:

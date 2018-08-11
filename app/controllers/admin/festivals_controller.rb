@@ -26,11 +26,32 @@ module Admin
       end
     end
 
+    def edit
+      authorize festival, :update?
+    end
+
+    def update
+      authorize festival, :update?
+      if festival.update_attributes(festival_params)
+        redirect_to admin_festival_path(festival)
+      else
+        render :edit
+      end
+    end
+
     private
 
     def festival_params
       return {} unless params[:festival].present?
-      params.require(:festival).permit(:year, :start_date, :end_date)
+      params
+        .require(:festival)
+        .permit(
+          :year,
+          :start_date,
+          :end_date,
+          :registrations_open_at,
+          :earlybird_cutoff
+        )
     end
 
     def default_dates

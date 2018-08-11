@@ -17,6 +17,8 @@ FactoryBot.define do
     end
     end_date { start_date + 7 }
     pitches_open_at { Time.zone.now }
+    registrations_open_at { start_date.beginning_of_day - 2.months }
+    earlybird_cutoff { registrations_open_at + 1.month }
   end
 
   factory :participant do
