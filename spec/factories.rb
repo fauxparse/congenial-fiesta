@@ -151,6 +151,11 @@ FactoryBot.define do
     participant
   end
 
+  factory :registration do
+    festival
+    participant
+  end
+
   factory :show do
     festival
     name 'A show'

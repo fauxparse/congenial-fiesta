@@ -346,6 +346,39 @@ ALTER SEQUENCE public.presenters_id_seq OWNED BY public.presenters.id;
 
 
 --
+-- Name: registrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.registrations (
+    id bigint NOT NULL,
+    festival_id bigint,
+    participant_id bigint,
+    state character varying DEFAULT 'pending'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: registrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.registrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: registrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.registrations_id_seq OWNED BY public.registrations.id;
+
+
+--
 -- Name: schedules; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -551,6 +584,13 @@ ALTER TABLE ONLY public.presenters ALTER COLUMN id SET DEFAULT nextval('public.p
 
 
 --
+-- Name: registrations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.registrations ALTER COLUMN id SET DEFAULT nextval('public.registrations_id_seq'::regclass);
+
+
+--
 -- Name: schedules id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -656,6 +696,14 @@ ALTER TABLE ONLY public.pitches
 
 ALTER TABLE ONLY public.presenters
     ADD CONSTRAINT presenters_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: registrations registrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.registrations
+    ADD CONSTRAINT registrations_pkey PRIMARY KEY (id);
 
 
 --
@@ -853,6 +901,34 @@ CREATE INDEX index_presenters_on_participant_id ON public.presenters USING btree
 
 
 --
+-- Name: index_registrations_on_festival_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_registrations_on_festival_id ON public.registrations USING btree (festival_id);
+
+
+--
+-- Name: index_registrations_on_festival_id_and_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_registrations_on_festival_id_and_participant_id ON public.registrations USING btree (festival_id, participant_id);
+
+
+--
+-- Name: index_registrations_on_festival_id_and_state; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_registrations_on_festival_id_and_state ON public.registrations USING btree (festival_id, state);
+
+
+--
+-- Name: index_registrations_on_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_registrations_on_participant_id ON public.registrations USING btree (participant_id);
+
+
+--
 -- Name: index_schedules_on_activity_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -975,11 +1051,27 @@ ALTER TABLE ONLY public.password_resets
 
 
 --
+-- Name: registrations fk_rails_4604f69f81; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.registrations
+    ADD CONSTRAINT fk_rails_4604f69f81 FOREIGN KEY (festival_id) REFERENCES public.festivals(id) ON DELETE CASCADE;
+
+
+--
 -- Name: presenters fk_rails_51807902f4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.presenters
     ADD CONSTRAINT fk_rails_51807902f4 FOREIGN KEY (participant_id) REFERENCES public.participants(id);
+
+
+--
+-- Name: registrations fk_rails_621cdb63fe; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.registrations
+    ADD CONSTRAINT fk_rails_621cdb63fe FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
 
 
 --
@@ -1054,6 +1146,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180714012648'),
 ('20180715212859'),
 ('20180718001951'),
-('20180724212201');
+('20180724212201'),
+('20180811220916');
 
 
