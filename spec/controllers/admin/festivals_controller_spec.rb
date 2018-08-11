@@ -64,4 +64,35 @@ RSpec.describe Admin::FestivalsController, type: :request do
       it { is_expected.to be_successful }
     end
   end
+
+  describe 'put /admin/festivals/:year' do
+    let(:festival) { create(:festival) }
+    before { get edit_admin_festival_path(festival) }
+    it { is_expected.to be_successful }
+  end
+
+  describe 'put /admin/festivals/:year' do
+    let(:festival) { create(:festival) }
+    before { put admin_festival_path(festival), params: festival_params }
+
+    context 'with valid params' do
+      let(:festival_params) do
+        { festival: { earlybird_cutoff: festival.start_date.beginning_of_day } }
+      end
+
+      it 'updates the earlybird cutoff' do
+        expect(festival.reload.earlybird_cutoff).to be_present
+      end
+
+      it { is_expected.to redirect_to admin_festival_path(festival) }
+    end
+
+    context 'with invalid params' do
+      let(:festival_params) do
+        { festival: { start_date: nil } }
+      end
+
+      it { is_expected.not_to redirect_to admin_festival_path(festival) }
+    end
+  end
 end

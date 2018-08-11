@@ -2,10 +2,7 @@
 
 Rails.application.routes.draw do
   namespace :admin do
-    get 'people/index'
-  end
-  namespace :admin do
-    resources :festivals, only: %i[new create]
+    resources :festivals, only: %i[new create edit]
 
     scope ':year', constraints: { year: /2\d{3}/ } do
       resources :activities, only: %i[index create]
@@ -27,6 +24,7 @@ Rails.application.routes.draw do
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
       get '/timetable' => 'schedules#index', as: :timetable
+      match '/' => 'festivals#update', via: %i[put patch]
       get '/' => 'festivals#show', as: :festival
     end
 

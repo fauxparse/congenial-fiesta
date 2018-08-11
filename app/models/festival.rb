@@ -12,6 +12,10 @@ class Festival < ApplicationRecord
     date: { on_or_after: :start_date },
     if: %i[start_date end_date]
 
+  validates :earlybird_cutoff,
+    time: { at_or_after: :registrations_open_at },
+    if: %i[registrations_open_at earlybird_cutoff]
+
   def pitches_open?
     pitches_open_at&.past? && !pitches_close_at&.past?
   end
