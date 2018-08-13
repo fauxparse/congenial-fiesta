@@ -4,6 +4,8 @@ import * as ActiveStorage from 'activestorage'
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 
+require('intersection-observer')
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

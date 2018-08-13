@@ -1,0 +1,22 @@
+en:
+  registration:
+    steps:
+      details: 'Your details'
+      code_of_conduct: 'Code of Conduct'
+
+  registrations:
+    edit:
+      back: 'Back: %{step}'
+      next: 'Next: %{step}'
+    steps:
+      details:
+        title: 'Your details'
+      code_of_conduct:
+        title: 'Code of Conduct'
+        instructions: |
+          We require all participants to adhere to our Code of Conduct.
+          Please make sure you’ve read the Code carefully before continuing.
+          This information will always be available on this website during the
+          Festival.
+        acceptance: 'I have read and agreed to the Code of Conduct'
+        please_read: 'Please read the Code of Conduct before continuing'

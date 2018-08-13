@@ -78,6 +78,15 @@
       &:last-child {
         @include border-bottom-radius($base-border-radius);
       }
+
+      &:empty {
+        margin: $small-spacing 0;
+        padding: 0;
+        height: $base-border-width;
+        border-top: $base-border;
+        pointer-events: none;
+        touch-action: none;
+      }
     }
 
     .select-option-disabled[data-value^="---"] {

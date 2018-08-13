@@ -50,6 +50,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/register/:step', to: 'registrations#edit', as: :registration_step
+  match '/register/:step', to: 'registrations#update', via: %i[put patch]
+  get '/register', to: 'registrations#edit', as: :registration
+
   constraints(step: /presenter|idea|finish/) do
     resources :pitches, except: %i[show new edit create]
     get '/pitches/:id/:step', to: 'pitches#edit', as: :pitch_step
