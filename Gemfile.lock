@@ -115,6 +115,7 @@ GEM
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
     coderay (1.1.2)
+    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     countries (2.1.4)
       i18n_data (~> 0.8.0)
@@ -122,6 +123,7 @@ GEM
       sixarm_ruby_unaccent (~> 1.1)
       unicode_utils (~> 1.4)
     crass (1.0.4)
+    cry (0.1.0)
     css-class-string (0.1.1)
     css_parser (1.6.0)
       addressable
@@ -417,7 +419,9 @@ DEPENDENCIES
   bourbon!
   brakeman
   byebug
+  colorize
   country_select!
+  cry
   css-class-string
   email_spec
   factory_bot_rails

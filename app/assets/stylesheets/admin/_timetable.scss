@@ -94,10 +94,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    background: linear-gradient(to top, $pale-grey 1px, transparent 1px);
+    background: linear-gradient(to top, $ghost-grey 1px, transparent 1px);
 
     &:nth-child(odd) {
-      background: linear-gradient(to top, rgba($pale-grey, .25) 1px, transparent 1px);
+      background: linear-gradient(to top, rgba($ghost-grey, .25) 1px, transparent 1px);
     }
   }
 
@@ -203,7 +203,7 @@
 
 .grid__selection {
   @include position(absolute, 0 0 null 0);
-  background: $pale-grey;
+  background: $ghost-grey;
   border-radius: .25em;
 }
 

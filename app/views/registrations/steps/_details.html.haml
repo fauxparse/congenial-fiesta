@@ -1,0 +1,21 @@
+%h1.registration-form__title= t('.title')
+
+= form.group :name, required: true do
+  = form.label :name
+  = form.text_field :name
+  = form.error_messages_for :name
+
+= form.group :email, required: true do
+  = form.label :email
+  = form.email_field :email
+  = form.error_messages_for :email
+
+= form.group :city, required: true do
+  = form.label :city
+  = form.text_field :city
+  = form.error_messages_for :city
+
+= form.group :country_code, required: true do
+  = form.label :country_code
+  = form.country_select :country_code, { priority_countries: %w(NZ AU), priority_countries_divider: '' }, data: { controller: 'select' }
+  = form.error_messages_for :country_code

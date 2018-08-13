@@ -1,0 +1,192 @@
+.registration-form {
+  @include full-width;
+  flex: 1;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'steps'
+    'form'
+    'buttons';
+  align-items: stretch;
+  justify-items: stretch;
+
+  &__title {
+    margin: 0 0 $base-spacing;
+    font-size: modular-scale(3);
+    line-height: 2.5rem;
+  }
+
+  &__steps {
+    grid-area: steps;
+    display: flex;
+    align-items: flex-start;
+    justify-content: stretch;
+    padding: $small-spacing 0;
+  }
+
+  &__form {
+    grid-area: form;
+  }
+
+  &__buttons {
+    grid-area: buttons;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: $small-spacing 0;
+
+    &::before {
+      content: '';
+      flex: 1;
+    }
+
+    [rel="prev"] {
+      order: -1;
+    }
+  }
+
+  &__step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    color: $secondary-font-color;
+
+    .step__icon {
+      padding: .5em;
+      border-radius: 50%;
+      background: $pale-grey;
+
+      .icon {
+        display: block;
+      }
+
+      &::before {
+        @include position(absolute, 1.25em 50% null -50%);
+        z-index: -1;
+        height: .25em;
+        content: '';
+        margin: -.125em 0;
+        border-radius: .125em;
+        background: inherit;
+      }
+    }
+
+    &:first-child {
+      .step__icon {
+        &::before {
+          display: none;
+        }
+      }
+    }
+
+    .step__name {
+      @include all-caps;
+      font-size: modular-scale(-1);
+      order: 1;
+      padding: .5em 1em;
+      text-align: center;
+      line-height: modular-scale(1);
+    }
+
+    &--complete,
+    &--current {
+      .step__icon {
+        background-color: $accent-color;
+        color: $white;
+      }
+
+      &:hover .step__name {
+        color: $accent-color;
+      }
+    }
+
+    &--current {
+      .step__name {
+        color: $accent-color;
+      }
+    }
+
+    &:focus,
+    &:active {
+      background: none;
+      outline: none;
+
+      .step__icon {
+        box-shadow: 0 0 0 .25em rgba($accent-color, .25);
+      }
+    }
+  }
+
+  .scrollable-content {
+    max-height: 50vh;
+    overflow-y: scroll;
+    border: $base-border;
+    border-radius: $base-border-radius;
+    margin: 0 (-$small-spacing) $base-spacing;
+    padding: $small-spacing;
+  }
+
+  @media(screen and min-width: #{$line-width}) {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      'steps form'
+      '. buttons';
+
+    &__form {
+      padding: $base-spacing 0;
+    }
+
+    &__steps {
+      flex: 0;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: $base-spacing $keyline $base-spacing $small-spacing;
+    }
+
+    &__step {
+      flex: 0 0 auto;
+      flex-direction: row-reverse;
+      align-items: center;
+      padding-bottom: $base-spacing;
+    }
+
+    .step__icon {
+      margin-right: -1.25em;
+
+      &::before {
+        top: -50%;
+        bottom: 50%;
+        left: auto;
+        right: 0;
+        height: auto;
+        width: .25em;
+        margin: 0 -.125em;
+      }
+    }
+  }
+}
+
+label[for='registration_code_of_conduct_accepted'] {
+  [data-read='false'] {
+    display: none;
+  }
+
+  [data-read='true'] {
+    display: block;
+  }
+
+  [type='checkbox']:disabled ~ & {
+    [data-read='false'] {
+      display: block;
+    }
+
+    [data-read='true'] {
+      display: none;
+    }
+  }
+}

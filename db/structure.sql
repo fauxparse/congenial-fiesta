@@ -357,7 +357,8 @@ CREATE TABLE public.registrations (
     participant_id bigint,
     state character varying DEFAULT 'pending'::character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    code_of_conduct_accepted_at timestamp without time zone
 );
 
 
@@ -1150,6 +1151,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180718001951'),
 ('20180724212201'),
 ('20180811220916'),
-('20180811222021');
+('20180811222021'),
+('20180812205342');
 
 

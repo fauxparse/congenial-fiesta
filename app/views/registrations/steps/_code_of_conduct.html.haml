@@ -1,0 +1,13 @@
+%h1.registration-form__title= t('.title')
+
+%p= t('.instructions')
+
+%section{data: { controller: 'code-of-conduct', action: 'reading:finished->code-of-conduct#enable' }}
+  .scrollable-content{data: { controller: 'reading' }}
+    .static-page__content.code_of_conduct
+      = render 'shared/code_of_conduct'
+
+  = form.check_box_field :code_of_conduct_accepted, data: { target: 'code-of-conduct.checkbox' }, disabled: !form.object.code_of_conduct_accepted? do
+    %span{data: { read: 'false' }}= t('.please_read')
+    %span{data: { read: 'true' }}= t('.acceptance')
+    = form.error_messages_for :code_of_conduct_accepted

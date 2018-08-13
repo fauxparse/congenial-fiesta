@@ -63,7 +63,7 @@
 
   &:active,
   &[aria-selected]:not([aria-selected='false']) {
-    background: $pale-grey;
+    background: $ghost-grey;
     color: $base-font-color;
   }
 
