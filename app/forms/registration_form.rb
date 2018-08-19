@@ -60,6 +60,10 @@ class RegistrationForm
     current_step.permitted_attributes
   end
 
+  def cart
+    @cart ||= Cart.new(registration)
+  end
+
   delegate :to_partial_path, to: :current_step
 
   private

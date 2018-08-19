@@ -1,14 +1,12 @@
 .registration-form {
   @include full-width;
   flex: 1;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    'steps'
-    'form'
-    'buttons';
-  align-items: stretch;
-  justify-items: stretch;
+
+  &__cart {
+    @include border-bottom-radius($base-border-radius);
+    background: $secondary-background-color;
+    padding: $small-spacing;
+  }
 
   &__title {
     margin: 0 0 $base-spacing;
@@ -17,36 +15,14 @@
   }
 
   &__steps {
-    grid-area: steps;
     display: flex;
     align-items: flex-start;
     justify-content: stretch;
     padding: $small-spacing 0;
   }
 
-  &__form {
-    grid-area: form;
-  }
-
-  &__buttons {
-    grid-area: buttons;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: $small-spacing 0;
-
-    &::before {
-      content: '';
-      flex: 1;
-    }
-
-    [rel="prev"] {
-      order: -1;
-    }
-  }
-
   &__step {
-    flex: 1;
+    flex: 1 1 3.5em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,6 +96,22 @@
     }
   }
 
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: $small-spacing 0;
+
+    &::before {
+      content: '';
+      flex: 1;
+    }
+
+    [rel="prev"] {
+      order: -1;
+    }
+  }
+
   .scrollable-content {
     max-height: 50vh;
     overflow-y: scroll;
@@ -129,18 +121,26 @@
     padding: $small-spacing;
   }
 
-  @media(screen and min-width: #{$line-width}) {
+  @media(screen and min-width: #{$line-width * 2 / 3}) {
+    display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
       'steps form'
+      'cart form'
       '. buttons';
 
     &__form {
+      grid-area: form;
       padding: $base-spacing 0;
     }
 
+    &__cart {
+      grid-area: cart;
+    }
+
     &__steps {
+      grid-area: steps;
       flex: 0;
       flex-direction: column;
       justify-content: flex-start;
@@ -168,6 +168,10 @@
         margin: 0 -.125em;
       }
     }
+
+    .buttons {
+      grid-area: buttons;
+    }
   }
 }
 
@@ -188,5 +192,14 @@ label[for='registration_code_of_conduct_accepted'] {
     [data-read='true'] {
       display: none;
     }
+  }
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+
+  .money {
+    margin-left: $small-spacing;
   }
 }
