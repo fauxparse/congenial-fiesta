@@ -1,4 +1,8 @@
 export default class VenueCollection {
+  get name() {
+    return 'venue'
+  }
+
   refresh(venues) {
     this._venues =
       venues.reduce((hash, venue) => ({ ...hash, [venue.id.toString()]: venue }), {})

@@ -9,10 +9,6 @@ export default class Collection {
     this.refresh(items)
   }
 
-  get name() {
-    return _.snakeCase(this.constructor.name.replace(/Collection$/, ''))
-  }
-
   get plural() {
     return _.pluralize(this.name)
   }

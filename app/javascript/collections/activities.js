@@ -8,6 +8,10 @@ export default class ActivityCollection extends Collection {
     this._types = types.slice()
   }
 
+  get name() {
+    return 'activity'
+  }
+
   get types() {
     if (!this._types) {
       this._types = new Collection
