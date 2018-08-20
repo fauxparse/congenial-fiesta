@@ -72,6 +72,7 @@ gem 'pundit'
 gem 'redcarpet'
 gem 'scavenger'
 gem 'stringex'
+gem 'unsplash'
 gem 'wannabe_bool'
 
 group :development, :test do

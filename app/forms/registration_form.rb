@@ -47,6 +47,7 @@ class RegistrationForm
     @steps ||= [
       Step::ParticipantDetails.new(self),
       Step::CodeOfConduct.new(self),
+      Step::WorkshopSelection.new(self),
       Step::PaymentDetails.new(self)
     ].freeze
   end

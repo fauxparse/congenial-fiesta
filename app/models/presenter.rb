@@ -8,6 +8,19 @@ class Presenter < ApplicationRecord
   validates :participant_id, uniqueness: { scope: :activity_id }
 
   def to_s
-    participant.name
+    "#{participant.name}#{" (#{location})" unless location.blank?}"
+  end
+
+  def location
+    @location ||=
+      if participant.country_code == 'nz'
+        participant.city || 'NZ'
+      else
+        I18n.t(
+          participant.country_code,
+          scope: :countries,
+          default: participant.country
+        )
+      end
   end
 end

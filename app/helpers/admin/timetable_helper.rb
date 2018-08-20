@@ -27,5 +27,11 @@ module Admin
         ].join(' ')
       }
     end
+
+    def time_range(start, finish)
+      [start, finish]
+        .map { |time| I18n.l(time, format: :time) }
+        .join('–')
+    end
   end
 end
