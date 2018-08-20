@@ -35,6 +35,7 @@
       padding: .5em;
       border-radius: 50%;
       background: $pale-grey;
+      color: $medium-grey;
 
       .icon {
         display: block;
@@ -62,6 +63,7 @@
     .step__name {
       @include all-caps;
       font-size: modular-scale(-1);
+      font-weight: $base-font-weight;
       order: 1;
       padding: .5em 1em;
       text-align: center;
@@ -83,6 +85,10 @@
     &--current {
       .step__name {
         color: $accent-color;
+      }
+
+      .step__icon {
+        box-shadow: 0 0 0 .25em rgba($accent-color, .5);
       }
     }
 
@@ -152,6 +158,8 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: stretch;
+      position: sticky;
+      top: 0;
       padding: $base-spacing $keyline $base-spacing $small-spacing;
     }
 
@@ -162,7 +170,7 @@
       font-size: modular-scale(0);
       padding-bottom: $base-spacing;
 
-      .step__label {
+      .step__name {
         text-align: right;
       }
     }
@@ -183,12 +191,6 @@
 
     .buttons {
       grid-area: buttons;
-
-      .button {
-        small {
-          display: initial;
-        }
-      }
     }
   }
 }
@@ -213,11 +215,67 @@ label[for='registration_code_of_conduct_accepted'] {
   }
 }
 
-.cart {
-  display: flex;
-  align-items: center;
+.activity-selector {
+  &__day {
+    margin: 0;
 
-  .money {
-    margin-left: $small-spacing;
+    &::before {
+      @include size(2.5em, .25em);
+      display: block;
+      content: '';
+      background-color: $accent-color;
+    }
+  }
+
+  &__date {
+    font-size: modular-scale(2);
+    font-weight: $light-font-weight;
+    background: rgba($white, .875);
+    position: sticky;
+    top: 0;
+    margin: 0 (-$base-spacing);
+    padding: $small-spacing $base-spacing;
+
+    &::before {
+      content: attr(data-date-short);
+    }
+  }
+
+  &__time {
+    font-weight: $base-font-weight;
+    color: $secondary-font-color;
+    margin: 0 0 $base-spacing;
+  }
+
+  &__activities {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+    grid-column-gap: $base-spacing;
+    padding: 0 0 $base-spacing;
+  }
+
+  .activity {
+    padding: 0 0 $base-spacing;
+    &__photo img {
+      width: 100%;
+      height: 6.5em;
+      object-fit: cover;
+    }
+
+    &__name {
+      font-size: modular-scale(1);
+    }
+
+    &__presenters {
+      color: $secondary-font-color;
+    }
+  }
+
+  @media(screen and min-width: #{$line-width / 2}) {
+    &__date {
+      &::before {
+        content: attr(data-date-full);
+      }
+    }
   }
 }

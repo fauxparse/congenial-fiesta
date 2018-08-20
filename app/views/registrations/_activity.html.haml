@@ -1,0 +1,5 @@
+.activity
+  - if activity.photo.present?
+    .activity__photo= image_tag activity.photo, alt: activity.name
+  .activity__name= activity.name
+  .activity__presenters= activity.presenters.to_sentence

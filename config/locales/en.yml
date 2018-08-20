@@ -11,11 +11,19 @@ en:
       same_month: '%-d'
       same_year: '%-d %B'
       long: '%-d %B, %Y'
+      short: '%a %-d %b'
+      timetable: '%A %-d %B'
 
   time:
     formats:
       time: '%I:%M%p'
       timetable: '%-l:%M'
+
+  countries:
+    NZ: 'NZ'
+    AU: 'Aus'
+    UK: 'UK'
+    US: 'USA'
 
   errors:
     messages:

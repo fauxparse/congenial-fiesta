@@ -3,6 +3,7 @@ en:
     steps:
       details: 'Your details'
       code_of_conduct: 'Code of Conduct'
+      workshops: 'Workshops'
       payment: 'Payment'
 
   registrations:
@@ -21,3 +22,5 @@ en:
           Festival.
         acceptance: 'I have read and agreed to the Code of Conduct'
         please_read: 'Please read the Code of Conduct before continuing'
+      workshops:
+        title: 'Workshop selection'
