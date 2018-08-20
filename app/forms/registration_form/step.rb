@@ -28,6 +28,10 @@ class RegistrationForm
       I18n.t(to_param, scope: 'registration.steps')
     end
 
+    def sublabel
+      nil
+    end
+
     def first?
       index.zero?
     end
@@ -54,6 +58,10 @@ class RegistrationForm
       first? ? nil : form.steps[index - 1]
     end
 
+    def previous_steps
+      form.steps[0...index]
+    end
+
     def next
       last? ? nil : form.steps[index + 1]
     end
@@ -62,7 +70,7 @@ class RegistrationForm
       if @complete.nil?
         existing_errors = errors.dup
         errors.clear
-        @complete = valid?
+        @complete = valid? && previous_steps.all?(&:complete?)
         errors.clear
         errors.merge! existing_errors
       end
