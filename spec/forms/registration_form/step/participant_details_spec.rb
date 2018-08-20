@@ -8,7 +8,8 @@ RSpec.describe RegistrationForm::Step::ParticipantDetails do
     double(
       RegistrationForm,
       registration: registration,
-      participant: participant
+      participant: participant,
+      steps: []
     )
   end
   let(:participant) { Participant.new }

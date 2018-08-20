@@ -59,7 +59,7 @@ class RegistrationForm
     end
 
     def previous_steps
-      form.steps[0...index]
+      first? ? [] : [*previous.previous_steps, previous]
     end
 
     def next
@@ -115,7 +115,7 @@ class RegistrationForm
     private
 
     def index
-      form.steps.find_index(self)
+      form.steps.find_index(self) || 0
     end
 
     def assign_attributes(attributes)

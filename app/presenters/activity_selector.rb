@@ -12,7 +12,7 @@ class ActivitySelector
     @scope = scope
   end
 
-  def each_day(&block)
+  def each_day(&_block)
     return enum_for(:each_day) unless block_given?
 
     (festival.start_date..festival.end_date).map do |date|
@@ -39,9 +39,9 @@ class ActivitySelector
   def activities
     @activities ||=
       scope
-        .all
-        .zip(photos)
-        .map { |activity, photo| scheduled(activity, photo: photo) }
+      .all
+      .zip(photos)
+      .map { |activity, photo| scheduled(activity, photo: photo) }
   end
 
   def scheduled(activity, photo: nil)
@@ -55,8 +55,8 @@ class ActivitySelector
   def photos
     @photos ||=
       (1..(scope.count / 30.0).ceil)
-        .flat_map { |page| Unsplash::Photo.search('dinosaur', page, 30) }
-        .map { |photo| photo.urls[:small] }
+      .flat_map { |page| Unsplash::Photo.search('dinosaur', page, 30) }
+      .map { |photo| photo.urls[:small] }
   end
 
   class Timeslot
