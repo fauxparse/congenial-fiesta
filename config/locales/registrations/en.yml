@@ -3,11 +3,12 @@ en:
     steps:
       details: 'Your details'
       code_of_conduct: 'Code of Conduct'
+      payment: 'Payment'
 
   registrations:
     edit:
-      back: 'Back: %{step}'
-      next: 'Next: %{step}'
+      back: 'Back:'
+      next: 'Next:'
     steps:
       details:
         title: 'Your details'

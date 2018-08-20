@@ -46,7 +46,8 @@ class RegistrationForm
   def steps
     @steps ||= [
       Step::ParticipantDetails.new(self),
-      Step::CodeOfConduct.new(self)
+      Step::CodeOfConduct.new(self),
+      Step::PaymentDetails.new(self)
     ].freeze
   end
 

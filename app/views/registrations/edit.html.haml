@@ -10,12 +10,16 @@
     - unless registration_form.current_step.first?
       = link_to registration_step_path(registration_form.previous_step), class: 'button', rel: :prev do
         = icon :back, class: 'button__icon'
-        .button__text= t('.back', step: registration_form.previous_step.label)
+        .button__text
+          %small= t('.back')
+          = registration_form.previous_step.label
     - if registration_form.current_step.last?
       %button.button.button--primary{type: :submit, rel: :next}
         = icon :check, class: 'button__icon'
         .button__text= t('.finish')
     - else
       %button.button.button--primary{type: :submit, rel: :last}
-        .button__text= t('.next', step: registration_form.next_step.label)
+        .button__text
+          %small= t('.next')
+          = registration_form.next_step.label
         = icon :next, class: 'button__icon'
