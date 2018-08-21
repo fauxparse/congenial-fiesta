@@ -23,7 +23,7 @@ RSpec.describe RegistrationForm::Step::CodeOfConduct do
     let(:attributes) { { code_of_conduct_accepted: true } }
 
     it 'updates the participant’s details' do
-      Timecop.freeze do
+      Timecop.freeze(Time.zone.now.change(usec: 0)) do
         expect { step.update(attributes) }
           .to change { registration.reload.code_of_conduct_accepted_at }
           .to Time.zone.now
