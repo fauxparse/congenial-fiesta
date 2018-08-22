@@ -262,6 +262,8 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
+    ordinalize_full (1.2.1)
+      i18n (>= 0.6.6)
     parallel (1.12.1)
     parser (2.5.1.0)
       ast (~> 2.4.0)
@@ -466,6 +468,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-twitter
+  ordinalize_full
   pg (>= 0.18, < 2.0)
   premailer-rails
   primalize

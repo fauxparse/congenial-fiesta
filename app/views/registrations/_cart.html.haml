@@ -1,3 +1,6 @@
-.cart
-  = icon :cart
-  .cart__total= money cart.total
+.cart{data: { controller: 'cart' }}
+  = icon :cart, class: 'cart__icon'
+  .cart__items
+    %span.cart__count{data: { count: cart.count, target: 'cart.count' }}
+    %span.cart__item{data: { singular: t('.workshop'), plural: t('.workshop').pluralize }}
+  .cart__total{data: { target: 'cart.total' }}= money cart.total

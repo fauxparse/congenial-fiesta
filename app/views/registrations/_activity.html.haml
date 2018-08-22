@@ -1,5 +1,18 @@
-.activity
+.activity{class: class_string('activity--unavailable' => !activity.available?), data: { target: 'activity-selector.activity', id: activity.id, slot: activity.slot, position: activity.position }}
   - if activity.photo.present?
     .activity__photo= image_tag activity.photo, alt: activity.name
   .activity__name= activity.name
   .activity__presenters= activity.presenters.to_sentence
+  %button.button.button--primary.activity__remove{data: { action: 'activity-selector#removeClicked'}}
+    = icon :check, class: 'button__icon'
+    .button__text= t('.chosen', position: (activity.position || 1).ordinalize_full).humanize
+  %button.button.activity__add{data: { action: 'activity-selector#addClicked'}, disabled: !activity.available?}
+    - if activity.compulsory?
+      = icon :check, class: 'button__icon'
+      .button__text= t('.compulsory')
+    - elsif !activity.available?
+      = icon :no, class: 'button__icon'
+      .button__text= t('.unavailable')
+    - else
+      = icon :add, class: 'button__icon'
+      .button__text= t('.add')
