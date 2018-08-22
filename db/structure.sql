@@ -318,6 +318,40 @@ ALTER SEQUENCE public.pitches_id_seq OWNED BY public.pitches.id;
 
 
 --
+-- Name: preferences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.preferences (
+    id bigint NOT NULL,
+    registration_id bigint,
+    schedule_id bigint,
+    "position" integer,
+    slot integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: preferences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.preferences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: preferences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.preferences_id_seq OWNED BY public.preferences.id;
+
+
+--
 -- Name: presenters; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -358,7 +392,8 @@ CREATE TABLE public.registrations (
     state character varying DEFAULT 'pending'::character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    code_of_conduct_accepted_at timestamp without time zone
+    code_of_conduct_accepted_at timestamp without time zone,
+    workshop_preferences_saved_at timestamp without time zone
 );
 
 
@@ -580,6 +615,13 @@ ALTER TABLE ONLY public.pitches ALTER COLUMN id SET DEFAULT nextval('public.pitc
 
 
 --
+-- Name: preferences id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.preferences ALTER COLUMN id SET DEFAULT nextval('public.preferences_id_seq'::regclass);
+
+
+--
 -- Name: presenters id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -691,6 +733,14 @@ ALTER TABLE ONLY public.password_resets
 
 ALTER TABLE ONLY public.pitches
     ADD CONSTRAINT pitches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: preferences preferences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.preferences
+    ADD CONSTRAINT preferences_pkey PRIMARY KEY (id);
 
 
 --
@@ -880,6 +930,34 @@ CREATE INDEX index_pitches_on_participant_id ON public.pitches USING btree (part
 --
 
 CREATE INDEX index_pitches_on_status_and_participant_id ON public.pitches USING btree (status, participant_id);
+
+
+--
+-- Name: index_preferences_on_registration_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_preferences_on_registration_id ON public.preferences USING btree (registration_id);
+
+
+--
+-- Name: index_preferences_on_registration_id_and_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_preferences_on_registration_id_and_schedule_id ON public.preferences USING btree (registration_id, schedule_id);
+
+
+--
+-- Name: index_preferences_on_registration_id_and_slot; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_preferences_on_registration_id_and_slot ON public.preferences USING btree (registration_id, slot);
+
+
+--
+-- Name: index_preferences_on_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_preferences_on_schedule_id ON public.preferences USING btree (schedule_id);
 
 
 --
@@ -1110,11 +1188,27 @@ ALTER TABLE ONLY public.activities
 
 
 --
+-- Name: preferences fk_rails_e71b272656; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.preferences
+    ADD CONSTRAINT fk_rails_e71b272656 FOREIGN KEY (registration_id) REFERENCES public.registrations(id) ON DELETE CASCADE;
+
+
+--
 -- Name: pitches fk_rails_faa4f9f838; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.pitches
     ADD CONSTRAINT fk_rails_faa4f9f838 FOREIGN KEY (festival_id) REFERENCES public.festivals(id) ON DELETE CASCADE;
+
+
+--
+-- Name: preferences fk_rails_fb2210dc9e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.preferences
+    ADD CONSTRAINT fk_rails_fb2210dc9e FOREIGN KEY (schedule_id) REFERENCES public.schedules(id) ON DELETE CASCADE;
 
 
 --
@@ -1152,6 +1246,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180724212201'),
 ('20180811220916'),
 ('20180811222021'),
-('20180812205342');
+('20180812205342'),
+('20180820211405');
 
 

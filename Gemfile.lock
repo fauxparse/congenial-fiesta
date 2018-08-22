@@ -7,6 +7,13 @@ GIT
       sort_alphabetical (~> 1.0)
 
 GIT
+  remote: https://github.com/swanandp/acts_as_list.git
+  revision: a35daedc79a26cfbe7045d97ed977368ee2c002b
+  specs:
+    acts_as_list (0.9.15)
+      activerecord (>= 3.0)
+
+GIT
   remote: https://github.com/thoughtbot/bitters.git
   revision: a4cfe46d0c1fce8b2734650af7489dd783dbd65b
   specs:
@@ -422,6 +429,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 6.0)
+  acts_as_list!
   auto_strip_attributes (~> 2.3)
   autoprefixer-rails
   aws-sdk-s3
@@ -490,4 +498,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.1
+   1.16.4

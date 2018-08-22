@@ -77,7 +77,7 @@ class RegistrationForm
       @complete
     end
 
-    def update(attributes)
+    def update(attributes = {})
       assign_attributes(attributes)
       @complete = nil
       valid? && save
@@ -120,7 +120,6 @@ class RegistrationForm
 
     def assign_attributes(attributes)
       attributes.each_pair do |attr, value|
-        Rails.logger.info "#{attr} = #{value}"
         send("#{attr}=", value)
       end
     end

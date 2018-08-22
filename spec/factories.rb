@@ -158,12 +158,23 @@ FactoryBot.define do
     participant
   end
 
+  factory :preference do
+    registration
+    schedule
+  end
+
+  factory :schedule do
+    activity
+    starts_at { festival.start_date.midnight.change(hour: 10) }
+    ends_at { starts_at + 3.hours }
+  end
+
   factory :show do
     festival
     name 'A show'
   end
 
-  factory :workshop do
+  factory :workshop, aliases: %i[activity] do
     festival
     name 'A workshop'
   end
