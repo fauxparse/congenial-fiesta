@@ -39,6 +39,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'acts_as_list', github: 'swanandp/acts_as_list'
 gem 'auto_strip_attributes', '~> 2.3'
 gem 'autoprefixer-rails'
 gem 'aws-sdk-s3', require: false
