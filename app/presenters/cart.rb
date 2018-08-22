@@ -7,6 +7,10 @@ class Cart
     @registration = registration
   end
 
+  def count
+    0
+  end
+
   def total
     Money.new(0)
   end

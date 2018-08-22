@@ -1,9 +1,13 @@
-.badge {
+@mixin badge($color: $accent-color) {
   display: inline-block;
   min-width: $base-line-height * 1em;
   padding: 0 0.25em;
   border-radius: ($base-line-height * 0.5em);
-  background-color: $action-color;
+  background-color: $color;
   color: $white;
   text-align: center;
+}
+
+.badge {
+  @include badge;
 }

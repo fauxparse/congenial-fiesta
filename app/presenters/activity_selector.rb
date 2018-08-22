@@ -25,6 +25,8 @@ class ActivitySelector
     '/registrations/activity_selector'
   end
 
+  delegate :each, to: :activities
+
   private
 
   def scope
@@ -36,20 +38,32 @@ class ActivitySelector
       .merge(@scope.all)
   end
 
+  def schedules
+    @schedules ||= scope.all
+  end
+
   def activities
     @activities ||=
-      scope
-      .all
-      .zip(photos)
-      .map { |activity, photo| scheduled(activity, photo: photo) }
+      schedules
+        .zip(photos)
+        .map { |activity, photo| scheduled(activity, photo: photo) }
   end
 
   def scheduled(activity, photo: nil)
     ScheduledActivity.new(
       activity,
       registration: registration,
-      photo: photo
+      photo: photo,
+      available: available?(activity)
     )
+  end
+
+  def available?(activity)
+    schedules.none? { |s| s.slot == activity.slot && presenting?(s.activity) }
+  end
+
+  def presenting?(activity)
+    activity.presenters.any? { |p| p.participant == registration.participant }
   end
 
   def photos
@@ -71,6 +85,10 @@ class ActivitySelector
 
     def initialize(activities)
       @activities = activities.sort
+    end
+
+    def selected?
+      activities.any?(&:selected?)
     end
 
     delegate :starts_at, :ends_at, to: :first_activity, allow_nil: true

@@ -1,7 +1,8 @@
-.activity-selector
+.activity-selector{data: { controller: 'activity-selector' }}
+  = yield
   - activity_selector.each_day do |date, timeslots|
     .activity-selector__day
-      %h2.activity-selector__date{data: { date: { short: l(date, format: :short), full: l(date, format: :timetable) } }}
+      %h2.activity-selector__date{data: { date: { short: l(date, format: :short), full: l(date, format: :timetable) }, count: timeslots.count(&:selected?) }}
       - timeslots.each do |timeslot|
         .activity-selector__slot
           %h3.activity-selector__time= time_range(timeslot.starts_at, timeslot.ends_at)

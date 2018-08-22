@@ -2,12 +2,6 @@
   @include full-width;
   flex: 1;
 
-  &__cart {
-    @include border-bottom-radius($base-border-radius);
-    background: $secondary-background-color;
-    padding: $small-spacing;
-  }
-
   &__title {
     margin: 0 0 $base-spacing;
     font-size: modular-scale(3);
@@ -137,19 +131,14 @@
   @media(screen and min-width: #{$line-width * 2 / 3}) {
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr;
     grid-template-areas:
       'steps form'
-      'cart form'
       '. buttons';
 
     &__form {
       grid-area: form;
       padding: $base-spacing 0;
-    }
-
-    &__cart {
-      grid-area: cart;
     }
 
     &__steps {
@@ -216,8 +205,12 @@ label[for='registration_code_of_conduct_accepted'] {
 }
 
 .activity-selector {
+  position: relative;
+
   &__day {
     margin: 0;
+    display: flex;
+    flex-direction: column;
 
     &::before {
       @include size(2.5em, .25em);
@@ -230,11 +223,12 @@ label[for='registration_code_of_conduct_accepted'] {
   &__date {
     font-size: modular-scale(2);
     font-weight: $light-font-weight;
-    background: rgba($white, .875);
+    background: rgba($white, .95);
     position: sticky;
     top: 0;
     margin: 0 (-$base-spacing);
     padding: $small-spacing $base-spacing;
+    z-index: 1;
 
     &::before {
       content: attr(data-date-short);
@@ -242,6 +236,7 @@ label[for='registration_code_of_conduct_accepted'] {
   }
 
   &__time {
+    font-size: modular-scale(0);
     font-weight: $base-font-weight;
     color: $secondary-font-color;
     margin: 0 0 $base-spacing;
@@ -256,10 +251,35 @@ label[for='registration_code_of_conduct_accepted'] {
 
   .activity {
     padding: 0 0 $base-spacing;
-    &__photo img {
-      width: 100%;
-      height: 6.5em;
-      object-fit: cover;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    &::after {
+      content: '';
+      flex: 1;
+    }
+
+    &--unavailable {
+      opacity: .5;
+
+      .button {
+        opacity: 1;
+      }
+
+      .activity__photo {
+        img {
+          filter: grayscale(1);
+        }
+      }
+    }
+
+    &__photo {
+      img {
+        width: 100%;
+        height: 6.5em;
+        object-fit: cover;
+      }
     }
 
     &__name {
@@ -269,6 +289,38 @@ label[for='registration_code_of_conduct_accepted'] {
     &__presenters {
       color: $secondary-font-color;
     }
+
+    .button {
+      margin: $small-spacing 0 0;
+      order: 1;
+      font-size: modular-scale(-1);
+      justify-content: flex-start;
+    }
+
+    .activity__remove {
+      display: none;
+    }
+
+    &[data-position] {
+      .activity__remove {
+        display: flex;
+      }
+
+      .activity__add {
+        display: none;
+      }
+    }
+  }
+
+  .registration-form__cart {
+    position: sticky;
+    top: 0;
+    height: 0;
+    z-index: 2;
+  }
+
+  .cart {
+    @include position(absolute, 0 0 null null);
   }
 
   @media(screen and min-width: #{$line-width / 2}) {
@@ -277,5 +329,53 @@ label[for='registration_code_of_conduct_accepted'] {
         content: attr(data-date-full);
       }
     }
+  }
+}
+
+.cart {
+  display: grid;
+  grid-template-areas:
+    'icon items'
+    'icon total';
+  grid-column-gap: $small-spacing;
+  grid-template-rows: $base-line-height $base-line-height;
+  align-items: center;
+  padding: .5em 0 .5em $small-spacing;
+
+  &__icon {
+    grid-area: icon;
+  }
+
+  &__items {
+    grid-area: items;
+    font-size: modular-scale(-1);
+    min-width: 6.5em;
+  }
+
+  &__item {
+    color: $secondary-font-color;
+
+    &::before {
+      content: attr(data-plural);
+    }
+  }
+
+  &__count {
+    &::before {
+      content: attr(data-count);
+    }
+
+    &[data-count='1'] {
+      + .cart__item {
+        &::before {
+          content: attr(data-singular);
+        }
+      }
+    }
+  }
+
+  &__total {
+    grid-area: total;
+    font-size: modular-scale(-1);
   }
 }
