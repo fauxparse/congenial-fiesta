@@ -77,6 +77,12 @@ class RegistrationForm
       @complete
     end
 
+    def assign_attributes(attributes)
+      attributes.each_pair do |attr, value|
+        send("#{attr}=", value)
+      end
+    end
+
     def update(attributes = {})
       assign_attributes(attributes)
       @complete = nil
@@ -116,12 +122,6 @@ class RegistrationForm
 
     def index
       form.steps.find_index(self) || 0
-    end
-
-    def assign_attributes(attributes)
-      attributes.each_pair do |attr, value|
-        send("#{attr}=", value)
-      end
     end
 
     def save
