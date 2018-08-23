@@ -60,6 +60,14 @@ export default class extends Controller {
     return this._preferences
   }
 
+  get selections() {
+    const activities =
+      values(this.activities)
+        .filter(activity => activity.position)
+        .sort((a, b) => a.position - b.position)
+    return groupBy(activities, property('slot'))
+  }
+
   addClicked = e => {
     e.preventDefault()
     const id = e.target.closest('.activity').getAttribute('data-id')
@@ -121,11 +129,7 @@ export default class extends Controller {
   }
 
   changed() {
-    const activities =
-      values(this.activities)
-        .filter(activity => activity.position)
-        .sort((a, b) => a.position - b.position)
-    const detail = groupBy(activities, property('slot'))
+    const detail = this.selections
     const event =
       new CustomEvent('activities:select', { detail, bubbles: true })
     this.element.dispatchEvent(event)

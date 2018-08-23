@@ -1,5 +1,5 @@
 import { Controller } from 'stimulus'
-import { keys, method, values } from 'lodash'
+import { flatten, keys, method, values } from 'lodash'
 
 export default class extends Controller {
   static targets = ['cart', 'hiddenField']
@@ -11,12 +11,24 @@ export default class extends Controller {
     )
   }
 
+  get activitySelector() {
+    return this.application.getControllerForElementAndIdentifier(
+      this.element.querySelector('.activity-selector'),
+      'activity-selector'
+    )
+  }
+
+  get selections() {
+    return this.activitySelector.selections;
+  }
+
   selectionChanged({ detail }) {
-    const count = keys(detail).length
-    this.cart.count = count
-    this.cart.total = count * (6500 - (count - 1) * 500)
     this.hiddenFieldTargets.forEach(method('remove'))
     values(detail).forEach(this.addHiddenFields)
+    const workshops =
+      flatten(values(detail))
+        .reduce((hash, { id, position }) => ({ ...hash, [id]: position }), {})
+    this.cart.update({ step: 'workshops', workshops })
   }
 
   addHiddenFields = activities => {

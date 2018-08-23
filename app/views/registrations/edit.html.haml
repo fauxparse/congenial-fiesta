@@ -1,9 +1,9 @@
 = form_for registration_form.current_step, url: registration_step_path(registration_form.current_step),
-  method: :patch, html: { class: 'registration-form' } do |form|
-  .registration-form__steps
+  method: :patch, html: { class: 'registration-form', data: { controller: 'registration-form' } } do |form|
+  .registration-form__steps{data: { target: 'registration-form.steps' }}
     = render partial: 'step', collection: registration_form.steps
 
-  .registration-form__form
+  .registration-form__form{data: { action: 'cart:updated->registration-form#updateCart' }}
     = render registration_form.current_step, form: form
 
   .buttons.registration-form__buttons

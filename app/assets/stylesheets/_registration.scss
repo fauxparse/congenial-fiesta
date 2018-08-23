@@ -62,6 +62,14 @@
       padding: .5em 1em;
       text-align: center;
       line-height: modular-scale(1);
+
+      span {
+        display: block;
+
+        &:empty  {
+          display: none;
+        }
+      }
     }
 
     &--complete,
@@ -98,10 +106,15 @@
   }
 
   &__buttons {
+    position: sticky;
+    bottom: 0;
+    background: rgba($white, .95);
+    z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: $small-spacing 0;
+    margin: 0 (-$base-spacing);
+    padding: $small-spacing $base-spacing;
 
     &::before {
       content: '';
@@ -135,6 +148,7 @@
     grid-template-areas:
       'steps form'
       '. buttons';
+    align-items: flex-start;
 
     &__form {
       grid-area: form;
@@ -293,7 +307,6 @@ label[for='registration_code_of_conduct_accepted'] {
     .button {
       margin: $small-spacing 0 0;
       order: 1;
-      font-size: modular-scale(-1);
       justify-content: flex-start;
     }
 
@@ -342,8 +355,30 @@ label[for='registration_code_of_conduct_accepted'] {
   align-items: center;
   padding: .5em 0 .5em $small-spacing;
 
+  span {
+    transition: opacity $base-duration $base-timing;
+  }
+
+  &--loading {
+    span {
+      opacity: .5;
+    }
+
+    .cart__icon {
+      .spinner {
+        opacity: 1;
+      }
+    }
+  }
+
   &__icon {
+    @include size(2.5em);
     grid-area: icon;
+
+    .spinner {
+      transition: opacity $base-duration $base-timing;
+      opacity: 0;
+    }
   }
 
   &__items {

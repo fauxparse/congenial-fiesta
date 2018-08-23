@@ -14,6 +14,15 @@ class RegistrationsController < ApplicationController
       .update(registration_attributes)
   end
 
+  def cart
+    registration_form.assign_attributes(registration_attributes)
+    respond_to do |format|
+      format.json do
+        render json: CartSerializer.new(registration_form.cart).call
+      end
+    end
+  end
+
   private
 
   def registration

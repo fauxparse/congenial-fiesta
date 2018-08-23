@@ -14,11 +14,18 @@ class RegistrationForm
 
   def registration
     @registration ||=
-      festival.registrations.find_or_initialize_by(participant: @participant)
+      festival
+        .registrations
+        .includes(preferences: { schedule: :activity })
+        .find_or_initialize_by(participant: @participant)
   end
 
   def participant
     registration.participant || registration.build_participant
+  end
+
+  def assign_attributes(params)
+    current_step.assign_attributes(params)
   end
 
   def update(params)

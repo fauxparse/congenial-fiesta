@@ -1,5 +1,6 @@
-.cart{data: { controller: 'cart' }}
-  = icon :cart, class: 'cart__icon'
+.cart{data: { controller: 'cart', total: cart.total.cents }}
+  .cart__icon
+    = inline_icon :cart_spinner, class: 'cart__icon'
   .cart__items
     %span.cart__count{data: { count: cart.count, target: 'cart.count' }}
     %span.cart__item{data: { singular: t('.workshop'), plural: t('.workshop').pluralize }}
