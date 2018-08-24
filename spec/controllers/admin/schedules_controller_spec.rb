@@ -62,7 +62,8 @@ RSpec.describe Admin::SchedulesController, type: :request do
           activity_id: workshop.id,
           venue_id: venue.id,
           starts_at: schedule.starts_at.iso8601,
-          ends_at: schedule.ends_at.iso8601
+          ends_at: schedule.ends_at.iso8601,
+          maximum: nil
         )
       end
     end
@@ -76,7 +77,8 @@ RSpec.describe Admin::SchedulesController, type: :request do
             starts_at: start_time,
             ends_at: end_time,
             venue_id: venue.id,
-            activity_id: workshop.id
+            activity_id: workshop.id,
+            maximum: 12
           }
         }
       end
@@ -95,7 +97,8 @@ RSpec.describe Admin::SchedulesController, type: :request do
           activity_id: workshop.id,
           venue_id: venue.id,
           starts_at: start_time.iso8601,
-          ends_at: end_time.iso8601
+          ends_at: end_time.iso8601,
+          maximum: 12
         )
       end
     end

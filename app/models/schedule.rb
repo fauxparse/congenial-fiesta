@@ -23,4 +23,14 @@ class Schedule < ApplicationRecord
   def available?
     !maximum? || active_selection_count < maximum
   end
+
+  def limited?
+    maximum.present?
+  end
+
+  alias limited limited?
+
+  def limited=(value)
+    self.maximum = value.to_b ? self.maximum || activity.maximum : nil
+  end
 end

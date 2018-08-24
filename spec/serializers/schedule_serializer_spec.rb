@@ -8,7 +8,8 @@ RSpec.describe ScheduleSerializer, type: :serializer do
     activity.schedules.create(
       starts_at: start_time,
       ends_at: end_time,
-      venue: venue
+      venue: venue,
+      maximum: 16
     )
   end
   let(:activity) { create(:workshop) }
@@ -23,7 +24,8 @@ RSpec.describe ScheduleSerializer, type: :serializer do
       venue_id: venue.id,
       activity_id: activity.id,
       starts_at: start_time,
-      ends_at: end_time
+      ends_at: end_time,
+      maximum: 16
     )
   end
 end
