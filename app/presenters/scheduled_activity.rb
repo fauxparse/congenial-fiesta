@@ -39,7 +39,9 @@ class ScheduledActivity
   end
 
   def available?
-    @available.present? && !compulsory?
+    @available.present? &&
+      !compulsory? &&
+      schedule.available?
   end
 
   private

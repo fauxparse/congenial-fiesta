@@ -3,13 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Preference, type: :model do
-  subject(:preference) do
-    create(:preference, schedule: schedule, registration: registration)
-  end
+  subject(:preference) { create(:preference, schedule: schedule) }
   let(:schedule) { create(:schedule) }
-  let(:registration) do
-    create(:registration, festival: schedule.activity.festival)
-  end
 
   it {
     is_expected

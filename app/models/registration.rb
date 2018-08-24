@@ -6,6 +6,7 @@ class Registration < ApplicationRecord
   belongs_to :festival
   belongs_to :participant
   has_many :preferences, -> { sorted }, dependent: :destroy, autosave: true
+  has_many :selections, dependent: :destroy, autosave: true
 
   enum state: {
     pending: 'pending',
