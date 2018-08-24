@@ -1,4 +1,4 @@
-.cart{data: { controller: 'cart', total: cart.total.cents }}
+.cart{data: { 'cart-total': cart.total.cents, action: 'click->cart#showDetails' }}
   .cart__icon
     = inline_icon :cart_spinner, class: 'cart__icon'
   .cart__items

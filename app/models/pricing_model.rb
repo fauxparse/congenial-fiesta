@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+class PricingModel
+  PRICES = [0, 60, 110, 160, 205, 250, 285, 315, 340, 365, 390, 400]
+
+  def self.for_festival(festival)
+    # TODO: flesh this out when prices change
+    new
+  end
+
+  def by_workshop_count(count)
+    Money.new(PRICES[count] * 100)
+  end
+end

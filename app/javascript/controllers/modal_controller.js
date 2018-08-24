@@ -20,9 +20,10 @@ export default class extends Controller {
     }
   }
 
-  close() {
-    const event = this.dispatchEvent('close')
-    if (!event.defaultPrevented) {
+  close(e) {
+    if (!e.defaultPrevented) {
+      e.preventDefault()
+      const event = this.dispatchEvent('close')
       const focused = this.element.querySelector(':focus')
       focused && focused.blur()
       this.element.classList.remove('modal--in')
