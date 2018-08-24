@@ -1,6 +1,16 @@
+@mixin horizontal-margin($margin) {
+  margin-left: $margin;
+  margin-right: $margin;
+}
+
 @mixin horizontal-padding($padding) {
   padding-left: $padding;
   padding-right: $padding;
+}
+
+@mixin vertical-margin($margin) {
+  margin-bottom: $margin;
+  margin-top: $margin;
 }
 
 @mixin vertical-padding($padding) {
@@ -26,4 +36,13 @@
   @media print {
     display: none;
   }
+}
+
+@mixin sticky-header {
+  @include horizontal-margin(-$base-spacing);
+  @include horizontal-padding($base-spacing);
+  position: sticky;
+  top: 0;
+  background: rgba($white, .95);
+  z-index: 1;
 }

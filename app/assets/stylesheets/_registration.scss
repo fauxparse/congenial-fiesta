@@ -106,15 +106,14 @@
   }
 
   &__buttons {
-    position: sticky;
+    @include sticky-header;
+    @include vertical-padding($small-spacing);
+    top: auto;
     bottom: 0;
-    background: rgba($white, .95);
-    z-index: 1;
+    z-index: 4;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 0 (-$base-spacing);
-    padding: $small-spacing $base-spacing;
 
     &::before {
       content: '';
@@ -235,14 +234,12 @@ label[for='registration_code_of_conduct_accepted'] {
   }
 
   &__date {
+    @include sticky-header;
+    @include vertical-padding($small-spacing);
+    margin-bottom: 0;
     font-size: modular-scale(2);
     font-weight: $light-font-weight;
-    background: rgba($white, .95);
-    position: sticky;
-    top: 0;
-    margin: 0 (-$base-spacing);
-    padding: $small-spacing $base-spacing;
-    z-index: 1;
+    z-index: 2;
 
     &::before {
       content: attr(data-date-short);
@@ -250,10 +247,15 @@ label[for='registration_code_of_conduct_accepted'] {
   }
 
   &__time {
+    @include sticky-header;
+    top: calc(#{modular-scale(2) * strip-unit($heading-line-height)} + #{$small-spacing * 2} - .5px);
+    padding-top: 0;
+    padding-bottom: $small-spacing;
     font-size: modular-scale(0);
     font-weight: $base-font-weight;
     color: $secondary-font-color;
-    margin: 0 0 $base-spacing;
+    margin-top: 0;
+    margin-bottom: $small-spacing;
   }
 
   &__activities {
@@ -329,7 +331,7 @@ label[for='registration_code_of_conduct_accepted'] {
     position: sticky;
     top: 0;
     height: 0;
-    z-index: 2;
+    z-index: 3;
   }
 
   .cart {
@@ -353,7 +355,16 @@ label[for='registration_code_of_conduct_accepted'] {
   grid-column-gap: $small-spacing;
   grid-template-rows: $base-line-height $base-line-height;
   align-items: center;
-  padding: .5em 0 .5em $small-spacing;
+  padding: .5em $small-spacing;
+  margin-right: -$small-spacing;
+  border-radius: $base-border-radius;
+  transition: background-color $base-duration $base-timing;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $ghost-grey;
+  }
 
   span {
     transition: opacity $base-duration $base-timing;
@@ -412,5 +423,49 @@ label[for='registration_code_of_conduct_accepted'] {
   &__total {
     grid-area: total;
     font-size: modular-scale(-1);
+  }
+}
+
+.cart__summary {
+  padding: $base-spacing;
+
+  .count {
+    &::before {
+      content: attr(data-count);
+    }
+
+    ~ .item {
+      &::before {
+        content: attr(data-plural);
+      }
+    }
+
+    &[data-count='1'] {
+      ~ .item {
+        &::before {
+          content: attr(data-singular);
+        }
+      }
+    }
+  }
+
+  del {
+    color: $tomato;
+    display: block;
+    font-size: modular-scale(-1);
+
+    ~ .money {
+      font-weight: $bold-font-weight;
+    }
+  }
+
+  .cart__workshops {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    .cart__savings {
+      margin-left: .5em;
+    }
   }
 }

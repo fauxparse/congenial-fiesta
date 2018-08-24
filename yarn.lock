@@ -5529,6 +5529,10 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
+"tag@https://github.com/fauxparse/tag.git#data_attributes":
+  version "0.3.0"
+  resolved "https://github.com/fauxparse/tag.git#9eac9e7c9c2260e05dc8d19c47291e3c8c63bc72"
+
 tapable@^0.2.7:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.2.8.tgz#99372a5c999bf2df160afc0d74bed4f47948cd22"

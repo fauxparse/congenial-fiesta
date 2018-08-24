@@ -7,12 +7,20 @@ class Cart
     @registration = registration
   end
 
+  def pricing_model
+    @pricing_model ||= PricingModel.for_festival(registration.festival)
+  end
+
   def count
     @count ||= workshops.uniq(&:slot).size
   end
 
   def total
-    Money.new(count * (6500 - (count - 1) * 500))
+    pricing_model.by_workshop_count(count)
+  end
+
+  def per_workshop
+    pricing_model.by_workshop_count(1)
   end
 
   def to_partial_path

@@ -14,6 +14,10 @@ class RegistrationForm
       def cart
         @cart ||= Cart.new(registration)
       end
+
+      def complete?
+        false
+      end
     end
   end
 end
