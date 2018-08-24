@@ -362,4 +362,19 @@
       font-size: modular-scale(-1);
     }
   }
+
+  .participant-limit {
+    margin: $small-spacing 0;
+
+    .check-box-field-content {
+      display: flex;
+      align-items: center;
+      margin-top: 0;
+
+      input {
+        width: 6em;
+        margin: 0 .5em;
+      }
+    }
+  }
 }

@@ -21,8 +21,8 @@ export default class extends Controller {
   }
 
   close(e) {
-    if (!e.defaultPrevented) {
-      e.preventDefault()
+    if (!e || !e.defaultPrevented) {
+      e && e.preventDefault()
       const event = this.dispatchEvent('close')
       const focused = this.element.querySelector(':focus')
       focused && focused.blur()

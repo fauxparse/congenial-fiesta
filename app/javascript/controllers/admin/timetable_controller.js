@@ -332,6 +332,7 @@ export default class extends Controller {
     const {
       method,
       mode,
+      moving,
       started,
       startDelay,
       block,
@@ -345,9 +346,10 @@ export default class extends Controller {
     cancelAnimationFrame(updating)
     this.removeListener(method, 'move', this.dragMove)
     this.removeListener(method, 'stop', this.dragStop)
-    if (started) {
+    block.classList.remove(`${BLOCK_CLASS}--${mode}`)
+
+    if (started && (mode !== 'moving' || moving)) {
       this.updateBlock(id, { x: column, y: row, height })
-      block.classList.remove(`${BLOCK_CLASS}--${mode}`)
     } else {
       clearTimeout(startDelay)
       const event = new Event('block:clicked', {

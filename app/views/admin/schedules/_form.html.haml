@@ -12,6 +12,11 @@
     .time-pickers__separator= t('.to')
     .time-picker{data: { controller: 'time-picker', target: 'admin--schedule.endTime', action: 'change->admin--schedule#endTimeChanged' }}
 
+  = form.check_box_field :limited, class: 'participant-limit', data: { target: 'admin--schedule.limited', action: 'change->admin--schedule#limitedChanged' } do
+    %span= t('.limit')
+    = form.number_field :maximum, min: 0, data: { target: 'admin--schedule.maximum' }
+    %span= t('.participants')
+
   .venue-picker
     - Venue.all.sort_by(&:name).each do |venue|
       %button.venue-picker__venue{data: { target: 'admin--schedule.venue', action: 'admin--schedule#venueClicked', id: venue.id }}= venue.name

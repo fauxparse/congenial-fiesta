@@ -6,6 +6,7 @@ class ScheduleSerializer < Primalize::Single
     venue_id: optional(integer),
     activity_id: integer,
     starts_at: timestamp,
-    ends_at: timestamp
+    ends_at: timestamp,
+    maximum: optional(integer)
   )
 end
