@@ -427,7 +427,8 @@ CREATE TABLE public.schedules (
     ends_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    venue_id bigint
+    venue_id bigint,
+    maximum integer
 );
 
 
@@ -457,6 +458,39 @@ ALTER SEQUENCE public.schedules_id_seq OWNED BY public.schedules.id;
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: selections; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.selections (
+    id bigint NOT NULL,
+    registration_id bigint,
+    schedule_id bigint,
+    state character varying(16) DEFAULT 'pending'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: selections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.selections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: selections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.selections_id_seq OWNED BY public.selections.id;
 
 
 --
@@ -643,6 +677,13 @@ ALTER TABLE ONLY public.schedules ALTER COLUMN id SET DEFAULT nextval('public.sc
 
 
 --
+-- Name: selections id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.selections ALTER COLUMN id SET DEFAULT nextval('public.selections_id_seq'::regclass);
+
+
+--
 -- Name: taggings id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -773,6 +814,14 @@ ALTER TABLE ONLY public.schedules
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: selections selections_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.selections
+    ADD CONSTRAINT selections_pkey PRIMARY KEY (id);
 
 
 --
@@ -1031,6 +1080,34 @@ CREATE INDEX index_schedules_on_venue_id ON public.schedules USING btree (venue_
 
 
 --
+-- Name: index_selections_on_registration_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_selections_on_registration_id ON public.selections USING btree (registration_id);
+
+
+--
+-- Name: index_selections_on_registration_id_and_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_selections_on_registration_id_and_schedule_id ON public.selections USING btree (registration_id, schedule_id);
+
+
+--
+-- Name: index_selections_on_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_selections_on_schedule_id ON public.selections USING btree (schedule_id);
+
+
+--
+-- Name: index_selections_on_schedule_id_and_state_and_updated_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_selections_on_schedule_id_and_state_and_updated_at ON public.selections USING btree (schedule_id, state, updated_at);
+
+
+--
 -- Name: index_taggings_on_context; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1116,11 +1193,35 @@ ALTER TABLE ONLY public.schedules
 
 
 --
+-- Name: identities fk_rails_27e74d7b52; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.identities
+    ADD CONSTRAINT fk_rails_27e74d7b52 FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
+
+
+--
 -- Name: password_resets fk_rails_286b6e4fd3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.password_resets
     ADD CONSTRAINT fk_rails_286b6e4fd3 FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
+
+
+--
+-- Name: selections fk_rails_2c18b93dc1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.selections
+    ADD CONSTRAINT fk_rails_2c18b93dc1 FOREIGN KEY (schedule_id) REFERENCES public.schedules(id) ON DELETE CASCADE;
+
+
+--
+-- Name: selections fk_rails_41dbad5a49; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.selections
+    ADD CONSTRAINT fk_rails_41dbad5a49 FOREIGN KEY (registration_id) REFERENCES public.registrations(id) ON DELETE CASCADE;
 
 
 --
@@ -1239,6 +1340,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180811220916'),
 ('20180811222021'),
 ('20180812205342'),
-('20180820211405');
+('20180820211405'),
+('20180824201155'),
+('20180824203055');
 
 

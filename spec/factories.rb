@@ -159,8 +159,13 @@ FactoryBot.define do
   end
 
   factory :preference do
-    registration
     schedule
+    registration { create(:registration, festival: schedule.activity.festival) }
+  end
+
+  factory :selection do
+    schedule
+    registration { create(:registration, festival: schedule.activity.festival) }
   end
 
   factory :schedule do
