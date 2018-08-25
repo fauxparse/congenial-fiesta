@@ -7,5 +7,3 @@
 
   - registration_form.current_step.activities.select(&:selected?).each do |activity|
     = hidden_field_tag "registration[workshops][#{activity.id}]", activity.position, data: { target: 'workshop-selection.hiddenField' }
-
-  = render 'cart_summary', cart: registration_form.cart

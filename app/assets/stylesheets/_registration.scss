@@ -360,7 +360,6 @@ label[for='registration_code_of_conduct_accepted'] {
   border-radius: $base-border-radius;
   transition: background-color $base-duration $base-timing;
   user-select: none;
-  cursor: pointer;
 
   &:hover {
     background-color: $ghost-grey;
@@ -427,7 +426,23 @@ label[for='registration_code_of_conduct_accepted'] {
 }
 
 .cart__summary {
-  padding: $base-spacing;
+  &.drop-element {
+    @include shadow(1);
+    background: $pale-grey;
+    margin-top: .5em;
+    padding: $small-spacing $base-spacing;
+    border-radius: $base-border-radius;
+    text-align: center;
+
+    &::before {
+      @include triangle('up', 1em, .5em, $pale-grey);
+      content: '';
+      position: absolute;
+      right: 50%;
+      bottom: 100%;
+      margin-right: -.5em;
+    }
+  }
 
   .count {
     &::before {
@@ -452,20 +467,11 @@ label[for='registration_code_of_conduct_accepted'] {
   del {
     color: $tomato;
     display: block;
-    font-size: modular-scale(-1);
-
-    ~ .money {
-      font-weight: $bold-font-weight;
-    }
   }
 
-  .cart__workshops {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-
-    .cart__savings {
-      margin-left: .5em;
-    }
+  .total {
+    display: block;
+    font-size: modular-scale(2);
+    font-weight: $bold-font-weight;
   }
 }

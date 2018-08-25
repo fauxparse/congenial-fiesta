@@ -1,10 +1,13 @@
 import { Controller } from 'stimulus'
 import { debounce } from 'lodash'
+import Drop from 'tether-drop'
+import { tag } from 'tag'
 import fetch from '../lib/fetch'
 import money from '../lib/money'
 
 export default class extends Controller {
   static targets = [
+    'cart',
     'count',
     'total',
     'modal',
@@ -16,11 +19,19 @@ export default class extends Controller {
 
   _params = {}
 
-  get modal() {
-    return this.application.getControllerForElementAndIdentifier(
-      this.modalTarget,
-      'modal'
-    )
+  connect() {
+    this.drop = new Drop({
+      target: this.cartTarget,
+      classes: 'cart__summary',
+      content: this.renderSummary,
+      openOn: 'hover',
+      hoverCloseDelay: 500,
+      remove: true,
+      tetherOptions: {
+        attachment: 'top right',
+        targetAttachment: 'bottom right'
+      }
+    })
   }
 
   get count() {
@@ -32,13 +43,17 @@ export default class extends Controller {
   }
 
   get total() {
-    return parseInt(this.data.get('total'), 10)
+    return parseInt(this.cartTarget.dataset.total, 10)
   }
 
   set total(value) {
-    this.data.set('total', value)
+    this.cartTarget.dataset.total = value
     const node = this.totalTarget.firstChild.firstChild
     node.textContent = money(value) + ' '
+  }
+
+  get perWorkshop() {
+    return parseInt(this.cartTarget.dataset.each, 10)
   }
 
   set loading(value) {
@@ -75,7 +90,6 @@ export default class extends Controller {
   updated = ({ count, total, per_workshop }) => {
     this.count = count
     this.total = total.amount
-    this.perWorkshop = per_workshop.amount
     this.loading = false
     this.updateSummary()
     const event =
@@ -83,16 +97,40 @@ export default class extends Controller {
     this.element.dispatchEvent(event)
   }
 
-  updateSummary() {
-    this.summaryCountTarget.setAttribute('data-count', this.count)
-    this.summaryPriceTarget.firstChild.textContent =
-      money(this.perWorkshop) + ' '
-    this.summaryValueTarget.firstChild.textContent =
-      money(this.count * this.perWorkshop) + ' '
-    this.summaryTotalTarget.firstChild.textContent = money(this.total) + ' '
-  }
-
-  showDetails() {
-    this.modal.show()
-  }
+  renderSummary = () =>
+    tag(
+      'div',
+      { class: 'cart__workshops' },
+      [
+        tag('span', { class: 'count', data: { count: this.count } }),
+        '&nbsp;',
+        tag('span', {
+          class: 'item',
+          data: { singular: 'workshop', plural: 'workshops' }
+        }),
+        '&nbsp;',
+        '@',
+        '&nbsp;',
+        tag('span', { class: 'money' }, money(this.perWorkshop)),
+        '&nbsp;=&nbsp;',
+        tag(
+          'div',
+          { class: 'cart__savings' },
+          [
+            this.count < 2 ? '' : tag(
+              'del',
+              {},
+              [
+                tag('span', { class: 'money' }, money(this.perWorkshop * this.count)),
+              ]
+            ),
+            tag('span', { class: 'money total' }, [
+              money(this.total),
+              '&nbsp;',
+              tag('span', { class: 'currency' }, 'NZD')
+            ])
+          ]
+        )
+      ]
+    )
 }
