@@ -55,7 +55,6 @@
     }
 
     .step__name {
-      @include all-caps;
       font-size: modular-scale(-1);
       font-weight: $base-font-weight;
       order: 1;
@@ -173,6 +172,7 @@
       padding-bottom: $base-spacing;
 
       .step__name {
+        @include all-caps;
         text-align: right;
       }
     }
@@ -306,9 +306,15 @@ label[for='registration_code_of_conduct_accepted'] {
       color: $secondary-font-color;
     }
 
+    &__times,
+    &__levels {
+      order: 1;
+      margin-top: $small-spacing;
+    }
+
     .button {
       margin: $small-spacing 0 0;
-      order: 1;
+      order: 2;
       justify-content: flex-start;
     }
 
@@ -473,5 +479,25 @@ label[for='registration_code_of_conduct_accepted'] {
     display: block;
     font-size: modular-scale(2);
     font-weight: $bold-font-weight;
+  }
+}
+
+.activity__level {
+  display: block;
+
+  &::before {
+    @include size(1em);
+    content: '';
+    display: inline-block;
+    margin-right: 0.5em;
+    border-radius: 2px;
+    background-color: $pale-grey;
+    vertical-align: text-top;
+  }
+
+  @each $level, $color in $level-colors {
+    &[data-level='#{$level}']::before {
+      background-color: $color;
+    }
   }
 }

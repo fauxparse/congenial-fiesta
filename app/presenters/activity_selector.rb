@@ -7,9 +7,10 @@ class ActivitySelector
 
   delegate :festival, to: :registration
 
-  def initialize(registration, scope: Activity)
+  def initialize(registration, scope: Activity, grouped: true)
     @registration = registration
     @scope = scope
+    @grouped = grouped
   end
 
   def each_day(&_block)
@@ -17,12 +18,16 @@ class ActivitySelector
 
     (festival.start_date..festival.end_date).map do |date|
       scheduled = activities.select { |a| a.starts_at.to_date == date }
-      yield date, Timeslot.from(scheduled) if scheduled.any?
+      yield date, Timeslot.from(scheduled, grouped: grouped?) if scheduled.any?
     end
   end
 
   def to_partial_path
     '/registrations/activity_selector'
+  end
+
+  def grouped?
+    @grouped.to_b
   end
 
   delegate :each, to: :activities
@@ -76,9 +81,9 @@ class ActivitySelector
   class Timeslot
     attr_reader :activities
 
-    def self.from(activities)
+    def self.from(activities, grouped: true)
       activities
-        .group_by(&:starts_at)
+        .group_by { |activity| grouped ? activity.starts_at : true }
         .to_a
         .map { |_, group| new(group) }
     end

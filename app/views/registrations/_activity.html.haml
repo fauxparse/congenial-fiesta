@@ -3,6 +3,9 @@
     .activity__photo= image_tag activity.photo, alt: activity.name
   .activity__name= activity.name
   .activity__presenters= activity.presenters.to_sentence
+
+  = yield
+
   %button.button.button--primary.activity__remove{data: { action: 'activity-selector#removeClicked'}}
     = icon :check, class: 'button__icon'
     .button__text= t('.chosen', position: (activity.position || 1).ordinalize_full).humanize
