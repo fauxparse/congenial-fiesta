@@ -11,6 +11,8 @@ class Schedule < ApplicationRecord
   validates :ends_at, time: { after: :starts_at }
 
   scope :sorted, -> { order(:starts_at, :id) }
+  scope :freebie, -> { where(freebie: true) }
+  scope :not_freebie, -> { where(freebie: false) }
 
   def slot
     starts_at.to_i

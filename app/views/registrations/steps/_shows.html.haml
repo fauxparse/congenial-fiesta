@@ -1,6 +1,13 @@
 %h1.registration-form__title= t('.title')
 
 .show-selection{data: { controller: 'show-selection', action: 'activities:select->show-selection#selectionChanged activities:limit->show-selection#limitReached' }}
+  .gala-rsvp
+    %h2.gala-rsvp__title= t('.gala.title')
+    %p.gala-rsvp__description= markdown t('.gala.description')
+
+    = form.check_box_field :attending_gala do
+      = t('.gala.attending')
+
   = render registration_form.current_step.activities do
     .registration-form__cart
       .show-selection__counter

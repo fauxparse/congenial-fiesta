@@ -517,6 +517,17 @@ label[for='registration_code_of_conduct_accepted'] {
 }
 
 .show-selection {
+  .gala-rsvp {
+    background: $ghost-grey;
+    border-top: .25em solid $accent-color;
+    padding: $small-spacing;
+    margin: 0 0 $base-spacing;
+
+    .check-box-field-icon {
+      background-color: $white;
+    }
+  }
+
   &__counter {
     margin-right: -$small-spacing;
     padding: $small-spacing;
