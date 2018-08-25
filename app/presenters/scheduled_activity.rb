@@ -3,7 +3,8 @@
 class ScheduledActivity
   attr_reader :photo
 
-  def initialize(schedule, registration: nil, photo: nil, available: true, selection: nil)
+  def initialize(schedule,
+    registration: nil, photo: nil, available: true, selection: nil)
     @schedule = schedule
     @registration = registration
     @photo = photo

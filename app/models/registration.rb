@@ -5,7 +5,6 @@ class Registration < ApplicationRecord
 
   belongs_to :festival
   belongs_to :participant
-  has_many :preferences, -> { sorted }, dependent: :destroy, autosave: true
   has_many :selections, -> { sorted }, dependent: :destroy, autosave: true
 
   enum state: {
@@ -14,11 +13,11 @@ class Registration < ApplicationRecord
     confirmed: 'confirmed'
   }
 
-  def workshop_preferences_saved?
-    workshop_preferences_saved_at.present?
+  def workshops_saved?
+    workshops_saved_at.present?
   end
 
-  def show_preferences_saved?
-    show_preferences_saved_at.present?
+  def shows_saved?
+    shows_saved_at.present?
   end
 end

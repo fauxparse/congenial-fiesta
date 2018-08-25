@@ -7,9 +7,9 @@ class RegistrationForm
 
       permit workshops: {}
 
-      validates :workshop_preferences_saved_at, presence: true
+      validates :workshops_saved_at, presence: true
 
-      delegate :workshop_preferences_saved_at, to: :registration
+      delegate :workshops_saved_at, to: :registration
 
       def to_param
         'workshops'
@@ -42,7 +42,7 @@ class RegistrationForm
 
       def workshops=(selections)
         update_selections(selections.transform_keys(&:to_i), type: Workshop)
-        registration.workshop_preferences_saved_at ||= Time.zone.now
+        registration.workshops_saved_at ||= Time.zone.now
       end
     end
   end

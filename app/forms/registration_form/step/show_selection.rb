@@ -8,9 +8,9 @@ class RegistrationForm
       permit shows: {}
       permit :attending_gala
 
-      validates :show_preferences_saved_at, presence: true
+      validates :shows_saved_at, presence: true
 
-      delegate :show_preferences_saved_at, to: :registration
+      delegate :shows_saved_at, to: :registration
 
       def to_param
         'shows'
@@ -52,7 +52,7 @@ class RegistrationForm
       end
 
       def attending_gala
-        !registration.show_preferences_saved? ||
+        !registration.shows_saved? ||
           (gala_selection && !gala_selection.marked_for_destruction?)
       end
 
@@ -70,7 +70,7 @@ class RegistrationForm
 
       def shows=(selections)
         update_selections(selections.transform_keys(&:to_i), type: Show)
-        registration.show_preferences_saved_at ||= Time.zone.now
+        registration.shows_saved_at ||= Time.zone.now
       end
 
       def workshops_count

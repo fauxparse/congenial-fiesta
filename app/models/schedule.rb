@@ -3,7 +3,6 @@
 class Schedule < ApplicationRecord
   belongs_to :activity
   belongs_to :venue, optional: true
-  has_many :preferences, dependent: :destroy
   has_many :selections, dependent: :destroy
   has_one :festival, through: :activity
 
