@@ -429,7 +429,8 @@ CREATE TABLE public.schedules (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     venue_id bigint,
-    maximum integer
+    maximum integer,
+    freebie boolean DEFAULT false
 );
 
 
@@ -1344,6 +1345,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180820211405'),
 ('20180824201155'),
 ('20180824203055'),
-('20180825010126');
+('20180825010126'),
+('20180825120959');
 
 

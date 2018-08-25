@@ -38,9 +38,19 @@ en:
           title: 'Limit reached'
           body: |
             Your registration entitles you to one free show ticket for each
-            workshop you’ve signed up for. Additional show tickets can be
-            purchased at Box Office during the Festival, and as a participant,
-            you’ll be entitled to stand-by comps on the night.
+            workshop you’ve signed up for (plus one additional ticket for the
+            Gala). Additional show tickets can be purchased at Box Office during
+            the Festival, and as a participant, you’ll be entitled to stand-by
+            comps on the night.
+        gala:
+          title: '10th Anniversary Gala'
+          description: |
+            To mark the 10th year of NZIF, we will be holding a special Gala
+            performance on Saturday 20 October at Hannah Playhouse (across the
+            road from BATS). This show is free for all NZIF participants, and
+            does not count towards your Festival allocation, but we need to
+            know if you can make it.
+          attending: 'Yes! Please save me a seat'
     activity:
       selected:
         multiple: '%{position} choice'

@@ -43,6 +43,7 @@ class ActivitySelector
   def scope
     festival
       .schedules
+      .not_freebie
       .includes(activity: { presenters: :participant })
       .references(:activity)
       .sorted
