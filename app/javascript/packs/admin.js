@@ -1,4 +1,4 @@
-import 'mdn-polyfills/Element.prototype.closest'
+import '@stimulus/polyfills'
 
 import Rails from 'rails-ujs'
 import Turbolinks from 'turbolinks'
