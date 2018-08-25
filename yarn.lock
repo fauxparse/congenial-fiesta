@@ -5531,7 +5531,7 @@ svgo@^0.7.0:
 
 "tag@https://github.com/fauxparse/tag.git#data_attributes":
   version "0.3.0"
-  resolved "https://github.com/fauxparse/tag.git#9eac9e7c9c2260e05dc8d19c47291e3c8c63bc72"
+  resolved "https://github.com/fauxparse/tag.git#b922581d932e9f24b477987cdd2db255506d7393"
 
 tapable@^0.2.7:
   version "0.2.8"
