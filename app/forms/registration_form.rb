@@ -16,7 +16,7 @@ class RegistrationForm
     @registration ||=
       festival
       .registrations
-      .includes(preferences: { schedule: :activity })
+      .includes(selections: { schedule: :activity })
       .find_or_initialize_by(participant: @participant)
   end
 

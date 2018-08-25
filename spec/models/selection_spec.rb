@@ -13,6 +13,11 @@ RSpec.describe Selection, type: :model do
       .scoped_to(:registration_id)
   }
 
+  describe '#slot' do
+    subject(:slot) { selection.slot }
+    it { is_expected.to eq selection.schedule.slot }
+  end
+
   describe '.included_in_limit' do
     subject(:included_selections) { schedule.selections.included_in_limit }
     let(:schedule) { create(:schedule) }
@@ -24,7 +29,7 @@ RSpec.describe Selection, type: :model do
       end
     end
 
-    context 'when not confirmed' do
+    context 'when not registered' do
       it { is_expected.to include(selection) }
 
       context 'and some time has elapsed' do
@@ -33,9 +38,9 @@ RSpec.describe Selection, type: :model do
       end
     end
 
-    context 'when confirmed' do
+    context 'when registered' do
       let(:selection) do
-        create(:selection, schedule: schedule).tap(&:confirmed!)
+        create(:selection, schedule: schedule).tap(&:registered!)
       end
 
       it { is_expected.to include(selection) }

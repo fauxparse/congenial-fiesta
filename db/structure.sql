@@ -472,7 +472,9 @@ CREATE TABLE public.selections (
     schedule_id bigint,
     state character varying(16) DEFAULT 'pending'::character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    slot character varying,
+    "position" integer DEFAULT 1
 );
 
 
@@ -1096,6 +1098,13 @@ CREATE UNIQUE INDEX index_selections_on_registration_id_and_schedule_id ON publi
 
 
 --
+-- Name: index_selections_on_registration_id_and_slot_and_position; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_selections_on_registration_id_and_slot_and_position ON public.selections USING btree (registration_id, slot, "position");
+
+
+--
 -- Name: index_selections_on_schedule_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1346,6 +1355,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180824201155'),
 ('20180824203055'),
 ('20180825010126'),
-('20180825120959');
+('20180825120959'),
+('20180825205149');
 
 

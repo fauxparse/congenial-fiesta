@@ -46,26 +46,26 @@ RSpec.describe RegistrationForm::Step::WorkshopSelection do
 
     it 'creates preferences' do
       expect { step.update(attributes) }
-        .to change(Preference, :count)
+        .to change(Selection, :count)
         .by(2)
     end
 
     context 'with existing preferences' do
       before do
         schedules.each do |schedule|
-          registration.preferences.create(schedule: schedule)
+          registration.selections.create(schedule: schedule)
         end
       end
 
       it 'deletes the old preference' do
         expect { step.update(attributes) }
-          .to change(Preference, :count)
+          .to change(Selection, :count)
           .by(-1)
       end
 
       it 'changes the order' do
         step.update(attributes)
-        expect(registration.reload.preferences.map(&:schedule_id))
+        expect(registration.reload.selections.map(&:schedule_id))
           .to eq [schedules.second.id, schedules.first.id]
       end
     end

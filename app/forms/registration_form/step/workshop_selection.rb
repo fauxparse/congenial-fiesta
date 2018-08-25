@@ -29,7 +29,7 @@ class RegistrationForm
       end
 
       def update(attributes = {})
-        Preference.acts_as_list_no_update do
+        Selection.acts_as_list_no_update do
           super
         end
       end
@@ -40,8 +40,8 @@ class RegistrationForm
 
       private
 
-      def workshops=(preferences)
-        update_preferences(preferences.transform_keys(&:to_i), type: Workshop)
+      def workshops=(selections)
+        update_selections(selections.transform_keys(&:to_i), type: Workshop)
         registration.workshop_preferences_saved_at ||= Time.zone.now
       end
     end
