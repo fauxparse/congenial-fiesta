@@ -92,7 +92,7 @@ export default class extends Controller {
     e.preventDefault()
     const id = e.target.closest('.activity').getAttribute('data-id')
     const activity = this.activities[id]
-    if (!this.addActivity(activity)) {
+    if (activity && !this.addActivity(activity)) {
       const event =
         new CustomEvent('activities:limit', { detail: activity, bubbles: true })
       this.element.dispatchEvent(event)
@@ -177,9 +177,11 @@ export default class extends Controller {
   }
 
   updateHiddenFields() {
-    const selections = this.selections
-    this.hiddenFieldTargets.forEach(method('remove'))
-    values(selections).forEach(this.addHiddenFields)
+    if (!this.data.get('demo')) {
+      const selections = this.selections
+      this.hiddenFieldTargets.forEach(method('remove'))
+      values(selections).forEach(this.addHiddenFields)
+    }
   }
 
   addHiddenFields = activities => {

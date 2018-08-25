@@ -23,6 +23,15 @@ en:
           Festival.
         acceptance: 'I have read and agreed to the Code of Conduct'
         please_read: 'Please read the Code of Conduct before continuing'
+      workshops:
+        title: 'Workshop selection'
+        instructions: |
+          During Earlybird registration, instead of selecting only one
+          workshop in each stream, select as many as you want, in order of
+          preference. We’ll do our best to get you into your first choice.
+          <a href="#" data-action="workshop-selection#help">Click here</a>
+          for more information on how and why we’re doing this.
+        help: 'Help'
       shows:
         title: 'Show selection'
         limit_reached:
@@ -32,8 +41,6 @@ en:
             workshop you’ve signed up for. Additional show tickets can be
             purchased at Box Office during the Festival, and as a participant,
             you’ll be entitled to stand-by comps on the night.
-      workshops:
-        title: 'Workshop selection'
     activity:
       selected:
         multiple: '%{position} choice'
@@ -42,3 +49,8 @@ en:
       compulsory: 'That’s you!'
     cart:
       workshop: 'workshop'
+
+  onboard:
+    read_more: 'Read more'
+    next: 'Next'
+    finish: 'Finish'

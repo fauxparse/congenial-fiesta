@@ -24,4 +24,13 @@ export default class extends Controller {
         .reduce((hash, { id, position }) => ({ ...hash, [id]: position }), {})
     this.cart.update({ step: 'workshops', workshops })
   }
+
+  help(e) {
+    e && e.preventDefault()
+    const help = this.application.getControllerForElementAndIdentifier(
+      document.querySelector('.workshop-onboarding'),
+      'onboard'
+    )
+    help && help.show()
+  }
 }
