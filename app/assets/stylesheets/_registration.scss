@@ -363,14 +363,14 @@ label[for='registration_code_of_conduct_accepted'] {
   grid-column-gap: $small-spacing;
   grid-template-rows: $base-line-height $base-line-height;
   align-items: center;
-  padding: .5em $small-spacing;
+  padding: .4375em .6875em;
   margin-right: -$small-spacing;
   border-radius: $base-border-radius;
-  transition: background-color $base-duration $base-timing;
+  border: 1px solid transparent;
   user-select: none;
 
   &:hover {
-    background-color: $ghost-grey;
+    border-color: $ghost-grey;
   }
 
   span {
@@ -504,6 +504,18 @@ label[for='registration_code_of_conduct_accepted'] {
   }
 }
 
+.workshop-selection {
+  &__instructions {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: $base-spacing;
+
+    .button {
+      margin-left: $base-spacing;
+    }
+  }
+}
+
 .show-selection {
   &__counter {
     margin-right: -$small-spacing;
@@ -533,5 +545,46 @@ label[for='registration_code_of_conduct_accepted'] {
     min-width: .5em;
     background: linear-gradient(to right, $grape, $plum);
     transition: width $base-duration $base-timing;
+  }
+}
+
+.workshop-onboarding {
+  .onboard__example {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .activity {
+    display: flex;
+    align-items: center;
+    margin: $small-spacing 0 0;
+
+    .fruit {
+      font-size: modular-scale(2);
+      margin-right: .5em;
+    }
+
+    .button {
+      width: 12em;
+      margin: 0;
+      justify-content: flex-start;
+    }
+
+    .activity__remove {
+      display: none;
+    }
+
+    &[data-position] {
+      .activity__remove {
+        display: flex;
+      }
+
+      .activity__add {
+        display: none;
+      }
+    }
   }
 }

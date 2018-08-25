@@ -34,15 +34,15 @@ class RegistrationForm
         end
       end
 
+      def registrations
+        @registrations ||= RegistrationStage.new(registration.festival)
+      end
+
       private
 
       def workshops=(preferences)
         update_preferences(preferences.transform_keys(&:to_i), type: Workshop)
         registration.workshop_preferences_saved_at ||= Time.zone.now
-      end
-
-      def registrations
-        @registrations ||= RegistrationStage.new(registration.festival)
       end
     end
   end
