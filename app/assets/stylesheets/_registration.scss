@@ -173,6 +173,7 @@
 
       .step__name {
         @include all-caps;
+        line-height: $heading-line-height;
         text-align: right;
       }
     }
@@ -340,7 +341,8 @@ label[for='registration_code_of_conduct_accepted'] {
     z-index: 3;
   }
 
-  .cart {
+  .cart,
+  .show-selection__counter {
     @include position(absolute, 0 0 null null);
   }
 
@@ -375,7 +377,7 @@ label[for='registration_code_of_conduct_accepted'] {
     transition: opacity $base-duration $base-timing;
   }
 
-  &--loading {
+  &.cart--loading {
     span {
       opacity: .5;
     }
@@ -499,5 +501,37 @@ label[for='registration_code_of_conduct_accepted'] {
     &[data-level='#{$level}']::before {
       background-color: $color;
     }
+  }
+}
+
+.show-selection {
+  &__counter {
+    margin-right: -$small-spacing;
+    padding: $small-spacing;
+    text-align: center;
+    color: $secondary-font-color;
+  }
+
+  &__count {
+    color: $base-font-color;
+  }
+
+  &__track,
+  &__progress {
+    height: .5em;
+    border-radius: .25em;
+    background: $ghost-grey;
+  }
+
+  &__track {
+    position: relative;
+    width: 8em;
+  }
+
+  &__progress {
+    @include position(absolute, 0 null 0 0);
+    min-width: .5em;
+    background: linear-gradient(to right, $grape, $plum);
+    transition: width $base-duration $base-timing;
   }
 }

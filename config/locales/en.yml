@@ -16,7 +16,7 @@ en:
 
   time:
     formats:
-      time: '%I:%M%p'
+      time: '%-l:%M%p'
       timetable: '%-l:%M'
 
   countries:

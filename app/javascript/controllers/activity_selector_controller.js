@@ -3,11 +3,13 @@ import {
   findIndex,
   groupBy,
   keyBy,
+  method,
   property,
   uniq,
   upperFirst,
   values
 } from 'lodash'
+import { tag } from 'tag'
 
 const ORDINALS = [
   undefined,
@@ -24,7 +26,11 @@ const ORDINALS = [
 ]
 
 export default class extends Controller {
-  static targets = ['activity']
+  static targets = ['activity', 'hiddenField']
+
+  get type() {
+    return this.data.get('type')
+  }
 
   get activities() {
     if (!this._activities) {
@@ -68,15 +74,43 @@ export default class extends Controller {
     return groupBy(activities, property('slot'))
   }
 
+  get count() {
+    return values(this.preferences)
+      .filter(slot => slot.length)
+      .length
+  }
+
+  get maximum() {
+    return parseInt(this.data.get('max') || 1000, 10)
+  }
+
+  get perSlot() {
+    return parseInt(this.data.get('per-slot') || 1000, 10)
+  }
+
   addClicked = e => {
     e.preventDefault()
     const id = e.target.closest('.activity').getAttribute('data-id')
-    this.addActivity(this.activities[id])
+    const activity = this.activities[id]
+    if (!this.addActivity(activity)) {
+      const event =
+        new CustomEvent('activities:limit', { detail: activity, bubbles: true })
+      this.element.dispatchEvent(event)
+    }
   }
 
   addActivity(activity) {
+    if (this.perSlot === 1) {
+      this.preferences[activity.slot] = []
+    }
     this.preferences[activity.slot].push(activity)
-    this.updatePositions(activity.slot)
+    if (this.count > this.maximum) {
+      this.removeActivity(activity)
+      return false
+    } else {
+      this.updatePositions(activity.slot)
+      return true
+    }
   }
 
   removeClicked = e => {
@@ -109,11 +143,17 @@ export default class extends Controller {
     if (position) {
       element.querySelector(
         '.activity__remove .button__text'
-      ).innerText = `${upperFirst(ORDINALS[position])} choice`
+      ).innerText = this.activeLabel(position)
       element.setAttribute('data-position', position)
     } else {
       element.removeAttribute('data-position')
     }
+  }
+
+  activeLabel(position) {
+    const key = this.perSlot > 1 ? 'selectedMultiple' : 'selectedSingle'
+    const template = this.element.dataset[key]
+    return template.replace('%{position}', upperFirst(ORDINALS[position]))
   }
 
   preferencesFor(slot) {
@@ -129,9 +169,31 @@ export default class extends Controller {
   }
 
   changed() {
+    this.updateHiddenFields()
     const detail = this.selections
     const event =
       new CustomEvent('activities:select', { detail, bubbles: true })
     this.element.dispatchEvent(event)
+  }
+
+  updateHiddenFields() {
+    const selections = this.selections
+    this.hiddenFieldTargets.forEach(method('remove'))
+    values(selections).forEach(this.addHiddenFields)
+  }
+
+  addHiddenFields = activities => {
+    const fragment = document.createDocumentFragment()
+    activities.forEach(({ id }, i) => {
+      fragment.appendChild(
+        tag('input', {
+          type: 'hidden',
+          name: `registration[${this.type}][${id}]`,
+          value: i + 1,
+          'data-target': 'activity-selector.hiddenField'
+        })
+      )
+    })
+    this.element.appendChild(fragment)
   }
 }

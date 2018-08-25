@@ -25,10 +25,19 @@ en:
         please_read: 'Please read the Code of Conduct before continuing'
       shows:
         title: 'Show selection'
+        limit_reached:
+          title: 'Limit reached'
+          body: |
+            Your registration entitles you to one free show ticket for each
+            workshop you’ve signed up for. Additional show tickets can be
+            purchased at Box Office during the Festival, and as a participant,
+            you’ll be entitled to stand-by comps on the night.
       workshops:
         title: 'Workshop selection'
     activity:
-      chosen: '%{position} choice'
+      selected:
+        multiple: '%{position} choice'
+        single: 'You’re in!'
       add: 'Add this'
       compulsory: 'That’s you!'
     cart:
