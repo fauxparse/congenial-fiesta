@@ -55,6 +55,7 @@ class RegistrationForm
       Step::ParticipantDetails.new(self),
       Step::CodeOfConduct.new(self),
       Step::WorkshopSelection.new(self),
+      Step::ShowSelection.new(self),
       Step::PaymentDetails.new(self)
     ].freeze
   end

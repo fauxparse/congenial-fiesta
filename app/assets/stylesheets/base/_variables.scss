@@ -44,6 +44,12 @@ $workshop-color: $mandarin;
 $show-color: $plum;
 $social-event-color: $apple;
 
+$level-colors: (
+  rookie: $apple,
+  intermediate: $mint,
+  advanced: $grape
+);
+
 $facebook: #4267b2;
 $google: #ea4335;
 $twitter: #1da1f2;

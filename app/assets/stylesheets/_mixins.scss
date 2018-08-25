@@ -43,6 +43,8 @@
   @include horizontal-padding($base-spacing);
   position: sticky;
   top: 0;
-  background: rgba($white, .95);
+  background: rgba($white, .90);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   z-index: 1;
 }

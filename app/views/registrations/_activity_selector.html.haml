@@ -5,6 +5,7 @@
       %h2.activity-selector__date{data: { date: { short: l(date, format: :short), full: l(date, format: :timetable) }, count: timeslots.count(&:selected?) }}
       - timeslots.each do |timeslot|
         .activity-selector__slot
-          %h3.activity-selector__time= time_range(timeslot.starts_at, timeslot.ends_at)
+          - if activity_selector.grouped?
+            %h3.activity-selector__time= time_range(timeslot.starts_at, timeslot.ends_at)
           .activity-selector__activities
             = render timeslot.activities

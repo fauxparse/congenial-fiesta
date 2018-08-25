@@ -23,7 +23,7 @@ class ScheduledActivity
   end
 
   def to_partial_path
-    'registrations/activity'
+    "registrations/#{activity.type.underscore}"
   end
 
   def selected?
@@ -42,6 +42,14 @@ class ScheduledActivity
     @available.present? &&
       !compulsory? &&
       schedule.available?
+  end
+
+  def sorted_level_list
+    if activity.respond_to?(:sorted_level_list)
+      activity.sorted_level_list
+    else
+      []
+    end
   end
 
   private

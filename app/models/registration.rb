@@ -17,4 +17,8 @@ class Registration < ApplicationRecord
   def workshop_preferences_saved?
     workshop_preferences_saved_at.present?
   end
+
+  def show_preferences_saved?
+    show_preferences_saved_at.present?
+  end
 end
