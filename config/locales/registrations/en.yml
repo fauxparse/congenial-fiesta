@@ -9,6 +9,7 @@ en:
 
   registrations:
     edit:
+      title: 'Register for %{festival}'
       back: 'Back:'
       next: 'Next:'
     steps:
