@@ -17,7 +17,20 @@ class RegistrationForm
 
       def activities
         @activities ||=
-          ActivitySelector.new(registration, scope: Show, grouped: false)
+          ActivitySelector.new(
+            registration,
+            scope: Show,
+            grouped: false,
+            max: workshops_count
+          )
+      end
+
+      def selections
+        registration
+          .preferences
+          .includes(schedule: :activity)
+          .references(:activity)
+          .merge(Show.all)
       end
 
       def assign_attributes(attributes)
@@ -35,6 +48,17 @@ class RegistrationForm
       def shows=(preferences)
         update_preferences(preferences.transform_keys(&:to_i), type: Show)
         registration.show_preferences_saved_at ||= Time.zone.now
+      end
+
+      def workshops_count
+        @workshops_count ||=
+          registration
+            .preferences
+            .joins(schedule: :activity)
+            .merge(Workshop.all)
+            .pluck(:slot)
+            .uniq
+            .size
       end
     end
   end

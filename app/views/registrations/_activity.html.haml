@@ -8,7 +8,8 @@
 
   %button.button.button--primary.activity__remove{data: { action: 'activity-selector#removeClicked'}}
     = icon :check, class: 'button__icon'
-    .button__text= t('.chosen', position: (activity.position || 1).ordinalize_full).humanize
+    .button__text
+      = t(selector.max_per_slot.blank? ? :multiple : :single, scope: 'registrations.activity.selected', position: (activity.position || 1).ordinalize_full).humanize
   %button.button.activity__add{data: { action: 'activity-selector#addClicked'}, disabled: !activity.available?}
     - if activity.compulsory?
       = icon :check, class: 'button__icon'

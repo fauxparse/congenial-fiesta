@@ -77,6 +77,10 @@ class RegistrationForm
       @complete
     end
 
+    def accessible?
+      form.accessible_steps.include?(self)
+    end
+
     def assign_attributes(attributes)
       attributes.each_pair do |attr, value|
         send("#{attr}=", value)

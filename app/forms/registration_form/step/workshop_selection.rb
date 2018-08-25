@@ -16,7 +16,12 @@ class RegistrationForm
       end
 
       def activities
-        @activities ||= ActivitySelector.new(registration, scope: Workshop)
+        @activities ||=
+          ActivitySelector.new(
+            registration,
+            scope: Workshop,
+            max_per_slot: registrations.earlybird? ? nil : 1
+        )
       end
 
       def assign_attributes(attributes)
@@ -34,6 +39,10 @@ class RegistrationForm
       def workshops=(preferences)
         update_preferences(preferences.transform_keys(&:to_i), type: Workshop)
         registration.workshop_preferences_saved_at ||= Time.zone.now
+      end
+
+      def registrations
+        @registrations ||= RegistrationStage.new(registration.festival)
       end
     end
   end

@@ -122,6 +122,24 @@
     }
   }
 
+  &--alert {
+    .modal__header {
+      min-height: auto;
+      flex-direction: row-reverse;
+      align-items: flex-start;
+    }
+
+    .modal__body {
+      padding: 1em;
+    }
+
+    .modal__footer {
+      .button {
+        min-width: 6em;
+      }
+    }
+  }
+
   @media screen and (min-width: #{$line-width / 2}) {
     &__content {
       height: auto;

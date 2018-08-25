@@ -58,9 +58,9 @@ export default class extends Controller {
 
   set loading(value) {
     if (value) {
-      this.element.classList.add('cart--loading')
+      this.cartTarget.classList.add('cart--loading')
     } else {
-      this.element.classList.remove('cart--loading')
+      this.cartTarget.classList.remove('cart--loading')
     }
   }
 
@@ -91,7 +91,6 @@ export default class extends Controller {
     this.count = count
     this.total = total.amount
     this.loading = false
-    this.updateSummary()
     const event =
       new CustomEvent('cart:updated', { detail: this, bubbles: true })
     this.element.dispatchEvent(event)

@@ -3,14 +3,16 @@
 class ActivitySelector
   include Enumerable
 
-  attr_reader :registration
+  attr_reader :registration, :max, :max_per_slot
 
   delegate :festival, to: :registration
 
-  def initialize(registration, scope: Activity, grouped: true)
+  def initialize(registration, scope: Activity, grouped: true, max: nil, max_per_slot: 1)
     @registration = registration
     @scope = scope
     @grouped = grouped
+    @max = max
+    @max_per_slot = max_per_slot
   end
 
   def each_day(&_block)
@@ -28,6 +30,10 @@ class ActivitySelector
 
   def grouped?
     @grouped.to_b
+  end
+
+  def type
+    @scope.name.pluralize.underscore
   end
 
   delegate :each, to: :activities
@@ -76,6 +82,10 @@ class ActivitySelector
       (1..(scope.count / 30.0).ceil)
       .flat_map { |page| Unsplash::Photo.search('dinosaur', page, 30) }
       .map { |photo| photo.urls[:small] }
+  end
+
+  def registrations
+    @registrations ||= RegistrationStage.new(festival)
   end
 
   class Timeslot
