@@ -33,6 +33,6 @@ class Schedule < ApplicationRecord
   alias limited limited?
 
   def limited=(value)
-    self.maximum = value.to_b ? self.maximum || activity.maximum : nil
+    self.maximum = value.to_b ? maximum || activity.maximum : nil
   end
 end

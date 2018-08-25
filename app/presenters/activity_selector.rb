@@ -7,7 +7,8 @@ class ActivitySelector
 
   delegate :festival, to: :registration
 
-  def initialize(registration, scope: Activity, grouped: true, max: nil, max_per_slot: 1)
+  def initialize(registration,
+    scope: Activity, grouped: true, max: nil, max_per_slot: 1)
     @registration = registration
     @scope = scope
     @grouped = grouped
@@ -57,8 +58,8 @@ class ActivitySelector
   def activities
     @activities ||=
       schedules
-        .zip(photos)
-        .map { |activity, photo| scheduled(activity, photo: photo) }
+      .zip(photos)
+      .map { |activity, photo| scheduled(activity, photo: photo) }
   end
 
   def scheduled(activity, photo: nil)

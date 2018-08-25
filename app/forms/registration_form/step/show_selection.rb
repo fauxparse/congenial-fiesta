@@ -48,12 +48,12 @@ class RegistrationForm
       def gala
         @gala ||=
           registration
-            .festival
-            .schedules
-            .freebie
-            .includes(:activity)
-            .merge(Show.all)
-            .first
+          .festival
+          .schedules
+          .freebie
+          .includes(:activity)
+          .merge(Show.all)
+          .first
       end
 
       def attending_gala
@@ -81,12 +81,12 @@ class RegistrationForm
       def workshops_count
         @workshops_count ||=
           registration
-            .preferences
-            .joins(schedule: :activity)
-            .merge(Workshop.all)
-            .pluck(:slot)
-            .uniq
-            .size
+          .preferences
+          .joins(schedule: :activity)
+          .merge(Workshop.all)
+          .pluck(:slot)
+          .uniq
+          .size
       end
 
       def gala_selection
