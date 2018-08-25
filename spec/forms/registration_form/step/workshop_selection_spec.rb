@@ -39,7 +39,7 @@ RSpec.describe RegistrationForm::Step::WorkshopSelection do
 
     it 'completes workshop selection' do
       expect { step.update(attributes) }
-        .to change { registration.reload.workshop_preferences_saved? }
+        .to change { registration.reload.workshops_saved? }
         .from(false)
         .to(true)
     end
