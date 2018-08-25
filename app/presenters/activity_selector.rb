@@ -68,12 +68,22 @@ class ActivitySelector
       registration: registration,
       photo: photo,
       available: available?(activity),
-      selection: selection_for(activity)
+      selection: selection_for(activity),
     )
   end
 
   def available?(activity)
-    schedules.none? { |s| s.slot == activity.slot && presenting?(s.activity) }
+    !presenting_opposite?(activity) && places_left?(activity)
+  end
+
+  def places_left?(activity)
+    !activity.limited? || count(activity) < activity.maximum
+  end
+
+  def presenting_opposite?(activity)
+    (schedules - [activity]).any? do |s|
+      s.slot == activity.slot && presenting?(s.activity)
+    end
   end
 
   def presenting?(activity)
@@ -95,6 +105,17 @@ class ActivitySelector
 
   def registrations
     @registrations ||= RegistrationStage.new(festival)
+  end
+
+  def count(schedule)
+    @counts ||=
+      festival
+      .schedules
+      .joins(selections: :registration)
+      .where('registrations.participant_id <> ?', registration.participant_id)
+      .group('schedules.id')
+      .count('schedules.id')
+    @counts[schedule.id] || 0
   end
 
   class Timeslot
