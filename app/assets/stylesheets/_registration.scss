@@ -554,7 +554,7 @@ label[for='registration_code_of_conduct_accepted'] {
   &__progress {
     @include position(absolute, 0 null 0 0);
     min-width: .5em;
-    background: linear-gradient(to right, $grape, $plum);
+    background: linear-gradient(to right, $tomato, $mandarin);
     transition: width $base-duration $base-timing;
   }
 }
