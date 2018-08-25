@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AddMaximumToSchedules < ActiveRecord::Migration[5.2]
   def up
     add_column :schedules, :maximum, :integer

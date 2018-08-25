@@ -82,9 +82,7 @@ class RegistrationForm
     end
 
     def assign_attributes(attributes)
-      attributes.each_pair do |attr, value|
-        send("#{attr}=", value)
-      end
+      attributes.each_pair { |attr, value| send("#{attr}=", value) }
     end
 
     def update(attributes = {})

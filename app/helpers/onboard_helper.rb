@@ -8,9 +8,7 @@ module OnboardHelper
       :section,
       options.deep_merge(
         class: class_string('onboard__step', options[:class]),
-        data: {
-          target: class_string('onboard.step', data[:target])
-        }
+        data: { target: class_string('onboard.step', data[:target]) }
       ),
       &block
     )

@@ -21,7 +21,7 @@ class RegistrationForm
             registration,
             scope: Workshop,
             max_per_slot: registrations.earlybird? ? nil : 1
-        )
+          )
       end
 
       def assign_attributes(attributes)
