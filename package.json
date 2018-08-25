@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5.3",
+    "@stimulus/polyfills": "^1.1.0",
     "activestorage": "^5.2.0",
     "autosize": "^4.0.2",
     "flickity": "^2.1.2",
