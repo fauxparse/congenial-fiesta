@@ -27,12 +27,7 @@ class RegistrationForm
       end
 
       def selections
-        registration
-          .preferences
-          .includes(schedule: :activity)
-          .references(:activity)
-          .merge(Schedule.not_freebie)
-          .merge(Show.all)
+        registration.selections.included_in_limit.merge(Show.all)
       end
 
       def assign_attributes(attributes)
@@ -40,7 +35,7 @@ class RegistrationForm
       end
 
       def update(attributes = {})
-        Preference.acts_as_list_no_update do
+        Selection.acts_as_list_no_update do
           super
         end
       end
@@ -73,15 +68,15 @@ class RegistrationForm
 
       private
 
-      def shows=(preferences)
-        update_preferences(preferences.transform_keys(&:to_i), type: Show)
+      def shows=(selections)
+        update_selections(selections.transform_keys(&:to_i), type: Show)
         registration.show_preferences_saved_at ||= Time.zone.now
       end
 
       def workshops_count
         @workshops_count ||=
           registration
-          .preferences
+          .selections
           .joins(schedule: :activity)
           .merge(Workshop.all)
           .pluck(:slot)

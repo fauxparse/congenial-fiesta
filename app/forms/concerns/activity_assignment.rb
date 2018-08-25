@@ -3,29 +3,29 @@
 module ActivityAssignment
   extend ActiveSupport::Concern
 
-  def update_preferences(preferences, type: Activity)
-    remove_old_preferences(preferences, type: type)
-    add_new_preferences(preferences)
+  def update_selections(selections, type: Activity)
+    remove_old_selections(selections, type: type)
+    add_new_selections(selections)
   end
 
   private
 
-  def remove_old_preferences(preferences, type:)
+  def remove_old_selections(selections, type:)
     registration
-      .preferences
-      .select { |p| p.activity.is_a?(type) }
-      .reject { |p| preferences.include?(p.schedule_id) }
+      .selections
+      .select { |s| s.activity.is_a?(type) && !s.schedule.freebie? }
+      .reject { |s| selections.include?(s.schedule_id) }
       .map(&:mark_for_destruction)
   end
 
-  def add_new_preferences(by_id)
+  def add_new_selections(by_id)
     by_id.each do |schedule_id, position|
-      find_or_build_preference(schedule_id).position = position
+      find_or_build_selection(schedule_id).position = position
     end
   end
 
-  def find_or_build_preference(schedule_id)
-    registration.preferences.detect { |p| p.schedule_id == schedule_id } ||
-      registration.preferences.build(schedule: Schedule.find(schedule_id))
+  def find_or_build_selection(schedule_id)
+    registration.selections.detect { |s| s.schedule_id == schedule_id } ||
+      registration.selections.build(schedule: Schedule.find(schedule_id))
   end
 end

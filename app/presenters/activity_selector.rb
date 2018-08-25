@@ -67,7 +67,8 @@ class ActivitySelector
       activity,
       registration: registration,
       photo: photo,
-      available: available?(activity)
+      available: available?(activity),
+      selection: selection_for(activity)
     )
   end
 
@@ -77,6 +78,12 @@ class ActivitySelector
 
   def presenting?(activity)
     activity.presenters.any? { |p| p.participant == registration.participant }
+  end
+
+  def selection_for(activity)
+    registration
+      .selections
+      .detect { |s| s.schedule_id == activity.id && !s.marked_for_destruction? }
   end
 
   def photos

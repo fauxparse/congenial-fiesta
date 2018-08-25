@@ -3,16 +3,17 @@
 class ScheduledActivity
   attr_reader :photo
 
-  def initialize(schedule, registration: nil, photo: nil, available: true)
+  def initialize(schedule, registration: nil, photo: nil, available: true, selection: nil)
     @schedule = schedule
     @registration = registration
     @photo = photo
     @available = available
+    @selection = selection
   end
 
   delegate :id, :starts_at, :ends_at, :slot, to: :schedule
   delegate :name, :description, :presenters, to: :activity
-  delegate :position, to: :preference, allow_nil: true
+  delegate :position, to: :selection, allow_nil: true
 
   def <=>(other)
     if starts_at == other.starts_at
@@ -27,7 +28,7 @@ class ScheduledActivity
   end
 
   def selected?
-    position.present?
+    selection.present?
   end
 
   def compulsory?
@@ -54,14 +55,7 @@ class ScheduledActivity
 
   private
 
-  def preference
-    @preference ||=
-      registration.preferences.detect do |p|
-        p.schedule_id == schedule.id
-      end
-  end
-
-  attr_reader :registration, :schedule
+  attr_reader :selection, :registration, :schedule
 
   delegate :activity, to: :schedule
 end
