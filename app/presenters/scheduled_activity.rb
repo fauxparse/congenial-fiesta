@@ -41,9 +41,7 @@ class ScheduledActivity
   end
 
   def available?
-    @available.present? &&
-      !compulsory? &&
-      schedule.available?
+    @available.present? && !compulsory?
   end
 
   def sorted_level_list
