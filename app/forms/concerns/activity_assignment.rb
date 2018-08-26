@@ -20,7 +20,9 @@ module ActivityAssignment
 
   def add_new_selections(by_id)
     by_id.each do |schedule_id, position|
-      find_or_build_selection(schedule_id).position = position
+      selection = find_or_build_selection(schedule_id)
+      selection.position = position
+      selection.state = 'allocated' if registration.completed?
     end
   end
 

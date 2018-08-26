@@ -599,3 +599,47 @@ label[for='registration_code_of_conduct_accepted'] {
     }
   }
 }
+
+.registration-completed {
+  @include full-width;
+  @include vertical-padding($base-spacing);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-family: $base-font-family;
+    font-size: modular-scale(4);
+    font-weight: $light-font-weight;
+    text-transform: none;
+  }
+
+  &__message {
+    max-width: $line-width / 2;
+    text-align: center;
+  }
+
+  &__icon {
+    margin-bottom: $base-spacing;
+    font-size: modular-scale(6);
+
+    circle {
+      stroke: $secondary-font-color;
+    }
+
+    path {
+      stroke: $success-color;
+      stroke-dasharray: 100;
+      stroke-dashoffset: -100;
+      animation: registration-complete .5s $base-timing 1 forwards;
+      animation-delay: 1s;
+    }
+  }
+}
+
+@keyframes registration-complete {
+  0% { stroke-dashoffset: -100; }
+  100% { stroke-dashoffset: 0; }
+}

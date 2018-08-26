@@ -80,6 +80,7 @@ class RegistrationForm
 
   def advance!
     if current_step.last?
+      CompleteRegistration.new(registration).call
       publish(:completed)
     else
       @current_step = next_step
