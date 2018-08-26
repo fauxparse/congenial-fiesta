@@ -19,7 +19,7 @@ class RegistrationForm
         @activities ||=
           ActivitySelector.new(
             registration,
-            scope: Workshop,
+            scope: Workshop.includes(:levels).references(:levels),
             max_per_slot: registrations.earlybird? ? nil : 1
           )
       end
