@@ -42,17 +42,16 @@ class ActivitySelector
   private
 
   def scope
-    festival
-      .schedules
-      .not_freebie
-      .includes(activity: { presenters: :participant })
-      .references(:activity)
-      .sorted
-      .merge(@scope.all)
+    @scope
+      .includes(:schedules, presenters: :participant)
+      .references(:schedules)
+      .merge(Schedule.not_freebie)
+      .merge(Schedule.sorted)
+      .where('activities.festival_id = ?', festival.id)
   end
 
   def schedules
-    @schedules ||= scope.all
+    @schedules ||= scope.all.flat_map(&:schedules)
   end
 
   def activities
@@ -68,7 +67,7 @@ class ActivitySelector
       registration: registration,
       photo: photo,
       available: available?(activity),
-      selection: selection_for(activity),
+      selection: selection_for(activity)
     )
   end
 
