@@ -1,0 +1,6 @@
+- content_for :title, t('.title', festival: registration_form.festival)
+
+.registration-completed
+  = inline_icon :checkbox, class: 'registration-completed__icon'
+  %h1.registration-completed__title= t('.congratulations')
+  .registration-completed__message= markdown t('.message', path: registration_path)

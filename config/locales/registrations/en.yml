@@ -8,6 +8,13 @@ en:
       payment: 'Payment'
 
   registrations:
+    complete:
+      title: 'Registered for %{festival}'
+      congratulations: 'You’re coming to NZIF!'
+      message: |
+        We can’t wait to see your smiling face at the Festival.
+        In the meantime, you can [come back here](%{path}) as often as you like
+        to change workshop or show preferences.
     edit:
       title: 'Register for %{festival}'
       back: 'Back:'

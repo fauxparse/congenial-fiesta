@@ -360,7 +360,8 @@ CREATE TABLE public.registrations (
     updated_at timestamp without time zone NOT NULL,
     code_of_conduct_accepted_at timestamp without time zone,
     workshops_saved_at timestamp without time zone,
-    shows_saved_at timestamp without time zone
+    shows_saved_at timestamp without time zone,
+    completed_at timestamp without time zone
 );
 
 
@@ -1265,6 +1266,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180825120959'),
 ('20180825205149'),
 ('20180825223748'),
-('20180825224326');
+('20180825224326'),
+('20180826000751');
 
 

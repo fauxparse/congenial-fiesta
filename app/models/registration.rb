@@ -13,11 +13,17 @@ class Registration < ApplicationRecord
     confirmed: 'confirmed'
   }
 
+  scope :completed, -> { where.not(completed_at: nil) }
+
   def workshops_saved?
     workshops_saved_at.present?
   end
 
   def shows_saved?
     shows_saved_at.present?
+  end
+
+  def completed?
+    completed_at.present?
   end
 end

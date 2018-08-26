@@ -16,7 +16,7 @@ class RegistrationForm
       end
 
       def complete?
-        false
+        true
       end
     end
   end

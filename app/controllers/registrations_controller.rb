@@ -9,9 +9,13 @@ class RegistrationsController < ApplicationController
     authorize registration, :update?
     registration_form
       .on(:advance) { |step| redirect_to registration_step_path(step) }
-      .on(:completed) { render :complete }
+      .on(:completed) { redirect_to complete_registration_path }
       .on(:show) { render :edit }
       .update(registration_attributes)
+  end
+
+  def complete
+    redirect_to registration_path unless registration&.completed?
   end
 
   def cart
