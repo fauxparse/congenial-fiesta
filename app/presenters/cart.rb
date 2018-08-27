@@ -15,12 +15,40 @@ class Cart
     @count ||= workshops.uniq(&:slot).size
   end
 
+  def paid
+    sum_of(registration.payments.select(&:confirmed?))
+  end
+
+  def pending
+    sum_of(registration.payments.select(&:pending?))
+  end
+
+  def paid?
+    to_pay <= 0
+  end
+
+  def payment_confirmed?
+    paid >= total
+  end
+
+  def to_pay
+    total - paid - pending
+  end
+
   def total
-    pricing_model.by_workshop_count(count)
+    workshop_cost
   end
 
   def per_workshop
     pricing_model.by_workshop_count(1)
+  end
+
+  def workshop_value
+    per_workshop * count
+  end
+
+  def workshop_cost
+    pricing_model.by_workshop_count(count)
   end
 
   def to_partial_path
@@ -36,5 +64,11 @@ class Cart
       .merge(Schedule.not_freebie)
       .merge(Workshop.all)
       .reject(&:marked_for_destruction?)
+  end
+
+  private
+
+  def sum_of(payments)
+    payments.map(&:amount).inject(Money.new(0), &:+)
   end
 end

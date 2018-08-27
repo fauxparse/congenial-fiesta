@@ -1,0 +1,6 @@
+%label.payment-method
+  = form.radio_button :payment_method, payment_method.payment_method
+  .payment-method__label
+    .payment-method__icon
+      = icon payment_method.payment_method
+    .payment-method__name= t(payment_method.payment_method, scope: 'payment.methods')

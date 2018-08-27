@@ -60,6 +60,10 @@ en:
           attributes:
             password_confirmation:
               confirmation: 'does not match'
+        registration_form/step/payment_details:
+          attributes:
+            payment_method:
+              blank: 'Please select a payment method'
 
   activerecord:
     attributes:

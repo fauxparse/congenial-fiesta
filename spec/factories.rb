@@ -185,4 +185,9 @@ FactoryBot.define do
     latitude '-41.2921901197085'.to_d
     longitude '174.7858539802915'.to_d
   end
+
+  factory :payment do
+    registration
+    amount_cents 10000
+  end
 end

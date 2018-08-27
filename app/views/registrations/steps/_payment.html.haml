@@ -1,0 +1,13 @@
+%h1.registration-form__title= t('.title')
+
+= render 'cart_summary', cart: registration_form.current_step.cart
+
+- if !registration_form.current_step.cart.payment_confirmed?
+  %h2= t('.select')
+
+  .payment-methods
+    = render registration_form.current_step.payment_methods, form: form
+
+- else
+  %h2= t('.paid_in_full')
+  %p= t('.thanks')
