@@ -614,6 +614,8 @@ label[for='registration_code_of_conduct_accepted'] {
     font-size: modular-scale(4);
     font-weight: $light-font-weight;
     text-transform: none;
+    text-align: center;
+    max-width: 75vw;
   }
 
   &__message {
@@ -642,4 +644,114 @@ label[for='registration_code_of_conduct_accepted'] {
 @keyframes registration-complete {
   0% { stroke-dashoffset: -100; }
   100% { stroke-dashoffset: 0; }
+}
+
+.cart-summary {
+  &__table {
+    table-layout: auto;
+
+    td {
+      white-space: nowrap;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    tr {
+      border-bottom: none;
+      border-top: 1px solid $pale-grey;
+    }
+  }
+
+  &__workshop-count {
+    .cart-summary__quantity {
+      display: block;
+      padding-left: $base-spacing;
+    }
+
+    @media screen and (min-width: #{$line-width / 2}) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__line-total {
+    text-align: right;
+    vertical-align: bottom;
+  }
+
+  &__item {
+    width: 99%;
+  }
+
+  &__discount {
+    .cart-summary__item {
+      padding-left: $base-spacing;
+    }
+  }
+
+  .cart-summary__subtotal,
+  .cart-summary__total {
+    border-top: 1px solid $medium-grey;
+  }
+
+  .cart-summary__total {
+    font-size: modular-scale(1);
+    font-weight: $bold-font-weight;
+  }
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin: 0 0 $base-spacing;
+}
+
+.payment-method {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+  &:not(:first-child) {
+    margin-left: $small-spacing;
+  }
+
+  [type='radio'] {
+    display: none;
+  }
+
+  &__icon {
+    @include size(2.5em);
+    padding: .5em;
+    border-radius: 50%;
+    color: $medium-grey;
+    background-color: $ghost-grey;
+    margin-bottom: $small-spacing;
+
+    .icon {
+      display: block;
+    }
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: $base-border;
+    border-radius: $base-border-radius;
+    color: $secondary-font-color;
+    padding: $small-spacing;
+    text-align: center;
+    cursor: pointer;
+    line-height: $heading-line-height;
+
+    :checked ~ & {
+      @include shadow(2);
+      border-color: $accent-color;
+      color: $base-font-color;
+    }
+  }
 }

@@ -1,0 +1,28 @@
+.cart-summary
+  %table.table.cart-summary__table
+    %tbody
+      %tr.cart-summary__workshops
+        %td.cart-summary__item
+          .cart-summary__workshop-count
+            %span= t('.workshops')
+            %span.cart-summary__quantity
+              = cart.count
+              = ' @'
+              = money(cart.per_workshop)
+        %td.cart-summary__line-total
+          = money(cart.workshop_value)
+      %tr.cart-summary__discount
+        %td.cart-summary__item
+          = t('.discount')
+        %td.cart-summary__line-total
+          = money(cart.workshop_cost - cart.workshop_value)
+      %tr.cart-summary__subtotal
+        %td.cart-summary__item
+          = t('.subtotal')
+        %td.cart-summary__line-total
+          = money(cart.workshop_cost)
+      %tr.cart-summary__total
+        %td.cart-summary__item
+          = t('.to_pay')
+        %td.cart-summary__line-total
+          = money(cart.to_pay)

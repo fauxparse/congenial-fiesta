@@ -283,6 +283,42 @@ ALTER SEQUENCE public.password_resets_id_seq OWNED BY public.password_resets.id;
 
 
 --
+-- Name: payments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payments (
+    id bigint NOT NULL,
+    registration_id bigint,
+    type character varying,
+    amount_cents integer DEFAULT 0,
+    state character varying DEFAULT 'pending'::character varying,
+    reference character varying,
+    details json,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.payments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.payments_id_seq OWNED BY public.payments.id;
+
+
+--
 -- Name: pitches; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -613,6 +649,13 @@ ALTER TABLE ONLY public.password_resets ALTER COLUMN id SET DEFAULT nextval('pub
 
 
 --
+-- Name: payments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments ALTER COLUMN id SET DEFAULT nextval('public.payments_id_seq'::regclass);
+
+
+--
 -- Name: pitches id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -730,6 +773,14 @@ ALTER TABLE ONLY public.participants
 
 ALTER TABLE ONLY public.password_resets
     ADD CONSTRAINT password_resets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payments payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
 
 
 --
@@ -907,6 +958,13 @@ CREATE UNIQUE INDEX index_password_resets_on_token ON public.password_resets USI
 --
 
 CREATE INDEX index_password_resets_on_token_and_expires_at ON public.password_resets USING btree (token, expires_at);
+
+
+--
+-- Name: index_payments_on_registration_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payments_on_registration_id ON public.payments USING btree (registration_id);
 
 
 --
@@ -1192,6 +1250,14 @@ ALTER TABLE ONLY public.pitches
 
 
 --
+-- Name: payments fk_rails_bb9133230f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT fk_rails_bb9133230f FOREIGN KEY (registration_id) REFERENCES public.registrations(id) ON DELETE RESTRICT;
+
+
+--
 -- Name: presenters fk_rails_c1df69d950; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1267,6 +1333,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180825205149'),
 ('20180825223748'),
 ('20180825224326'),
-('20180826000751');
+('20180826000751'),
+('20180826013354');
 
 

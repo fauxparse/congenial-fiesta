@@ -59,6 +59,18 @@ en:
             does not count towards your Festival allocation, but we need to
             know if you can make it.
           attending: 'Yes! Please save me a seat'
+      payment:
+        title: 'Payment'
+        select: 'Select payment method'
+        paid_in_full: 'You’re all paid up.'
+        thanks: 'Thanks! Enjoy the Festival.'
+
+    cart_summary:
+      workshops: 'Workshops'
+      discount: 'Discount'
+      subtotal: 'Subtotal'
+      to_pay: 'Total to pay'
+
     activity:
       selected:
         multiple: '%{position} choice'
@@ -67,6 +79,10 @@ en:
       compulsory: 'That’s you!'
     cart:
       workshop: 'workshop'
+
+  payment:
+    methods:
+      internet_banking: 'Internet banking'
 
   onboard:
     read_more: 'Read more'
