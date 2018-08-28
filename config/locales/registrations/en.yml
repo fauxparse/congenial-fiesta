@@ -22,6 +22,14 @@ en:
     steps:
       details:
         title: 'Your details'
+        new_password: |
+          Unfortunately, even if you’ve been to NZIF before, you’ll need to
+          create a new account for this year. We’ve made some exciting changes
+          to the system, but for security reasons we can’t import existing login
+          information. If you already have an account from this year (for
+          example, if you submitted a pitch), you can
+          <a href="/login?redirect=/register">log in here</a>.
+        where: 'Where are you from?'
       code_of_conduct:
         title: 'Code of Conduct'
         instructions: |

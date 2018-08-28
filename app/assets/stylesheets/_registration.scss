@@ -198,6 +198,54 @@
   }
 }
 
+.registration-form__social {
+  .label {
+    @include all-caps;
+    display: block;
+    color: $medium-grey;
+    font-size: modular-scale(-1);
+  }
+
+  &-links {
+    display: flex;
+    align-items: center;
+    margin-bottom: $small-spacing;
+
+    a {
+      padding: .5em;
+      border-radius: 50%;
+    }
+  }
+}
+
+.registration-form__participant-details {
+  h2 {
+    margin-top: $base-spacing;
+  }
+
+  .registration_form__new-password {
+    background-color: $secondary-background-color;
+    font-size: modular-scale(-1);
+    padding: $small-spacing;
+    border-radius: $base-border-radius;
+  }
+}
+
+.registration-form__login-details {
+  @media screen and (min-width: #{$line-width / 2}) {
+    display: flex;
+    align-items: flex-start;
+
+    .form-field {
+      flex: 1;
+    }
+
+    .registration-form__social {
+      margin-left: $base-spacing;
+    }
+  }
+}
+
 label[for='registration_code_of_conduct_accepted'] {
   [data-read='false'] {
     display: none;

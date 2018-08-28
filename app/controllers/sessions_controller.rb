@@ -7,6 +7,8 @@ class SessionsController < ApplicationController
   must_be_logged_out only: %i[new create]
 
   def new
+    store_location(params[:redirect]) \
+      if valid_redirect_location?(params[:redirect])
     @login_form = LoginForm.new
   end
 
@@ -42,5 +44,13 @@ class SessionsController < ApplicationController
 
   def oauth_hash
     request.env['omniauth.auth']
+  end
+
+  def valid_redirect_location?(path)
+    return false unless path.present?
+    Rails.application.routes.recognize_path(path)
+    true
+  rescue ActionController::RoutingError
+    return false
   end
 end
