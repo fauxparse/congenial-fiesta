@@ -11,6 +11,7 @@ class RegistrationsController < ApplicationController
       .on(:advance) { |step| redirect_to registration_step_path(step) }
       .on(:completed) { redirect_to complete_registration_path }
       .on(:show) { render :edit }
+      .on(:login) { |participant| log_in_as(participant) }
       .update(registration_attributes)
   end
 
@@ -25,6 +26,11 @@ class RegistrationsController < ApplicationController
         render json: CartSerializer.new(registration_form.cart).call
       end
     end
+  end
+
+  def oauth
+    store_location(registration_path)
+    redirect_to "/auth/#{params[:provider]}"
   end
 
   private

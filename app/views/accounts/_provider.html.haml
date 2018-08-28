@@ -1,2 +1,2 @@
-= link_to "/auth/#{provider}", title: t(provider, scope: 'oauth.providers'), data: { provider: provider } do
+= link_to "/#{local_assigns[:prefix] || 'auth'}/#{provider}", title: t(provider, scope: 'oauth.providers'), data: { provider: provider } do
   = icon(provider)

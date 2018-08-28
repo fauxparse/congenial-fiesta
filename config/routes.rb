@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   constraints(provider: /#{OmniAuth.registered_providers.join('|')}/) do
     match '/auth/:provider/callback' => 'sessions#oauth', via: %i[get post]
+    get '/register/with/:provider', to: 'registrations#oauth'
 
     resource :profile, only: %i[show update] do
       get 'connect/:provider' => 'profiles#connect', as: :connect

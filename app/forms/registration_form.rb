@@ -30,6 +30,7 @@ class RegistrationForm
 
   def update(params)
     if current_step.update(params)
+      publish(:login, participant) if participant.persisted? && !@participant
       advance!
     else
       publish(:show, current_step)
