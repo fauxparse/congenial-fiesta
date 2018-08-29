@@ -12,3 +12,15 @@
 
   - activity_selector.select(&:selected?).each do |activity|
     = hidden_field_tag "registration[#{activity_selector.type}][#{activity.id}]", activity.position, data: { target: 'activity-selector.hiddenField' }
+
+  = render 'shared/modal',
+    class: 'activity-details',
+    controller: 'modal activity-details',
+    target: 'activity-selector.details' do
+    = render 'shared/modal_header', title: content_tag(:div, nil, data: { target: 'activity-details.title' })
+    .modal__body
+      = target 'activity-details', 'presenters'
+      = target 'activity-details', 'times'
+      .activity__levels{data: { target: 'activity-details.levels' }}
+      = target 'activity-details', 'description'
+      = target 'activity-details', 'bio'

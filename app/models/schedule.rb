@@ -13,6 +13,7 @@ class Schedule < ApplicationRecord
   scope :sorted, -> { order(:starts_at, :id) }
   scope :freebie, -> { where(freebie: true) }
   scope :not_freebie, -> { where(freebie: false) }
+  scope :with_details, -> { includes(activity: { presenters: :participant }) }
 
   def slot
     starts_at.to_i

@@ -16,6 +16,7 @@ export default class extends Controller {
     if (!event.defaultPrevented) {
       this.element.classList.add('modal--in')
       setTimeout(() => this.dispatchEvent('opened'), TRANSITION_DURATION)
+      this.element.querySelector('.modal__body').scrollTop = 0
       this.element.focus()
     }
   }
