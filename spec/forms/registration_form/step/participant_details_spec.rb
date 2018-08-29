@@ -9,7 +9,8 @@ RSpec.describe RegistrationForm::Step::ParticipantDetails do
       RegistrationForm,
       registration: registration,
       participant: participant,
-      steps: []
+      steps: [],
+      current_step: nil
     )
   end
   let(:participant) { Participant.new }
@@ -18,6 +19,16 @@ RSpec.describe RegistrationForm::Step::ParticipantDetails do
   describe '#to_param' do
     subject { step.to_param }
     it { is_expected.to eq 'details' }
+  end
+
+  describe '#eql?' do
+    it { is_expected.to eql :details }
+  end
+
+  describe '#method_missing' do
+    it 'still falls through' do
+      expect { step.send(:broken?) }.to raise_error(NameError)
+    end
   end
 
   context 'with a new participant' do
@@ -41,6 +52,8 @@ RSpec.describe RegistrationForm::Step::ParticipantDetails do
           .to change { step.complete? }
           .from(false)
           .to(true)
+          .and change { step.state }
+          .to(:complete)
       end
 
       it 'creates a participant' do

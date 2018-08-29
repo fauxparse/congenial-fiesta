@@ -23,6 +23,37 @@ RSpec.describe SessionsController, type: :request do
 
       it { is_expected.to redirect_to root_path }
     end
+
+    context 'and redirect' do
+      before do
+        get login_path, params: { redirect: path }
+        post login_path, params: { login: credentials }
+      end
+
+      context 'to a valid path' do
+        let(:path) { code_of_conduct_path }
+
+        it 'redirects after login' do
+          expect(response).to redirect_to path
+        end
+      end
+
+      context 'to a dodgy path' do
+        let(:path) { 'http://suspicious.ru' }
+
+        it 'does not redirect' do
+          expect(response).not_to redirect_to path
+        end
+      end
+
+      context 'to a bad path' do
+        let(:path) { '/stuff/is/broken' }
+
+        it 'does not redirect' do
+          expect(response).not_to redirect_to path
+        end
+      end
+    end
   end
 
   describe 'post /login' do

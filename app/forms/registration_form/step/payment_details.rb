@@ -24,15 +24,15 @@ class RegistrationForm
       end
 
       def payment_method=(type)
-        unless payment_method == type
-          if payment&.persisted?
-            payment.state = 'cancelled'
-          else
-            payment&.mark_for_destruction
-          end
+        return if payment_method == type
 
-          @payment = build_payment(type)
+        if payment&.persisted?
+          payment.state = 'cancelled'
+        else
+          payment&.mark_for_destruction
         end
+
+        @payment = build_payment(type)
       end
 
       def payment_methods

@@ -20,10 +20,10 @@ en:
       timetable: '%-l:%M'
 
   countries:
-    NZ: 'NZ'
-    AU: 'Aus'
-    UK: 'UK'
-    US: 'USA'
+    nz: 'NZ'
+    au: 'Aus'
+    uk: 'UK'
+    us: 'USA'
 
   errors:
     messages:

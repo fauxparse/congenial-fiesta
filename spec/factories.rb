@@ -156,6 +156,22 @@ FactoryBot.define do
   factory :registration do
     festival
     participant
+
+    trait :with_workshops do
+      after(:create) do |registration|
+        create_list(:workshop, 3, festival: registration.festival)
+          .each.with_index do |workshop, i|
+            time = registration.festival.start_date.midnight + i.days + 10.hours
+            registration.selections.create!(
+              schedule: create(
+                :schedule,
+                activity: workshop,
+                starts_at: time
+              )
+            )
+          end
+      end
+    end
   end
 
   factory :selection do
@@ -188,6 +204,10 @@ FactoryBot.define do
 
   factory :payment do
     registration
-    amount_cents 10000
+    amount_cents 10_000
   end
+
+  factory :internet_banking_payment,
+    parent: :payment,
+    class: Payment::InternetBanking
 end
