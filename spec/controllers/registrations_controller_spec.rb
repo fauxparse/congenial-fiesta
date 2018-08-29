@@ -19,6 +19,16 @@ RSpec.describe RegistrationsController, type: :request do
   describe 'GET /register' do
     before { get registration_path }
     it { is_expected.to be_successful }
+
+    context 'when registrations are closed' do
+      around do |example|
+        Timecop.freeze(festival.registrations_open_at - 2.weeks) do
+          example.run
+        end
+      end
+
+      it { is_expected.to redirect_to root_path }
+    end
   end
 
   describe 'PUT /register' do
