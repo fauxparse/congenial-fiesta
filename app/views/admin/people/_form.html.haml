@@ -5,5 +5,17 @@
     = form.label :email
     = form.email_field :email, data: { target: 'admin--person.email' }
 
+  = form.group :bio do
+    = form.label :bio
+    = form.text_area :bio, data: { target: 'admin--person.bio' }
+
+  = form.group :city do
+    = form.label :city
+    = form.text_field :city, data: { target: 'admin--person.city' }
+
+  = form.group :country_code do
+    = form.label :country_code
+    = form.country_select :country_code, priority_countries: %w(NZ AU), data: { target: 'admin--person.country' }
+
   = form.check_box_field(:admin, data: { target: 'admin--person.admin' }) do
     %span= t('.admin')

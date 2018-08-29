@@ -9,6 +9,7 @@
 .select-element {
   display: none;
   position: absolute;
+  z-index: 10;
 
   &.select-open {
     display: block;
@@ -19,7 +20,7 @@
   user-select: none;
 
   .select-content {
-    @include shadow(0.5);
+    @include shadow(1);
     background: $white;
     border-radius: $base-border-radius;
     max-height: 18rem;

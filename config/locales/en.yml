@@ -53,6 +53,8 @@ en:
     attributes:
       activity:
         maximum: 'Maximum number of participants'
+      participant:
+        country_code: 'Country'
 
   helpers:
     label:

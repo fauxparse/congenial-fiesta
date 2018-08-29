@@ -14,7 +14,8 @@ RSpec.describe PeopleSerializer, type: :serializer do
       name: 'Matt Powell',
       email: 'matt@nzimprovfestival.co.nz',
       city: 'Wellington',
-      country: 'New Zealand'
+      country: 'New Zealand',
+      bio: 'a egg'
     )
   end
   let!(:jim) do
@@ -23,7 +24,8 @@ RSpec.describe PeopleSerializer, type: :serializer do
       name: 'Jim Fishwick',
       email: 'jim@acmi.com.au',
       city: 'Melbourne',
-      country: 'Australia'
+      country: 'Australia',
+      bio: 'jimothy'
     )
   end
 
@@ -39,7 +41,9 @@ RSpec.describe PeopleSerializer, type: :serializer do
           admin: true,
           avatar: /.+/,
           city: 'Wellington',
-          country: 'New Zealand'
+          country: 'New Zealand',
+          country_code: 'NZ',
+          bio: 'a egg'
         },
         {
           id: jim.to_param,
@@ -48,7 +52,9 @@ RSpec.describe PeopleSerializer, type: :serializer do
           admin: false,
           avatar: nil,
           city: 'Melbourne',
-          country: 'Australia'
+          country: 'Australia',
+          country_code: 'AU',
+          bio: 'jimothy'
         }
       )
     )
