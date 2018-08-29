@@ -8,6 +8,7 @@ en:
       payment: 'Payment'
 
   registrations:
+    closed: 'Registrations are currently closed.'
     complete:
       title: 'Registered for %{festival}'
       congratulations: 'You’re coming to NZIF!'

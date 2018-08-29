@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RegistrationsController < ApplicationController
+  before_action :registrations_closed, unless: :registrations_open?
+
   def edit
     authorize registration, :edit?
   end
@@ -35,6 +37,12 @@ class RegistrationsController < ApplicationController
 
   private
 
+  def registrations
+    @registrations ||= RegistrationStage.new(festival)
+  end
+
+  delegate :open?, to: :registrations, prefix: true
+
   def registration
     registration_form.registration
   end
@@ -49,6 +57,10 @@ class RegistrationsController < ApplicationController
     params
       .require(:registration)
       .permit(*registration_form.permitted_attributes)
+  end
+
+  def registrations_closed
+    redirect_to root_path, info: I18n.t('registrations.closed')
   end
 
   helper_method :registration_form
