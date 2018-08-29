@@ -12,7 +12,9 @@ RSpec.describe PersonSerializer, type: :serializer do
       name: 'Matt Powell',
       email: 'matt@nzimprovfestival.co.nz',
       city: 'Wellington',
-      country: 'New Zealand'
+      country: 'New Zealand',
+      country_code: 'NZ',
+      bio: 'a egg'
     )
   end
 
@@ -24,7 +26,9 @@ RSpec.describe PersonSerializer, type: :serializer do
       admin: true,
       avatar: /.+/,
       city: 'Wellington',
-      country: 'New Zealand'
+      country: 'New Zealand',
+      country_code: 'NZ',
+      bio: 'a egg'
     )
   end
 end

@@ -26,7 +26,9 @@ module Admin
     end
 
     def person_params
-      params.require(:person).permit(:name, :email, :bio, :admin)
+      params
+        .require(:person)
+        .permit(:name, :email, :city, :country_code, :bio, :admin)
     end
 
     def serialized_people

@@ -10,7 +10,9 @@ class PersonSerializer < Primalize::Single
     admin: boolean,
     avatar: optional(string),
     city: optional(string),
-    country: optional(string)
+    country: optional(string),
+    country_code: optional(string),
+    bio: optional(string)
   )
 
   def id

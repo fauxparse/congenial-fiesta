@@ -29,6 +29,7 @@
   }
 
   &__header {
+    flex: 0 0 auto;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -100,6 +101,7 @@
   }
 
   &__footer {
+    flex: 0 0 auto;
     display: flex;
     justify-content: flex-end;
     padding: $small-spacing 1em;

@@ -1,7 +1,21 @@
 import { Controller } from 'stimulus'
+import autosize from 'autosize'
+import Select from 'tether-select'
 
 export default class extends Controller {
-  static targets = ['name', 'email', 'admin', 'form']
+  static targets = ['name', 'email', 'city', 'bio', 'admin', 'form']
+
+  connect() {
+    autosize(this.bioTarget)
+  }
+
+  get countrySelect() {
+    if (!this._countrySelect) {
+      this._countrySelect =
+        new Select({ el: this.element.querySelector('select') })
+    }
+    return this._countrySelect
+  }
 
   get modal() {
     return this.application.getControllerForElementAndIdentifier(
@@ -24,6 +38,31 @@ export default class extends Controller {
 
   set email(email) {
     this.emailTarget.value = email || ''
+  }
+
+  get city() {
+    return this.cityTarget.value || ''
+  }
+
+  set city(city) {
+    this.cityTarget.value = city || ''
+  }
+
+  get country() {
+    return this.countrySelect.value || ''
+  }
+
+  set country(country) {
+    this.countrySelect.change(country || '')
+  }
+
+  get bio() {
+    return this.bioTarget.value || ''
+  }
+
+  set bio(bio) {
+    this.bioTarget.value = bio || ''
+    autosize.update(this.bioTarget)
   }
 
   get id() {
@@ -60,6 +99,9 @@ export default class extends Controller {
     this.id = person.id
     this.name = person.name
     this.email = person.email
+    this.city = person.city
+    this.country = person.country_code
+    this.bio = person.bio
     this.admin = person.admin
     this.modal.show()
   }
@@ -72,6 +114,9 @@ export default class extends Controller {
         id: this.id,
         name: this.name,
         email: this.email,
+        city: this.city,
+        country_code: this.country,
+        bio: this.bio,
         admin: this.admin
       })
       .then(person => {
