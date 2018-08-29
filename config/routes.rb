@@ -51,7 +51,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/register/complete', to: 'registrations#complete', as: :complete_registration
+  get '/register/complete',
+    to: 'registrations#complete',
+    as: :complete_registration
   get '/register/:step', to: 'registrations#edit', as: :registration_step
   post '/register/cart', to: 'registrations#cart', as: :update_cart
   match '/register/:step', to: 'registrations#update', via: %i[put patch]

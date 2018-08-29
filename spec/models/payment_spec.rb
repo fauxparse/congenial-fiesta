@@ -13,4 +13,9 @@ RSpec.describe Payment, type: :model do
       .to validate_numericality_of(:amount)
       .is_greater_than_or_equal_to(0)
   }
+
+  describe '.default_payment_type' do
+    subject { Payment.default_payment_type }
+    it { is_expected.to eq Payment::InternetBanking }
+  end
 end

@@ -48,9 +48,10 @@ class SessionsController < ApplicationController
 
   def valid_redirect_location?(path)
     return false unless path.present?
-    Rails.application.routes.recognize_path(path)
-    true
+    requested =
+      Rails.application.routes.recognize_path(path).merge(only_path: true)
+    url_for(requested) == path
   rescue ActionController::RoutingError
-    return false
+    false
   end
 end

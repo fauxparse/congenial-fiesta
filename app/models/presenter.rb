@@ -17,7 +17,7 @@ class Presenter < ApplicationRecord
         participant.city || 'NZ'
       else
         I18n.t(
-          participant.country_code,
+          participant.country_code&.downcase,
           scope: :countries,
           default: participant.country
         )
