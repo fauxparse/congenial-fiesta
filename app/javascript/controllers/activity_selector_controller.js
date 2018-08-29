@@ -26,10 +26,17 @@ const ORDINALS = [
 ]
 
 export default class extends Controller {
-  static targets = ['activity', 'hiddenField']
+  static targets = ['activity', 'hiddenField', 'details']
 
   get type() {
     return this.data.get('type')
+  }
+
+  get details() {
+    return this.application.getControllerForElementAndIdentifier(
+      this.detailsTarget,
+      'activity-details'
+    )
   }
 
   get activities() {
@@ -197,5 +204,10 @@ export default class extends Controller {
       )
     })
     this.element.appendChild(fragment)
+  }
+
+  showDetails(e) {
+    e.preventDefault()
+    this.details.load(e.target.closest('.activity').dataset.id)
   }
 }

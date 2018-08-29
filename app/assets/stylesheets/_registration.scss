@@ -349,6 +349,7 @@ label[for='registration_code_of_conduct_accepted'] {
 
     &__name {
       font-size: modular-scale(1);
+      text-decoration: none;
     }
 
     &__presenters {
@@ -800,6 +801,32 @@ label[for='registration_code_of_conduct_accepted'] {
       @include shadow(2);
       border-color: $accent-color;
       color: $base-font-color;
+    }
+  }
+}
+
+.activity-details {
+  .modal__body {
+    padding: 1em;
+  }
+
+  &__presenters {
+    font-size: modular-scale(1);
+  }
+
+  &__description {
+    margin-top: $base-spacing;
+  }
+
+  &__bio {
+    color: $secondary-font-color;
+
+    &::before {
+      @include size(2em, .25em);
+      display: block;
+      content: '';
+      background-color: $accent-color;
+      margin-bottom: $small-spacing;
     }
   }
 }
