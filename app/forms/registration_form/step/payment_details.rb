@@ -24,7 +24,7 @@ class RegistrationForm
       end
 
       def payment_method=(type)
-        return if payment_method == type
+        return if payment_method === type
 
         if payment&.persisted?
           payment.state = 'cancelled'
@@ -36,7 +36,16 @@ class RegistrationForm
       end
 
       def payment_methods
-        Payment.subclasses.map { |klass| PaymentMethod.new(klass) }
+        PaymentMethod.subclasses
+      end
+
+      def update(attributes = {})
+        assign_attributes(attributes)
+        if payment.valid?
+          submit_payment
+        else
+          publish(:error)
+        end
       end
 
       private
@@ -56,20 +65,13 @@ class RegistrationForm
         )
       end
 
-      class PaymentMethod
-        def initialize(klass)
-          @klass = klass
-        end
-
-        def to_partial_path
-          'registrations/payment_method'
-        end
-
-        delegate :payment_method, to: :klass
-
-        private
-
-        attr_reader :klass
+      def submit_payment
+        payment.save
+        payment_method
+          .on(:success) { publish(:success) }
+          .on(:error) { publish(:error) }
+          .on(:redirect) { |url| publish(:redirect, url) }
+          .submit!
       end
     end
   end

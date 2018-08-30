@@ -36,7 +36,7 @@ class RegistrationForm
       end
 
       def save
-        participant.save
+        publish(:login, participant) if participant.save
         super
       end
     end

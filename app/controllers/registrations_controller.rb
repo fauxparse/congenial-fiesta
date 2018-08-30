@@ -14,6 +14,7 @@ class RegistrationsController < ApplicationController
       .on(:completed) { redirect_to complete_registration_path }
       .on(:show) { render :edit }
       .on(:login) { |participant| log_in_as(participant) }
+      .on(:redirect) { |url| redirect_to(url) }
       .update(registration_attributes)
   end
 

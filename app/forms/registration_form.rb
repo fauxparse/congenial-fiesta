@@ -29,12 +29,12 @@ class RegistrationForm
   end
 
   def update(params)
-    if current_step.update(params)
-      publish(:login, participant) if participant.persisted? && !@participant
-      advance!
-    else
-      publish(:show, current_step)
-    end
+    current_step
+      .on(:login) { |participant| publish(:login, participant) }
+      .on(:success) { advance! }
+      .on(:error) { publish(:show, current_step) }
+      .on(:redirect) { |url| publish(:redirect, url) }
+      .update(params)
   end
 
   def current_step

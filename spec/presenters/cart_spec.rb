@@ -22,9 +22,9 @@ RSpec.describe Cart do
       it { is_expected.to be_zero }
     end
 
-    context 'with pending payments' do
+    context 'with approved payments' do
       let!(:payment) do
-        create(:payment, registration: registration).tap(&:confirmed!)
+        create(:payment, registration: registration).tap(&:approved!)
       end
 
       it { is_expected.to eq payment.amount }
@@ -43,8 +43,8 @@ RSpec.describe Cart do
 
       it { is_expected.to be_falsy }
 
-      context 'and confirmed' do
-        before { payment.confirmed! }
+      context 'and approved' do
+        before { payment.approved! }
 
         it { is_expected.to be_truthy }
       end

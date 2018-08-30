@@ -107,4 +107,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  Rails.application.default_url_options = { host: 'https://nzif.info' }
 end

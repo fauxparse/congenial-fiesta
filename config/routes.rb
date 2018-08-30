@@ -59,6 +59,12 @@ Rails.application.routes.draw do
   match '/register/:step', to: 'registrations#update', via: %i[put patch]
   get '/register', to: 'registrations#edit', as: :registration
 
+  post '/payments/paypal/:id' => 'payments#paypal_callback',
+    as: :paypal_callback
+  match '/payments/:id' => 'payments#paypal_redirect',
+    as: :paypal_return,
+    via: %i[get post]
+
   resources :schedules, only: :show
 
   constraints(step: /presenter|idea|finish/) do
