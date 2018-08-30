@@ -5,6 +5,7 @@ class RegistrationForm
     include ActiveModel::Conversion
     include ActiveModel::Naming
     include ActiveModel::Validations
+    include Cry
 
     attr_reader :form
 
@@ -88,7 +89,11 @@ class RegistrationForm
     def update(attributes = {})
       assign_attributes(attributes)
       @complete = nil
-      valid? && save
+      if valid? && save
+        publish(:success)
+      else
+        publish(:error)
+      end
     end
 
     def eql?(other)

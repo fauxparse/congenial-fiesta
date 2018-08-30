@@ -16,7 +16,7 @@ class Cart
   end
 
   def paid
-    sum_of(registration.payments.select(&:confirmed?))
+    sum_of(registration.payments.select(&:approved?))
   end
 
   def pending

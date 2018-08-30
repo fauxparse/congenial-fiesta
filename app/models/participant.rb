@@ -10,6 +10,7 @@ class Participant < ApplicationRecord
   has_many :password_resets
   has_many :pitches, dependent: :destroy
   has_many :registrations, dependent: :destroy
+  has_many :payments, through: :registrations
 
   has_one_attached :avatar
 
