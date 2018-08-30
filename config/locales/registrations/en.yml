@@ -92,6 +92,7 @@ en:
   payment:
     methods:
       internet_banking: 'Internet banking'
+      pay_pal: 'PayPal'
 
   onboard:
     read_more: 'Read more'

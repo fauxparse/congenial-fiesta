@@ -20,7 +20,7 @@ class RegistrationForm
       end
 
       def payment_method
-        payment&.payment_method
+        payment&.payment_method.to_param
       end
 
       def payment_method=(type)

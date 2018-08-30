@@ -14,4 +14,9 @@
   svg {
     display: block;
   }
+
+  &.icon--filled {
+    stroke: none;
+    fill: currentColor;
+  }
 }

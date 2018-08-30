@@ -66,6 +66,11 @@ class Cart
       .reject(&:marked_for_destruction?)
   end
 
+  def payments
+    all = registration.payments.sort_by(&:created_at)
+    all.select { |payment| payment.approved? || payment.pending? }
+  end
+
   private
 
   def sum_of(payments)
