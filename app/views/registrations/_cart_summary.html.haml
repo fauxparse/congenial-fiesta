@@ -21,6 +21,7 @@
           = t('.subtotal')
         %td.cart-summary__line-total
           = money(cart.workshop_cost)
+      = render partial: 'payment', collection: cart.payments
       %tr.cart-summary__total
         %td.cart-summary__item
           = t('.to_pay')
