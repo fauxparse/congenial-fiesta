@@ -289,13 +289,13 @@ ALTER SEQUENCE public.password_resets_id_seq OWNED BY public.password_resets.id;
 CREATE TABLE public.payments (
     id bigint NOT NULL,
     registration_id bigint,
-    type character varying,
     amount_cents integer DEFAULT 0,
     state character varying DEFAULT 'pending'::character varying,
     reference character varying,
     details json,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    kind character varying(32) DEFAULT 'internet_banking'::character varying
 );
 
 
@@ -1334,6 +1334,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180825223748'),
 ('20180825224326'),
 ('20180826000751'),
-('20180826013354');
+('20180826013354'),
+('20180831014046');
 
 

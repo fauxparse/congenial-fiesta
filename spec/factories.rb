@@ -207,7 +207,7 @@ FactoryBot.define do
     amount_cents 10_000
   end
 
-  factory :internet_banking_payment,
-    parent: :payment,
-    class: Payment::InternetBanking
+  factory :internet_banking_payment, parent: :payment do
+    kind 'internet_banking'
+  end
 end
