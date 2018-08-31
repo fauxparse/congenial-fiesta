@@ -1,4 +1,11 @@
 %section.activity-form__section
+  %label.activity-form__image{data: {controller: 'image-upload'}}
+    = activity_photo(form.object, size: :small)
+    %svg.upload-progress{width: 480, height: 8, viewbox: '0 0 480 8'}
+      %path{d: 'M0,4h480', data: { target: 'image-upload.progress' }}
+    = icon :upload, width: 72, height: 72
+    = form.file_field :photo, direct_upload: true, data: { target: 'image-upload.file', action: 'change->image-upload#submit' }
+
   = form.group :name do
     = form.label :name, t(form.object.type, scope: 'activity.types')
     = form.text_area :name, rows: 1

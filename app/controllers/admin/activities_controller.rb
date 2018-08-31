@@ -47,7 +47,7 @@ module Admin
       params
         .require(:activity)
         .permit(
-          :name, :type, :slug, :description, :maximum,
+          :name, :type, :slug, :description, :maximum, :photo,
           presenter_participant_ids: [],
           level_list: []
         )
