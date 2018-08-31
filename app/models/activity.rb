@@ -8,6 +8,8 @@ class Activity < ApplicationRecord
   has_many :presenters, dependent: :destroy, autosave: true
   has_many :schedules, dependent: :destroy
 
+  has_one_attached :photo
+
   validates :name, :type, :maximum, presence: true
   validates :maximum, numericality: { greater_than: 0, only_integer: true }
 

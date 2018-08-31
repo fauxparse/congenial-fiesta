@@ -158,4 +158,54 @@
       }
     }
   }
+
+  &__image {
+    display: block;
+    position: relative;
+    width: 30em;
+    max-width: 100%;
+    background: $dark-grey;
+    transition: opacity $base-duration $base-timing;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    input {
+      display: none;
+    }
+
+    .icon {
+      @include position(absolute, 50% null null 50%);
+      color: $white;
+      margin: -.75em;
+      opacity: 0;
+      transition: opacity $base-duration $base-timing;
+      cursor: pointer;
+      transform: scale(2);
+    }
+
+    .upload-progress {
+      @include position(absolute, null 0 0 0);
+
+      path {
+        stroke: $accent-color;
+        stroke-width: 8px;
+        stroke-dasharray: 480;
+        stroke-dashoffset: -480;
+      }
+    }
+
+    &:hover {
+      img {
+        opacity: .5;
+      }
+
+      .icon {
+        opacity: 1;
+      }
+    }
+  }
 }
