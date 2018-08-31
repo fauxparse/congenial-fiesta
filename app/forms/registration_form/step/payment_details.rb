@@ -20,11 +20,11 @@ class RegistrationForm
       end
 
       def payment_method
-        payment&.payment_method.to_param
+        payment&.payment_method
       end
 
-      def payment_method=(type)
-        return if payment_method === type
+      def payment_method=(kind)
+        return if payment_method === kind
 
         if payment&.persisted?
           payment.state = 'cancelled'
@@ -32,11 +32,11 @@ class RegistrationForm
           payment&.mark_for_destruction
         end
 
-        @payment = build_payment(type)
+        @payment = build_payment(kind)
       end
 
       def payment_methods
-        PaymentMethod.subclasses
+        PaymentMethod.all
       end
 
       def update(attributes = {})
@@ -58,11 +58,8 @@ class RegistrationForm
         @payment ||= registration.payments.to_a.select(&:pending?).last
       end
 
-      def build_payment(type)
-        registration.payments.build(
-          type: "Payment::#{type.camelize}",
-          amount: cart.to_pay
-        )
+      def build_payment(kind)
+        registration.payments.build(kind: kind, amount: cart.to_pay)
       end
 
       def submit_payment

@@ -20,12 +20,14 @@ class Payment < ApplicationRecord
     presence: true,
     numericality: { greater_than_or_equal_to: 0 }
   validates :payment_method, presence: true
+  validates :kind,
+    presence: true,
+    inclusion: { in: PaymentMethod.kinds }
 
   scope :in_place, -> { where(state: %i[pending approved]) }
 
   def payment_method
-    @payment_method ||=
-      PaymentMethod.const_get(self.class.name.demodulize).new(self)
+    @payment_method ||= PaymentMethod.const_get(kind.camelize).new(self)
   end
 
   def self.payment_method
@@ -36,5 +38,3 @@ class Payment < ApplicationRecord
     subclasses.first
   end
 end
-
-require_dependency 'payment/internet_banking'
