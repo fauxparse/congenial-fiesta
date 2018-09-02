@@ -16,6 +16,8 @@ en:
         We can’t wait to see your smiling face at the Festival.
         In the meantime, you can <a href="%{path}">come back here</a>
         as often as you like to change workshop or show preferences.
+
+        Check your inbox for a confirmation email very soon!
     edit:
       title: 'Register for %{festival}'
       back: 'Back:'
@@ -101,3 +103,8 @@ en:
     read_more: 'Read more'
     next: 'Next'
     finish: 'Finish'
+
+  participant_mailer:
+    registration_confirmation_email:
+      subject: 'Your %{festival} registration'
+      registered: 'You’re registered for %{festival}!'

@@ -50,6 +50,7 @@ class PaymentMethod
 
     def complete_payment(params)
       update_payment(:approved, params)
+      complete_registration if paid_in_full?
     end
 
     def pending_payment(params)
@@ -86,5 +87,15 @@ class PaymentMethod
         data
       end
     end
+
+    def paid_in_full?
+      Cart.new(registration).paid?
+    end
+
+    def complete_registration
+      CompleteRegistration.new(registration).call unless registration.completed?
+    end
+
+    delegate :registration, to: :payment
   end
 end

@@ -2,7 +2,34 @@
 %html
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
-    :css
-      /* Email styles need to be inline */
+    %meta{name: 'viewport', content: 'width=device-width'}
+    = stylesheet_link_tag 'email'
   %body
-    = yield
+    %table.body{border: 0, cellpadding: 0, cellspacing: 0}
+      %tr
+        %td
+        %td.container
+          .content
+            %span.preheader= yield :preheader
+            %table.main
+              %tr
+                %td
+                  = email_image_tag 'email_header.png'
+
+              %tr
+                %td.wrapper
+                  %table{border: 0, cellpadding: 0, cellspacing: 0}
+                    %tr
+                      %td
+                        = yield
+
+            .footer
+              %table{border: 0, cellpadding: 0, cellspacing: 0}
+                %tr
+                  %td.content-block
+                    %span.apple-link New Zealand Improv Festival
+                    %br/
+                    Don't like these emails?
+                    = succeed "." do
+                      %a{:href => "https://nzif.info"} Unsubscribe
+        %td

@@ -1,0 +1,5 @@
+%tr.cart-summary__payment
+  %td{class: class_string('cart-summary__payment-method', 'cart-summary__payment-method--pending' => payment.pending?)}
+    = t(payment.payment_method.to_param, scope: 'payment.methods')
+  %td.cart-summary__line-total
+    = money(-payment.amount)

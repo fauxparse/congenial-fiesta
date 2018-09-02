@@ -23,6 +23,10 @@ class PaymentsController < ApplicationController
 
   def return_to_registration
     flash[:error] = I18n.t('payment.problem') unless payment.approved?
-    redirect_to registration_step_path(:payment)
+    if payment.registration.completed?
+      redirect_to complete_registration_path
+    else
+      redirect_to registration_step_path(:payment)
+    end
   end
 end

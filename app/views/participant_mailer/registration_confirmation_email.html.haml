@@ -1,0 +1,52 @@
+- content_for :preheader, t('.registered', festival: @festival)
+
+%h1= "You’re coming to #{@festival}!"
+
+%p
+  Thanks for joining in our very special celebration.
+  We’ve recorded your workshop and show preferences,
+  but you can change these at any time prior to the Festival
+  by clicking this button:
+
+%table.btn.btn-primary{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+  %tbody
+    %tr
+      %td{align: 'center'}
+        %table{border: 0, cellpadding: 0, cellspacing: 0}
+          %tbody
+            %tr
+              %td
+                = link_to 'My registration', registration_step_url(:workshops), target: '_blank'
+
+- if RegistrationStage.new(@festival).earlybird?
+  %h2 Earlybird registrations
+  %p
+    Registration runs a little differently this year. Up until 1 October, the
+    workshops you select during registration will be split between everybody who
+    registers prior to that date, to ensure a fairer distribution. We will do
+    our best to make sure you get your first choice wherever possible!
+
+  %p
+    Please don't hesitate to reach out to the Festival team if you'd like more
+    details about how and why this process works.
+
+= render 'registrations/cart_summary', cart: @cart
+
+- @registration.payments.pending.where(kind: 'internet_banking').each do |payment|
+  = render 'registrations/internet_banking_instructions', payment: payment
+
+%h2 Questions? Problems? Feedback?
+
+%p
+  We have a dedicated and friendly team who are here to help you.
+  You can reply to this email, or you can find us in the
+  = link_to 'NZIF Green Room', 'https://www.facebook.com/groups/NZIFGreenRoom'
+  on Facebook.
+
+%p
+  See you in October!
+
+%p
+  Ngā mihi nui,
+  %br
+  The NZIF Team

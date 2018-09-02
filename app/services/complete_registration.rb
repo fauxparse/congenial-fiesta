@@ -26,6 +26,17 @@ class CompleteRegistration
   end
 
   def first_time_completion
-    registration.update(completed_at: Time.zone.now)
+    registration.update(completed_at: Time.zone.now, state: new_state)
+    ParticipantMailer
+      .registration_confirmation_email(registration)
+      .deliver_later
+  end
+
+  def cart
+    @cart ||= Cart.new(registration)
+  end
+
+  def new_state
+    cart.payment_confirmed? ? :confirmed : :awaiting_payment
   end
 end
