@@ -28,8 +28,6 @@ jobs:
       # Bundle install dependencies
       - run: bundle install --path vendor/bundle
 
-      - run: yarn global add bower
-
       - run: yarn install
 
       # Cache Dependencies
