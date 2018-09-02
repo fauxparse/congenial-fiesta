@@ -9,7 +9,12 @@ class PaymentsController < ApplicationController
   end
 
   def paypal_redirect
-    redirect_to registration_step_path(:payment)
+    respond_to do |format|
+      format.json { render json: { state: payment.state } }
+      format.html do
+        redirect_to registration_step_path(:payment) unless payment.pending?
+      end
+    end
   end
 
   private
