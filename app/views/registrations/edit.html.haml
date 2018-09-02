@@ -1,4 +1,6 @@
 - content_for :title, t('.title', festival: registration_form.festival)
+- content_for :head do
+  = display_meta_tags og: { title: festival.to_s, description: t('.og_description'), image: image_url('facebook.png') }
 
 = form_for registration_form.current_step, url: registration_step_path(registration_form.current_step),
   method: :patch, html: { class: 'registration-form', data: { controller: 'registration-form' } } do |form|

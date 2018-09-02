@@ -1,4 +1,6 @@
 - content_for :title, activity.name
+- content_for :head do
+  = display_meta_tags og: { title: "#{activity.name} at #{festival.to_s}", description: activity.description, image: activity_opengraph_photo(photo) }
 - content_for :body_class, 'activity-details--full'
 
 %header.hero

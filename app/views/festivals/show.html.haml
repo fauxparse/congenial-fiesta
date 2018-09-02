@@ -1,3 +1,6 @@
+- content_for :head do
+  = display_meta_tags og: { title: festival.to_s, description: t('.og_description'), image: image_url('facebook.png') }
+
 %main.home
   %header.hero
     = image_tag 'logo-white.svg', class: 'hero__logo', title: t('festival.name.full')
