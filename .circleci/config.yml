@@ -20,6 +20,8 @@ jobs:
 
       - run: gem install bundler
 
+      - run: yarn global add bower
+
       # Restore Cached Dependencies
       - type: cache-restore
         name: Restore bundle cache
