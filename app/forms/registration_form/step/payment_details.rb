@@ -42,6 +42,7 @@ class RegistrationForm
       def update(attributes = {})
         assign_attributes(attributes)
         if payment.valid?
+          save
           submit_payment
         else
           publish(:error)

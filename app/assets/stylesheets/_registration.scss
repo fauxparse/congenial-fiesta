@@ -846,3 +846,27 @@ label[for='registration_code_of_conduct_accepted'] {
     }
   }
 }
+
+.payment-processing {
+  @include full-width;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__icon {
+    @include size(4.5em);
+    display: block;
+    margin-bottom: $small-spacing;
+  }
+
+  &__title {
+    font-family: $base-font-family;
+    font-size: modular-scale(4);
+    font-weight: $light-font-weight;
+    text-transform: none;
+    text-align: center;
+    max-width: 75vw;
+  }
+}

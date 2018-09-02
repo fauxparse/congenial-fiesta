@@ -59,7 +59,7 @@ class PaymentMethod
     end
 
     def fail_payment(params)
-      update_payment(:failed, params)
+      update_payment(:declined, params)
     end
 
     def cancel_payment(params)
