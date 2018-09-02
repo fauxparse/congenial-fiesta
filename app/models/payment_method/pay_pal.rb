@@ -2,8 +2,6 @@
 
 class PaymentMethod
   class PayPal < PaymentMethod
-    include Rails.application.routes.url_helpers
-
     def submit!
       payment.save
       publish(:redirect, paypal_url)

@@ -49,14 +49,14 @@ class RegistrationForm
         end
       end
 
+      def payment
+        @payment ||= registration.payments.to_a.select(&:pending?).last
+      end
+
       private
 
       def payments_in_place
         errors.add(:payment_method, :blank) unless cart.paid?
-      end
-
-      def payment
-        @payment ||= registration.payments.to_a.select(&:pending?).last
       end
 
       def build_payment(kind)

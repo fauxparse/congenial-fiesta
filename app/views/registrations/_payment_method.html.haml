@@ -1,6 +1,4 @@
-%label.payment-method
-  = form.radio_button :payment_method, payment_method
-  .payment-method__label
-    .payment-method__icon
-      = inline_icon payment_method.to_param
-    .payment-method__name= t(payment_method.to_param, scope: 'payment.methods')
+%button.button.payment-method{type: 'submit', name: 'registration[payment_method]', value: payment_method}
+  .payment-method__icon
+    = inline_icon payment_method.to_param
+  .payment-method__name= t(payment_method.to_param, scope: 'payment.methods')

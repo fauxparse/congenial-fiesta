@@ -778,7 +778,17 @@ label[for='registration_code_of_conduct_accepted'] {
   flex: 1 0 0;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
+  justify-content: flex-start;
+  align-items: center;
+  border: $base-border;
+  border-radius: $base-border-radius;
+  font: inherit;
+  color: $base-font-color;
+  padding: $small-spacing;
+  text-align: center;
+  cursor: pointer;
+  line-height: $heading-line-height;
+  transition: border-color $base-duration $base-timing;
 
   &:not(:first-child) {
     margin-left: $small-spacing;
@@ -798,25 +808,6 @@ label[for='registration_code_of_conduct_accepted'] {
 
     .icon {
       display: block;
-    }
-  }
-
-  &__label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid $white;
-    border-radius: $base-border-radius;
-    color: $secondary-font-color;
-    padding: $small-spacing;
-    text-align: center;
-    cursor: pointer;
-    line-height: $heading-line-height;
-    transition: border-color $base-duration $base-timing;
-
-    :checked ~ & {
-      border-color: $accent-color;
-      color: $base-font-color;
     }
   }
 }
@@ -868,5 +859,23 @@ label[for='registration_code_of_conduct_accepted'] {
     text-transform: none;
     text-align: center;
     max-width: 75vw;
+  }
+}
+
+.internet-banking-instructions {
+  margin: 0 0 $base-spacing;
+  padding: $small-spacing;
+  background: $secondary-background-color;
+  border-radius: $base-border-radius;
+
+  dt {
+    @include all-caps;
+    font-size: modular-scale(-1);
+  }
+
+  dd {
+    &:not(:last-of-type) {
+      margin-bottom: $small-spacing;
+    }
   }
 }

@@ -11,9 +11,7 @@ class PaymentsController < ApplicationController
   def paypal_redirect
     respond_to do |format|
       format.json { render json: { state: payment.state } }
-      format.html do
-        redirect_to registration_step_path(:payment) unless payment.pending?
-      end
+      format.html { return_to_registration unless payment.pending? }
     end
   end
 
@@ -21,5 +19,10 @@ class PaymentsController < ApplicationController
 
   def payment
     @payment ||= Payment.includes(:registration).find(params[:id])
+  end
+
+  def return_to_registration
+    flash[:error] = I18n.t('payment.problem') unless payment.approved?
+    redirect_to registration_step_path(:payment)
   end
 end

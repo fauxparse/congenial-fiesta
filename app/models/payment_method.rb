@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PaymentMethod
+  include Rails.application.routes.url_helpers
   include Cry
 
   attr_reader :payment
