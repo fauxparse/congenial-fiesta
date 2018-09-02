@@ -131,6 +131,7 @@ en:
         [NZIF Green Room](https://www.facebook.com/groups/NZIFGreenRoom/) on Facebook.
       register_now: 'Register now'
       earlybird: 'Preferential registrations close %{close}'
+      og_description: 'The New Zealand Improv Festival gathers improvisational theatre companies from around the nation (and around the globe) to present new work, learn new skills and make connections across the industry.'
 
   passwords:
     create:

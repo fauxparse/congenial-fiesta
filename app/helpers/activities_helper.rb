@@ -27,7 +27,15 @@ module ActivitiesHelper
   end
 
   def activity_permalink(activity)
-    send(:"#{activity.type.underscore}_path", festival, activity)
+    send(:"#{activity.type.underscore}_url", festival, activity)
+  end
+
+  def activity_opengraph_photo(activity)
+    if activity.photo.attached?
+      photo_variant_url(activity.photo, 1200, 628)
+    else
+      image_url('facebook.png')
+    end
   end
 
   private

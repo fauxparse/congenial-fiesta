@@ -9,6 +9,7 @@
     = yield :stylesheets
     = yield :scripts
     = svg_sprite_sheet
+    = content_for :head
 
   %body{class: class_string(local_assigns[:body_class], content_for(:body_class))}
     = content_for?(:main) ? yield(:main) : yield
