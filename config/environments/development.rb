@@ -38,7 +38,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options =
-    { protocol: 'https', host: 'localhost', port: 3000 }
+    { protocol: 'http', host: 'localhost', port: 3000 }
 
   config.action_mailer.perform_caching = false
 
