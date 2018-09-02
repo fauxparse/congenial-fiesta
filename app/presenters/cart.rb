@@ -3,8 +3,13 @@
 class Cart
   attr_reader :registration
 
-  def initialize(registration)
+  def initialize(registration, include_pending: true)
     @registration = registration
+    @include_pending = include_pending
+  end
+
+  def include_pending?
+    @include_pending
   end
 
   def pricing_model
@@ -32,7 +37,7 @@ class Cart
   end
 
   def to_pay
-    total - paid - pending
+    total - paid - (include_pending? ? pending : 0)
   end
 
   def total
@@ -68,7 +73,9 @@ class Cart
 
   def payments
     all = registration.payments.sort_by(&:created_at)
-    all.select { |payment| payment.approved? || payment.pending? }
+    all.select do |payment|
+      payment.approved? || (include_pending? && payment.pending?)
+    end
   end
 
   private

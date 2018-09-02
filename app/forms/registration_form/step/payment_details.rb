@@ -41,11 +41,16 @@ class RegistrationForm
 
       def update(attributes = {})
         assign_attributes(attributes)
-        if payment.valid?
-          save
-          submit_payment
+        if attributes.include?(:payment_method)
+          if payment&.valid?
+            save
+            submit_payment
+          else
+            publish(:error)
+          end
         else
-          publish(:error)
+          save
+          publish(:success)
         end
       end
 
