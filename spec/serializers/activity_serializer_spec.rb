@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ActivitySerializer, type: :serializer do
   subject(:serializer) { ActivitySerializer.new(activity) }
-  let(:activity) { create(:workshop, name: 'a workshop') }
+  let(:activity) { create(:workshop, name: 'a workshop', maximum: 15) }
   let!(:presenter) { create(:presenter, activity: activity) }
   let(:json) { serializer.call }
 
@@ -13,6 +13,7 @@ RSpec.describe ActivitySerializer, type: :serializer do
       id: activity.id,
       name: 'a workshop',
       type: 'Workshop',
+      maximum: 15,
       presenters: [{
         id: presenter.participant.id,
         name: presenter.participant.name

@@ -1,0 +1,7 @@
+= linked_block_if step.accessible?, registration_step_path(step),
+  class: class_string('registration-form__step', "registration-form__step--#{step.state}"),
+  data: { step: step.to_param, target: 'registration-form.step' } do
+  .step__icon= icon :"registration_#{step.to_param}"
+  .step__name
+    %span.step__label= step.label
+    %span.step__sublabel= step.sublabel

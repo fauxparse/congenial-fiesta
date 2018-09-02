@@ -24,4 +24,16 @@ RSpec.describe Festival, type: :model do
         .to include 'must be on or after 20 October, 2018'
     end
   end
+
+  context 'with earlybird cutoff before registrations open' do
+    before do
+      festival.registrations_open_at = Time.zone.now
+      festival.earlybird_cutoff = 1.day.ago
+    end
+
+    it 'is invalid' do
+      expect(festival).not_to be_valid
+      expect(festival).to have_exactly(1).error_on(:earlybird_cutoff)
+    end
+  end
 end

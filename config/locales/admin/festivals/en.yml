@@ -4,3 +4,6 @@ en:
       new:
         title: 'New festival'
         submit: 'Create festival'
+      edit:
+        title: 'Festival settings'
+        submit: 'Save changes'

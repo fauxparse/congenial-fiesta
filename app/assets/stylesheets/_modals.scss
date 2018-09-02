@@ -45,6 +45,7 @@
     }
 
     &-buttons {
+      flex: 0 0 auto;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -97,7 +98,7 @@
   &__body {
     position: relative;
     overflow: auto;
-    flex: 1;
+    flex: 1 1 auto;
   }
 
   &__footer {
@@ -119,6 +120,24 @@
     .modal__content {
       transform: translateY(0);
       transition-timing-function: $deceleration-timing;
+    }
+  }
+
+  &--alert {
+    .modal__header {
+      min-height: auto;
+      flex-direction: row-reverse;
+      align-items: flex-start;
+    }
+
+    .modal__body {
+      padding: 1em;
+    }
+
+    .modal__footer {
+      .button {
+        min-width: 6em;
+      }
     }
   }
 

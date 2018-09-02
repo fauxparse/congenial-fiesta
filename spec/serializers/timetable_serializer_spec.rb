@@ -32,12 +32,14 @@ RSpec.describe TimetableSerializer, type: :serializer do
         venue_id: venue.id,
         activity_id: activity.id,
         starts_at: start_time,
-        ends_at: end_time
+        ends_at: end_time,
+        maximum: nil
       ),
       activities: a_collection_containing_exactly(
         id: activity.id,
         name: activity.name,
         type: 'Workshop',
+        maximum: 16,
         presenters: []
       ),
       activity_types: a_collection_containing_exactly(

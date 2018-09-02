@@ -5,7 +5,9 @@ body {
 }
 
 main {
-  flex: 1;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 
   > section {
     @include full-width;
@@ -51,6 +53,17 @@ header.hero {
       color: white;
       border-color: white;
       background-color: rgba(white, 0.15);
+    }
+  }
+}
+
+.breadcrumbs {
+  &__link {
+    color: $secondary-font-white;
+    text-decoration: none;
+
+    &:hover {
+      color: $base-font-white;
     }
   }
 }

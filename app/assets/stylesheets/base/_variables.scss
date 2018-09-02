@@ -14,7 +14,7 @@ $hero-font-family: 'Brother', $base-font-family;
 
 // Line height
 $base-line-height: 1.5;
-$heading-line-height: 1.2;
+$heading-line-height: 1.25;
 
 // Other Sizes
 $base-border-radius: 0.25em;
@@ -36,12 +36,19 @@ $apple: #62bc46;
 $dark-grey: #283149;
 $medium-grey: #455168;
 $light-grey: #b6c2d6;
-$pale-grey: rgba($light-grey, 0.375);
+$pale-grey: #e3e8f0;
+$ghost-grey: rgba($light-grey, 0.375);
 $white: #fff;
 
 $workshop-color: $mandarin;
 $show-color: $plum;
 $social-event-color: $apple;
+
+$level-colors: (
+  rookie: $apple,
+  intermediate: $mint,
+  advanced: $grape
+);
 
 $facebook: #4267b2;
 $google: #ea4335;

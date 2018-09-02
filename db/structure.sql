@@ -153,7 +153,9 @@ CREATE TABLE public.festivals (
     start_date date,
     end_date date,
     pitches_open_at timestamp without time zone,
-    pitches_close_at timestamp without time zone
+    pitches_close_at timestamp without time zone,
+    registrations_open_at timestamp without time zone,
+    earlybird_cutoff timestamp without time zone
 );
 
 
@@ -281,6 +283,42 @@ ALTER SEQUENCE public.password_resets_id_seq OWNED BY public.password_resets.id;
 
 
 --
+-- Name: payments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payments (
+    id bigint NOT NULL,
+    registration_id bigint,
+    amount_cents integer DEFAULT 0,
+    state character varying DEFAULT 'pending'::character varying,
+    reference character varying,
+    details json,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    kind character varying(32) DEFAULT 'internet_banking'::character varying
+);
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.payments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.payments_id_seq OWNED BY public.payments.id;
+
+
+--
 -- Name: pitches; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -346,6 +384,43 @@ ALTER SEQUENCE public.presenters_id_seq OWNED BY public.presenters.id;
 
 
 --
+-- Name: registrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.registrations (
+    id bigint NOT NULL,
+    festival_id bigint,
+    participant_id bigint,
+    state character varying DEFAULT 'pending'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    code_of_conduct_accepted_at timestamp without time zone,
+    workshops_saved_at timestamp without time zone,
+    shows_saved_at timestamp without time zone,
+    completed_at timestamp without time zone
+);
+
+
+--
+-- Name: registrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.registrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: registrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.registrations_id_seq OWNED BY public.registrations.id;
+
+
+--
 -- Name: schedules; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -356,7 +431,9 @@ CREATE TABLE public.schedules (
     ends_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    venue_id bigint
+    venue_id bigint,
+    maximum integer,
+    freebie boolean DEFAULT false
 );
 
 
@@ -386,6 +463,41 @@ ALTER SEQUENCE public.schedules_id_seq OWNED BY public.schedules.id;
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: selections; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.selections (
+    id bigint NOT NULL,
+    registration_id bigint,
+    schedule_id bigint,
+    state character varying(16) DEFAULT 'pending'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    slot character varying,
+    "position" integer DEFAULT 1
+);
+
+
+--
+-- Name: selections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.selections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: selections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.selections_id_seq OWNED BY public.selections.id;
 
 
 --
@@ -537,6 +649,13 @@ ALTER TABLE ONLY public.password_resets ALTER COLUMN id SET DEFAULT nextval('pub
 
 
 --
+-- Name: payments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments ALTER COLUMN id SET DEFAULT nextval('public.payments_id_seq'::regclass);
+
+
+--
 -- Name: pitches id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -551,10 +670,24 @@ ALTER TABLE ONLY public.presenters ALTER COLUMN id SET DEFAULT nextval('public.p
 
 
 --
+-- Name: registrations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.registrations ALTER COLUMN id SET DEFAULT nextval('public.registrations_id_seq'::regclass);
+
+
+--
 -- Name: schedules id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.schedules ALTER COLUMN id SET DEFAULT nextval('public.schedules_id_seq'::regclass);
+
+
+--
+-- Name: selections id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.selections ALTER COLUMN id SET DEFAULT nextval('public.selections_id_seq'::regclass);
 
 
 --
@@ -643,6 +776,14 @@ ALTER TABLE ONLY public.password_resets
 
 
 --
+-- Name: payments payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: pitches pitches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -659,6 +800,14 @@ ALTER TABLE ONLY public.presenters
 
 
 --
+-- Name: registrations registrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.registrations
+    ADD CONSTRAINT registrations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schedules schedules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -672,6 +821,14 @@ ALTER TABLE ONLY public.schedules
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: selections selections_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.selections
+    ADD CONSTRAINT selections_pkey PRIMARY KEY (id);
 
 
 --
@@ -804,6 +961,13 @@ CREATE INDEX index_password_resets_on_token_and_expires_at ON public.password_re
 
 
 --
+-- Name: index_payments_on_registration_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payments_on_registration_id ON public.payments USING btree (registration_id);
+
+
+--
 -- Name: index_pitches_on_festival_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -853,6 +1017,34 @@ CREATE INDEX index_presenters_on_participant_id ON public.presenters USING btree
 
 
 --
+-- Name: index_registrations_on_festival_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_registrations_on_festival_id ON public.registrations USING btree (festival_id);
+
+
+--
+-- Name: index_registrations_on_festival_id_and_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_registrations_on_festival_id_and_participant_id ON public.registrations USING btree (festival_id, participant_id);
+
+
+--
+-- Name: index_registrations_on_festival_id_and_state; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_registrations_on_festival_id_and_state ON public.registrations USING btree (festival_id, state);
+
+
+--
+-- Name: index_registrations_on_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_registrations_on_participant_id ON public.registrations USING btree (participant_id);
+
+
+--
 -- Name: index_schedules_on_activity_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -871,6 +1063,41 @@ CREATE INDEX index_schedules_on_starts_at_and_ends_at ON public.schedules USING 
 --
 
 CREATE INDEX index_schedules_on_venue_id ON public.schedules USING btree (venue_id);
+
+
+--
+-- Name: index_selections_on_registration_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_selections_on_registration_id ON public.selections USING btree (registration_id);
+
+
+--
+-- Name: index_selections_on_registration_id_and_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_selections_on_registration_id_and_schedule_id ON public.selections USING btree (registration_id, schedule_id);
+
+
+--
+-- Name: index_selections_on_registration_id_and_slot_and_position; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_selections_on_registration_id_and_slot_and_position ON public.selections USING btree (registration_id, slot, "position");
+
+
+--
+-- Name: index_selections_on_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_selections_on_schedule_id ON public.selections USING btree (schedule_id);
+
+
+--
+-- Name: index_selections_on_schedule_id_and_state_and_updated_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_selections_on_schedule_id_and_state_and_updated_at ON public.selections USING btree (schedule_id, state, updated_at);
 
 
 --
@@ -975,6 +1202,30 @@ ALTER TABLE ONLY public.password_resets
 
 
 --
+-- Name: selections fk_rails_2c18b93dc1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.selections
+    ADD CONSTRAINT fk_rails_2c18b93dc1 FOREIGN KEY (schedule_id) REFERENCES public.schedules(id) ON DELETE CASCADE;
+
+
+--
+-- Name: selections fk_rails_41dbad5a49; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.selections
+    ADD CONSTRAINT fk_rails_41dbad5a49 FOREIGN KEY (registration_id) REFERENCES public.registrations(id) ON DELETE CASCADE;
+
+
+--
+-- Name: registrations fk_rails_4604f69f81; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.registrations
+    ADD CONSTRAINT fk_rails_4604f69f81 FOREIGN KEY (festival_id) REFERENCES public.festivals(id) ON DELETE CASCADE;
+
+
+--
 -- Name: presenters fk_rails_51807902f4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -983,11 +1234,27 @@ ALTER TABLE ONLY public.presenters
 
 
 --
+-- Name: registrations fk_rails_621cdb63fe; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.registrations
+    ADD CONSTRAINT fk_rails_621cdb63fe FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
+
+
+--
 -- Name: pitches fk_rails_b8c4f77d16; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.pitches
     ADD CONSTRAINT fk_rails_b8c4f77d16 FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
+
+
+--
+-- Name: payments fk_rails_bb9133230f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT fk_rails_bb9133230f FOREIGN KEY (registration_id) REFERENCES public.registrations(id) ON DELETE RESTRICT;
 
 
 --
@@ -1054,6 +1321,20 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180714012648'),
 ('20180715212859'),
 ('20180718001951'),
-('20180724212201');
+('20180724212201'),
+('20180811220916'),
+('20180811222021'),
+('20180812205342'),
+('20180820211405'),
+('20180824201155'),
+('20180824203055'),
+('20180825010126'),
+('20180825120959'),
+('20180825205149'),
+('20180825223748'),
+('20180825224326'),
+('20180826000751'),
+('20180826013354'),
+('20180831014046');
 
 

@@ -2,10 +2,7 @@
 
 Rails.application.routes.draw do
   namespace :admin do
-    get 'people/index'
-  end
-  namespace :admin do
-    resources :festivals, only: %i[new create]
+    resources :festivals, only: %i[new create edit]
 
     scope ':year', constraints: { year: /2\d{3}/ } do
       resources :activities, only: %i[index create]
@@ -27,6 +24,7 @@ Rails.application.routes.draw do
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
       get '/timetable' => 'schedules#index', as: :timetable
+      match '/' => 'festivals#update', via: %i[put patch]
       get '/' => 'festivals#show', as: :festival
     end
 
@@ -45,12 +43,29 @@ Rails.application.routes.draw do
 
   constraints(provider: /#{OmniAuth.registered_providers.join('|')}/) do
     match '/auth/:provider/callback' => 'sessions#oauth', via: %i[get post]
+    get '/register/with/:provider', to: 'registrations#oauth'
 
     resource :profile, only: %i[show update] do
       get 'connect/:provider' => 'profiles#connect', as: :connect
       delete 'connect/:provider' => 'profiles#disconnect'
     end
   end
+
+  get '/register/complete',
+    to: 'registrations#complete',
+    as: :complete_registration
+  get '/register/:step', to: 'registrations#edit', as: :registration_step
+  post '/register/cart', to: 'registrations#cart', as: :update_cart
+  match '/register/:step', to: 'registrations#update', via: %i[put patch]
+  get '/register', to: 'registrations#edit', as: :registration
+
+  post '/payments/paypal/:id' => 'payments#paypal_callback',
+    as: :paypal_callback
+  match '/payments/:id' => 'payments#paypal_redirect',
+    as: :paypal_return,
+    via: %i[get post]
+
+  resources :schedules, only: :show
 
   constraints(step: /presenter|idea|finish/) do
     resources :pitches, except: %i[show new edit create]
@@ -59,6 +74,18 @@ Rails.application.routes.draw do
     get '/pitches/:id', to: 'pitches#edit', as: :edit_pitch
     get '/pitch', to: 'pitches#new', as: :new_pitch
     post '/pitch', to: 'pitches#create'
+  end
+
+  scope ':year', constraints: { year: /2\d{3}/ } do
+    defaults type: 'workshop' do
+      get '/workshops/:slug' => 'activities#show', as: :workshop
+      get '/workshops' => 'activities#index', as: :workshops
+    end
+
+    defaults type: 'show' do
+      get '/shows/:slug' => 'activities#show', as: :show
+      get '/shows' => 'activities#index', as: :shows
+    end
   end
 
   def static_page(name)

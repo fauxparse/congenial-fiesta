@@ -17,6 +17,8 @@ FactoryBot.define do
     end
     end_date { start_date + 7 }
     pitches_open_at { Time.zone.now }
+    registrations_open_at { start_date.beginning_of_day - 2.months }
+    earlybird_cutoff { registrations_open_at + 1.month }
   end
 
   factory :participant do
@@ -151,12 +153,44 @@ FactoryBot.define do
     participant
   end
 
+  factory :registration do
+    festival
+    participant
+
+    trait :with_workshops do
+      after(:create) do |registration|
+        create_list(:workshop, 3, festival: registration.festival)
+          .each.with_index do |workshop, i|
+            time = registration.festival.start_date.midnight + i.days + 10.hours
+            registration.selections.create!(
+              schedule: create(
+                :schedule,
+                activity: workshop,
+                starts_at: time
+              )
+            )
+          end
+      end
+    end
+  end
+
+  factory :selection do
+    schedule
+    registration { create(:registration, festival: schedule.activity.festival) }
+  end
+
+  factory :schedule do
+    activity
+    starts_at { festival.start_date.midnight.change(hour: 10) }
+    ends_at { starts_at + 3.hours }
+  end
+
   factory :show do
     festival
     name 'A show'
   end
 
-  factory :workshop do
+  factory :workshop, aliases: %i[activity] do
     festival
     name 'A workshop'
   end
@@ -166,5 +200,14 @@ FactoryBot.define do
     address '1 Kent Tce'
     latitude '-41.2921901197085'.to_d
     longitude '174.7858539802915'.to_d
+  end
+
+  factory :payment do
+    registration
+    amount_cents 10_000
+  end
+
+  factory :internet_banking_payment, parent: :payment do
+    kind 'internet_banking'
   end
 end

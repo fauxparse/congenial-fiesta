@@ -6,6 +6,8 @@ en:
         next: 'Next day'
       form:
         to: 'to'
+        limit: 'Limit to'
+        participants: 'participants'
       modal:
         delete: 'Delete'
         title: 'Scheduled activity'

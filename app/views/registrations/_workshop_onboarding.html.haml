@@ -1,0 +1,73 @@
+= render 'shared/onboard', class: 'workshop-onboarding', data: { 'onboard-key': 'earlybird', 'onboard-auto': true } do
+  = onboard_step do
+    .onboard__image
+      = image_tag 'onboarding/2x/asleep@2x'
+    %h3.onboard__title
+      %small Introducing:
+      Earlybird Registration
+    %p
+      Last year, some workshops sold out in a matter of hours,
+      before some of you were even awake.
+    %p
+      We want to make things fairer this year.
+    %button.button{data: { action: 'onboard#next' }}
+      .button__text= t('onboard.read_more')
+
+  = onboard_step do
+    .onboard__image
+      = image_tag 'onboarding/2x/placement@2x'
+    %p
+      Until #{l registration_form.registration.festival.earlybird_cutoff.to_date, format: :same_year},
+      rather than first-in, first-served, we’ll collect your
+      order of preference for the workshops you’re interested in.
+    %p
+      Then our software will fill in workshop lists using those preferences,
+      attempting to give everybody their first choices where possible.
+    %button.button{data: { action: 'onboard#next' }}
+      .button__text= t('onboard.next')
+
+  = onboard_step do
+    .onboard__image
+      = image_tag 'onboarding/2x/royal@2x'
+    %p
+      This means that if a workshop sells out quickly, we have the information
+      we need to give our earlybirds the royal treatment, like
+      putting you on a waitlist for your top choice, or running more workshops
+      where popular choices have sold out quickly.
+    %p
+      This isn’t information we’ve been able to collect before!
+    %button.button{data: { action: 'onboard#next' }}
+      .button__text= t('onboard.next')
+
+  = onboard_step do
+    .onboard__example{data: { controller: 'activity-selector', selected: t('registrations.activity.selected') }}
+      - 3.times do |i|
+        .activity{data: { target: 'activity-selector.activity', id: i, slot: 1 }}
+          .fruit= ['🐧', '🐤', '🐦'][i]
+          %button.button.button--primary.activity__remove{data: { action: 'activity-selector#removeClicked'}}
+            = icon :check, class: 'button__icon'
+            .button__text
+          %button.button.activity__add{data: { action: 'activity-selector#addClicked'}}
+            = icon :add, class: 'button__icon'
+            .button__text= t('registrations.activity.add')
+    %p
+      Try it now! Click on the buttons in the order you want to select them.
+    %p
+      To change the order, simply click on a selected button to deselect it.
+      The others will be bumped up the list.
+    %button.button{data: { action: 'onboard#next' }}
+      .button__text= t('onboard.next')
+
+  = onboard_step do
+    .onboard__image
+      = image_tag 'onboarding/2x/graduated@2x'
+    %p
+      We know it’s a bit more complicated, but we think it’s a much fairer way
+      to make sure everyone gets the best out of their Festival.
+
+    %p
+      Please contact
+      = mail_to 'matt@nzimprovfestival.co.nz', 'Matt'
+      if you have any comments, questions, or suggestions about this process.
+    %button.button{data: { action: 'onboard#close' }}
+      .button__text= t('onboard.finish')

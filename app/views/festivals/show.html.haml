@@ -8,5 +8,19 @@
       %p= link_to t('.pitch_now'), new_pitch_path, class: 'button button--primary'
       %p= t('.pitches_close', date: l(festival.pitches_close_at.to_date - 1, format: :same_year)) if festival.pitches_close_at?
 
-  %section
-    = m t('.hold_tight')
+  %section.activity-counts
+    .activity-count
+      .activity-count__number= (festival.end_date - festival.start_date).to_i + 1
+      .activity-count__type Days
+    = link_to workshops_path(festival), class: 'activity-count activity-count--workshops' do
+      .activity-count__number= festival.workshops_count
+      .activity-count__type= t('activity.types.workshop').pluralize(festival.workshops_count)
+    = link_to shows_path(festival), class: 'activity-count activity-count--shows' do
+      .activity-count__number= festival.shows_count
+      .activity-count__type= t('activity.types.show').pluralize(festival.shows_count)
+
+  - if festival.registrations_open?
+    .register-now
+      = link_to 'Register now!', registration_path, class: 'button register-now__button'
+      - if festival.earlybird?
+        %p.register-now__earlybird= t('.earlybird', close: l(festival.earlybird_cutoff.to_date, format: :same_year))

@@ -1,0 +1,7 @@
+.cart{data: { target: 'cart.cart', total: cart.total.cents, each: cart.per_workshop.cents }}
+  .cart__icon
+    = inline_icon :cart_spinner, class: 'cart__icon'
+  .cart__items
+    %span.cart__count{data: { count: cart.count, target: 'cart.count' }}
+    %span.cart__item{data: { singular: t('.workshop'), plural: t('.workshop').pluralize }}
+  .cart__total{data: { target: 'cart.total' }}= money cart.total

@@ -44,7 +44,7 @@ module Admin
     def schedule_params
       params
         .require(:schedule)
-        .permit(:activity_id, :venue_id, :starts_at, :ends_at)
+        .permit(:activity_id, :venue_id, :starts_at, :ends_at, :maximum)
     end
 
     def schedules

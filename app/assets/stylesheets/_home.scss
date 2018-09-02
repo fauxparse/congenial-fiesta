@@ -7,3 +7,58 @@
     @include bulleted-list;
   }
 }
+
+.activity-counts {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  .activity-count {
+    flex: 1 1 0;
+    text-align: center;
+    text-decoration: none;
+    padding: $small-spacing;
+    border-radius: $base-border-radius;
+
+    &__number {
+      font-family: $hero-font-family;
+      font-size: modular-scale(6);
+      line-height: 1;
+    }
+
+    &__type {
+      font-size: modular-scale(1);
+    }
+
+    @media screen and (min-width: #{$line-width * 2 / 3}) {
+      &__number {
+        font-size: modular-scale(10);
+      }
+
+      &__type {
+        font-size: modular-scale(2);
+      }
+    }
+  }
+}
+
+.register-now {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__button {
+    width: 100%;
+    max-width: 25em;
+    font-size: modular-scale(2);
+    font-family: $hero-font-family;
+    text-transform: uppercase;
+    border-width: .125em;
+    justify-content: center;
+    margin: 0 auto $small-spacing;
+  }
+
+  &__earlybird {
+    text-align: center;
+  }
+}

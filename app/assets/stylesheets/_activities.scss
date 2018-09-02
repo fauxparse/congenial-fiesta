@@ -1,0 +1,127 @@
+.activities {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+  grid-column-gap: $base-spacing;
+  padding: 0 0 $base-spacing;
+
+  .activity {
+    padding: 0 0 $base-spacing;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    &::after {
+      content: '';
+      flex: 1;
+    }
+
+    &__photo {
+      margin-bottom: $small-spacing;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    &__name {
+      font-size: modular-scale(1);
+      text-decoration: none;
+    }
+
+    &__presenters {
+      color: $secondary-font-color;
+    }
+
+    &__times,
+    &__levels {
+      order: 1;
+      margin-top: $small-spacing;
+    }
+  }
+}
+
+.activity-list {
+  padding-top: $base-spacing;
+
+  &__day {
+    @include vertical-padding(0);
+    border-top: none !important;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    &:not(:first-of-type) {
+      &::before {
+        @include size(2.5em, .25em);
+        display: block;
+        content: '';
+        background-color: $accent-color;
+      }
+    }
+  }
+
+  &__date {
+    @include sticky-header;
+    @include vertical-padding($small-spacing);
+    margin-bottom: 0;
+    font-size: modular-scale(2);
+    font-weight: $light-font-weight;
+    z-index: 2;
+
+    &::before {
+      content: attr(data-date-short);
+    }
+  }
+
+  &__time {
+    @include sticky-header;
+    top: calc(#{modular-scale(2) * strip-unit($heading-line-height)} + #{$small-spacing * 2} - .5px);
+    padding-top: 0;
+    padding-bottom: $small-spacing;
+    font-size: modular-scale(0);
+    font-weight: $base-font-weight;
+    color: $secondary-font-color;
+    margin-top: 0;
+    margin-bottom: $small-spacing;
+  }
+}
+
+.activity-details--full {
+  section:not(:first-of-type) {
+    border-top: none;
+  }
+
+  .activity__photo {
+    display: block;
+    margin: 0 auto $base-spacing;
+    max-width: $line-width / 2;
+  }
+
+  .activity-details__bio {
+    color: inherit;
+    display: grid;
+    grid-column-gap: calc(#{$keyline} - #{$avatar-size});
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      '. pill'
+      'avatar name'
+      'avatar text';
+
+    &::before {
+      grid-area: pill;
+    }
+
+    .avatar {
+      grid-area: avatar;
+    }
+
+    h3 {
+      grid-area: name;
+      font-weight: $base-font-weight;
+      line-height: #{strip-unit($avatar-size)}rem;
+    }
+
+    .text {
+      grid-area: text;
+    }
+  }
+}

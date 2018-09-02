@@ -1,0 +1,41 @@
+%h1.registration-form__title= t('.title')
+
+.registration-form__participant-details
+  = form.group :name, required: true do
+    = form.label :name
+    = form.text_field :name
+    = form.error_messages_for :name
+
+  = form.group :email, required: true do
+    = form.label :email
+    = form.email_field :email
+    = form.error_messages_for :email
+
+  - unless registration_form.participant.persisted?
+    .registration-form__login-details
+      = form.group :password, required: true do
+        = form.label :password
+        = form.password_field :password
+        = form.error_messages_for :password
+        = form.label :password_confirmation
+        = form.password_field :password_confirmation
+        = form.error_messages_for :password_confirmation
+
+      .registration-form__social
+        .label= t('.or_log_in_with')
+        .registration-form__social-links
+          = render partial: 'accounts/provider', collection: Identity.providers.except(:developer).keys, locals: { prefix: 'register/with' }
+
+    .registration_form__new-password= markdown t('.new_password')
+
+  %h2= t('.where')
+
+  = form.group :city, required: true do
+    = form.label :city
+    = form.text_field :city
+    = form.error_messages_for :city
+
+  = form.group :country_code, required: true do
+    = form.label :country_code
+    = form.country_select :country_code, { priority_countries: %w(NZ AU), priority_countries_divider: '' }, data: { controller: 'select' }
+    = form.error_messages_for :country_code

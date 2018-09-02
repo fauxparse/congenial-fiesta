@@ -1,0 +1,110 @@
+en:
+  registration:
+    steps:
+      details: 'Your details'
+      code_of_conduct: 'Code of Conduct'
+      workshops: 'Workshops'
+      shows: 'Shows'
+      payment: 'Payment'
+
+  registrations:
+    closed: 'Registrations are currently closed.'
+    complete:
+      title: 'Registered for %{festival}'
+      congratulations: 'You’re coming to NZIF!'
+      message: |
+        We can’t wait to see your smiling face at the Festival.
+        In the meantime, you can <a href="%{path}">come back here</a>
+        as often as you like to change workshop or show preferences.
+
+        Check your inbox for a confirmation email very soon!
+    edit:
+      title: 'Register for %{festival}'
+      back: 'Back:'
+      next: 'Next:'
+      finish: 'Finish'
+    steps:
+      details:
+        title: 'Your details'
+        new_password: |
+          Unfortunately, even if you’ve been to NZIF before, you’ll need to
+          create a new account for this year. We’ve made some exciting changes
+          to the system, but for security reasons we can’t import existing login
+          information. If you already have an account from this year (for
+          example, if you submitted a pitch), you can
+          <a href="/login?redirect=/register">log in here</a>.
+        where: 'Where are you from?'
+      code_of_conduct:
+        title: 'Code of Conduct'
+        instructions: |
+          We require all participants to adhere to our Code of Conduct.
+          Please make sure you’ve read the Code carefully before continuing.
+          This information will always be available on this website during the
+          Festival.
+        acceptance: 'I have read and agreed to the Code of Conduct'
+        please_read: 'Please read the Code of Conduct before continuing'
+      workshops:
+        title: 'Workshop selection'
+        instructions: |
+          During Earlybird registration, instead of selecting only one
+          workshop in each stream, select as many as you want, in order of
+          preference. We’ll do our best to get you into your first choice.
+          <a href="#" data-action="workshop-selection#help">Click here</a>
+          for more information on how and why we’re doing this.
+        help: 'Help'
+      shows:
+        title: 'Show selection'
+        limit_reached:
+          title: 'Limit reached'
+          body: |
+            Your registration entitles you to one free show ticket for each
+            workshop you’ve signed up for (plus one additional ticket for the
+            Gala). Additional show tickets can be purchased at Box Office during
+            the Festival, and as a participant, you’ll be entitled to stand-by
+            comps on the night.
+        gala:
+          title: '10th Anniversary Gala'
+          description: |
+            To mark the 10th year of NZIF, we will be holding a special Gala
+            performance on Saturday 20 October at Hannah Playhouse (across the
+            road from BATS). This show is free for all NZIF participants, and
+            does not count towards your Festival allocation, but we need to
+            know if you can make it.
+          attending: 'Yes! Please save me a seat'
+      payment:
+        title: 'Payment'
+        select: 'Select payment method'
+        or: 'Or select an alternative payment method below:'
+        paid_in_full: 'You’re all paid up.'
+        thanks: 'Thanks! Enjoy the Festival.'
+
+    cart_summary:
+      workshops: 'Workshops'
+      discount: 'Discount'
+      subtotal: 'Subtotal'
+      to_pay: 'Total to pay'
+
+    activity:
+      selected:
+        multiple: '%{position} choice'
+        single: 'You’re in!'
+      add: 'Add this'
+      compulsory: 'That’s you!'
+    cart:
+      workshop: 'workshop'
+
+  payment:
+    methods:
+      internet_banking: 'Internet banking'
+      pay_pal: 'PayPal'
+    problem: 'Sorry, there was a problem processing your payment. Please try again below.'
+
+  onboard:
+    read_more: 'Read more'
+    next: 'Next'
+    finish: 'Finish'
+
+  participant_mailer:
+    registration_confirmation_email:
+      subject: 'Your %{festival} registration'
+      registered: 'You’re registered for %{festival}!'

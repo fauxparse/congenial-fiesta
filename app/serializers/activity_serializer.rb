@@ -5,6 +5,7 @@ class ActivitySerializer < Primalize::Single
     id: optional(integer),
     name: string,
     type: string,
+    maximum: optional(integer),
     presenters: array(primalize(PresenterSerializer))
   )
 end

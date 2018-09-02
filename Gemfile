@@ -39,12 +39,15 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'acts_as_list', github: 'swanandp/acts_as_list'
 gem 'auto_strip_attributes', '~> 2.3'
 gem 'autoprefixer-rails'
 gem 'aws-sdk-s3', require: false
 gem 'bitters', github: 'thoughtbot/bitters'
 gem 'bourbon', github: 'thoughtbot/bourbon'
+gem 'colorize'
 gem 'country_select', github: 'stefanpenner/country_select'
+gem 'cry'
 gem 'css-class-string'
 gem 'figaro'
 gem 'geokit'
@@ -57,11 +60,14 @@ gem 'inline_svg'
 gem 'letter_opener'
 gem 'letter_opener_web'
 gem 'mini_magick'
+gem 'money'
+gem 'money-rails'
 gem 'neat', github: 'thoughtbot/neat'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
+gem 'ordinalize_full'
 gem 'premailer-rails'
 gem 'primalize'
 gem 'pundit'
@@ -69,6 +75,7 @@ gem 'redcarpet'
 gem 'scavenger'
 gem 'sendgrid-ruby'
 gem 'stringex'
+gem 'unsplash'
 gem 'wannabe_bool'
 
 group :development, :test do
@@ -99,6 +106,7 @@ group :test do
   gem 'rspec-collection_matchers'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'timecop'
   gem 'zonebie'
 end
 

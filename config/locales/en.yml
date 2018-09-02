@@ -11,11 +11,19 @@ en:
       same_month: '%-d'
       same_year: '%-d %B'
       long: '%-d %B, %Y'
+      short: '%a %-d %b'
+      timetable: '%A %-d %B'
 
   time:
     formats:
-      time: '%I:%M%p'
+      time: '%-l:%M%p'
       timetable: '%-l:%M'
+
+  countries:
+    nz: 'NZ'
+    au: 'Aus'
+    uk: 'UK'
+    us: 'USA'
 
   errors:
     messages:
@@ -34,6 +42,10 @@ en:
       pitch_form/step/participant_info:
         country_code: 'Country'
         company: 'Company name'
+      registration_form/step/participant_details:
+        country_code: 'Country'
+      registration_form/step/code_of_conduct:
+        code_of_conduct_accepted: 'Code of Conduct'
     errors:
       models:
         login_form:
@@ -48,6 +60,10 @@ en:
           attributes:
             password_confirmation:
               confirmation: 'does not match'
+        registration_form/step/payment_details:
+          attributes:
+            payment_method:
+              blank: 'Please select a payment method'
 
   activerecord:
     attributes:
@@ -55,6 +71,8 @@ en:
         maximum: 'Maximum number of participants'
       participant:
         country_code: 'Country'
+      festival:
+        registrations_open_at: 'Registrations open'
 
   helpers:
     label:
@@ -111,6 +129,8 @@ en:
         We’ll have more information soon.
         The best place to watch for updates is the
         [NZIF Green Room](https://www.facebook.com/groups/NZIFGreenRoom/) on Facebook.
+      register_now: 'Register now'
+      earlybird: 'Preferential registrations close %{close}'
 
   passwords:
     create:

@@ -30,6 +30,8 @@ export default class extends Controller {
     'startTime',
     'endTime',
     'activityName',
+    'limited',
+    'maximum',
     'submit'
   ]
 
@@ -96,6 +98,10 @@ export default class extends Controller {
     this.submitTarget.disabled = !activity
   }
 
+  get activity() {
+    return this.activities.get(this.activityId)
+  }
+
   get startTime() {
     return this._startTime
   }
@@ -146,6 +152,21 @@ export default class extends Controller {
           (!id && !venue.dataset.id)
       )
     )
+  }
+
+  get limited() {
+    return this.limitedTarget.checked
+  }
+
+  get maximum() {
+    return this.limited ? this.maximumTarget.value : undefined
+  }
+
+  set maximum(value) {
+    if (value) {
+      this.maximumTarget.value = value
+    }
+    this.limitedTarget.checked = !!value
   }
 
   get activities() {
@@ -232,11 +253,13 @@ export default class extends Controller {
     this.id = id
     fetch(this.url)
       .then(response => response.json())
-      .then(({ activity_id, venue_id, starts_at, ends_at }) => {
+      .then(({ activity_id, venue_id, starts_at, ends_at, maximum }) => {
         this.activityId = activity_id
         this.venueId = venue_id
         this.startTime = starts_at
         this.endTime = ends_at
+        this.maximumTarget.value = this.activity.maximum
+        this.maximum = maximum
       })
   }
 
@@ -252,6 +275,7 @@ export default class extends Controller {
 
   submit(e) {
     e && e.preventDefault()
+
     if (this.activityId) {
       this.formTarget.disabled = true
       const method = this.id ? 'PUT' : 'POST'
@@ -263,7 +287,8 @@ export default class extends Controller {
             activity_id: this.activityId,
             venue_id: this.venueId || '',
             starts_at: this.startTime.toISOString(),
-            ends_at: this.endTime.toISOString()
+            ends_at: this.endTime.toISOString(),
+            maximum: this.maximum || ''
           }
         }
       })
@@ -329,6 +354,13 @@ export default class extends Controller {
     } else {
       this.activityId = data.id
       this.autocomplete.hide()
+    }
+  }
+
+  limitedChanged() {
+    this.maximumTarget.disabled = !this.limitedTarget.checked
+    if (this.limitedTarget.checked) {
+      this.maximumTarget.focus()
     }
   }
 

@@ -1,0 +1,5 @@
+%h1.page-title= t('.title')
+
+= form_for festival, url: admin_festival_path(festival), html: { class: 'new-festival' } do |form|
+  = render 'form', form: form
+  = form.submit t('.submit'), class: 'button button--primary'

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -20 40 40">
+  <defs>
+    <linearGradient id="spinner-gradient" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ef4136"/>
+      <stop offset="100%" stop-color="#ef4136" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(-12 -12)">
+    <use xlink:href="#cart" />
+  </g>
+  <g class="spinner">
+    <path fill="url(#spinner-gradient)" stroke="none" d="M0 -20a1 1 0 0 1 0 2a18 18 0 0 0 -18 18a18 18 0 0 0 18 18a1 1 0 0 1 0 2a20 20 0 0 1 -20 -20a20 20 0 0 1 20 -20">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="0.9s" repeatCount="indefinite" />
+    </path>
+  </g>
+</svg>

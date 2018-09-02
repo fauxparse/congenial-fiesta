@@ -16,13 +16,15 @@ export default class extends Controller {
     if (!event.defaultPrevented) {
       this.element.classList.add('modal--in')
       setTimeout(() => this.dispatchEvent('opened'), TRANSITION_DURATION)
+      this.element.querySelector('.modal__body').scrollTop = 0
       this.element.focus()
     }
   }
 
-  close() {
-    const event = this.dispatchEvent('close')
-    if (!event.defaultPrevented) {
+  close(e) {
+    if (!e || !e.defaultPrevented) {
+      e && e.preventDefault()
+      const event = this.dispatchEvent('close')
       const focused = this.element.querySelector(':focus')
       focused && focused.blur()
       this.element.classList.remove('modal--in')

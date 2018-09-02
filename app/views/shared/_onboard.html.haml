@@ -1,0 +1,10 @@
+= render 'shared/modal',
+  class: class_string('onboard', local_assigns[:class]),
+  controller: class_string('onboard', local_assigns[:controller]),
+  target: class_string('onboard.modal', local_assigns[:target]),
+  action: class_string('modal:open->onboard#opened'),
+  data: (local_assigns[:data] || {}) do
+  .onboard__steps{data: { target: 'onboard.steps' }}
+    = yield
+  %button.onboard__close{data: { action: 'onboard#close' }}
+    = icon :close

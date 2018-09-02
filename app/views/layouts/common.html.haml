@@ -10,5 +10,5 @@
     = yield :scripts
     = svg_sprite_sheet
 
-  %body{class: class_string(local_assigns[:body_class])}
+  %body{class: class_string(local_assigns[:body_class], content_for(:body_class))}
     = content_for?(:main) ? yield(:main) : yield

@@ -1,0 +1,26 @@
+.activity-selector{data: { controller: 'activity-selector', 'activity-selector-type': activity_selector.type, 'activity-selector-max': activity_selector.max, 'activity-selector-per-slot': activity_selector.max_per_slot, selected: t('registrations.activity.selected') }}
+  = yield
+  - activity_selector.each_day do |date, timeslots|
+    .activity-selector__day
+      %h2.activity-selector__date{data: { date: { short: l(date, format: :short), full: l(date, format: :timetable) }, count: timeslots.count(&:selected?) }}
+      - timeslots.each do |timeslot|
+        .activity-selector__slot
+          - if activity_selector.grouped?
+            %h3.activity-selector__time= time_range(timeslot.starts_at, timeslot.ends_at)
+          .activity-selector__activities
+            = render timeslot.activities, selector: activity_selector
+
+  - activity_selector.select(&:selected?).each do |activity|
+    = hidden_field_tag "registration[#{activity_selector.type}][#{activity.id}]", activity.position, data: { target: 'activity-selector.hiddenField' }
+
+  = render 'shared/modal',
+    class: 'activity-details',
+    controller: 'modal activity-details',
+    target: 'activity-selector.details' do
+    = render 'shared/modal_header', title: content_tag(:div, nil, data: { target: 'activity-details.title' })
+    .modal__body
+      = target 'activity-details', 'presenters'
+      = target 'activity-details', 'times'
+      .activity__levels{data: { target: 'activity-details.levels' }}
+      = target 'activity-details', 'description'
+      = target 'activity-details', 'bio'

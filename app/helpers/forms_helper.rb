@@ -14,12 +14,8 @@ module FormsHelper
     end
 
     def check_box_field(field, options = {}, &block)
-      data = options[:data]
-      options = options.except(:data).merge(
-        class: @template.class_string('check-box-field', options[:class])
-      )
-      @template.content_tag(:div, options) do
-        @template.concat check_box(field, data: data)
+      @template.content_tag(:div, check_box_field_options(options)) do
+        @template.concat check_box(field, options.except(:class))
         @template.concat check_box_icon(field)
         @template.concat check_box_field_content(field, &block) if block_given?
       end
@@ -60,6 +56,12 @@ module FormsHelper
       label field, class: 'check-box-field-icon' do
         @template.concat @template.inline_icon(:check)
       end
+    end
+
+    def check_box_field_options(options)
+      options.except(:autocomplete, :data, :disabled).merge(
+        class: @template.class_string('check-box-field', options[:class])
+      )
     end
 
     def check_box_field_content(field)

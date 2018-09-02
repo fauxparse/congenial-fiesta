@@ -1,0 +1,22 @@
+.activity{class: class_string('activity--unavailable' => !activity.available?), data: { target: 'activity-selector.activity', id: activity.id, slot: activity.slot, position: activity.position }}
+  - if activity.photo.present?
+    .activity__photo= image_tag activity.photo, alt: activity.name, data: { action: 'click->activity-selector#showDetails' }
+  = link_to activity.name, '#', class: 'activity__name', data: { action: 'activity-selector#showDetails' }
+  .activity__presenters= activity.presenters.to_sentence
+
+  = yield
+
+  %button.button.button--primary.activity__remove{data: { action: 'activity-selector#removeClicked'}}
+    = icon :check, class: 'button__icon'
+    .button__text
+      = t(selector.max_per_slot.blank? ? :multiple : :single, scope: 'registrations.activity.selected', position: (activity.position || 1).ordinalize_full).humanize
+  %button.button.activity__add{data: { action: 'activity-selector#addClicked'}, disabled: !activity.available?}
+    - if activity.compulsory?
+      = icon :check, class: 'button__icon'
+      .button__text= t('.compulsory')
+    - elsif !activity.available?
+      = icon :no, class: 'button__icon'
+      .button__text= t('.unavailable')
+    - else
+      = icon :add, class: 'button__icon'
+      .button__text= t('.add')

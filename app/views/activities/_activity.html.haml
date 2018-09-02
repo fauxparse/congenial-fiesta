@@ -1,0 +1,5 @@
+.activity.activity-list__activity
+  = activity_photo(activity, size: :small)
+  = link_to activity.name, activity_permalink(activity), class: 'activity__name'
+  .activity__presenters= activity.presenters.to_sentence
+  = yield

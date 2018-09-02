@@ -12,7 +12,7 @@
 
   &:hover {
     color: inherit;
-    background: $pale-grey;
+    background: $ghost-grey;
   }
 
   &__icon {
@@ -95,7 +95,7 @@
     align-items: center;
 
     .avatar {
-      background: $pale-grey;
+      background: $ghost-grey;
       margin: 0 1em;
     }
 
@@ -154,7 +154,7 @@
       }
 
       &--selected {
-        background: $pale-grey;
+        background: $ghost-grey;
       }
     }
   }

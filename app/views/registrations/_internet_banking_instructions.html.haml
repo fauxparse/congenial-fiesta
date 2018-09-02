@@ -1,0 +1,13 @@
+%p
+  Please make your payment as follows:
+
+.internet-banking-instructions
+  %dl
+    %dt Account name
+    %dd= PaymentMethod::InternetBanking.account_name
+    %dt Account number
+    %dd= PaymentMethod::InternetBanking.account_number
+    %dt Amount
+    %dd= money payment.amount
+    %dt Reference
+    %dd= payment.reference

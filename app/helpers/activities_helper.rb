@@ -15,6 +15,21 @@ module ActivitiesHelper
     )
   end
 
+  def activity_levels(activity)
+    levels = activity.sorted_level_list.map(&:to_sym)
+    return unless levels.any?
+
+    content_tag :div, class: 'activity__levels' do
+      Workshop.levels.each do |level|
+        concat activity_level(level) if levels.include?(level)
+      end
+    end
+  end
+
+  def activity_permalink(activity)
+    send(:"#{activity.type.underscore}_path", festival, activity)
+  end
+
   private
 
   def activity_photo_url(activity, size)
@@ -38,5 +53,14 @@ module ActivitiesHelper
   def photo_placeholder_url(activity, width, height)
     "https://via.placeholder.com/#{width}x#{height}/b6c2d6/ffffff.png?" \
       "text=#{h activity.name}"
+  end
+
+  def activity_level(level)
+    content_tag(
+      :span,
+      content_tag(:span, t(level, scope: 'activity.levels')),
+      data: { level: level },
+      class: 'activity__level'
+    )
   end
 end

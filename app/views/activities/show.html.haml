@@ -1,0 +1,19 @@
+- content_for :title, activity.name
+- content_for :body_class, 'activity-details--full'
+
+%header.hero
+  .breadcrumbs
+    = link_to t(activity.type.underscore, scope: 'activity.types').pluralize, send(:"#{activity.type.underscore.pluralize}_path"), class: 'breadcrumbs__link'
+    %h1= activity.name
+    .activity-details__presenters= activity.presenters.to_sentence
+
+%section.activity__description
+  = activity_photo(activity, size: :large)
+  = markdown activity.description
+
+%section.activity-details__bios
+  - activity.presenters.each do |presenter|
+    .activity-details__bio
+      = avatar(presenter.participant)
+      %h3= presenter.participant.name
+      .text= markdown presenter.participant.bio

@@ -1,0 +1,28 @@
+%h1.registration-form__title= t('.title')
+
+.show-selection{data: { controller: 'show-selection', action: 'activities:select->show-selection#selectionChanged activities:limit->show-selection#limitReached' }}
+  .gala-rsvp
+    %h2.gala-rsvp__title= t('.gala.title')
+    %p.gala-rsvp__description= markdown t('.gala.description')
+
+    = form.check_box_field :attending_gala do
+      = t('.gala.attending')
+
+  = render registration_form.current_step.activities do
+    .registration-form__cart
+      .show-selection__counter
+        %span.show-selection__count{data: { target: 'show-selection.count' }}= registration_form.current_step.selections.count
+        = ' of '
+        %span.show-selection__max= registration_form.current_step.activities.max
+        = ' shows'
+        .show-selection__track{data: { target: 'show-selection.track' }}
+          .show-selection__progress{data: { target: 'show-selection.progress' }}
+
+  = render 'shared/modal', class: 'modal--alert', target: 'show-selection.limitModal' do
+    = render 'shared/modal_header', title: t('registrations.steps.shows.limit_reached.title')
+    .modal__body
+      = markdown t('registrations.steps.shows.limit_reached.body')
+    .modal__footer
+      %button.button.button--primary{data: { action: 'modal#close' }}
+        %span.button__text= t('modal.ok')
+
