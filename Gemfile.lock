@@ -216,6 +216,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    mustermann (1.0.3)
     nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -267,6 +268,8 @@ GEM
     pundit (2.0.0)
       activesupport (>= 3.0.0)
     rack (2.0.5)
+    rack-protection (2.0.3)
+      rack
     rack-proxy (0.6.4)
       rack
     rack-test (1.0.0)
@@ -329,6 +332,7 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.9.0)
     ruby_dep (1.5.0)
+    ruby_http_client (3.3.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
     sass (3.5.6)
@@ -346,6 +350,9 @@ GEM
       capybara (~> 2.10)
       nokogiri (~> 1.7)
       rails (>= 4.2)
+    sendgrid-ruby (5.2.0)
+      ruby_http_client (~> 3.2)
+      sinatra (>= 1.4.7, < 3)
     sexp_processor (4.11.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
@@ -354,6 +361,11 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    sinatra (2.0.3)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.3)
+      tilt (~> 2.0)
     sixarm_ruby_unaccent (1.2.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
@@ -452,6 +464,7 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 5.0)
   scavenger
+  sendgrid-ruby
   shoulda-matchers
   simplecov
   spring
@@ -469,4 +482,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.1
+   1.16.4

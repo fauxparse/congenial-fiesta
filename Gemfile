@@ -67,6 +67,7 @@ gem 'primalize'
 gem 'pundit'
 gem 'redcarpet'
 gem 'scavenger'
+gem 'sendgrid-ruby'
 gem 'stringex'
 gem 'wannabe_bool'
 
