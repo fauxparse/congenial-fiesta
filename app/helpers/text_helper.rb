@@ -11,7 +11,7 @@ module TextHelper
   end
 
   def markdown(text)
-    markdown_renderer.render(text).html_safe
+    text && markdown_renderer.render(text).html_safe
   end
 
   alias m markdown
