@@ -15,7 +15,7 @@
 
   = form.group :country_code do
     = form.label :country_code
-    = form.country_select :country_code, priority_countries: %w(NZ AU), data: { target: 'admin--person.country' }
+    = form.country_select :country_code, priority_countries: %w(NZ AU), include_blank: true, data: { target: 'admin--person.country' }
 
   = form.check_box_field(:admin, data: { target: 'admin--person.admin' }) do
     %span= t('.admin')
