@@ -1,5 +1,5 @@
 - content_for :head do
-  = display_meta_tags og: { title: festival.to_s, description: t('.og_description'), image: image_url('facebook.png') }
+  = display_meta_tags og: { title: festival.to_s, description: t('.og_description'), image: image_url('facebook.png'), url: root_url, type: 'website' }
 
 %main.home
   %header.hero
