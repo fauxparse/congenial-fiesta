@@ -51,10 +51,12 @@ module ActivitiesHelper
   end
 
   def photo_variant_url(photo, width, height)
-    photo.variant(
-      resize: "#{width}x#{height}^",
-      extent: "#{width}x#{height}",
-      gravity: 'center'
+    url_for(
+      photo.variant(
+        resize: "#{width}x#{height}^",
+        extent: "#{width}x#{height}",
+        gravity: 'center'
+      )
     )
   end
 
