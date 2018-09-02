@@ -6,11 +6,11 @@ class AddSlotAndPositionToSelections < ActiveRecord::Migration[5.2]
     add_column :selections, :position, :integer, default: 1
     add_index :selections, %i[registration_id slot position]
 
-    migrate_existing_preferences
+    # migrate_existing_preferences
   end
 
   def down
-    remove_newly_created_selections
+    # remove_newly_created_selections
 
     remove_column :selections, :slot
     remove_column :selections, :position
