@@ -4,7 +4,12 @@
   = render 'cart_summary', cart: registration_form.current_step.cart
 
   - if !registration_form.current_step.cart.payment_confirmed?
-    %h2= t('.select')
+    - if registration_form.current_step.payment&.pending?
+      = render "#{registration_form.current_step.payment.payment_method}_instructions", payment: registration_form.current_step.payment
+
+      %p= t('.or')
+    - else
+      %h2= t('.select')
 
     .payment-methods
       = render registration_form.current_step.payment_methods, form: form

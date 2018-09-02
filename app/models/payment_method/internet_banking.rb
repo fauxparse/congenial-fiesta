@@ -4,7 +4,19 @@ class PaymentMethod
   class InternetBanking < PaymentMethod
     def submit!
       payment.update!(reference: generate_reference)
-      publish(:success, :payment)
+      publish(:success)
+    end
+
+    def self.configuration
+      @configuration ||= Rails.application.credentials.internet_banking
+    end
+
+    def self.account_name
+      configuration[:name]
+    end
+
+    def self.account_number
+      configuration[:account]
     end
 
     private

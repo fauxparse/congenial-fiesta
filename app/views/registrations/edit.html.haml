@@ -16,7 +16,7 @@
           %small= t('.back')
           = registration_form.previous_step.label
     - if registration_form.current_step.last?
-      %button.button.button--primary{type: :submit, rel: :next}
+      %button.button.button--primary{type: :submit, rel: :next, disabled: !registration_form.steps.last.complete?}
         = icon :check, class: 'button__icon'
         .button__text= t('.finish')
     - else
