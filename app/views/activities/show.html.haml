@@ -1,6 +1,6 @@
 - content_for :title, activity.name
 - content_for :head do
-  = display_meta_tags og: { title: "#{activity.name} at #{festival.to_s}", description: activity.description, image: activity_opengraph_photo(activity), url: activity_permalink(activity), type: 'website' }
+  = display_meta_tags og: { title: "#{activity.name} at #{festival.to_s}", description: activity.description, image: activity_opengraph_photo(activity), url: activity_permalink(activity), type: 'website', 'image:width' => 1200, 'image:height' => 628 }
 - content_for :body_class, 'activity-details--full'
 
 %header.hero
