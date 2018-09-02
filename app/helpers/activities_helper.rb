@@ -32,7 +32,7 @@ module ActivitiesHelper
 
   def activity_opengraph_photo(activity)
     if activity.photo.attached?
-      photo_variant_url(activity.photo, 1200, 628)
+      full_url_for(photo_variant_url(activity.photo, 1200, 628))
     else
       image_url('facebook.png')
     end
@@ -51,12 +51,10 @@ module ActivitiesHelper
   end
 
   def photo_variant_url(photo, width, height)
-    url_for(
-      photo.variant(
-        resize: "#{width}x#{height}^",
-        extent: "#{width}x#{height}",
-        gravity: 'center'
-      )
+    photo.variant(
+      resize: "#{width}x#{height}^",
+      extent: "#{width}x#{height}",
+      gravity: 'center'
     )
   end
 
