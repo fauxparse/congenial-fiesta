@@ -1,0 +1,9 @@
+- activities.group_by(&:day).each do |day, scheduled_activities|
+  %section.activity-list__day
+    %h2.activity-list__date= l(day, format: :timetable)
+
+    - activities.group(scheduled_activities).each do |group|
+      - if activities.grouped?
+        %h3.activity-list__time= time_range(group.first.starts_at, group.first.ends_at)
+      .activities.activity-list__activities
+        = render group

@@ -129,6 +129,8 @@ en:
         We’ll have more information soon.
         The best place to watch for updates is the
         [NZIF Green Room](https://www.facebook.com/groups/NZIFGreenRoom/) on Facebook.
+      register_now: 'Register now'
+      earlybird: 'Preferential registrations close %{close}'
 
   passwords:
     create:

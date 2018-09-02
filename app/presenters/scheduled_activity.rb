@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 
 class ScheduledActivity
-  attr_reader :photo
-
-  def initialize(schedule,
-    registration: nil, photo: nil, available: true, selection: nil)
+  def initialize(schedule, registration: nil, available: true, selection: nil)
     @schedule = schedule
     @registration = registration
-    @photo = photo
     @available = available
     @selection = selection
   end
 
   delegate :id, :starts_at, :ends_at, :slot, to: :schedule
-  delegate :name, :description, :presenters, to: :activity
+  delegate :name, :description, :photo, :presenters, :to_param, :type,
+    to: :activity
   delegate :position, to: :selection, allow_nil: true
 
   def <=>(other)
@@ -25,7 +22,7 @@ class ScheduledActivity
   end
 
   def to_partial_path
-    "registrations/#{activity.type.underscore}"
+    activity.type.underscore
   end
 
   def selected?
@@ -50,6 +47,10 @@ class ScheduledActivity
     else
       []
     end
+  end
+
+  def day
+    schedule.starts_at.to_date
   end
 
   private

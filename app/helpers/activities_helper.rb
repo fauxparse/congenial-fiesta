@@ -26,6 +26,10 @@ module ActivitiesHelper
     end
   end
 
+  def activity_permalink(activity)
+    send(:"#{activity.type.underscore}_path", festival, activity)
+  end
+
   private
 
   def activity_photo_url(activity, size)

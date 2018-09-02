@@ -56,3 +56,14 @@ header.hero {
     }
   }
 }
+
+.breadcrumbs {
+  &__link {
+    color: $secondary-font-white;
+    text-decoration: none;
+
+    &:hover {
+      color: $base-font-white;
+    }
+  }
+}

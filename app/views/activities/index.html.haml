@@ -1,0 +1,8 @@
+- content_for :title, activities.title
+
+%header.hero
+  .breadcrumbs
+    = link_to 'Activities', root_path, class: 'breadcrumbs__link'
+  %h1= activities.title
+
+= render activities

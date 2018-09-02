@@ -55,17 +55,13 @@ class ActivitySelector
   end
 
   def activities
-    @activities ||=
-      schedules
-      .zip(photos)
-      .map { |activity, photo| scheduled(activity, photo: photo) }
+    @activities ||= schedules.map(&method(:scheduled))
   end
 
-  def scheduled(activity, photo: nil)
+  def scheduled(activity)
     ScheduledActivity.new(
       activity,
       registration: registration,
-      photo: photo,
       available: available?(activity),
       selection: selection_for(activity)
     )
@@ -93,13 +89,6 @@ class ActivitySelector
     registration
       .selections
       .detect { |s| s.schedule_id == activity.id && !s.marked_for_destruction? }
-  end
-
-  def photos
-    @photos ||=
-      (1..(scope.count / 30.0).ceil)
-      .flat_map { |page| Unsplash::Photo.search('dinosaur', page, 30) }
-      .map { |photo| photo.urls[:small] }
   end
 
   def registrations

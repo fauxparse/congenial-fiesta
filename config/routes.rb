@@ -76,6 +76,18 @@ Rails.application.routes.draw do
     post '/pitch', to: 'pitches#create'
   end
 
+  scope ':year', constraints: { year: /2\d{3}/ } do
+    defaults type: 'workshop' do
+      get '/workshops/:slug' => 'activities#show', as: :workshop
+      get '/workshops' => 'activities#index', as: :workshops
+    end
+
+    defaults type: 'show' do
+      get '/shows/:slug' => 'activities#show', as: :show
+      get '/shows' => 'activities#index', as: :shows
+    end
+  end
+
   def static_page(name)
     get "/#{name.tr('_', '-')}",
       to: 'high_voltage/pages#show',
