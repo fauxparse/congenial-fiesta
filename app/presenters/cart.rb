@@ -64,10 +64,7 @@ class Cart
     @workshops ||=
       registration
       .selections
-      .includes(schedule: :activity)
-      .references(:schedule, :activity)
-      .merge(Schedule.not_freebie)
-      .merge(Workshop.all)
+      .select { |s| !s.schedule.freebie? && s.activity.is_a?(Workshop) }
       .reject(&:marked_for_destruction?)
   end
 
