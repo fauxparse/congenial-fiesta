@@ -4,5 +4,7 @@ en:
       index:
         title: 'People'
         search: 'Search…'
+      edit:
+        save: 'Save changes'
       form:
         admin: 'Admin access?'

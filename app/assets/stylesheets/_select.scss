@@ -103,6 +103,8 @@
   border-bottom: $base-border;
   color: $base-font-color;
   cursor: pointer;
+  min-width: 6em;
+  min-height: 2.5em;
   max-width: 100%;
   position: relative;
   padding: ($base-spacing / 3) calc(#{$icon-size} + #{$small-spacing}) ($base-spacing / 3) 0;

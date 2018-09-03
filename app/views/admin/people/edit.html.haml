@@ -24,5 +24,8 @@
     = form.label :country_code
     = form.country_select :country_code, priority_countries: %w(NZ AU), include_blank: true, data: { target: 'admin--person.country' }
 
-  = form.check_box_field(:admin, data: { target: 'admin--person.admin' }) do
+  = form.check_box_field(:admin, disabled: !current_participant.admin? || person == current_participant) do
     %span= t('.admin')
+
+  .form-buttons
+    = form.submit t('.save'), class: 'button button--primary'
