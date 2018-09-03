@@ -8,3 +8,5 @@ en:
         save: 'Save changes'
       form:
         admin: 'Admin access?'
+      update:
+        updated: 'Participant details updated'
