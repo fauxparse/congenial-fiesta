@@ -7,6 +7,7 @@ export default class extends Controller {
 
   connect() {
     autosize(this.bioTarget)
+    this.countrySelect
   }
 
   get countrySelect() {

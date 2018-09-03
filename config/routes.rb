@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         controller: 'activities',
         only: %i[show update],
         defaults: { type: 'Workshop' }
-      resources :people, only: %i[index show update]
+      resources :people, only: %i[index show edit update]
       resources :pitches, only: %i[index show update] do
         collection do
           get '/convert' => 'pitches#select', as: :select

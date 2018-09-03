@@ -188,8 +188,9 @@ export default class extends Controller {
     text.innerHTML = name
     result.dataset.id = id
     result.appendChild(text)
-    this.dispatch('render', { query, name, data, result })
-    return result
+    const detail = { query, id, name, data, result }
+    this.dispatch('render', detail)
+    return detail.result
   }
 
   resultClicked = e => {

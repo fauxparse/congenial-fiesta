@@ -10,29 +10,55 @@ module Admin
       end
     end
 
-    def update
-      person = Participant.find(params[:id])
+    def edit
       authorize person, :update?
-      person.update!(person_params)
-      respond_to do |format|
-        format.json { render json: PersonSerializer.new(person).call }
+    end
+
+    def update
+      authorize person, :update?
+      if person.update(person_params)
+        update_succeeded
+      else
+        update_failed
       end
     end
 
     private
 
-    def people
-      @people ||= Participant.all
+    def person
+      @person = Participant.find(params[:id])
     end
+
+    helper_method :person
+
+    def people
+      @people ||= Participant.all.sort_by { |person| person.name.upcase }
+    end
+
+    helper_method :people
 
     def person_params
       params
         .require(:person)
-        .permit(:name, :email, :city, :country_code, :bio, :admin)
+        .permit(:name, :email, :city, :country_code, :bio, :avatar, :admin)
     end
 
     def serialized_people
       PeopleSerializer.new(self: current_participant, people: people).call
+    end
+
+    def update_succeeded
+      respond_to do |format|
+        format.json { render json: PersonSerializer.new(person).call }
+        format.html { redirect_to admin_people_path, notice: t('.updated') }
+      end
+    end
+
+    def update_failed
+      respond_to do |format|
+        format.json { render json: PersonSerializer.new(person).call }
+        format.html { render :edit }
+      end
     end
   end
 end

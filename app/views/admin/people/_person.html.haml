@@ -1,0 +1,5 @@
+= link_to edit_admin_person_path(festival, person), class: 'person', data: { id: person.to_param, target: 'admin--people.person' } do
+  = avatar(person)
+  .person__details
+    .person__name= person.name
+    .person__email= person.email
