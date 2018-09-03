@@ -22,12 +22,16 @@ class RegistrationForm
             registration,
             scope: Show,
             grouped: false,
-            max: workshops_count
+            max: maximum
           )
       end
 
       def selections
         registration.selections.included_in_limit.merge(Show.all)
+      end
+
+      def maximum
+        [workshops_count, 5].min
       end
 
       def assign_attributes(attributes)
