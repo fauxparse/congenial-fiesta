@@ -18,7 +18,7 @@ class ScheduleDetailsSerializer < ScheduleSerializer
   delegate :name, to: :activity
 
   def description
-    markdown(activity.description)
+    markdown(activity.description || '')
   end
 
   def presenters

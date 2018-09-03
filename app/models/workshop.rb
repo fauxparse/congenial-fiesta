@@ -6,7 +6,7 @@ class Workshop < Activity
   LEVELS = %i[rookie intermediate advanced].freeze
 
   def sorted_level_list
-    levels.map(&:name).sort_by { |level| LEVELS.find_index(level) }
+    levels.map(&:name).sort_by { |level| LEVELS.find_index(level.to_sym) }
   end
 
   def self.levels

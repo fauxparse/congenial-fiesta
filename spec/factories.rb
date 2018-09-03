@@ -192,7 +192,16 @@ FactoryBot.define do
 
   factory :workshop, aliases: %i[activity] do
     festival
-    name 'A workshop'
+    name { 'A workshop' }
+    transient do
+      presenters { [] }
+    end
+
+    after :build do |workshop, evaluator|
+      evaluator.presenters.each do |participant|
+        workshop.presenters.build(participant: participant)
+      end
+    end
   end
 
   factory :venue do

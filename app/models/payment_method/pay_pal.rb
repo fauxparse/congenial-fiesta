@@ -73,13 +73,12 @@ class PaymentMethod
       payment.update!(
         state: state,
         reference: params[:txn_id],
-        details: sanitize_transaction_data(params.to_h),
+        details: sanitize_transaction_data(params.to_h)
       )
     end
 
     def sanitize_transaction_data(data)
       if data[:charset]
-        charset = data[:charset]
         data.to_a.each.with_object({}) do |(key, value), hash|
           hash[key] = value.force_encoding('windows-1252').encode('utf-8')
         end

@@ -6,7 +6,7 @@ RSpec.describe Presenter, type: :model do
   subject(:presenter) { build(:presenter) }
   let(:participant) { presenter.participant }
 
-  it { is_expected.to validate_presence_of(:activity_id) }
+  it { is_expected.to validate_presence_of(:activity) }
   it { is_expected.to validate_presence_of(:participant_id) }
   it {
     is_expected

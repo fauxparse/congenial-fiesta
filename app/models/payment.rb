@@ -29,12 +29,4 @@ class Payment < ApplicationRecord
   def payment_method
     @payment_method ||= PaymentMethod.const_get(kind.camelize).new(self)
   end
-
-  def self.payment_method
-    name.demodulize.underscore
-  end
-
-  def self.default_payment_type
-    subclasses.first
-  end
 end

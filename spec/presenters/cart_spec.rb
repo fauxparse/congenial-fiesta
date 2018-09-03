@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Cart do
+RSpec.describe Cart, type: :presenter do
   subject(:cart) { Cart.new(registration) }
   let(:registration) { create(:registration, :with_workshops) }
 

@@ -32,6 +32,7 @@ class ScheduledActivity
   def compulsory?
     if @compulsory.nil?
       @compulsory =
+        registration.present? &&
         presenters.map(&:participant).include?(registration.participant)
     end
     @compulsory
