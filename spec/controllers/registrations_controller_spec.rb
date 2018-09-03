@@ -80,6 +80,7 @@ RSpec.describe RegistrationsController, type: :request do
           params: { registration: { shows: {} } }
         put registration_step_path(:payment),
           params: { registration: { payment_method: 'internet_banking' } }
+        put registration_step_path(:payment)
       end
 
       it { is_expected.to redirect_to complete_registration_path }

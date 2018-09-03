@@ -4,6 +4,7 @@ class PaymentMethod
   class InternetBanking < PaymentMethod
     def submit!
       payment.update!(reference: generate_reference)
+      publish(:redirect, registration_step_path(:payment))
       publish(:success)
     end
 

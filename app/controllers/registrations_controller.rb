@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
     authorize registration, :update?
     registration_form
       .on(:advance) { |step| redirect_to registration_step_path(step) }
-      .on(:completed) { redirect_to complete_registration_path }
+      .on(:completed) { default_redirect_to complete_registration_path }
       .on(:show) { render :edit }
       .on(:login) { |participant| log_in_as(participant) }
       .on(:redirect) { |url| redirect_to(url) }
@@ -62,6 +62,10 @@ class RegistrationsController < ApplicationController
 
   def registrations_closed
     redirect_to root_path, info: I18n.t('registrations.closed')
+  end
+
+  def default_redirect_to(url)
+    redirect_to url unless performed?
   end
 
   helper_method :registration_form
