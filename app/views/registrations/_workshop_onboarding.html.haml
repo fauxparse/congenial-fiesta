@@ -1,7 +1,7 @@
 = render 'shared/onboard', class: 'workshop-onboarding', data: { 'onboard-key': 'earlybird', 'onboard-auto': true } do
   = onboard_step do
     .onboard__image
-      = image_tag 'onboarding/2x/asleep@2x'
+      = image_tag 'onboarding/2x/asleep@2x.png'
     %h3.onboard__title
       %small Introducing:
       Earlybird Registration
@@ -15,7 +15,7 @@
 
   = onboard_step do
     .onboard__image
-      = image_tag 'onboarding/2x/placement@2x'
+      = image_tag 'onboarding/2x/placement@2x.png'
     %p
       Until #{l registration_form.registration.festival.earlybird_cutoff.to_date, format: :same_year},
       rather than first-in, first-served, we’ll collect your
@@ -28,7 +28,7 @@
 
   = onboard_step do
     .onboard__image
-      = image_tag 'onboarding/2x/royal@2x'
+      = image_tag 'onboarding/2x/royal@2x.png'
     %p
       This means that if a workshop sells out quickly, we have the information
       we need to give our earlybirds the royal treatment, like
@@ -60,7 +60,7 @@
 
   = onboard_step do
     .onboard__image
-      = image_tag 'onboarding/2x/graduated@2x'
+      = image_tag 'onboarding/2x/graduated@2x.png'
     %p
       We know it’s a bit more complicated, but we think it’s a much fairer way
       to make sure everyone gets the best out of their Festival.
