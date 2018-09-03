@@ -1,5 +1,5 @@
 .activity{class: class_string('activity--unavailable' => !activity.available?), data: { target: 'activity-selector.activity', id: activity.id, slot: activity.slot, position: activity.position }}
-  - if activity.photo.present?
+  - if activity.photo.attached?
     .activity__photo= image_tag activity.photo, alt: activity.name, data: { action: 'click->activity-selector#showDetails' }
   = link_to activity.name, '#', class: 'activity__name', data: { action: 'activity-selector#showDetails' }
   .activity__presenters= activity.presenters.to_sentence
