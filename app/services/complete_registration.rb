@@ -8,7 +8,7 @@ class CompleteRegistration
   end
 
   def call
-    registration.selections.pending.each(&selection_action)
+    confirm_selections
     first_time_completion unless completed?
   end
 
@@ -17,12 +17,25 @@ class CompleteRegistration
   delegate :completed?, to: :registration
   delegate :earlybird?, to: :registration_stage
 
-  def registration_stage
-    @registration_stage ||= RegistrationStage.new(registration.festival)
+  def pending_selections
+    registration
+      .selections
+      .includes(schedule: :activity)
+      .where.not(state: :allocated)
   end
 
-  def selection_action
-    earlybird? ? :registered! : :allocated!
+  def confirm_selections
+    pending_selections.each do |selection|
+      if earlybird? && selection.schedule.activity.is_a?(Workshop)
+        selection.registered!
+      else
+        selection.allocated!
+      end
+    end
+  end
+
+  def registration_stage
+    @registration_stage ||= RegistrationStage.new(registration.festival)
   end
 
   def first_time_completion
