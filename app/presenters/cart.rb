@@ -64,7 +64,8 @@ class Cart
     @workshops ||=
       registration
       .selections
-      .select { |s| !s.schedule.freebie? && s.activity.is_a?(Workshop) }
+      .reject { |s| s.schedule.freebie? }
+      .select { |s| s.schedule.activity.is_a?(Workshop) }
       .reject(&:marked_for_destruction?)
   end
 

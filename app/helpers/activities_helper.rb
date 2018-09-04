@@ -43,7 +43,7 @@ module ActivitiesHelper
   def activity_photo_url(activity, size)
     width = ACTIVITY_PHOTO_SIZES[size] || size
     height = width * 9 / 16
-    if activity.photo.attached?
+    if Rails.env.production? && activity.photo.attached?
       photo_variant_url(activity.photo, width, height)
     else
       photo_placeholder_url(activity, width, height)

@@ -362,6 +362,18 @@ label[for='registration_code_of_conduct_accepted'] {
       margin-top: $small-spacing;
     }
 
+    &__show-workshop {
+      @include all-caps;
+      align-self: flex-start;
+      font-size: modular-scale(-1);
+      font-weight: $base-font-weight;
+      margin-top: $small-spacing;
+      background-color: $plum;
+      color: $base-font-white;
+      border-radius: ($base-line-height / 2 * 1rem);
+      padding: 0 $small-spacing;
+    }
+
     .button {
       margin: $small-spacing 0 0;
       order: 2;

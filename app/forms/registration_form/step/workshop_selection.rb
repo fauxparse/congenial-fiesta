@@ -19,7 +19,7 @@ class RegistrationForm
         @activities ||=
           ActivitySelector.new(
             registration,
-            scope: Workshop.includes(:levels).references(:levels),
+            scope: workshop_scope,
             max_per_slot: registrations.earlybird? ? nil : 1
           )
       end
@@ -43,6 +43,12 @@ class RegistrationForm
       def workshops=(selections)
         update_selections(selections.transform_keys(&:to_i), type: Workshop)
         registration.workshops_saved_at ||= Time.zone.now
+      end
+
+      def workshop_scope
+        Workshop
+          .includes(:levels, pitch: { activities: :schedules })
+          .references(:levels)
       end
     end
   end

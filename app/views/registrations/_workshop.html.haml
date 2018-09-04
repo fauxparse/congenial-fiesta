@@ -1,2 +1,4 @@
 = render 'activity', activity: workshop, selector: selector do
+  - if workshop.for_show?
+    .activity__show-workshop= t('.show_workshop')
   = activity_levels(workshop)

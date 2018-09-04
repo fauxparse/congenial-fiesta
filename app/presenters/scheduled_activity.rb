@@ -53,6 +53,11 @@ class ScheduledActivity
     schedule.starts_at.to_date
   end
 
+  def for_show?
+    activity.is_a?(Workshop) &&
+      activity.pitch.activities.any? { |a| a.is_a?(Show) && a.schedules.any? }
+  end
+
   private
 
   attr_reader :selection, :registration, :schedule
