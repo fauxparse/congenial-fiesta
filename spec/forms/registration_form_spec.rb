@@ -51,16 +51,26 @@ RSpec.describe RegistrationForm do
   end
 
   context 'from start to finish' do
+    let(:workshop) do
+      create(:schedule, activity: create(:workshop, festival: festival))
+    end
+    let(:show) do
+      create(:schedule, activity: create(:show, festival: festival))
+    end
+
     it 'completes successfully' do
       form.on(:completed) { @complete = true }
 
       form.update(participant_params)
       form.update(code_of_conduct_accepted: true)
-      form.update(workshops: {})
-      form.update(shows: {})
+      form.update(workshops: { workshop.id => 1 })
+      form.update(shows: { show.id => 1 })
       form.update(payment_method: 'internet_banking')
 
       expect(@complete).to be true
+
+      expect(form.registration.reload.selections.registered.count).to eq 1
+      expect(form.registration.reload.selections.allocated.count).to eq 1
     end
   end
 

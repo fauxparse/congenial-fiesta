@@ -22,9 +22,24 @@ module ActivityAssignment
     by_id.each do |schedule_id, position|
       selection = find_or_build_selection(schedule_id)
       selection.position = position
-      selection.state = 'allocated' if registration.completed?
+      selection.state = new_selection_state(selection.schedule) \
+        if registration.completed?
     end
   end
+
+  def new_selection_state(schedule)
+    if earlybird? && schedule.activity.is_a?(Workshop)
+      'registered'
+    else
+      'allocated'
+    end
+  end
+
+  def registration_stage
+    @registration_stage ||= RegistrationStage.new(registration.festival)
+  end
+
+  delegate :earlybird?, to: :registration_stage
 
   def find_or_build_selection(schedule_id)
     registration.selections.detect { |s| s.schedule_id == schedule_id } ||
