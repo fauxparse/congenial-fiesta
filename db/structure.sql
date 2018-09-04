@@ -1186,14 +1186,6 @@ ALTER TABLE ONLY public.schedules
 
 
 --
--- Name: identities fk_rails_27e74d7b52; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.identities
-    ADD CONSTRAINT fk_rails_27e74d7b52 FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
-
-
---
 -- Name: password_resets fk_rails_286b6e4fd3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 

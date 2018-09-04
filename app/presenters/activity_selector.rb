@@ -72,7 +72,9 @@ class ActivitySelector
   end
 
   def places_left?(activity)
-    !activity.limited? || count(activity) < activity.maximum
+    !activity.limited? ||
+      max_per_slot.nil? ||
+      count(activity) < activity.maximum
   end
 
   def presenting_opposite?(activity)
