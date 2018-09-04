@@ -100,6 +100,7 @@ class ActivitySelector
       festival
       .schedules
       .joins(selections: :registration)
+      .merge(Selection.included_in_limit)
       .where('registrations.participant_id <> ?', registration.participant_id)
       .group('schedules.id')
       .count('schedules.id')
