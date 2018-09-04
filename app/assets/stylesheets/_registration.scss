@@ -137,6 +137,7 @@
     border-radius: $base-border-radius;
     margin: 0 (-$small-spacing) $base-spacing;
     padding: $small-spacing;
+    -webkit-overflow-scrolling: touch;
   }
 
   @media(screen and min-width: #{$line-width * 2 / 3}) {

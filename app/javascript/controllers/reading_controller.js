@@ -22,6 +22,7 @@ export default class extends Controller {
     if (!this.bookmarkTargets[0]) {
       const bookmark = document.createElement('div')
       bookmark.setAttribute('data-target', 'reading.bookmark')
+      bookmark.style.height = '6em'
       this.element.appendChild(bookmark)
     }
     return this.bookmarkTargets[0]
