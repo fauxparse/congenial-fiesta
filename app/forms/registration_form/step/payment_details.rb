@@ -24,12 +24,14 @@ class RegistrationForm
       end
 
       def payment_method=(kind)
-        return if payment_method === kind
-
-        if payment&.persisted?
-          payment.state = 'cancelled'
+        if payment_method === kind
+          return if cart.paid + cart.pending >= cart.total
         else
-          payment&.mark_for_destruction
+          if payment&.persisted?
+            payment.state = 'cancelled'
+          else
+            payment&.mark_for_destruction
+          end
         end
 
         @payment = build_payment(kind)
