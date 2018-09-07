@@ -1,0 +1,18 @@
+.dashboard-widget.dashboard__summary{data: { target: 'admin--dashboard.widget', controller: 'dashboard--summary', 'dashboard--summary-url': admin_registrations_path(festival) }}
+  %h4.dashboard-widget__title Registrations
+
+  .big-number.odometer{data: { target: 'dashboard--summary.count' } } 0000
+
+  %canvas.summary__histogram{width: 400, height: 128, data: { target: 'dashboard--summary.histogram' }}
+
+  %h4.dashboard-widget__title Workshops
+  .capacity
+    .track
+    .progress{data: { target: 'dashboard--summary.workshopsProgress' }}
+    .caption{data: { target: 'dashboard--summary.workshopsAllocation' }}
+
+  %h4.dashboard-widget__title Shows
+  .capacity
+    .track
+    .progress{data: { target: 'dashboard--summary.showsProgress' }}
+    .caption{data: { target: 'dashboard--summary.showsAllocation' }}

@@ -1,0 +1,79 @@
+@import 'odometer';
+
+.dashboard {
+  flex: 1;
+  margin: 1em;
+}
+
+.dashboard-widget {
+  width: 100%;
+  height: 24em;
+  padding: .9375em;
+  background: $viewport-background-color;
+  border: 1px solid transparent;
+  border-top-color: $base-border-color;
+  transition: box-shadow $base-duration $base-timing, border-color $base-duration $base-timing;
+
+  @for $columns from 2 through 5 {
+    @media screen and (min-width: #{$columns * 16em + ($columns - 1) * 1em + $keyline + 2em}) {
+      width: calc(#{percentage(1/$columns)} - #{($columns - 1) * 1em / $columns});
+    }
+  }
+
+  &.is-dragging,
+  &.is-positioning-post-drag {
+    @include shadow(1);
+    border-color: $base-border-color;
+    border-radius: $base-border-radius;
+    z-index: 2;
+  }
+
+  &__title {
+    @include all-caps;
+    font-size: modular-scale(-1);
+    font-weight: $base-font-weight;
+    color: $secondary-font-color;
+    margin: 0;
+  }
+
+  .capacity {
+    display: block;
+    position: relative;
+    margin: 0 0 $small-spacing;
+
+    .track {
+      display: block;
+      height: 1rem;
+      background: $ghost-grey;
+      border-radius: 2px;
+    }
+
+    .progress {
+      @include position(absolute, 0 null 0 0);
+      background: $accent-color;
+      width: 100%;
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      transition: transform $base-duration $base-timing;
+      border-radius: 2px;
+    }
+
+    .caption {
+      @include position(absolute, 0 null 0 0);
+      font-size: modular-scale(-1);
+      padding: 0 .25em;
+      line-height: modular-scale(1);
+    }
+  }
+
+  .big-number {
+    font-family: $hero-font-family;
+    font-size: modular-scale(6);
+  }
+}
+
+.dashboard__summary {
+  .summary__histogram {
+    margin: $small-spacing 0;
+  }
+}
