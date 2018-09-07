@@ -17,7 +17,7 @@ class Cart
   end
 
   def count
-    @count ||= workshops.uniq(&:slot).size
+    workshops.uniq(&:slot).size
   end
 
   def paid
@@ -61,12 +61,12 @@ class Cart
   end
 
   def workshops
-    @workshops ||=
-      registration
-      .selections
-      .reject { |s| s.schedule.freebie? }
-      .select { |s| s.schedule.activity.is_a?(Workshop) }
-      .reject(&:marked_for_destruction?)
+    registration
+    .selections
+    .select { |s| s.position == 1 }
+    .select { |s| s.schedule.activity.is_a?(Workshop) }
+    .reject { |s| s.schedule.freebie? }
+    .reject(&:marked_for_destruction?)
   end
 
   def payments
