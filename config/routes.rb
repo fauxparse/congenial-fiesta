@@ -21,6 +21,7 @@ Rails.application.routes.draw do
           post '/convert' => 'pitches#convert', as: :convert
         end
       end
+      resources :registrations
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
       get '/timetable' => 'schedules#index', as: :timetable
