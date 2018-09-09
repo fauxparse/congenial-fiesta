@@ -1,12 +1,9 @@
 %h1.page-title= t('.title')
 
-.people{data: { controller: 'admin--people autocomplete', action: 'autocomplete:search->admin--people#searchPeople autocomplete:select->admin--people#editPerson autocomplete:render->admin--people#renderPerson' }}
+.people{data: { controller: 'admin--people filter-list', action: 'autocomplete:search->admin--people#searchPeople autocomplete:select->admin--people#editPerson' }}
   .people__search
     = search_field_tag('query', '', placeholder: t('.search'), autocomplete: 'off',
-      data: { target: 'admin--people.search autocomplete.input', action: 'focus->autocomplete#focus blur->autocomplete#blur input->autocomplete#textChanged' })
-  .people__results{data: { target: 'autocomplete.results' }}
-    .people__list{data: { target: 'admin--people.list autocomplete.list' }}
-    .people__list--hidden{data: { target: 'admin--people.source' }}
+      data: { target: 'admin--people.search filter-list.input', action: 'focus->autocomplete#focus input->autocomplete#textChanged' })
+  .people__results{data: { target: 'filter-list.results' }}
+    .people__list{data: { target: 'admin--people.list filter-list.list' }}
       = render partial: 'person', collection: people
-
-    .people__empty

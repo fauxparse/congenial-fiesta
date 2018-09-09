@@ -28,8 +28,18 @@
   text-decoration: none;
   padding: $small-spacing ($keyline - 2.5em) $small-spacing 1em;
 
+  &[aria-hidden] {
+    display: none;
+  }
+
+  &:hover {
+    color: inherit;
+  }
+
+  &:focus,
   &.autocomplete__result--selected {
     background: $secondary-background-color;
+    outline: none;
   }
 
   .avatar {

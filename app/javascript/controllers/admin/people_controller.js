@@ -5,17 +5,17 @@ import normalize from '../../lib/normalize'
 import People from '../../collections/people'
 
 export default class extends Controller {
-  static targets = ['search', 'list', 'source', 'person']
+  static targets = ['search', 'list', 'person']
 
   connect() {
     this.searchTarget.focus()
-    setTimeout(() => this.autocomplete.search())
+    setTimeout(() => this.filterList.search())
   }
 
-  get autocomplete() {
+  get filterList() {
     return this.application.getControllerForElementAndIdentifier(
       this.element,
-      'autocomplete'
+      'filter-list'
     )
   }
 
@@ -34,6 +34,7 @@ export default class extends Controller {
     if (query) {
       const people = this.people.filter(this.matcher(query))
       results.push(...people)
+      console.log(results.length)
     } else {
       results.push(...this.people)
     }

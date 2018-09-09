@@ -4,9 +4,9 @@ import escapeRegExp from 'lodash/escapeRegExp'
 import { KEYS } from '../lib/events'
 import normalize from '../lib/normalize'
 
-const VISIBLE_CLASS = 'autocomplete--visible'
-const RESULT_CLASS = 'autocomplete__result'
-const SELECTED_CLASS = 'autocomplete__result--selected'
+export const VISIBLE_CLASS = 'autocomplete--visible'
+export const RESULT_CLASS = 'autocomplete__result'
+export const SELECTED_CLASS = 'autocomplete__result--selected'
 
 export default class extends Controller {
   static targets = ['input', 'results', 'list']
@@ -140,7 +140,7 @@ export default class extends Controller {
 
   moveSelection(direction = 1) {
     const { length } = this.results
-    this.index = length && (this.index + length + direction) % length
+    this.index = length && ((this.index || 0) + length + direction) % length
   }
 
   confirmSelection(originalEvent) {
@@ -232,7 +232,7 @@ export default class extends Controller {
     const re = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/
 
     if (style.position === 'fixed') {
-      return document.body
+      return document.documentElement
     }
     for (let parent = el.parentElement; parent; parent = parent.parentElement) {
       style = getComputedStyle(parent)
@@ -244,7 +244,7 @@ export default class extends Controller {
       }
     }
 
-    return document.body
+    return document.documentElement
   }
 
   highlight(text, query) {
