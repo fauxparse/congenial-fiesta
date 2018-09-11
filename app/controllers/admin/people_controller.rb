@@ -32,7 +32,11 @@ module Admin
     helper_method :person
 
     def people
-      @people ||= Participant.all.sort_by { |person| person.name.upcase }
+      @people ||=
+        Participant
+        .all
+        .includes(:registrations)
+        .sort_by { |person| person.name.upcase }
     end
 
     helper_method :people

@@ -10,3 +10,12 @@ en:
         admin: 'Admin access?'
       update:
         updated: 'Participant details updated'
+
+    registrations:
+      show:
+        registered: 'Registered %{date}'
+        workshops: 'Workshops'
+        shows: 'Shows'
+        save: 'Save changes'
+      update:
+        updated: 'Registration updated successfully'

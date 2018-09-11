@@ -1,0 +1,5 @@
+.activity{class: class_string('activity--unavailable' => !activity.available?), data: { target: 'activity-selector.activity', id: activity.id, slot: activity.slot, position: activity.position }}
+  .activity__position.badge{data: { action: 'click->activity-selector#toggleClicked' }}= activity.position
+  .activity__details
+    .activity__name= activity.name
+    .activity__presenters= activity.presenters.to_sentence

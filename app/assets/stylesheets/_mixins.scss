@@ -38,13 +38,17 @@
   }
 }
 
-@mixin sticky-header {
-  @include horizontal-margin(-$base-spacing);
-  @include horizontal-padding($base-spacing);
-  position: sticky;
-  top: 0;
+@mixin frosty {
   background: rgba($white, .90);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
+}
+
+@mixin sticky-header {
+  @include horizontal-margin(-$base-spacing);
+  @include horizontal-padding($base-spacing);
+  @include frosty;
+  position: sticky;
+  top: 0;
   z-index: 1;
 }

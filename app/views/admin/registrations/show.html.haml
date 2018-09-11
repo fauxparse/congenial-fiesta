@@ -1,0 +1,22 @@
+= form_for :registration, url: admin_person_registration_path(festival, registration.participant), method: :put, html: { class: 'registration-details', data: { controller: 'admin--registration' } } do |form|
+  %section.registration__summary
+    %h1.page-title= registration.participant
+    = content_tag :p, t('.registered', date: l(registration.completed_at.to_date, format: :long)) if registration.completed?
+
+  %section.registration__activities
+    %section.registration__workshops
+      = render registration_workshop_selector(registration) do |activities|
+        %h2
+          = t('.workshops')
+          %span.activity-count= activities.selected_count
+
+    %section.registration__shows
+      = render registration_show_selector(registration) do |activities|
+        %h2
+          = t('.shows')
+          %span.activity-count= activities.selected_count
+
+  %footer.registration__buttons
+    %button.button.button--primary{disabled: true, data: { target: 'admin--registration.saveButton' }}
+      = icon :done, class: 'button__icon'
+      .button__text= t('.save')

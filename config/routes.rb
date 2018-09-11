@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :festivals, only: %i[new create edit]
 
     scope ':year', constraints: { year: /2\d{3}/ } do
+      resources :registrations, only: :index
       resources :activities, only: %i[index create]
       resources :shows,
         controller: 'activities',
@@ -14,14 +15,15 @@ Rails.application.routes.draw do
         controller: 'activities',
         only: %i[show update],
         defaults: { type: 'Workshop' }
-      resources :people, only: %i[index show edit update]
+      resources :people, only: %i[index show edit update] do
+        resource :registration, only: %i[index show update]
+      end
       resources :pitches, only: %i[index show update] do
         collection do
           get '/convert' => 'pitches#select', as: :select
           post '/convert' => 'pitches#convert', as: :convert
         end
       end
-      resources :registrations
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
       get '/timetable' => 'schedules#index', as: :timetable

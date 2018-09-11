@@ -1,0 +1,16 @@
+.activity-selector{data: { controller: 'activity-selector', 'activity-selector-type': activity_selector.type, 'activity-selector-max': activity_selector.max, 'activity-selector-per-slot': activity_selector.max_per_slot }}
+  = yield activity_selector
+  - activity_selector.each_day do |date, timeslots|
+    .activity-selector__day
+      %input{type: :checkbox, id: "#{activity_selector.type}-#{l(date)}"}
+      %label.activity-selector__date{for: "#{activity_selector.type}-#{l(date)}"}= l(date, format: :timetable)
+      .activity-selector__slots
+        - timeslots.each do |timeslot|
+          .activity-selector__slot
+            - if activity_selector.grouped?
+              %h3.activity-selector__time= time_range(timeslot.starts_at, timeslot.ends_at)
+            .activity-selector__activities
+              = render timeslot.activities, selector: activity_selector
+
+  - activity_selector.select(&:selected?).each do |activity|
+    = hidden_field_tag "registration[#{activity_selector.type}][#{activity.id}]", activity.position, data: { target: 'activity-selector.hiddenField' }
