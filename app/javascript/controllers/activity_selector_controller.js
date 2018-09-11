@@ -95,6 +95,15 @@ export default class extends Controller {
     return parseInt(this.data.get('per-slot') || 1000, 10)
   }
 
+  toggleClicked = e => {
+    const el = e.target.closest('.activity')
+    if (el.dataset.position) {
+      this.removeClicked(e)
+    } else {
+      this.addClicked(e)
+    }
+  }
+
   addClicked = e => {
     e.preventDefault()
     const id = e.target.closest('.activity').getAttribute('data-id')
@@ -146,13 +155,15 @@ export default class extends Controller {
 
   updateActivityPosition(activity, position) {
     const { id, element } = activity
+    const number = element.querySelector('.activity__position')
     activity.position = position
     if (position) {
-      element.querySelector(
-        '.activity__remove .button__text'
-      ).innerText = this.activeLabel(position)
+      const text = element.querySelector('.activity__remove .button__text')
+      text && (text.innerText = this.activeLabel(position))
+      number && (number.innerText = position)
       element.setAttribute('data-position', position)
     } else {
+      number && (number.innerText = '')
       element.removeAttribute('data-position')
     }
   }

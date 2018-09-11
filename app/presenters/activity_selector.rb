@@ -8,12 +8,14 @@ class ActivitySelector
   delegate :festival, to: :registration
 
   def initialize(registration,
-    scope: Activity, grouped: true, max: nil, max_per_slot: 1)
+    scope: Activity, grouped: true, max: nil, max_per_slot: 1,
+    include_free: false)
     @registration = registration
     @scope = scope
-    @grouped = grouped
+    @grouped = grouped.to_b
     @max = max
     @max_per_slot = max_per_slot
+    @include_free = include_free.to_b
   end
 
   def each_day(&_block)
@@ -26,15 +28,27 @@ class ActivitySelector
   end
 
   def to_partial_path
-    '/registrations/activity_selector'
+    'registrations/activity_selector'
   end
 
   def grouped?
-    @grouped.to_b
+    @grouped
+  end
+
+  def include_free?
+    @include_free
   end
 
   def type
     @scope.name.pluralize.underscore
+  end
+
+  def selected_count
+    activities
+      .map { |activity| selection_for(activity) }
+      .compact
+      .select { |selection| selection.position == 1 }
+      .size
   end
 
   delegate :each, to: :activities
@@ -45,7 +59,7 @@ class ActivitySelector
     @scope
       .includes(:schedules, presenters: :participant)
       .references(:schedules)
-      .merge(Schedule.not_freebie)
+      .merge(include_free? ? Schedule.all : Schedule.not_freebie)
       .merge(Schedule.sorted)
       .where('activities.festival_id = ?', festival.id)
   end

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       scope 'reports', controller: 'reports' do
         get :workshops, as: :workshops_report
       end
+      resources :registrations, only: :index
       resources :activities, only: %i[index create]
       resources :shows,
         controller: 'activities',
@@ -17,7 +18,9 @@ Rails.application.routes.draw do
         controller: 'activities',
         only: %i[show update],
         defaults: { type: 'Workshop' }
-      resources :people, only: %i[index show edit update]
+      resources :people, only: %i[index show edit update] do
+        resource :registration, only: %i[index show update]
+      end
       resources :pitches, only: %i[index show update] do
         collection do
           get '/convert' => 'pitches#select', as: :select
@@ -25,7 +28,6 @@ Rails.application.routes.draw do
         end
       end
       resources :payments, only: %i[index show update]
-      resources :registrations
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
       get '/timetable' => 'schedules#index', as: :timetable

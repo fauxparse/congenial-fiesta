@@ -1,5 +1,9 @@
-= link_to edit_admin_person_path(festival, person), class: 'person', data: { id: person.to_param, target: 'admin--people.person' } do
+.person{data: { id: person.to_param, target: 'admin--people.person' }}
   = avatar(person)
   .person__details
     .person__name= person.name
     .person__email= person.email
+  = edit_admin_registration_link(festival, person) do
+    = icon :cart
+  = link_to edit_admin_person_path(festival, person) do
+    = icon :edit
