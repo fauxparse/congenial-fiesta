@@ -18,7 +18,8 @@ module Admin
     end
 
     def render_csv(report)
-      send_data report.to_csv, filename: "#{action_name}-#{Time.now.to_date}.csv"
+      send_data report.to_csv,
+        filename: "#{action_name}-#{Time.now.to_date}.csv"
     end
   end
 end

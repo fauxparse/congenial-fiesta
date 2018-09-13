@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FestivalPresenter < SimpleDelegator
-  alias_method :festival, :__getobj__
+  alias festival __getobj__
 
   def workshops_count
     activity_count(Workshop)
@@ -29,9 +29,9 @@ class FestivalPresenter < SimpleDelegator
     @counts ||= {}
     @counts[type.name] ||=
       festival
-        .activities
-        .joins('INNER JOIN schedules ON schedules.activity_id = activities.id')
-        .merge(type.all)
-        .count
+      .activities
+      .joins('INNER JOIN schedules ON schedules.activity_id = activities.id')
+      .merge(type.all)
+      .count
   end
 end

@@ -73,7 +73,7 @@ class PaymentMethod
       payment.update!(
         state: state,
         reference: params[:txn_id],
-        details: sanitize_transaction_data(params.to_h),
+        details: sanitize_transaction_data(params.to_h)
       )
     end
 
