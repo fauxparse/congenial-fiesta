@@ -1,0 +1,11 @@
+.report
+  %table.table.report__table
+    %thead
+      %tr
+        - report.columns.each do |column, _|
+          %th= report.column_name(column)
+    %tbody
+      - report.each do |row|
+        %tr
+          - row.each do |_, datum|
+            %td= datum

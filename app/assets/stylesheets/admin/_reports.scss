@@ -1,0 +1,14 @@
+.report {
+  padding: 0 $base-spacing;
+
+  &__table {
+    font-size: modular-scale(-1);
+    table-layout: auto;
+
+    tr {
+      :last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}

@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     resources :festivals, only: %i[new create edit]
 
     scope ':year', constraints: { year: /2\d{3}/ } do
+      scope 'reports', controller: 'reports' do
+        get :workshops, as: :workshops_report
+      end
       resources :activities, only: %i[index create]
       resources :shows,
         controller: 'activities',

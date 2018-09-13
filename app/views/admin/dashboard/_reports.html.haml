@@ -1,0 +1,11 @@
+.dashboard-widget.dashboard__reports
+  %h4.dashboard-widget__title Reports
+
+  .report-list
+    .report-list__report
+      .report__name Workshops
+      = link_to admin_workshops_report_path(festival) do
+        = icon :table
+      = link_to admin_workshops_report_path(festival, format: :csv) do
+        = icon :download
+

@@ -77,3 +77,27 @@
     margin: $small-spacing 0;
   }
 }
+
+.dashboard__reports {
+  .report-list {
+    &__report {
+      display: flex;
+      align-items: center;
+      border-bottom: $base-border;
+
+      .report__name {
+        flex: 1;
+      }
+
+      a {
+        padding: .5em;
+        border-radius: 50%;
+        outline: none;
+
+        .icon {
+          display: block;
+        }
+      }
+    }
+  }
+}

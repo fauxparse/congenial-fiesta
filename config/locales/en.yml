@@ -16,6 +16,7 @@ en:
 
   time:
     formats:
+      full: '%a %-d %b, %-l:%M%p'
       time: '%-l:%M%p'
       timetable: '%-l:%M'
 
