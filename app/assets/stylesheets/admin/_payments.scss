@@ -1,0 +1,56 @@
+.payments {
+  border-top: $base-border;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  &--empty {
+    @include center-content;
+    flex: 1;
+    color: $secondary-font-color;
+  }
+}
+
+.payment {
+  display: flex;
+  padding: .5em 1em .5em 1em;
+  cursor: pointer;
+
+  &:hover {
+    background: $ghost-grey;
+  }
+
+  > .icon {
+    @include size(2.5em);
+    margin-right: 1em;
+  }
+
+  &__participant {
+    flex: 1;
+  }
+
+  &__participant {
+    margin-right: 1em;
+  }
+
+  &__email,
+  &__state,
+  &__reference {
+    font-size: modular-scale(-1);
+    color: $secondary-font-color;
+  }
+
+  &__amount {
+    flex: 0 0 6em;
+    text-align: right;
+    margin-right: 1em;
+  }
+
+  &__details {
+    flex: 0 0 16em;
+  }
+
+  .currency {
+    display: none;
+  }
+}

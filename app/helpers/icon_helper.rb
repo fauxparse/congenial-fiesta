@@ -3,8 +3,7 @@
 module IconHelper
   DEFAULT_ICON_OPTIONS = {
     width: 24,
-    height: 24,
-    viewbox: '0 0 24 24'
+    height: 24
   }.freeze
 
   def inline_icon(name, options = {})
@@ -16,6 +15,8 @@ module IconHelper
 
   def icon(name, options = {})
     options[:class] = icon_class(name, options)
+    options.reverse_merge!(DEFAULT_ICON_OPTIONS)
+    options[:viewbox] ||= "0 0 #{options[:width]} #{options[:height]}"
     svg name, options.reverse_merge(DEFAULT_ICON_OPTIONS)
   end
 
