@@ -1,0 +1,21 @@
+en:
+  admin:
+    payments:
+      index:
+        title: 'Payments'
+        all: 'All'
+        empty: 'No payments to show'
+
+    payment:
+      states:
+        pending: 'Pending'
+        approved: 'Approved'
+        cancelled: 'Cancelled'
+        declined: 'Declined'
+        refunded: 'Refunded'
+      actions:
+        pending: 'Hold'
+        approved: 'Approve'
+        cancelled: 'Cancel'
+        declined: 'Decline'
+        refunded: 'Refund'

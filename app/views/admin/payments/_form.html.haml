@@ -1,0 +1,23 @@
+= form_for payment, url: admin_payments_path(festival),
+  html: { class: 'payment-editor', data: { target: 'admin--payment.form', action: 'admin--payment#submit' } } do |form|
+
+  .payment-details__status
+    = icon :payment_pending, width: 40, height: 40, class: 'payment-details__icon', data: { target: 'admin--payment.icon' }
+    .payment-details__amount{data: { target: 'admin--payment.amount' }}= money(payment.amount)
+
+  .payment-details__particulars
+    .payment-details__date{data: { target: 'admin--payment.date' }}= l(payment.created_at || Time.zone.now, format: :full)
+    .payment-details__kind{data: { target: 'admin--payment.kind' }}= t(payment.kind, scope: 'payment.methods')
+    .payment-details__reference{data: { target: 'admin--payment.reference' }}= payment.reference
+    
+    %p
+      This payment is
+      = succeed '.' do
+        %b{data: { target: 'admin--payment.state' }}= t(payment.state, scope: 'admin.payment.states').downcase
+      You can:
+
+  .payment-details__actions
+    - Payment.states.keys.each do |state|
+      %button.button.payment-details__action{data: { target: 'admin--payment.action', action: "admin--payment#changeState", state: state }}
+        = icon "payment_#{state}", class: 'button__icon payment-details__action-icon'
+        .button__text= t(state, scope: 'admin.payment.actions')

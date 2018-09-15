@@ -1,0 +1,13 @@
+= link_to admin_payment_path(festival, payment), class: 'payment', data: { id: payment.to_param, target: 'admin--payments.payment', action: 'admin--payments#editPayment' } do
+  = icon "payment_#{payment.state}", width: 40, height: 40
+  .payment__participant
+    .payment__name= payment.registration.participant.name
+    .payment__email= payment.registration.participant.email
+  .payment__amount
+    = money(payment.amount, class: 'payment__money')
+    .payment__state= t(payment.state, scope: 'payment.states')
+  .payment__details
+    .payment__method= t(payment.kind, scope: 'payment.methods')
+    .payment__reference
+      = l(payment.created_at.to_date, format: :short)
+      = ' • ' + payment.reference if payment.reference?
