@@ -22,6 +22,10 @@ export default class extends Controller {
   }
 
   close(e) {
+    this.hide()
+  }
+
+  hide(e) {
     if (!e || !e.defaultPrevented) {
       e && e.preventDefault()
       const event = this.dispatchEvent('close')

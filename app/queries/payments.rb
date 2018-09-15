@@ -31,12 +31,4 @@ class Payments < ApplicationQuery
       .where('registrations.festival_id = ?', festival.id)
       .order('payments.created_at DESC')
   end
-
-  def state(scope, state)
-    if state == 'all'
-      scope
-    else
-      scope.where(state: state)
-    end
-  end
 end

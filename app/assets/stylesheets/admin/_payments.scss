@@ -15,8 +15,11 @@
   display: flex;
   padding: .5em 1em .5em 1em;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 
   &:hover {
+    color: inherit;
     background: $ghost-grey;
   }
 
@@ -52,5 +55,52 @@
 
   .currency {
     display: none;
+  }
+}
+
+.payment-editor {
+  padding: 1em;
+
+  .payment-details {
+    &__status {
+      display: flex;
+      align-items: center;
+    }
+
+    &__icon {
+      @include size(2.5em);
+      margin-right: 1em;
+    }
+
+    &__amount {
+      font-size: modular-scale(2);
+
+      .currency {
+        color: $secondary-font-color;
+      }
+    }
+
+    &__particulars,
+    &__actions {
+      padding-left: 3.5em;
+
+      p {
+        margin-top: $base-spacing;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      margin-left: -$small-spacing;
+    }
+
+    &__action {
+      flex: 1;
+      margin-left: $small-spacing;
+
+      &[aria-hidden] {
+        display: none;
+      }
+    }
   }
 }

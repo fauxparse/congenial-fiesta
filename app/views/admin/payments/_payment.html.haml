@@ -1,4 +1,4 @@
-.payment{data: { id: payment.id }}
+= link_to admin_payment_path(festival, payment), class: 'payment', data: { id: payment.to_param, target: 'admin--payments.payment', action: 'admin--payments#editPayment' } do
   = icon "payment_#{payment.state}", width: 40, height: 40
   .payment__participant
     .payment__name= payment.registration.participant.name

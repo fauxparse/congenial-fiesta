@@ -13,3 +13,9 @@ en:
         cancelled: 'Cancelled'
         declined: 'Declined'
         refunded: 'Refunded'
+      actions:
+        pending: 'Hold'
+        approved: 'Approve'
+        cancelled: 'Cancel'
+        declined: 'Decline'
+        refunded: 'Refund'

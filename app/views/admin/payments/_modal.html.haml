@@ -1,0 +1,9 @@
+= render 'shared/modal',
+  controller: 'admin--payment',
+  target: 'admin--payments.modal admin--payment.modal',
+  action: 'modal:open->admin--payment#modalOpened',
+  class: 'payment-editor--modal' do
+
+  = render 'shared/modal_header'
+  .modal__body
+    = yield

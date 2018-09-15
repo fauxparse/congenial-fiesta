@@ -1,8 +1,6 @@
 %h1.page-title= t('.title')
 
 .filters{role: 'tablist'}
-  = link_to admin_payments_path(payments.parameters.merge(state: :all)), class: 'filter', role: 'tab', aria: { selected: payments.parameters[:state] == 'all' } do
-    .filter__text= t('.all')
   - payments.states.each do |state|
     = link_to admin_payments_path(payments.parameters.merge(state: state.to_param)), class: 'filter', role: 'tab', aria: { selected: state == payments.parameters[:state] } do
       .filter__text= t(state, scope: '.states')
@@ -16,5 +14,7 @@
       .filter__text= t(kind.to_param, scope: 'payment.methods')
       = badge payments.count(kind: kind.to_param)
 
-.payments
+.payments{data: { controller: 'admin--payments', action: 'payment:updated->admin--payments#paymentUpdated' }}
   = render(payments.to_a) || content_tag(:div, t('.empty'), class: 'payments--empty')
+
+  = render partial: 'form', layout: 'modal', locals: { payment: Payment.new }
