@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     resources :festivals, only: %i[new create edit]
 
     scope ':year', constraints: { year: /2\d{3}/ } do
+      scope 'reports', controller: 'reports' do
+        get :workshops, as: :workshops_report
+      end
       resources :activities, only: %i[index create]
       resources :shows,
         controller: 'activities',
@@ -61,10 +64,10 @@ Rails.application.routes.draw do
   get '/register', to: 'registrations#edit', as: :registration
 
   post '/payments/paypal/:id' => 'payments#paypal_callback',
-    as: :paypal_callback
+       as: :paypal_callback
   match '/payments/:id' => 'payments#paypal_redirect',
-    as: :paypal_return,
-    via: %i[get post]
+        as: :paypal_return,
+        via: %i[get post]
 
   resources :schedules, only: :show
 

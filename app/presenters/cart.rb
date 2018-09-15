@@ -62,11 +62,11 @@ class Cart
 
   def workshops
     registration
-    .selections
-    .select { |s| s.position == 1 }
-    .select { |s| s.schedule.activity.is_a?(Workshop) }
-    .reject { |s| s.schedule.freebie? }
-    .reject(&:marked_for_destruction?)
+      .selections
+      .select { |s| s.position == 1 }
+      .select { |s| s.schedule.activity.is_a?(Workshop) }
+      .reject { |s| s.schedule.freebie? }
+      .reject(&:marked_for_destruction?)
   end
 
   def payments

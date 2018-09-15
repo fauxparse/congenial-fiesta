@@ -1,9 +1,9 @@
-class ActivitiesController < ApplicationController
-  def index
-  end
+# frozen_string_literal: true
 
-  def show
-  end
+class ActivitiesController < ApplicationController
+  def index; end
+
+  def show; end
 
   private
 
