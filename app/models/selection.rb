@@ -27,6 +27,10 @@ class Selection < ApplicationRecord
     super || populate_slot
   end
 
+  def <=>(other)
+    position <=> other.position
+  end
+
   def self.with_activity
     includes(schedule: :activity)
       .references(:activity)

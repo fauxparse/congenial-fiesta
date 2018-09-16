@@ -9,4 +9,21 @@ module StimulusHelper
     content = capture(&block) if block_given?
     content_tag tag, content, options
   end
+
+  def copy_to_clipboard(content, icon: :copy, &block)
+    content_tag(:div, class: 'clipboard',
+      data: { controller: 'clipboard' }) do
+      concat content_tag(:div, class: 'clipboard__content', &block)
+      concat clipboard_copy_button(content, icon_name: icon)
+    end
+  end
+
+  private
+
+  def clipboard_copy_button(content, icon_name:)
+    content_tag :button, class: 'clipboard__copy',
+      data: { target: 'clipboard.copyButton', 'clipboard-text': content } do
+      concat icon(icon_name)
+    end
+  end
 end

@@ -17,6 +17,10 @@ en:
       update:
         success: 'Activity details successfully updated.'
         error: 'Something’s not quite right below.'
+      dry_run:
+        title: 'Workshop allocation'
+        magic_number: 'Magic number'
+        shuffle: 'Shuffle'
     attendees:
       index:
         title: 'Attendees'

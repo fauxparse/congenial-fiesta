@@ -36,6 +36,10 @@ module Admin
       end
     end
 
+    def dry_run
+      authorize Activity, :update?
+    end
+
     private
 
     def activities
@@ -102,5 +106,19 @@ module Admin
         end
       end
     end
+
+    def allocator
+      @allocator ||= if params[:magic_number]
+        AllocateWorkshops.with_magic_number(festival, params[:magic_number])
+      else
+        AllocateWorkshops.new(festival)
+      end
+    end
+
+    def allocated_workshops
+      @allocated_workshops ||= allocator.tap(&:call).results
+    end
+
+    helper_method :allocator, :allocated_workshops
   end
 end

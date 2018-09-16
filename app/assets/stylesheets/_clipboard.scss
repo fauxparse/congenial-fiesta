@@ -1,0 +1,52 @@
+.clipboard {
+  display: flex;
+  align-items: center;
+  background: $ghost-grey;
+  border-radius: $base-border-radius;
+
+  &__content {
+    flex: 1;
+    padding: 0 $small-spacing;
+  }
+
+  &__copy {
+    align-self: stretch;
+    appearance: none;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    margin: none;
+    padding: .5em;
+    border-radius: 0 $base-border-radius $base-border-radius 0;
+    outline: none;
+    background: $action-color;
+    color: $white;
+
+    .icon {
+      @include size(1em);
+      display: block;
+    }
+  }
+
+  &--copied {
+    animation: copied .5s $base-timing 1 forwards;
+  }
+}
+
+@keyframes copied {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(.95);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+  85% {
+    transform: scale(.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

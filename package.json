@@ -7,6 +7,7 @@
     "activestorage": "^5.2.0",
     "autosize": "^4.0.2",
     "chart.js": "^2.7.2",
+    "clipboard": "^2.0.1",
     "draggabilly": "^2.2.0",
     "flickity": "^2.1.2",
     "intersection-observer": "^0.5.0",
@@ -22,6 +23,7 @@
     "tag": "https://github.com/fauxparse/tag.git#data_attributes",
     "tether-drop": "^1.4.2",
     "tether-select": "^1.1.0",
+    "tether-tooltip": "^1.2.0",
     "turbolinks": "^5.1.1",
     "whatwg-fetch": "^2.0.4"
   },

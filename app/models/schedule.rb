@@ -14,6 +14,8 @@ class Schedule < ApplicationRecord
   scope :freebie, -> { where(freebie: true) }
   scope :not_freebie, -> { where(freebie: false) }
   scope :with_details, -> { includes(activity: { presenters: :participant }) }
+  scope :with_selections,
+    -> { includes(selections: { registration: :participant }) }
 
   def <=>(other)
     starts_at <=> other.starts_at

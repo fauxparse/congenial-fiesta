@@ -1,0 +1,39 @@
+- content_for :title, t('.title')
+
+- content_for :scripts do
+  %meta{name: 'turbolinks-cache-control', content: 'no-cache'}/
+
+.workshop-allocation
+  %h1.page-title= t('.title')
+  .magic-number{data: { tooltip: t('.magic_number'), 'tooltip-position': 'top left' }}
+    = copy_to_clipboard(allocate_admin_activities_url(festival, magic_number: allocator.magic_number), icon: :copy_link) do
+      %tt= allocator.magic_number
+
+    = link_to allocate_admin_activities_path, class: 'button' do
+      = icon :shuffle, class: 'button__icon'
+      .button_text= t('.shuffle')
+
+  - allocated_workshops.each do |time, allocations|
+    .workshop-allocation__slot
+      %h2.workshop-allocation__time
+        = content_tag :span, allocations[nil].size, class: 'badge' if allocations[nil].any?
+        = l(time, format: :full)
+      - allocations.each_pair do |schedule, registrations|
+        - if schedule
+          .workshop-allocation__workshop
+            %h3.workshop-allocation__workshop-name
+              = "(#{registrations.size}/#{schedule.maximum})"
+              = schedule.activity.name
+            %ul.workshop-allocation__participants
+              - registrations.each do |registration|
+                %li.workshop-allocation__participant
+                  .workshop-allocation__name= registration.participant.name
+                  .badge= registration.selections.detect { |s| s.schedule_id == schedule.id }.position
+        - elsif registrations.any?
+          .workshop-allocation__unassigned
+            %h3.workshop-allocation__workshop-name= t('.unassigned')
+            %ul.workshop-allocation__participants
+              - registrations.each do |registration|
+                %li.workshop-allocation__participant.workshop-allocation__participant--unassigned
+                  %span.workshop-allocation__name= registration.participant.name
+                  %span.workshop-allocation__choices= registration.selections.select { |s| allocations.keys.compact.map(&:id).include?(s.schedule_id) }.sort_by(&:position).map { |s| s.activity.name }.join(', ')
