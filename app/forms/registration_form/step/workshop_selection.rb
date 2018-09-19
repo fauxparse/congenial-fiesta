@@ -47,7 +47,7 @@ class RegistrationForm
 
       def workshop_scope
         Workshop
-          .includes(:levels, pitch: { activities: :schedules })
+          .includes(:levels, pitch: :activities)
           .references(:levels)
       end
     end

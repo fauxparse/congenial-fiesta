@@ -55,6 +55,7 @@ class ScheduledActivity
 
   def for_show?
     activity.is_a?(Workshop) &&
+      activity.pitch &&
       activity.pitch.activities.any? { |a| a.is_a?(Show) && a.schedules.any? }
   end
 
