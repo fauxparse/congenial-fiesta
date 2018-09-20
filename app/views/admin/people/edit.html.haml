@@ -8,6 +8,10 @@
         %path{d: 'M0 -38 A 38 38 0 0 1 0 38 A 38 38 0 0 1 0 -38', data: { target: 'image-upload.progress' }}
       = form.file_field :avatar, direct_upload: true, data: { target: 'image-upload.file', action: 'change->image-upload#submit' }
 
+  = form.group :name do
+    = form.label :name
+    = form.text_field :name, data: { target: 'admin--person.name' }
+
   = form.group :email do
     = form.label :email
     = form.email_field :email, data: { target: 'admin--person.email' }
