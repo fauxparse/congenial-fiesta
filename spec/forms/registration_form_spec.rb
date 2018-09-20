@@ -58,6 +58,12 @@ RSpec.describe RegistrationForm do
       create(:schedule, activity: create(:show, festival: festival))
     end
 
+    before do
+      allow_any_instance_of(RegistrationStage)
+        .to receive(:earlybird?)
+        .and_return(true)
+    end
+
     it 'completes successfully' do
       form.on(:completed) { @complete = true }
 
