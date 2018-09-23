@@ -59,6 +59,14 @@ class ScheduledActivity
       activity.pitch.activities.any? { |a| a.is_a?(Show) && a.schedules.any? }
   end
 
+  def <=>(other)
+    if slot == other.slot
+      id <=> other.id
+    else
+      starts_at <=> other.starts_at
+    end
+  end
+
   private
 
   attr_reader :selection, :registration, :schedule

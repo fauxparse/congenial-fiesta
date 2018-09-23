@@ -22,7 +22,7 @@ class ScheduledActivityList
 
   def group(activities)
     if grouped?
-      activities.group_by(&:starts_at).to_a.sort_by(&:first).map(&:last)
+      activities.group_by(&:starts_at).values.sort_by(&:first)
     else
       [activities]
     end
@@ -36,7 +36,13 @@ class ScheduledActivityList
     scheduled(scope.find_by!(slug: slug).schedules.first)
   end
 
-  delegate :each, :group_by, to: :activities
+  def each_day(&block)
+    activities.sort.group_by(&:day).each do |day, group|
+      yield day, group
+    end
+  end
+
+  delegate :each, to: :activities
 
   private
 
