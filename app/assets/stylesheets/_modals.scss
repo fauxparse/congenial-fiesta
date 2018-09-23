@@ -101,6 +101,10 @@
     flex: 1 1 auto;
   }
 
+  &__message {
+    padding: 1em;
+  }
+
   &__footer {
     flex: 0 0 auto;
     display: flex;

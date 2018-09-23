@@ -22,6 +22,7 @@ class Selection < ApplicationRecord
   validates :schedule_id, uniqueness: { scope: :registration_id }
 
   scope :sorted, -> { order(:position) }
+  scope :excluded, -> { where(excluded: true) }
 
   def slot
     super || populate_slot

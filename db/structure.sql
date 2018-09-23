@@ -477,7 +477,8 @@ CREATE TABLE public.selections (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     slot character varying,
-    "position" integer DEFAULT 1
+    "position" integer DEFAULT 1,
+    excluded boolean DEFAULT false
 );
 
 
@@ -1186,6 +1187,14 @@ ALTER TABLE ONLY public.schedules
 
 
 --
+-- Name: identities fk_rails_27e74d7b52; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.identities
+    ADD CONSTRAINT fk_rails_27e74d7b52 FOREIGN KEY (participant_id) REFERENCES public.participants(id) ON DELETE CASCADE;
+
+
+--
 -- Name: password_resets fk_rails_286b6e4fd3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1327,6 +1336,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180825224326'),
 ('20180826000751'),
 ('20180826013354'),
-('20180831014046');
+('20180831014046'),
+('20180923002028');
 
 

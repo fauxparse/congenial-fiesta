@@ -23,11 +23,15 @@ class AllocateWorkshops
   end
 
   def self.with_magic_number(festival, magic_number)
-    new(
-      festival,
-      jostle: magic_number[0, 2].to_i(16) / 100.0,
-      seed: magic_number[2..-1].to_i(16)
-    )
+    if magic_number.blank?
+      new(festival)
+    else
+      new(
+        festival,
+        jostle: magic_number[0, 2].to_i(16) / 100.0,
+        seed: magic_number[2..-1].to_i(16)
+      )
+    end
   end
 
   private
@@ -57,6 +61,7 @@ class AllocateWorkshops
     schedule
       .selections
       .reject(&:pending?)
+      .reject(&:excluded?)
       .sort_by { |s| s.registration.completed_at }
       .map(&:registration)
       .jostle(jostle_amount)
@@ -71,7 +76,9 @@ class AllocateWorkshops
       .flat_map(&:selections)
       .select(&:registered?)
       .group_by(&:registration)
-      .transform_values { |selections| selections.sort.map(&:schedule) }
+      .transform_values do |selections|
+        selections.reject(&:excluded).sort.map(&:schedule)
+      end
   end
 
   def matchmaker(schedules)

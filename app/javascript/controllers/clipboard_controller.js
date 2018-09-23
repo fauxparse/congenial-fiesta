@@ -12,6 +12,11 @@ export default class extends Controller {
   connect() {
     this.clipboard = new Clipboard(this.copyButtonTarget)
     this.clipboard.on('success', this.copied)
+    this.element.addEventListener('click', this.stopClickLeakage)
+  }
+
+  disconnect() {
+    this.element.removeEventListener('click', this.stopClickLeakage)
   }
 
   copied = e => {
@@ -32,5 +37,10 @@ export default class extends Controller {
     }
     this._tooltip.open()
     setTimeout(() => this._tooltip.close(), 2000)
+  }
+
+  stopClickLeakage = e => {
+    e.stopPropagation()
+    e.preventDefault()
   }
 }

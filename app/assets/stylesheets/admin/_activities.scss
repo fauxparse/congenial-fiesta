@@ -255,7 +255,13 @@
     padding-left: 0;
   }
 
-  .magic-number {
+  .workshop-allocation__toolbar {
+    @include sticky-header;
+    @include vertical-padding($small-spacing);
+    margin-left: -$keyline;
+    padding-left: $keyline;
+    margin-right: -1em;
+    margin-right: -1em;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -279,7 +285,7 @@
 
   &__slot {
     display: grid;
-    grid-template-columns: repeat(auto-fill, calc((100% - 2em) / 3));
+    grid-template-columns: repeat(auto-fill, calc((100% - 3em) / 4));
     grid-column-gap: 1em;
   }
 
@@ -324,12 +330,33 @@
     font-size: modular-scale(-1);
     margin-top: .25em;
 
+    input {
+      display: none;
+    }
+
     .badge {
+      @include size(1.5em);
       order: -1;
       margin-right: .5em;
-      width: 1.5em;
+      border-radius: 50%;
       padding: 0;
       background: $light-grey;
+      position: relative;
+    }
+
+    :checked ~ .badge {
+      color: $secondary-font-color;
+      background: none;
+      box-shadow: inset 0 0 0 2px $accent-color;
+
+      &::after {
+        @include position(absolute, 50% 0 null 0);
+        margin: -1px 0;
+        height: 2px;
+        background: $accent-color;
+        content: '';
+        transform: rotate(-45deg);
+      }
     }
   }
 

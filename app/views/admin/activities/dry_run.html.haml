@@ -3,17 +3,26 @@
 - content_for :scripts do
   %meta{name: 'turbolinks-cache-control', content: 'no-cache'}/
 
-.workshop-allocation
+= form_tag allocate_admin_activities_path(festival), method: :post, class: 'workshop-allocation', data: { controller: 'admin--workshop-allocation' } do
   %h1.page-title= t('.title')
-  .magic-number{data: { tooltip: t('.magic_number'), 'tooltip-position': 'top left' }}
-    = copy_to_clipboard(allocate_admin_activities_url(festival, magic_number: allocator.magic_number), icon: :copy_link) do
-      %tt= allocator.magic_number
+  .workshop-allocation__toolbar
+    = hidden_field_tag :magic_number, workshop_allocation_form.magic_number
+    = copy_to_clipboard(allocate_admin_activities_url(festival, magic_number: workshop_allocation_form.magic_number, data: { tooltip: t('.magic_number'), 'tooltip-position': 'top left' }), icon: :copy_link) do
+      %tt= workshop_allocation_form.magic_number
 
     = link_to allocate_admin_activities_path, class: 'button' do
       = icon :shuffle, class: 'button__icon'
       .button_text= t('.shuffle')
 
-  - allocated_workshops.each do |time, allocations|
+    %button.button{type: :submit}
+      = icon :refresh, class: 'button__icon'
+      .button__text= t('.apply')
+
+    %button.button.button--primary{type: :submit, name: 'finalize', value: 'yes', data: { action: 'admin--workshop-allocation#finalize' }}
+      = icon :warning, class: 'button__icon'
+      .button__text= t('.finalize')
+
+  - workshop_allocation_form.each do |time, allocations|
     .workshop-allocation__slot
       %h2.workshop-allocation__time
         = content_tag :span, allocations[nil].size, class: 'badge' if allocations[nil].any?
@@ -26,9 +35,18 @@
               = schedule.activity.name
             %ul.workshop-allocation__participants
               - registrations.each do |registration|
-                %li.workshop-allocation__participant
-                  .workshop-allocation__name= registration.participant.name
-                  .badge= registration.selections.detect { |s| s.schedule_id == schedule.id }.position
+                %li
+                  - selection = registration.selections.detect { |s| s.schedule_id == schedule.id }
+                  %label.workshop-allocation__participant
+                    = check_box_tag 'exclude[]', selection.id
+                    .workshop-allocation__name= registration.participant.name
+                    .badge= selection.position
+              - schedule.selections.select(&:excluded?).each do |selection|
+                %li
+                  %label.workshop-allocation__participant
+                    = check_box_tag 'exclude[]', selection.id, true
+                    .workshop-allocation__name= selection.registration.participant.name
+                    .badge= selection.position
         - elsif registrations.any?
           .workshop-allocation__unassigned
             %h3.workshop-allocation__workshop-name= t('.unassigned')
@@ -37,3 +55,18 @@
                 %li.workshop-allocation__participant.workshop-allocation__participant--unassigned
                   %span.workshop-allocation__name= registration.participant.name
                   %span.workshop-allocation__choices= registration.selections.select { |s| allocations.keys.compact.map(&:id).include?(s.schedule_id) }.sort_by(&:position).map { |s| s.activity.name }.join(', ')
+
+  = render 'shared/modal', target: 'admin--workshop-allocation.confirmation' do
+    = render 'shared/modal_header', title: 'Hey, watch out!'
+    .modal__body
+      %p.modal__message
+        This is it. If you click this button, everything gets set in stone.
+        Emails get sent. People find out their workshop choices.
+        There is no undo.
+    .modal__footer
+      %button.button{data: { action: 'modal#close admin--workshop-allocation#cancel' }}
+        = icon :close, class: 'button__icon'
+        .button__text= t('modal.cancel')
+      %button.button.button--primary{name: 'confirm', value: 'yes', data: { action: 'admin--workshop-allocation#confirm' }}
+        = icon :check, class: 'button__icon'
+        .button__text= t('admin.activities.dry_run.ready')

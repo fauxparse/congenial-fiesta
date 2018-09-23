@@ -40,6 +40,15 @@ module Admin
       authorize Activity, :update?
     end
 
+    def allocate
+      authorize Activity, :update?
+      workshop_allocation_form.on(:dry_run) { render(:dry_run) }
+      workshop_allocation_form.on(:allocated) do
+        redirect_to admin_root_path(festival), notice: t('.allocated')
+      end
+      workshop_allocation_form.update(dry_run: params[:confirm].blank?)
+    end
+
     private
 
     def activities
@@ -107,18 +116,10 @@ module Admin
       end
     end
 
-    def allocator
-      @allocator ||= if params[:magic_number]
-        AllocateWorkshops.with_magic_number(festival, params[:magic_number])
-      else
-        AllocateWorkshops.new(festival)
-      end
+    def workshop_allocation_form
+      @workshop_allocation_form ||= WorkshopAllocationForm.new(festival, params)
     end
 
-    def allocated_workshops
-      @allocated_workshops ||= allocator.tap(&:call).results
-    end
-
-    helper_method :allocator, :allocated_workshops
+    helper_method :workshop_allocation_form
   end
 end
