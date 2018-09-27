@@ -210,4 +210,9 @@ FactoryBot.define do
   factory :internet_banking_payment, parent: :payment do
     kind 'internet_banking'
   end
+
+  factory :waitlist do
+    schedule
+    registration
+  end
 end

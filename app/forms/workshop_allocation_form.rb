@@ -13,7 +13,7 @@ class WorkshopAllocationForm
     if dry_run
       publish :dry_run
     else
-      ConfirmWorkshopAllocations.new(allocator).call
+      ConfirmWorkshopAllocations.new(allocator.results).call
       publish :allocated
     end
   end

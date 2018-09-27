@@ -2,7 +2,7 @@
 
 class ConfirmWorkshopAllocations
   def initialize(allocations)
-    @allocations = allocations.results
+    @allocations = allocations
   end
 
   def call
@@ -35,16 +35,16 @@ class ConfirmWorkshopAllocations
   end
 
   def waitlist(selection)
-    selection.waitlisted!
+    selection.schedule.waitlists.create(
+      registration: selection.registration
+    )
   end
 
   def waitlist_all(slot, registrations)
-    registrations.each do |registration|
-      registration
-        .selections
-        .select { |s| s.slot == slot }
-        .each { |selection| waitlist(selection) }
-    end
+    registrations
+      .flat_map(&:selections)
+      .select { |s| s.slot == slot }
+      .each { |selection| waitlist(selection) }
   end
 
   attr_reader :allocations

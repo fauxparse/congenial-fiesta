@@ -601,6 +601,39 @@ ALTER SEQUENCE public.venues_id_seq OWNED BY public.venues.id;
 
 
 --
+-- Name: waitlists; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.waitlists (
+    id bigint NOT NULL,
+    schedule_id bigint,
+    registration_id bigint,
+    "position" integer DEFAULT 1,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: waitlists_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.waitlists_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: waitlists_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.waitlists_id_seq OWNED BY public.waitlists.id;
+
+
+--
 -- Name: active_storage_attachments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -710,6 +743,13 @@ ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id
 --
 
 ALTER TABLE ONLY public.venues ALTER COLUMN id SET DEFAULT nextval('public.venues_id_seq'::regclass);
+
+
+--
+-- Name: waitlists id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.waitlists ALTER COLUMN id SET DEFAULT nextval('public.waitlists_id_seq'::regclass);
 
 
 --
@@ -854,6 +894,14 @@ ALTER TABLE ONLY public.tags
 
 ALTER TABLE ONLY public.venues
     ADD CONSTRAINT venues_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: waitlists waitlists_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.waitlists
+    ADD CONSTRAINT waitlists_pkey PRIMARY KEY (id);
 
 
 --
@@ -1165,6 +1213,20 @@ CREATE INDEX index_venues_on_latitude_and_longitude ON public.venues USING btree
 
 
 --
+-- Name: index_waitlists_on_registration_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_waitlists_on_registration_id ON public.waitlists USING btree (registration_id);
+
+
+--
+-- Name: index_waitlists_on_schedule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_waitlists_on_schedule_id ON public.waitlists USING btree (schedule_id);
+
+
+--
 -- Name: taggings_idx; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1243,6 +1305,14 @@ ALTER TABLE ONLY public.registrations
 
 
 --
+-- Name: waitlists fk_rails_6cb00a50bf; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.waitlists
+    ADD CONSTRAINT fk_rails_6cb00a50bf FOREIGN KEY (schedule_id) REFERENCES public.schedules(id) ON DELETE CASCADE;
+
+
+--
 -- Name: pitches fk_rails_b8c4f77d16; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1264,6 +1334,14 @@ ALTER TABLE ONLY public.payments
 
 ALTER TABLE ONLY public.presenters
     ADD CONSTRAINT fk_rails_c1df69d950 FOREIGN KEY (activity_id) REFERENCES public.activities(id);
+
+
+--
+-- Name: waitlists fk_rails_c944808e3a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.waitlists
+    ADD CONSTRAINT fk_rails_c944808e3a FOREIGN KEY (registration_id) REFERENCES public.registrations(id) ON DELETE CASCADE;
 
 
 --
@@ -1337,6 +1415,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180826000751'),
 ('20180826013354'),
 ('20180831014046'),
-('20180923002028');
+('20180923002028'),
+('20180927093109');
 
 

@@ -6,6 +6,7 @@ class Schedule < ApplicationRecord
   has_many :selections, dependent: :destroy
   has_one :festival, through: :activity
   has_many :presenters, through: :activity
+  has_many :waitlists
 
   validates :starts_at, :ends_at, :activity_id, presence: true
   validates :ends_at, time: { after: :starts_at }
