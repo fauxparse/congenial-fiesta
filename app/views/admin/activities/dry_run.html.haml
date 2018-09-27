@@ -7,7 +7,7 @@
   %h1.page-title= t('.title')
   .workshop-allocation__toolbar
     = hidden_field_tag :magic_number, workshop_allocation_form.magic_number
-    = copy_to_clipboard(allocate_admin_activities_url(festival, magic_number: workshop_allocation_form.magic_number, data: { tooltip: t('.magic_number'), 'tooltip-position': 'top left' }), icon: :copy_link) do
+    = copy_to_clipboard(allocate_admin_activities_url(festival, magic_number: workshop_allocation_form.magic_number), data: { tooltip: t('.magic_number'), 'tooltip-position': 'top left' }, icon: :copy_link) do
       %tt= workshop_allocation_form.magic_number
 
     = link_to allocate_admin_activities_path, class: 'button' do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AllocateWorkshops
-  attr_reader :festival, :results, :jostle_amount, :seed
+  attr_reader :festival, :jostle_amount, :seed
 
   def initialize(festival, jostle: 0.5, seed: rand(0x100000000))
     @festival = festival
@@ -16,6 +16,11 @@ class AllocateWorkshops
       matches.by_target.merge(nil => unmatched_candidates(matches))
     end
     true
+  end
+
+  def results
+    call unless @results
+    @results
   end
 
   def magic_number
@@ -57,13 +62,19 @@ class AllocateWorkshops
       .to_h
   end
 
+  def registration(id)
+    @registrations ||=
+      festival.registrations.includes(:selections).all.index_by(&:id)
+    @registrations[id]
+  end
+
   def sorted_candidates(schedule)
     schedule
       .selections
       .reject(&:pending?)
       .reject(&:excluded?)
-      .sort_by { |s| s.registration.completed_at }
-      .map(&:registration)
+      .map { |s| registration(s.registration_id) }
+      .sort_by(&:completed_at)
       .jostle(jostle_amount)
   end
 
