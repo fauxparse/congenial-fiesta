@@ -17,4 +17,20 @@ RSpec.describe Schedule, type: :model do
   it { is_expected.to validate_presence_of(:starts_at) }
   it { is_expected.to validate_presence_of(:ends_at) }
   it { is_expected.to validate_presence_of(:activity_id) }
+
+  context 'when changing times' do
+    let(:selection) { schedule.selections.create(registration: registration) }
+    let(:registration) { create(:registration, festival: festival) }
+
+    before { schedule.save }
+
+    it 'updates its selections’ slots' do
+      new_start = schedule.starts_at + 1.day
+      new_end = new_start + 3.hours
+      expect { schedule.update!(starts_at: new_start, ends_at: new_end) }
+        .to change { schedule.slot }
+        .and change { selection.reload.slot }
+      expect(selection.slot).to eq(schedule.slot)
+    end
+  end
 end

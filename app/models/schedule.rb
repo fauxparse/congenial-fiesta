@@ -11,6 +11,8 @@ class Schedule < ApplicationRecord
   validates :starts_at, :ends_at, :activity_id, presence: true
   validates :ends_at, time: { after: :starts_at }
 
+  after_save :update_selection_slots
+
   scope :sorted, -> { order(:starts_at, :id) }
   scope :freebie, -> { where(freebie: true) }
   scope :not_freebie, -> { where(freebie: false) }
@@ -23,7 +25,7 @@ class Schedule < ApplicationRecord
   end
 
   def slot
-    starts_at.to_i
+    starts_at.to_i.to_s
   end
 
   def active_selection_count
@@ -42,5 +44,11 @@ class Schedule < ApplicationRecord
 
   def limited=(value)
     self.maximum = value.to_b ? maximum || activity.maximum : nil
+  end
+
+  private
+
+  def update_selection_slots
+    selections.update_all(slot: slot) if previous_changes.include?(:starts_at)
   end
 end
