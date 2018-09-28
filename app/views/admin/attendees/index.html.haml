@@ -1,0 +1,12 @@
+= render '/admin/activities/tabs', activity: activity
+
+%h1.page-title= t('.title')
+
+- activity.schedules.sort.each do |schedule|
+  %section.attendees__schedule
+    %h2
+      .badge= schedule.selections.select(&:allocated?).size
+      = l(schedule.starts_at, format: :full)
+
+    .attendees__list
+      = render partial: 'attendee', collection: schedule.selections.select(&:allocated?).map(&:participant).sort

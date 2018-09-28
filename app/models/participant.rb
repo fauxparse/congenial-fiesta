@@ -25,6 +25,10 @@ class Participant < ApplicationRecord
 
   scope :with_email, ->(email) { where('LOWER(email) = ?', email&.downcase) }
 
+  def <=>(other)
+    name.upcase <=> other.name.upcase
+  end
+
   def to_s
     # In case the user is changing their name to an invalid value
     name_changed? ? name_was : name
