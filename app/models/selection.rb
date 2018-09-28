@@ -6,6 +6,7 @@ class Selection < ApplicationRecord
   belongs_to :registration
   belongs_to :schedule
   has_one :activity, through: :schedule
+  has_one :participant, through: :registration
 
   acts_as_list scope: %i[registration_id slot]
 

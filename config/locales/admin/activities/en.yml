@@ -17,3 +17,6 @@ en:
       update:
         success: 'Activity details successfully updated.'
         error: 'Something’s not quite right below.'
+    attendees:
+      index:
+        title: 'Attendees'

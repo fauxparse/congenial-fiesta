@@ -10,14 +10,14 @@ Rails.application.routes.draw do
       end
       resources :registrations, only: :index
       resources :activities, only: %i[index create]
-      resources :shows,
-        controller: 'activities',
-        only: %i[show update],
-        defaults: { type: 'Show' }
-      resources :workshops,
-        controller: 'activities',
-        only: %i[show update],
-        defaults: { type: 'Workshop' }
+      %w[show workshop].each do |type|
+        resources type.pluralize.to_sym,
+          controller: 'activities',
+          only: %i[show update],
+          defaults: { type: type.camelize } do
+          resources :attendees, only: :index
+        end
+      end
       resources :people, only: %i[index show edit update] do
         resource :registration, only: %i[index show update]
       end

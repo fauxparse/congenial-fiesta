@@ -7,6 +7,7 @@ class Activity < ApplicationRecord
   belongs_to :pitch, optional: true
   has_many :presenters, dependent: :destroy, autosave: true
   has_many :schedules, dependent: :destroy
+  has_many :selections, through: :schedules
 
   has_one_attached :photo
 

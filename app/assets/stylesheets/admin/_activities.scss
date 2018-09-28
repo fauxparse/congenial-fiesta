@@ -179,12 +179,12 @@
 
     .icon {
       @include position(absolute, 50% null null 50%);
+      @include size(4.5em);
+      margin: -2.25em;
       color: $white;
-      margin: -.75em;
       opacity: 0;
       transition: opacity $base-duration $base-timing;
       cursor: pointer;
-      transform: scale(2);
     }
 
     .upload-progress {
@@ -204,6 +204,44 @@
       }
 
       .icon {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.attendees {
+  &__schedule {
+    padding: 0 $base-spacing $base-spacing $keyline;
+
+    h2 {
+      position: relative;
+
+      .badge {
+        position: absolute;
+        right: 100%;
+        margin-right: .5em;
+      }
+    }
+  }
+
+  &__list {
+    .attendee {
+      @include ellipsis;
+      display: block;
+
+      &__name,
+      &__email {
+        display: inline;
+      }
+
+      &__email {
+        color: $secondary-font-color;
+        opacity: 0;
+        text-decoration: none;
+      }
+
+      &:hover .attendee__email {
         opacity: 1;
       }
     }
