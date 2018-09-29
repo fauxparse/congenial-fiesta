@@ -7,8 +7,10 @@ Rails.application.routes.draw do
     scope ':year', constraints: { year: /2\d{3}/ } do
       scope 'reports', controller: 'reports' do
         get :workshops, as: :workshops_report
+        get :finance, as: :finance_report
       end
       resources :registrations, only: :index
+      resource :finance, only: :show
       resources :activities, only: %i[index create]
       %w[show workshop].each do |type|
         resources type.pluralize.to_sym,

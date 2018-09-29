@@ -2,10 +2,11 @@
   %h4.dashboard-widget__title Reports
 
   .report-list
-    .report-list__report
-      .report__name Workshops
-      = link_to admin_workshops_report_path(festival) do
-        = icon :table
-      = link_to admin_workshops_report_path(festival, format: :csv) do
-        = icon :download
+    - Report.subclasses.each do |klass|
+      .report-list__report
+        .report__name= klass.report_name.humanize
+        = link_to [:admin, klass.name.demodulize.underscore, year: festival] do
+          = icon :table
+        = link_to [:admin, klass.name.demodulize.underscore, year: festival, format: :csv] do
+          = icon :download
 
