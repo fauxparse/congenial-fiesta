@@ -11,6 +11,7 @@ class Dashboard
   def widgets
     @widgets ||= [
       Dashboard::Summary.new(festival),
+      Dashboard::Finance.new(festival),
       Dashboard::Reports.new(festival)
     ]
   end

@@ -7,8 +7,6 @@ class FinanceReport < Report
   column(:paid) { |row| row.paid.to_d }
   column(:outstanding) { |row| row.to_pay.to_d }
 
-  private
-
   def rows
     @rows =
       festival

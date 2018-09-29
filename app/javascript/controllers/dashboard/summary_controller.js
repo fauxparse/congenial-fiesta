@@ -31,6 +31,7 @@ export default class extends Controller {
     this.countTarget.innerHTML = padStart(data.count.toString(), 4, '0')
     this.updateHistogram(data.histogram)
     this.updateCapacities(data.bookings)
+    this.element.classList.remove(LOADING_CLASS)
   }
 
   updateHistogram(data) {

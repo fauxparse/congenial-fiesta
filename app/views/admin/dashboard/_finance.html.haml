@@ -1,0 +1,25 @@
+.dashboard-widget.dashboard__finance{data: { target: 'admin--dashboard.widget', controller: 'dashboard--finance', 'dashboard--finance-url': admin_finance_path(festival) }}
+  %h4.dashboard-widget__title Finances
+
+  %table.table.finance__summary
+    %tbody
+      %tr
+        %th Total due
+        %td
+          .odometer{data: { target: 'dashboard--finance.total' }} 0
+      %tr
+        %th Internet banking
+        %td
+          .odometer{data: { target: 'dashboard--finance.internetBanking' }} 0
+      %tr
+        %th PayPal
+        %td
+          .odometer{data: { target: 'dashboard--finance.paypal' }} 0
+      %tr
+        %th Total received
+        %td
+          .odometer{data: { target: 'dashboard--finance.paid' }} 0
+      %tr
+        %th Outstanding
+        %td
+          .odometer{data: { target: 'dashboard--finance.outstanding' }} 0

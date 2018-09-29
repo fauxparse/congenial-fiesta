@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         get :finance, as: :finance_report
       end
       resources :registrations, only: :index
+      resource :finance, only: :show
       resources :activities, only: %i[index create]
       %w[show workshop].each do |type|
         resources type.pluralize.to_sym,
