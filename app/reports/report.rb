@@ -3,6 +3,8 @@
 class Report
   include Enumerable
 
+  attr_reader :festival
+
   def initialize(festival)
     @festival = festival
   end
@@ -37,7 +39,7 @@ class Report
   end
 
   def name
-    self.class.name.demodulize.underscore.sub(/_report$/, '')
+    self.class.report_name
   end
 
   def title
@@ -52,11 +54,18 @@ class Report
     )
   end
 
+  def self.report_name
+    name.demodulize.underscore.sub(/_report$/, '')
+  end
+
   def self.columns
     @columns ||= []
   end
 
   def self.column(name, &block)
-    columns << [name, block]
+    columns << [name, block_given? ? block : name.to_proc]
   end
 end
+
+require_dependency 'workshops_report'
+require_dependency 'finance_report'

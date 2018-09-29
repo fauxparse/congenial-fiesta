@@ -21,6 +21,7 @@ class WorkshopsReport < Report
       .includes(:activity, :selections)
       .references(:activities)
       .merge(Workshop.all)
+      .merge(festival.activities)
       .order('schedules.starts_at ASC, schedules.id ASC')
   end
 end

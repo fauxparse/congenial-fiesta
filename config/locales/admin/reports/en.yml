@@ -8,3 +8,8 @@ en:
         '3': '3rd'
         '4': '4th'
         '5': '5th'
+    finance:
+      title: 'Finance report'
+      coumns:
+        count: 'Workshops'
+        total: 'Total due'
