@@ -5,7 +5,7 @@ class RegistrationForm
     class ShowSelection < Step
       include ActivityAssignment
 
-      permit shows: {}
+      permit shows: {}, waitlist: []
       permit :attending_gala
 
       validates :shows_saved_at, presence: true
@@ -75,6 +75,10 @@ class RegistrationForm
       def shows=(selections)
         update_selections(selections.transform_keys(&:to_i), type: Show)
         registration.shows_saved_at ||= Time.zone.now
+      end
+
+      def waitlist=(ids)
+        update_waitlists(ids.reject(&:blank?).map(&:to_i), type: Show)
       end
 
       def workshops_count

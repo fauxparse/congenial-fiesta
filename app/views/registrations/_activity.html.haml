@@ -1,6 +1,5 @@
-.activity{class: class_string('activity--unavailable' => !activity.available?), data: { target: 'activity-selector.activity', id: activity.id, slot: activity.slot, position: activity.position }}
-  - if activity.photo.attached?
-    = activity_photo activity, alt: activity.name, data: { action: 'click->activity-selector#showDetails' }
+.activity{class: class_string('activity--selected' => activity.selected?, 'activity--unavailable' => !activity.available?, 'activity--compulsory' => activity.compulsory?, 'activity--clash' => activity.clash?), data: { target: 'activity-selector.activity', id: activity.id, slot: activity.slot, position: activity.position }}
+  = activity_photo activity, alt: activity.name, data: { action: 'click->activity-selector#showDetails' }
   = link_to activity.name, '#', class: 'activity__name', data: { action: 'activity-selector#showDetails' }
   .activity__presenters= activity.presenters.to_sentence
 
@@ -10,7 +9,7 @@
     = icon :check, class: 'button__icon'
     .button__text
       = t(selector.max_per_slot.blank? ? :multiple : :single, scope: 'registrations.activity.selected', position: (activity.position || 1).ordinalize_full).humanize
-  %button.button.activity__add{data: { action: 'activity-selector#addClicked'}, disabled: !activity.available?}
+  %button.button.activity__add{data: { action: 'activity-selector#addClicked' }, disabled: !activity.available?}
     - if activity.compulsory?
       = icon :check, class: 'button__icon'
       .button__text= t('.compulsory')
@@ -20,3 +19,12 @@
     - else
       = icon :add, class: 'button__icon'
       .button__text= t('.add')
+  - unless activity.clash? || activity.compulsory?
+    %label.activity__waitlist
+      = check_box_tag "registration[waitlist][]", activity.id, activity.waitlisted?
+      .button.activity__waitlisted--no
+        = icon :waitlist, class: 'button__icon'
+        .button__text= t('.add_to_waitlist')
+      .button.button--primary.activity__waitlisted--yes
+        = icon :waitlist, class: 'button__icon'
+        .button__text= t('.waitlisted')

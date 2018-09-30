@@ -7,6 +7,7 @@ class Registration < ApplicationRecord
   belongs_to :participant
   has_many :selections, -> { sorted }, dependent: :destroy, autosave: true
   has_many :payments, dependent: :destroy, autosave: true
+  has_many :waitlists, dependent: :destroy, autosave: true
 
   enum state: {
     pending: 'pending',

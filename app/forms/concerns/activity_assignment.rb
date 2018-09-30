@@ -8,6 +8,11 @@ module ActivityAssignment
     add_new_selections(selections)
   end
 
+  def update_waitlists(schedule_ids, type: Activity)
+    remove_old_waitlists(schedule_ids, type: type)
+    add_new_waitlists(schedule_ids)
+  end
+
   private
 
   def remove_old_selections(selections, type:)
@@ -44,5 +49,19 @@ module ActivityAssignment
   def find_or_build_selection(schedule_id)
     registration.selections.detect { |s| s.schedule_id == schedule_id } ||
       registration.selections.build(schedule: Schedule.find(schedule_id))
+  end
+
+  def remove_old_waitlists(schedule_ids, type:)
+    registration
+      .waitlists
+      .select { |s| s.schedule.activity.is_a?(type) }
+      .reject { |s| schedule_ids.include?(s.schedule_id) }
+      .map(&:mark_for_destruction)
+  end
+
+  def add_new_waitlists(schedule_ids)
+    (schedule_ids - registration.waitlists.map(&:schedule_id)).each do |id|
+      registration.waitlists.build(schedule_id: id)
+    end
   end
 end
