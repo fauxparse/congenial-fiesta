@@ -1,0 +1,4 @@
+.waitlist__participant{data: { target: 'admin--waitlist.participant', id: waitlist.id }}
+  = hidden_field_tag "waitlist[#{waitlist.id}]", waitlist.position
+  = icon :reorder
+  .waitlist__name= waitlist.registration.participant.name
