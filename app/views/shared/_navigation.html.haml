@@ -15,6 +15,10 @@
                 = icon :admin
                 = t('.festival_admin_link')
           %li
+            = link_to registration_path do
+              = icon :cart
+              = current_participant.registered?(festival) ? 'Your registration' : 'Register now!'
+          %li
             = link_to profile_path do
               = icon :user
               = t('profiles.show.link')

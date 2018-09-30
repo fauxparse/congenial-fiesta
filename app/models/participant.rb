@@ -49,6 +49,10 @@ class Participant < ApplicationRecord
     role_list.include?(role.to_s)
   end
 
+  def registered?(festival)
+    registrations.where(festival: festival).exists?
+  end
+
   private
 
   def remove_admin_if_cannot_log_in
