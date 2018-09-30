@@ -23,7 +23,7 @@ module Admin
 
     def workshop_scope
       Workshop
-        .includes(:levels, pitch: { activities: :schedules })
+        .includes(:levels, :schedules)
         .references(:levels)
     end
 

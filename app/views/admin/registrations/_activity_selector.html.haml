@@ -2,7 +2,7 @@
   = yield activity_selector
   - activity_selector.each_day do |date, timeslots|
     .activity-selector__day
-      %input{type: :checkbox, id: "#{activity_selector.type}-#{l(date)}"}
+      %input{type: :checkbox, checked: true, id: "#{activity_selector.type}-#{l(date)}"}
       %label.activity-selector__date{for: "#{activity_selector.type}-#{l(date)}"}= l(date, format: :timetable)
       .activity-selector__slots
         - timeslots.each do |timeslot|
