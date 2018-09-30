@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class ScheduledActivity
-  def initialize(schedule, registration: nil, available: true, selection: nil)
+  def initialize(schedule,
+    registration: nil, available: true, selection: nil, clash: false)
     @schedule = schedule
     @registration = registration
     @available = available
     @selection = selection
+    @clash = clash
   end
 
   delegate :id, :starts_at, :ends_at, :slot, to: :schedule
@@ -37,8 +39,16 @@ class ScheduledActivity
     @compulsory
   end
 
+  def clash?
+    @clash.present?
+  end
+
   def available?
-    @available.present? && !compulsory?
+    (@available.present? || selected?) && !compulsory?
+  end
+
+  def waitlisted?
+    registration.waitlists.any? { |w| w.schedule_id == id }
   end
 
   def sorted_level_list

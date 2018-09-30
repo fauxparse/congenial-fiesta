@@ -45,12 +45,18 @@ en:
         please_read: 'Please read the Code of Conduct before continuing'
       workshops:
         title: 'Workshop selection'
-        instructions: |
+        earlybird_instructions: |
           During Earlybird registration, instead of selecting only one
           workshop in each stream, select as many as you want, in order of
           preference. We’ll do our best to get you into your first choice.
           <a href="#" data-action="workshop-selection#help">Click here</a>
           for more information on how and why we’re doing this.
+        normal_instructions: |
+          Now that Earlybird registration is over and initial workshop
+          allocations have been made, remaining registrations are on a
+          “first in, first served” basis. A lot of workshops are full up, but
+          you can join a waitlist for anything you’ve missed out on, and if a
+          space opens up, you’ll be moved into it automatically.
         help: 'Help'
       shows:
         title: 'Show selection'
@@ -90,6 +96,8 @@ en:
         single: 'You’re in!'
       add: 'Add this'
       compulsory: 'That’s you!'
+      add_to_waitlist: 'Join waitlist'
+      waitlisted: 'Leave waitlist'
     cart:
       workshop: 'workshop'
 
