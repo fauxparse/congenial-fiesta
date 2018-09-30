@@ -22,6 +22,7 @@ Rails.application.routes.draw do
           only: %i[show update],
           defaults: { type: type.camelize } do
           resources :attendees, only: :index
+          resource :waitlist
         end
       end
       resources :people, only: %i[index show edit update] do

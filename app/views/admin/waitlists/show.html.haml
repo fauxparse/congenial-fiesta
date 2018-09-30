@@ -1,0 +1,11 @@
+= render '/admin/activities/tabs', activity: activity
+
+%h1.page-title= activity.name
+
+- activity.schedules.sort.each do |schedule|
+  %section.waitlist__schedule
+    %h2
+      = l(schedule.starts_at, format: :full)
+
+    = form_tag polymorphic_path([:admin, activity, :waitlist], year: festival), method: :put, class: 'waitlist', data: { controller: 'admin--waitlist', action: 'admin--waitlist#cancelSubmit' } do
+      = render partial: 'waitlist', collection: schedule.waitlists.sort
