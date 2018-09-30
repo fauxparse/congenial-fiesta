@@ -155,7 +155,8 @@ CREATE TABLE public.festivals (
     pitches_open_at timestamp without time zone,
     pitches_close_at timestamp without time zone,
     registrations_open_at timestamp without time zone,
-    earlybird_cutoff timestamp without time zone
+    earlybird_cutoff timestamp without time zone,
+    registrations_closed boolean DEFAULT false
 );
 
 
@@ -1416,6 +1417,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180826013354'),
 ('20180831014046'),
 ('20180923002028'),
-('20180927093109');
+('20180927093109'),
+('20180930020209');
 
 

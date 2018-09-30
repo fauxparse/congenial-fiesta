@@ -8,7 +8,8 @@ class RegistrationStage
   end
 
   def open?
-    festival.registrations_open_at? &&
+    !festival.registrations_closed? &&
+      festival.registrations_open_at? &&
       registration_period.include?(Time.zone.now)
   end
 
