@@ -61,7 +61,7 @@ class RegistrationsController < ApplicationController
   end
 
   def registrations_closed
-    redirect_to root_path, info: I18n.t('registrations.closed')
+    redirect_to root_path, notice: I18n.t('registrations.closed')
   end
 
   def default_redirect_to(url)
