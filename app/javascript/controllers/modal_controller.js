@@ -22,7 +22,7 @@ export default class extends Controller {
   }
 
   close(e) {
-    this.hide()
+    this.hide(e)
   }
 
   hide(e) {

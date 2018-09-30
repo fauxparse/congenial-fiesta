@@ -11,7 +11,10 @@ Rails.application.routes.draw do
       end
       resources :registrations, only: :index
       resource :finance, only: :show
-      resources :activities, only: %i[index create]
+      resources :activities, only: %i[index create] do
+        get '/allocate' => 'activities#dry_run', on: :collection, as: :allocate
+        post '/allocate' => 'activities#allocate', on: :collection
+      end
       %w[show workshop].each do |type|
         resources type.pluralize.to_sym,
           controller: 'activities',

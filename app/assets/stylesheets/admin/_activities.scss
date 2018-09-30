@@ -247,3 +247,139 @@
     }
   }
 }
+
+.workshop-allocation {
+  padding: 1em 1em 1em $keyline;
+
+  .page-title {
+    padding-left: 0;
+  }
+
+  .workshop-allocation__toolbar {
+    @include sticky-header;
+    @include vertical-padding($small-spacing);
+    margin-left: -$keyline;
+    padding-left: $keyline;
+    margin-right: -1em;
+    margin-right: -1em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    .clipboard {
+      &__copy {
+        .icon {
+          @include size(1.5em);
+        }
+      }
+
+      tt {
+        font-size: modular-scale(2);
+      }
+    }
+
+    .button {
+      margin-left: $small-spacing;
+    }
+  }
+
+  &__slot {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, calc((100% - 3em) / 4));
+    grid-column-gap: 1em;
+  }
+
+  &__time {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    font-size: modular-scale(2);
+    font-weight: $light-font-weight;
+    margin: $base-spacing 0 0;
+    position: relative;
+
+    .badge {
+      @include position(absolute, null 100% 0 null);
+      margin-right: .5em;
+      min-width: $heading-line-height * 1em;
+      border-radius: $heading-line-height * .5em;
+      padding: 0;
+    }
+  }
+
+  &__workshop {
+    grid-row: 2;
+
+    &-name {
+      @include ellipsis;
+      font-size: modular-scale(0);
+      font-weight: $base-font-weight;
+      margin: $small-spacing 0 0;
+    }
+  }
+
+  &__unassigned {
+    grid-row: 3;
+    grid-column: 1 / -1;
+  }
+
+  &__participants {
+    margin: 0 0 $small-spacing;
+  }
+
+  &__participant {
+    font-size: modular-scale(-1);
+    margin-top: .25em;
+
+    input {
+      display: none;
+    }
+
+    .badge {
+      @include size(1.5em);
+      order: -1;
+      margin-right: .5em;
+      border-radius: 50%;
+      padding: 0;
+      background: $light-grey;
+      position: relative;
+    }
+
+    :checked ~ .badge {
+      color: $secondary-font-color;
+      background: none;
+      box-shadow: inset 0 0 0 2px $accent-color;
+
+      &::after {
+        @include position(absolute, 50% 0 null 0);
+        margin: -1px 0;
+        height: 2px;
+        background: $accent-color;
+        content: '';
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &__workshop {
+    .workshop-allocation__participant {
+      display: flex;
+
+      .workshop-allocation__name {
+        @include ellipsis;
+        flex: 1;
+      }
+    }
+  }
+
+  &__choices {
+    color: $secondary-font-color;
+
+    &::before {
+      content: '(';
+    }
+
+    &::after {
+      content: ')';
+    }
+  }
+}

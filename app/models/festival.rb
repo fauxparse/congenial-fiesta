@@ -6,6 +6,8 @@ class Festival < ApplicationRecord
   has_many :schedules, through: :activities
   has_many :registrations, dependent: :destroy
   has_many :payments, through: :registrations
+  has_many :selections, through: :registrations
+  has_many :workshops
 
   validates :year, presence: true, uniqueness: true
   validates :start_date, :end_date, presence: true
