@@ -5,7 +5,7 @@ class RegistrationForm
     class WorkshopSelection < Step
       include ActivityAssignment
 
-      permit workshops: {}
+      permit workshops: {}, waitlist: []
 
       validates :workshops_saved_at, presence: true
 
@@ -25,7 +25,7 @@ class RegistrationForm
       end
 
       def assign_attributes(attributes)
-        super(attributes.reverse_merge(workshops: {}))
+        super(attributes.reverse_merge(workshops: {}, waitlist: []))
       end
 
       def update(attributes = {})
@@ -43,6 +43,10 @@ class RegistrationForm
       def workshops=(selections)
         update_selections(selections.transform_keys(&:to_i), type: Workshop)
         registration.workshops_saved_at ||= Time.zone.now
+      end
+
+      def waitlist=(ids)
+        update_waitlists(ids.reject(&:blank?).map(&:to_i), type: Workshop)
       end
 
       def workshop_scope

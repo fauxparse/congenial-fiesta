@@ -1,5 +1,5 @@
 .tabs
-  - [[nil, :details], [:attendees, :attendees]].map { |subpath, label| [polymorphic_path([:admin, activity, subpath].compact, year: festival), label] }.each do |path, label|
+  - [[nil, :details], [:attendees, :attendees], [:waitlist, :waitlist]].map { |subpath, label| [polymorphic_path([:admin, activity, subpath].compact, year: festival), label] }.each do |path, label|
     = link_to path, class: 'tab', aria: { selected: current_page?(path) } do
       = t(".#{label}")
       - if label == :attendees

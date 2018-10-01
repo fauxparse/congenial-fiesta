@@ -17,6 +17,7 @@ module Admin
         festival
           .activities
           .includes(schedules: { selections: :participant })
+          .references(:selections)
           .where(type: params[:type])
           .find_by(slug: slug)
     end

@@ -6,6 +6,12 @@ RSpec.describe Cart do
   subject(:cart) { Cart.new(registration) }
   let(:registration) { create(:registration, :with_workshops) }
 
+  before do
+    allow_any_instance_of(RegistrationStage)
+      .to receive(:earlybird?)
+      .and_return(true)
+  end
+
   describe '#count' do
     subject(:count) { cart.count }
     it { is_expected.to eq 3 }

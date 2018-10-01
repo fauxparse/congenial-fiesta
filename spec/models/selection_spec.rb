@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Selection, type: :model do
   subject(:selection) { build(:selection) }
+  let(:festival) { selection.activity.festival }
 
   it { is_expected.to validate_presence_of(:registration_id) }
   it { is_expected.to validate_presence_of(:schedule_id) }
@@ -16,6 +17,31 @@ RSpec.describe Selection, type: :model do
   describe '#slot' do
     subject(:slot) { selection.slot }
     it { is_expected.to eq selection.schedule.slot }
+  end
+
+  describe '#destroy' do
+    it 'checks the waitlist' do
+      expect(CheckWaitlist)
+        .to receive(:new)
+        .with(selection.schedule)
+        .and_call_original
+      selection.destroy
+    end
+
+    it 'promotes someone else into this spot' do
+      selection.schedule.update!(maximum: 1)
+      other_registration = create(:registration, festival: festival)
+      create(
+        :waitlist,
+        registration: other_registration,
+        schedule: selection.schedule
+      )
+      expect { selection.destroy }
+        .to change(Waitlist, :count)
+        .by(-1)
+        .and change { other_registration.selections.allocated.count }
+        .by(1)
+    end
   end
 
   describe '.included_in_limit' do

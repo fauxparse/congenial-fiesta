@@ -9,4 +9,8 @@ class Waitlist < ApplicationRecord
   validates :registration_id, uniqueness: { scope: :schedule_id }
 
   scope :in_order, -> { order(:position) }
+
+  def <=>(other)
+    position <=> other.position
+  end
 end

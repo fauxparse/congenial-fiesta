@@ -1,8 +1,11 @@
 %h1.registration-form__title= t('.title')
 
 .workshop-selection{data: { controller: 'workshop-selection cart', action: 'activities:select->workshop-selection#selectionChanged' }}
+  .workshop-selection__instructions
   - if registration_form.current_step.registrations.earlybird?
-    .workshop-selection__instructions= markdown t('.instructions')
+    = markdown t('.earlybird_instructions')
+  - else
+    = markdown t('.normal_instructions')
 
   = render registration_form.current_step.activities do
     .registration-form__cart{data: { target: 'workshop-selection.cart' }}

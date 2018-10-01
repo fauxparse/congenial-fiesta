@@ -1,6 +1,7 @@
 .tabs {
   display: flex;
   border-bottom: $base-border;
+  padding-left: calc(#{$keyline} - #{$small-spacing});
 }
 
 .tab {

@@ -389,3 +389,32 @@
     }
   }
 }
+
+.waitlist {
+  &__schedule {
+    border-top: $base-border;
+    padding: $small-spacing $base-spacing $base-spacing $keyline;
+  }
+
+  &__participant {
+    width: 100%;
+    margin-left: -$keyline;
+    margin-right: -$base-spacing;
+    display: flex;
+    padding-left: 2em;
+
+    .icon--reorder {
+      flex: 0 0 $icon-size;
+      margin-right: 1em;
+      color: $secondary-font-color;
+      opacity: 0;
+      cursor: ns-resize;
+    }
+
+    &:hover {
+      .icon--reorder {
+        opacity: 1;
+      }
+    }
+  }
+}

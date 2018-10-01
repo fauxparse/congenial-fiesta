@@ -1,6 +1,6 @@
 = render '/admin/activities/tabs', activity: activity
 
-%h1.page-title= t('.title')
+%h1.page-title= activity.name
 
 - activity.schedules.sort.each do |schedule|
   %section.attendees__schedule

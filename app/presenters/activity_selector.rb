@@ -77,6 +77,7 @@ class ActivitySelector
       activity,
       registration: registration,
       available: available?(activity),
+      clash: presenting_opposite?(activity),
       selection: selection_for(activity)
     )
   end
@@ -104,7 +105,11 @@ class ActivitySelector
   def selection_for(activity)
     registration
       .selections
-      .detect { |s| s.schedule_id == activity.id && !s.marked_for_destruction? }
+      .detect do |s|
+        s.schedule_id == activity.id &&
+          !s.marked_for_destruction? &&
+          (s.allocated? || registrations.earlybird?)
+      end
   end
 
   def registrations
