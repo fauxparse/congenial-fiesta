@@ -1,0 +1,63 @@
+- content_for :preheader, t('.subject')
+
+- if @workshops.any?
+  %h1 Drumroll, please…
+
+  %p
+    We’re delighted to confirm your place in the following workshops:
+
+  - @workshops.each do |workshop|
+    %p
+      %b= workshop.activity.name
+      %br
+      = workshop.activity.presenters.to_sentence
+      %br
+      = l(workshop.starts_at, format: :full)
+
+- else
+  %p
+    Unfortunately, we were unable to fit you into the workshops you selected at
+    this time.
+
+%h2 Waitlists
+
+- if @waitlists.any?
+  %p
+    You have
+    = 'also' if @workshops.any?
+    been added to the waitlists for the following workshops:
+
+  - @waitlists.each do |workshop|
+    %p
+      %b= workshop.activity.name
+      %br
+      = workshop.activity.presenters.to_sentence
+
+  %p
+    Should a space come open in any of your waitlisted workshops, you will
+    automatically be moved into that workshop.
+
+%p
+  We’ve written
+  = link_to 'an FAQ', 'https://docs.google.com/document/d/1CMBtuqPM8Mx_Q5ZcXyrJQTOj0VMGK1u4zOks4JdU-IQ'
+  to help you understand the whole waitlist/allocation
+  process, and we recommend you have a big read of it all. You can make
+  changes to what you’re waitlisted for, add extra workshops, swap to
+  different workshops if space allows, etc. Just remember that once you’re out
+  of a workshop you’re at the back of the queue.
+
+%h2 Questions? Problems? Feedback?
+
+%p
+  We have a dedicated and friendly team who are here to help you.
+  You can reply to this email, or you can find us in the
+  = link_to 'NZIF Green Room', 'https://www.facebook.com/groups/NZIFGreenRoom'
+  on Facebook (make sure you’ve read that FAQ first!)
+
+%p
+  See you soon!
+
+%p
+  Ngā mihi nui,
+  %br
+  The NZIF Team

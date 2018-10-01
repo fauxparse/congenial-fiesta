@@ -118,3 +118,5 @@ en:
       registered: 'You’re registered for %{festival}!'
     waitlist_success_email:
       subject: 'You have a spot in %{activity}!'
+    allocation_confirmation_email:
+      subject: 'At last, your 2018 NZIF workshops'
