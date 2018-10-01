@@ -66,3 +66,46 @@
     }
   }
 }
+
+.faq__qa {
+  padding-bottom: $base-spacing;
+
+  &:not(:first-child) {
+    border-top: $base-border;
+  }
+}
+
+.faq__question {
+  font-size: modular-scale(2);
+  font-weight: $light-font-weight;
+  color: $secondary-font-color;
+}
+
+.faq__answer {
+  h3 {
+    font-size: modular-scale(1);
+  }
+
+  h4 {
+    font-size: modular-scale(0);
+  }
+}
+
+.faq__pricing {
+  th, td {
+    text-align: center;
+  }
+
+  tbody {
+    td {
+      &:nth-last-child(2) {
+        color: $secondary-font-color;
+        text-decoration: line-through;
+      }
+
+      &:last-child {
+        font-weight: $bold-font-weight;
+      }
+    }
+  }
+}

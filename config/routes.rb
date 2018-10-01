@@ -114,6 +114,7 @@ Rails.application.routes.draw do
 
   static_page 'terms_and_conditions'
   static_page 'privacy'
+  static_page 'faq'
 
   root to: 'festivals#show'
 

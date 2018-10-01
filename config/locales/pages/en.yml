@@ -7,3 +7,12 @@ en:
       title: 'Terms and conditions'
     privacy:
       title: 'Privacy policy'
+    faq:
+      title: 'Frequently-Asked Questions'
+
+  shared:
+    footer:
+      code_of_conduct: 'Code of Conduct'
+      privacy: 'Privacy Policy'
+      terms_and_conditions: 'Terms & Conditions'
+      faq: 'Frequently-Asked Questions'
