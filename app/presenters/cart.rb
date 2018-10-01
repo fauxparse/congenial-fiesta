@@ -63,8 +63,8 @@ class Cart
   def workshops
     registration
       .selections
-      .select { |s| s.position == 1 }
       .select { |s| s.schedule.activity.is_a?(Workshop) }
+      .select { |s| count_selection?(s) }
       .reject { |s| s.schedule.freebie? }
       .reject(&:marked_for_destruction?)
   end
@@ -80,5 +80,21 @@ class Cart
 
   def sum_of(payments)
     payments.map(&:amount).inject(Money.new(0), &:+)
+  end
+
+  def count_selection?(selection)
+    if earlybird?
+      selection.position == 1
+    else
+      selection.allocated?
+    end
+  end
+
+  def registration_stage
+    @registration_stage ||= RegistrationStage.new(registration.festival)
+  end
+
+  def earlybird?
+    registration_stage.earlybird?
   end
 end
