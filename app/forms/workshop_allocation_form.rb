@@ -39,7 +39,10 @@ class WorkshopAllocationForm
       Selection.excluded.joins(:activity).merge(festival.workshops).pluck(:id)
     Selection.transaction do
       festival.selections.where(id: existing - ids).update_all(excluded: false)
-      festival.selections.where(id: ids - existing).update_all(excluded: true)
+      festival
+        .selections
+        .where(id: ids - existing)
+        .update_all(excluded: true, state: :registered)
     end
   end
 end
