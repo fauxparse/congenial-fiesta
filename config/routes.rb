@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :registrations, only: :index
       resource :finance, only: :show
       resources :activities, only: %i[index create] do
+        put '/allocate' => 'activities#force', on: :member, as: :allocate
         get '/allocate' => 'activities#dry_run', on: :collection, as: :allocate
         post '/allocate' => 'activities#allocate', on: :collection
       end

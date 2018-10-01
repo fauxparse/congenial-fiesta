@@ -344,6 +344,12 @@
       position: relative;
     }
 
+    &--allocated {
+      .badge {
+        background: $grape;
+      }
+    }
+
     :checked ~ .badge {
       color: $secondary-font-color;
       background: none;

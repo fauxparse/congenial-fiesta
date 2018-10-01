@@ -34,6 +34,12 @@
               = "(#{registrations.size}/#{schedule.maximum})"
               = schedule.activity.name
             %ul.workshop-allocation__participants
+              - schedule.selections.includes(registration: :participant).allocated.each do |selection|
+                %li
+                  %label.workshop-allocation__participant.workshop-allocation__participant--allocated
+                    = check_box_tag 'exclude[]', selection.id
+                    .workshop-allocation__name= selection.registration.participant.name
+                    .badge= selection.position
               - registrations.each do |registration|
                 %li
                   - selection = registration.selections.detect { |s| s.schedule_id == schedule.id }
@@ -54,7 +60,10 @@
               - registrations.each do |registration|
                 %li.workshop-allocation__participant.workshop-allocation__participant--unassigned
                   %span.workshop-allocation__name= registration.participant.name
-                  %span.workshop-allocation__choices= registration.selections.select { |s| allocations.keys.compact.map(&:id).include?(s.schedule_id) }.sort_by(&:position).map { |s| s.activity.name }.join(', ')
+                  %span.workshop-allocation__choices<
+                    - registration.selections.select { |s| allocations.keys.compact.map(&:id).include?(s.schedule_id) }.sort_by(&:position).each.with_index do |selection, i|
+                      = '/' unless i.zero?
+                      = link_to selection.activity.name, allocate_admin_activity_path(festival, selection.id, magic_number: workshop_allocation_form.magic_number), method: :put
 
   = render 'shared/modal', target: 'admin--workshop-allocation.confirmation' do
     = render 'shared/modal_header', title: 'Hey, watch out!'

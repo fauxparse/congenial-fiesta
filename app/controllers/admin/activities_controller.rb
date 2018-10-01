@@ -49,6 +49,17 @@ module Admin
       workshop_allocation_form.update(dry_run: params[:confirm].blank?)
     end
 
+    def force
+      authorize Activity, :update?
+      Selection.find(params[:id]).allocated!
+      redirect_to(
+        allocate_admin_activities_path(
+          festival,
+          magic_number: params[:magic_number]
+        )
+      )
+    end
+
     private
 
     def activities
