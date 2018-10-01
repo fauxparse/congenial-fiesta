@@ -17,6 +17,7 @@ class Selection < ApplicationRecord
   }
 
   before_validation :populate_slot
+  after_destroy :check_waitlist
 
   validates :registration_id, :schedule_id, :slot, presence: true
   validates :schedule_id, uniqueness: { scope: :registration_id }
@@ -51,5 +52,9 @@ class Selection < ApplicationRecord
 
   def populate_slot
     self.slot = schedule&.slot
+  end
+
+  def check_waitlist
+    CheckWaitlist.new(schedule).call
   end
 end

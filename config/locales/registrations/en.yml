@@ -116,3 +116,5 @@ en:
     registration_confirmation_email:
       subject: 'Your %{festival} registration'
       registered: 'You’re registered for %{festival}!'
+    waitlist_success_email:
+      subject: 'You have a spot in %{activity}!'

@@ -1,0 +1,41 @@
+- content_for :preheader, t('.subject', activity: @schedule.activity)
+
+%h1 Dreams do come true!
+
+%p
+  Thanks for your patience. We’re pleased to advise that a space has opened up
+  in a #{@schedule.activity.type.underscore} you were waitlisted for:
+
+%p
+  %b= @schedule.activity.name
+  %br
+  %b= l(@schedule.starts_at, format: :full)
+
+%p
+  You don’t have to do anything to accept this placement. If you were already
+  in a #{@schedule.activity.type.underscore} at the same time, you have been
+  moved into this one because you indicated that was your preference.
+  If this increases your total number of workshops, you will need to pay a bit
+  more. Please check
+  = link_to 'your registration', registration_step_url(:payment), target: '_blank'
+  for details.
+
+%p
+  If you cannot attend this activity, please let us know immediately so that
+  we can offer your place to someone else.
+
+%h2 Questions? Problems? Feedback?
+
+%p
+  We have a dedicated and friendly team who are here to help you.
+  You can reply to this email, or you can find us in the
+  = link_to 'NZIF Green Room', 'https://www.facebook.com/groups/NZIFGreenRoom'
+  on Facebook.
+
+%p
+  See you in October!
+
+%p
+  Ngā mihi nui,
+  %br
+  The NZIF Team
