@@ -6,7 +6,7 @@ module Admin
       ActivitySelector.new(
         registration,
         scope: workshop_scope,
-        max_per_slot: earlybird_registration?(registration) ? nil : 1
+        max_per_slot: nil
       )
     end
 

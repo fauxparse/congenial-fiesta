@@ -23,6 +23,10 @@ class UpdateRegistration
 
   delegate :festival, to: :registration
 
+  def earlybird?
+    true
+  end
+
   def update_workshop_selections
     update_selections(workshop_preferences, type: Workshop)
   end
