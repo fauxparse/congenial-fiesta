@@ -42,10 +42,10 @@ class CheckWaitlist
 
   def promote_waitlist
     selection.allocated!
-    other_selections.each(&:destroy)
-    waitlist.destroy
     send_confirmation_email
     lower_priority_waitlists.each(&:destroy)
+    waitlist.destroy
+    other_selections.each(&:destroy)
   end
 
   def other_selections
@@ -70,7 +70,7 @@ class CheckWaitlist
           .map(&:id)
       end
 
-    registration.waitlists.where(schedule_id: ids).all
+    registration.waitlists.where(schedule_id: ids).all - [waitlist]
   end
 
   def send_confirmation_email
