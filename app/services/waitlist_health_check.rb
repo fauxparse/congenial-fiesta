@@ -14,7 +14,7 @@ class WaitlistHealthCheck
         .each do |slot, selections|
           missing = expected(selections) - waitlisted(registration, selections)
           missing.each do |selection|
-            waitlist!(selection)
+            waitlist!(selection, missing.size == selections.size)
           end
         end
     end
@@ -23,12 +23,12 @@ class WaitlistHealthCheck
 
   private
 
-  def waitlist!(selection)
+  def waitlist!(selection, priority = false)
     selection
       .registration
       .waitlists
       .create!(schedule_id: selection.schedule_id)
-      .move_to_top
+      .tap { |w| w.move_to_top if priority }
   end
 
   def registrations
