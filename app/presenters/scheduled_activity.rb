@@ -13,7 +13,7 @@ class ScheduledActivity
   delegate :id, :starts_at, :ends_at, :slot, to: :schedule
   delegate :name, :description, :photo, :presenters, :to_param, :type,
     to: :activity
-  delegate :position, to: :selection, allow_nil: true
+  delegate :position, :allocated?, to: :selection, allow_nil: true
 
   def <=>(other)
     if starts_at == other.starts_at
@@ -29,6 +29,18 @@ class ScheduledActivity
 
   def selected?
     selection.present?
+  end
+
+  def waitlisted?
+    waitlist.present?
+  end
+
+  def state
+    if waitlisted?
+      'waitlisted'
+    else
+      selection&.state || 'unselected'
+    end
   end
 
   def compulsory?
@@ -78,6 +90,10 @@ class ScheduledActivity
   end
 
   private
+
+  def waitlist
+    registration.waitlists.detect { |w| w.schedule_id == schedule.id }
+  end
 
   attr_reader :selection, :registration, :schedule
 

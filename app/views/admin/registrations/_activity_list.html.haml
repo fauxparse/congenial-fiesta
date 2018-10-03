@@ -1,0 +1,13 @@
+.registration__activity-list
+  - schedules.each do |schedule|
+    .registration__activity{class: "registration__activity--#{schedule.state}", data: { id: schedule.id, slot: schedule.slot }}
+      .activity__position
+        = schedule.position
+      .activity__details
+        .activity__name= schedule.name
+        .activity__presenters= schedule.presenters.to_sentence
+      .activity__actions
+        %button.button.activity__remove{data: { action: 'admin--registration#removeActivity'}}= icon :close, class: 'button__icon'
+        %button.button.activity__add{data: { action: 'admin--registration#addActivity'}}= icon :add, class: 'button__icon'
+        %button.button.activity__waitlist{data: { action: 'admin--registration#waitlistActivity'}}= icon :waitlist, class: 'button__icon'
+      = hidden_field_tag "registration[activities][#{schedule.id}]", schedule.state, data: { id: schedule.id, slot: schedule.slot, state: schedule.state }

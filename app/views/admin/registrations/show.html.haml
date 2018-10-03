@@ -3,20 +3,27 @@
     %h1.page-title= registration.participant
     = content_tag :p, t('.registered', date: l(registration.completed_at.to_date, format: :long)) if registration.completed?
 
-  %section.registration__activities
-    %section.registration__workshops
-      = render registration_workshop_selector(registration) do |activities|
-        %h2
-          = t('.workshops')
-          %span.activity-count= activities.selected_count
+  .tabs
+    .tab{aria: { selected: 'true' }, data: { target: 'admin--registration.tab', action: 'click->admin--registration#changeTab', tab: 'workshops' }} Workshops
+    .tab{data: { target: 'admin--registration.tab', action: 'click->admin--registration#changeTab', tab: 'shows' }} Shows
 
-    %section.registration__shows
-      = render registration_show_selector(registration) do |activities|
-        %h2
-          = t('.shows')
-          %span.activity-count= activities.selected_count
+  %section.registration__activities{aria: { selected: 'true' }, data: { target: 'admin--registration.pane', type: 'workshops' }}
+    %h2 Workshops
+
+    - registration_form.schedules(type: Workshop).to_a.sort_by(&:first).each do |slot, schedules|
+      %h3.registration__slot= l(slot, format: :full)
+
+      = render 'activity_list', schedules: schedules
+
+  %section.registration__activities{data: { target: 'admin--registration.pane', type: 'shows' }}
+    %h2 Shows
+
+    - registration_form.schedules(type: Show).to_a.sort_by(&:first).each do |slot, schedules|
+      %h3.registration__slot= l(slot, format: :full)
+
+      = render 'activity_list', schedules: schedules
 
   %footer.registration__buttons
-    %button.button.button--primary{disabled: true, data: { target: 'admin--registration.saveButton' }}
+    %button.button.button--primary{data: { target: 'admin--registration.saveButton' }}
       = icon :done, class: 'button__icon'
       .button__text= t('.save')

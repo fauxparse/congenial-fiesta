@@ -17,7 +17,7 @@ module Admin
 
     def update
       authorize registration, :update?
-      UpdateRegistration.new(registration, registration_params).call
+      registration_form.update(registration_params)
       redirect_to admin_person_registration_path(festival, person),
         notice: t('.updated')
     end
@@ -42,7 +42,13 @@ module Admin
     def registration_params
       params
         .require(:registration)
-        .permit(workshops: {}, shows: {})
+        .permit(activities: {})
     end
+
+    def registration_form
+      @registration_form ||= Admin::RegistrationForm.new(registration)
+    end
+
+    helper_method :registration_form
   end
 end
