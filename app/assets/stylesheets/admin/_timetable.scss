@@ -153,6 +153,14 @@
       color: $show-color;
     }
 
+    &--social-event {
+      color: $social-event-color;
+    }
+
+    &--forum {
+      color: $forum-color;
+    }
+
     &-name {
       font-size: modular-scale(-2);
       color: $base-font-white;

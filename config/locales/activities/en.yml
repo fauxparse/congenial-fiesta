@@ -4,6 +4,7 @@ en:
       workshop: 'Workshop'
       show: 'Show'
       social_event: 'Social Event'
+      forum: 'Forum'
     levels:
       rookie: 'Rookie'
       intermediate: 'Intermediate'

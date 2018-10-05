@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         get '/allocate' => 'activities#dry_run', on: :collection, as: :allocate
         post '/allocate' => 'activities#allocate', on: :collection
       end
-      %w[show workshop].each do |type|
+      %w[show workshop social_event forum].each do |type|
         resources type.pluralize.to_sym,
           controller: 'activities',
           only: %i[show update],

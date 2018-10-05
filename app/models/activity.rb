@@ -40,3 +40,5 @@ end
 
 require_dependency 'workshop'
 require_dependency 'show'
+require_dependency 'social_event'
+require_dependency 'forum'
