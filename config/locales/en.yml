@@ -107,6 +107,8 @@ en:
     type:
       workshop: 'Workshop'
       show: 'Show'
+      social_event: 'Social Event'
+      forum: 'Forum'
 
   festivals:
     show:

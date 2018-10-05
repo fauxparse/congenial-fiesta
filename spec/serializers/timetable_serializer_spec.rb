@@ -44,7 +44,9 @@ RSpec.describe TimetableSerializer, type: :serializer do
       ),
       activity_types: a_collection_containing_exactly(
         { name: 'Workshop', label: 'Workshop' },
-        name: 'Show', label: 'Show'
+        { name: 'Show', label: 'Show' },
+        { name: 'SocialEvent', label: 'Social Event' },
+        { name: 'Forum', label: 'Forum' }
       ),
       venues: a_collection_containing_exactly(
         id: venue.id,
