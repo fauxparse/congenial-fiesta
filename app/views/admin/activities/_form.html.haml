@@ -23,6 +23,7 @@
   = form.group :maximum do
     = form.label :maximum
     = form.number_field :maximum, min: 0
+    = form.error_messages_for :maximum
 
   - if form.object.respond_to?(:levels)
     = hidden_field_tag 'activity[level_list][]'

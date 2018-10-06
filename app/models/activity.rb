@@ -11,8 +11,9 @@ class Activity < ApplicationRecord
 
   has_one_attached :photo
 
-  validates :name, :type, :maximum, presence: true
-  validates :maximum, numericality: { greater_than: 0, only_integer: true }
+  validates :name, :type, presence: true
+  validates :maximum,
+    numericality: { greater_than: 0, only_integer: true, allow_blank: true }
 
   scope :with_presenters, -> { includes(presenters: :participant) }
   scope :by_name, -> { order(:name) }
