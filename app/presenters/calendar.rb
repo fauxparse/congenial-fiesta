@@ -101,7 +101,7 @@ class Calendar
   def publish_calendar_event(activity, calendar)
     calendar.event do |event|
       event.dtstart = ical_time(activity.starts_at)
-      event.dtend = (activity.ends_at)
+      event.dtend = ical_time(activity.ends_at)
       event.summary = ical_text(activity.name)
       event.description = ical_text(event_description(activity))
       if activity.venue
