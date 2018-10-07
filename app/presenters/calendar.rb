@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'icalendar'
+require 'icalendar/tzinfo'
+
 class Calendar
   def initialize(festival, participant)
     @festival = festival
@@ -13,6 +16,16 @@ class Calendar
 
   def to_partial_path
     'calendar'
+  end
+
+  def to_ical
+    ical = Icalendar::Calendar.new.tap do |calendar|
+      calendar.x_wr_calname = festival.to_s
+      events.each do |event|
+        publish_calendar_event(event, calendar)
+      end
+    end
+    ical.to_ical
   end
 
   private
@@ -79,5 +92,40 @@ class Calendar
       registration: registration,
       selection: selection
     )
+  end
+
+  def publish_calendar_event(activity, calendar)
+    calendar.event do |event|
+      event.dtstart = ical_time(activity.starts_at)
+      event.dtend = (activity.ends_at)
+      event.summary = ical_text(activity.name)
+      event.description = ical_text(event_description(activity))
+      if activity.venue
+        event.location = activity.venue.name
+        event.geo =
+          ical_array(activity.venue.latitude, activity.venue.longitude)
+      end
+
+      calendar.add_timezone(Time.zone.tzinfo.ical_timezone(activity.starts_at))
+    end
+  end
+
+  def event_description(activity)
+    [
+      I18n.t(activity.type.underscore, scope: 'activity.types'),
+      activity.presenters.to_sentence
+    ].reject(&:blank?).join(' with ')
+  end
+
+  def ical_time(time)
+    Icalendar::Values::DateTime.new(time, 'tzid' => Time.zone.tzinfo.name)
+  end
+
+  def ical_text(text)
+    Icalendar::Values::Text.new(text)
+  end
+
+  def ical_array(*values)
+    Icalendar::Values::Array.new(values, Icalendar::Values::Float)
   end
 end
