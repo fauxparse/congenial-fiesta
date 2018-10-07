@@ -9,6 +9,10 @@ class Venue < ApplicationRecord
 
   validates :latitude, :longitude, presence: true, numericality: true
 
+  def to_s
+    name
+  end
+
   # BATS, home to us all
   def self.origin
     @origin ||= Geokit::LatLng.new(-41.2935391, 174.784505).freeze

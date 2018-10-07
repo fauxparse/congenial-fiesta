@@ -81,6 +81,9 @@ Rails.application.routes.draw do
 
   resources :schedules, only: :show
 
+  resource :calendar, only: :show
+  resources :calendars, only: :show
+
   constraints(step: /presenter|idea|finish/) do
     resources :pitches, except: %i[show new edit create]
     get '/pitches/:id/:step', to: 'pitches#edit', as: :pitch_step
@@ -91,14 +94,11 @@ Rails.application.routes.draw do
   end
 
   scope ':year', constraints: { year: /2\d{3}/ } do
-    defaults type: 'workshop' do
-      get '/workshops/:slug' => 'activities#show', as: :workshop
-      get '/workshops' => 'activities#index', as: :workshops
-    end
-
-    defaults type: 'show' do
-      get '/shows/:slug' => 'activities#show', as: :show
-      get '/shows' => 'activities#index', as: :shows
+    %w[show workshop social_event forum].each do |type|
+      resources type.pluralize.to_sym,
+        controller: 'activities',
+        only: %i[index show],
+        defaults: { type: type.camelize }
     end
   end
 

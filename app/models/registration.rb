@@ -28,4 +28,18 @@ class Registration < ApplicationRecord
   def completed?
     completed_at.present?
   end
+
+  def self.with_full_details
+    includes(
+      :waitlists,
+      selections: {
+        schedule: [
+          :venue,
+          activity: {
+            presenters: :participant
+          }
+        ]
+      }
+    )
+  end
 end

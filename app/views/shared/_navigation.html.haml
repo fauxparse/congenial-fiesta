@@ -1,6 +1,6 @@
 %header.navbar
   = link_to root_path, class: 'navbar__link navbar__logo' do
-    = t('festival.name.short')
+    = festival || t('festival.name.short')
   - if logged_in?
     .navbar__user{'data-controller': 'dropdown-menu'}
       = link_to profile_path, class: 'navbar__link drop-target navbar__menu-target', data: { target: 'dropdown-menu.link', 'drop-position': 'bottom right' } do
@@ -18,6 +18,10 @@
             = link_to registration_path do
               = icon :cart
               = current_participant.registered?(festival) ? 'Your registration' : 'Register now!'
+          %li
+            = link_to calendar_path do
+              = icon :schedule
+              = t('calendars.show.title')
           %li
             = link_to profile_path do
               = icon :user

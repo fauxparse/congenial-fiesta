@@ -1,0 +1,51 @@
+.calendar__day {
+}
+
+.calendar__date {
+  font-size: modular-scale(1);
+  font-weight: $light-font-weight;
+  color: $secondary-font-color;
+  padding-left: 7rem;
+}
+
+.calendar__activity {
+  display: flex;
+  align-items: flex-start;
+
+  .activity__photo {
+    flex: 0 0 6em;
+    width: 6em;
+    margin: 1.5em 1em $small-spacing 0;
+    height: auto;
+    border-radius: $base-border-radius;
+  }
+
+  .activity__details {
+    flex: 1;
+    margin-bottom: $small-spacing;
+  }
+
+  .activity__type {
+    @include all-caps;
+    color: $secondary-font-color;
+    line-height: 1.5rem;
+    font-size: modular-scale(-1);
+  }
+
+  .activity__name {
+    display: block;
+    font-weight: $bold-font-weight;
+    text-decoration: none;
+  }
+
+  .activity__time-and-place {
+    font-size: modular-scale(-1);
+    color: $secondary-font-color;
+  }
+
+  .activity__times {
+    &::after {
+      content: ' • ';
+    }
+  }
+}

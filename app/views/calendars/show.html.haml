@@ -1,0 +1,6 @@
+- content_for :title, t('.title')
+
+%header.hero
+  %h1= t('.title', festival: festival)
+
+= render calendar
