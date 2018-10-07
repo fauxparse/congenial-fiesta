@@ -81,8 +81,8 @@ Rails.application.routes.draw do
 
   resources :schedules, only: :show
 
+  get '/calendar/:id', to: 'calendars#show', as: :personalised_calendar
   resource :calendar, only: :show
-  resources :calendars, only: :show
 
   constraints(step: /presenter|idea|finish/) do
     resources :pitches, except: %i[show new edit create]

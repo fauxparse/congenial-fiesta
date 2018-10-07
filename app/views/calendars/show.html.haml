@@ -3,4 +3,9 @@
 %header.hero
   %h1= t('.title', festival: festival)
 
+- if logged_in?
+  %section.calendar__instructions
+    = copy_to_clipboard(personalised_calendar_url(current_participant, format: :ics)) do
+      = personalised_calendar_url(current_participant, format: :ics)
+
 = render calendar
