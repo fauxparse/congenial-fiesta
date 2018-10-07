@@ -10,8 +10,7 @@ class Calendar
   end
 
   def events
-    @events ||=
-      (registered_events + public_events + presenting).sort.uniq(&:id)
+    @events ||= all_events.sort.uniq(&:id)
   end
 
   def to_partial_path
@@ -36,6 +35,10 @@ class Calendar
 
   attr_reader :festival, :participant
 
+  def all_events
+    registered_events + public_events + presented_events
+  end
+
   def registration
     @registration ||=
       festival
@@ -58,7 +61,7 @@ class Calendar
       .select(&:allocated?)
   end
 
-  def presenting
+  def presented_events
     return [] unless participant
     festival
       .activities
@@ -104,11 +107,7 @@ class Calendar
       event.dtend = ical_time(activity.ends_at)
       event.summary = ical_text(activity.name)
       event.description = ical_text(event_description(activity))
-      if activity.venue
-        event.location = activity.venue.name
-        event.geo =
-          ical_array(activity.venue.latitude, activity.venue.longitude)
-      end
+      event.location = ical_location(activity.venue) if activity.venue
     end
   end
 
@@ -128,6 +127,10 @@ class Calendar
 
   def ical_text(text)
     Icalendar::Values::Text.new(text)
+  end
+
+  def ical_location(venue)
+    ical_text([venue.name, *venue.address.split].join(', '))
   end
 
   def ical_array(*values)
