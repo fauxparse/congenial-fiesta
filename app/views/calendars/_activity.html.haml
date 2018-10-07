@@ -1,0 +1,9 @@
+.calendar__activity{class: "calendar__activity--#{activity.activity.type.dasherize}"}
+  = activity_photo(activity, size: :tiny)
+  .activity__details
+    .activity__type= t(activity.activity.type.underscore, scope: 'activity.types')
+    = link_to activity.name, polymorphic_path(activity.activity, year: festival), class: 'activity__name'
+    .activity__presenters= activity.presenters.to_sentence
+    .activity__time-and-place
+      %span.activity__times= time_range(activity.starts_at, activity.ends_at)
+      %span.activity__venue= venue_link(activity.venue)

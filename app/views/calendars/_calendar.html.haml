@@ -1,0 +1,4 @@
+- calendar.events.group_by(&:day).each do |date, events|
+  %section.calendar__day
+    %h2.calendar__date= l(date, format: :timetable)
+    = render events

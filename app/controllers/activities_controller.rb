@@ -21,7 +21,7 @@ class ActivitiesController < ApplicationController
   end
 
   def activity
-    activities.find(params[:slug])
+    activities.find(params[:id])
   end
 
   helper_method :activity

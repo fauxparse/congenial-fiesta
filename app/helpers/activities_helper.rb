@@ -2,6 +2,7 @@
 
 module ActivitiesHelper
   ACTIVITY_PHOTO_SIZES = {
+    tiny: 240,
     small: 480,
     medium: 960,
     large: 1920

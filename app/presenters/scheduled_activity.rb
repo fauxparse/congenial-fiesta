@@ -10,7 +10,7 @@ class ScheduledActivity
     @clash = clash
   end
 
-  delegate :id, :starts_at, :ends_at, :slot, to: :schedule
+  delegate :id, :starts_at, :ends_at, :slot, :venue, to: :schedule
   delegate :name, :description, :photo, :presenters, :to_param, :type,
     to: :activity
   delegate :position, :allocated?, to: :selection, allow_nil: true
