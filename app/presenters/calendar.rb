@@ -20,7 +20,11 @@ class Calendar
 
   def to_ical
     ical = Icalendar::Calendar.new.tap do |calendar|
-      calendar.x_wr_calname = festival.to_s
+      events
+        .flat_map { |e| [e.starts_at, e.ends_at] }
+        .map { |t| Time.zone.tzinfo.ical_timezone(t) }
+        .uniq
+        .each { |z| calendar.add_timezone(z) }
       events.each do |event|
         publish_calendar_event(event, calendar)
       end
@@ -105,8 +109,6 @@ class Calendar
         event.geo =
           ical_array(activity.venue.latitude, activity.venue.longitude)
       end
-
-      calendar.add_timezone(Time.zone.tzinfo.ical_timezone(activity.starts_at))
     end
   end
 
@@ -118,7 +120,10 @@ class Calendar
   end
 
   def ical_time(time)
-    Icalendar::Values::DateTime.new(time, 'tzid' => Time.zone.tzinfo.name)
+    Icalendar::Values::DateTime.new(
+      time.to_datetime,
+      'tzid' => Time.zone.tzinfo.name
+    )
   end
 
   def ical_text(text)
