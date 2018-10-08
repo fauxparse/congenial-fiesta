@@ -13,6 +13,8 @@
     content: '';
     opacity: 0;
     transition: opacity $base-duration $base-timing;
+    pointer-events: none;
+    touch-action: none;
   }
 
   &__content {
@@ -24,7 +26,8 @@
     display: flex;
     flex-direction: column;
     transform: translateY(100vh);
-    transition: transform $base-duration $acceleration-timing;
+    opacity: 0;
+    transition: transform $base-duration $acceleration-timing, opacity $base-duration $base-timing;
     background: $viewport-background-color;
   }
 
@@ -123,7 +126,10 @@
 
     .modal__content {
       transform: translateY(0);
+      opacity: 1;
       transition-timing-function: $deceleration-timing;
+      pointer-events: initial;
+      touch-action: initial;
     }
   }
 

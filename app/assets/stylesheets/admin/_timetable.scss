@@ -54,6 +54,7 @@
   &__body {
     flex: 1;
     overflow-y: auto;
+    position: relative;
   }
 
   &__days {
@@ -72,7 +73,7 @@
 
     &--active,
     &:first-child {
-      .timetable__slot:nth-child(odd):not(:first-child)::before {
+      .timetable__slot:nth-child(4n+1):not(:first-child)::before {
         content: attr(data-label);
         font-size: modular-scale(-1);
         color: $secondary-font-color;
@@ -86,7 +87,7 @@
   }
 
   &__slot {
-    height: 1em;
+    height: .75em;
     position: relative;
     cursor: cell;
     margin-left: -1px;
@@ -94,10 +95,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    background: linear-gradient(to top, $ghost-grey 1px, transparent 1px);
+    background: linear-gradient(to top, rgba($ghost-grey, .25) 1px, transparent 1px);
 
-    &:nth-child(odd) {
-      background: linear-gradient(to top, rgba($ghost-grey, .25) 1px, transparent 1px);
+    &:nth-child(4n) {
+      background: linear-gradient(to top, $ghost-grey 1px, transparent 1px);
     }
   }
 
