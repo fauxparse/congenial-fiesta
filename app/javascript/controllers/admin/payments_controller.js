@@ -16,7 +16,6 @@ export default class extends Controller {
   }
 
   paymentUpdated({ detail: { id } }) {
-    console.log('changed', id)
     const payment = this.element.querySelector(`.payment[data-id="${id}"]`)
     if (payment) {
       payment.remove()
