@@ -28,7 +28,7 @@ export const absolutePosition = element => {
   let y = 0
   while (element) {
     x += element.offsetLeft
-    y += element.offsetTop
+    y += element.offsetTop - element.scrollTop
     element = element.offsetParent
   }
   return { x, y }

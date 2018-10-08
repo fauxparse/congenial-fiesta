@@ -10,7 +10,7 @@ const ACTIVE_HEADER_CLASS = 'timetable__header-day--active'
 const ACTIVE_CLASS = 'timetable__day--active'
 const BLOCK_CLASS = 'timetable__block'
 const SLOT_CLASS = 'timetable__slot'
-const DRAG_THRESHOLD = 10
+const DRAG_THRESHOLD = 8
 
 export default class extends Controller {
   static targets = ['back', 'next', 'header', 'day', 'slot', 'modal']
@@ -306,7 +306,7 @@ export default class extends Controller {
           0
         ) + 1
       this.dragging.height = height
-      this.dragGhost().style.height = `${height}em`
+      this.dragGhost().style.height = `${height * .75}em`
     }
   }
 

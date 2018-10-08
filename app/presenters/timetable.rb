@@ -2,8 +2,8 @@
 
 class Timetable
   START_OF_DAY = 9
-  END_OF_DAY = 24
-  GRID_SIZE = 2
+  END_OF_DAY = 26
+  GRID_SIZE = 4
 
   attr_reader :festival, :start_hour, :end_hour, :grid_size
 
@@ -28,7 +28,8 @@ class Timetable
       *(START_OF_DAY...END_OF_DAY).to_a.product((0...GRID_SIZE).to_a),
       [END_OF_DAY, 0]
     ].map do |hour, minute|
-      time.change(hour: hour, min: minute * 60 / GRID_SIZE)
+      (time + (hour >= 24 ? 1 : 0).days)
+        .change(hour: hour % 24, min: minute * 60 / GRID_SIZE)
     end
   end
 

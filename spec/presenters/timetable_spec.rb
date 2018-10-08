@@ -15,34 +15,34 @@ RSpec.describe Timetable, type: :presenter do
   describe '#time_slots' do
     subject(:slots) { timetable.time_slots(festival.start_date) }
 
-    it { is_expected.to have_exactly(30).items }
+    it { is_expected.to have_exactly(68).items }
 
-    it 'gives half-hour intervals' do
-      expect(slots.first.last).to eq(slots.first.first + 30.minutes)
+    it 'gives quarter-hour intervals' do
+      expect(slots.first.last).to eq(slots.first.first + 15.minutes)
     end
 
-    it 'extends until midnight' do
-      expect(slots.to_a.last.last).to eq Time.zone.local(2018, 10, 21)
+    it 'extends until 2am' do
+      expect(slots.to_a.last.last).to eq Time.zone.local(2018, 10, 21, 2)
     end
 
     it 'takes a block' do
       counter = 0
       expect { timetable.time_slots(festival.start_date) { counter += 1 } }
-        .to change { counter }.by 30
+        .to change { counter }.by 68
     end
   end
 
   describe '#times' do
     subject(:times) { timetable.times(festival.start_date) }
 
-    it { is_expected.to have_exactly(31).items }
+    it { is_expected.to have_exactly(69).items } # nice
 
     it 'starts at 9am' do
       expect(times.first).to eq Time.zone.local(2018, 10, 20, 9)
     end
 
-    it 'ends at midnight' do
-      expect(times.last).to eq Time.zone.local(2018, 10, 21)
+    it 'ends at 2am' do
+      expect(times.last).to eq Time.zone.local(2018, 10, 21, 2)
     end
   end
 

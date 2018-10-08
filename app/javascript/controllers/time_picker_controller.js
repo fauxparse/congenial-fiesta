@@ -24,7 +24,7 @@ export default class extends Controller {
   }
 
   get granularity() {
-    return 30
+    return 15
   }
 
   get time() {

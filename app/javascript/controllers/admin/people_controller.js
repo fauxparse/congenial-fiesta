@@ -34,7 +34,6 @@ export default class extends Controller {
     if (query) {
       const people = this.people.filter(this.matcher(query))
       results.push(...people)
-      console.log(results.length)
     } else {
       results.push(...this.people)
     }
