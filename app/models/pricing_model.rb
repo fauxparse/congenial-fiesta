@@ -9,6 +9,6 @@ class PricingModel
   end
 
   def by_workshop_count(count)
-    Money.new(PRICES[count] * 100)
+    Money.new((count < PRICES.size ? PRICES[count] : PRICES.last) * 100)
   end
 end
