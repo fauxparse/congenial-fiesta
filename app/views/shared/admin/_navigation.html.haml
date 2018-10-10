@@ -9,6 +9,7 @@
   - if festival
     = navigation_link 'people', admin_people_path(festival) if policy(Participant).index?
     = navigation_link 'activities', admin_activities_path(festival), icon: 'activity' if policy(Activity).index?
+    = navigation_link 'tickets', admin_tickets_path(festival), icon: 'show' if policy(Show).index?
     = navigation_link 'payments', admin_payments_path(festival), icon: 'payment' if policy(Payment).update?
     = navigation_link 'pitches', admin_pitches_path(festival), icon: 'pitch' if policy(Pitch).index?
     = navigation_link 'timetable', admin_timetable_path(festival), icon: 'schedule' if policy(Schedule).index?

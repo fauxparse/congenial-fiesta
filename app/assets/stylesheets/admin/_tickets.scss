@@ -1,0 +1,35 @@
+.tickets,
+.tickets__day {
+  padding: $base-spacing $keyline;
+
+  &:not(:first-child) {
+    border-top: $base-border;
+  }
+}
+
+.tickets__day {
+  .show-links {
+  }
+
+  .show-link {
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none;
+    padding: .5em 0;
+    color: inherit;
+
+    &__time {
+      flex: 0 0 4em;
+      text-align: right;
+      margin-right: $base-spacing;
+    }
+
+    &__name {
+      font-weight: $bold-font-weight;
+    }
+
+    &__venue {
+      color: $secondary-font-color;
+    }
+  }
+}

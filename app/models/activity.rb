@@ -17,6 +17,7 @@ class Activity < ApplicationRecord
 
   scope :with_presenters, -> { includes(presenters: :participant) }
   scope :by_name, -> { order(:name) }
+  scope :for_festival, ->(festival) { where(festival_id: festival) }
 
   def self.to_param
     name.underscore.pluralize.dasherize
