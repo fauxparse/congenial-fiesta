@@ -21,11 +21,6 @@ module Admin
     def update(params)
       update_activities(params[:activities]) if params.key?(:activities)
       registration.save!
-      # registration.selections.each do |s|
-      #   Rails.logger.info(
-      #     s.changes.merge(deleted: s.marked_for_destruction?).inspect
-      #   )
-      # end
     end
 
     private
@@ -80,13 +75,14 @@ module Admin
 
     def deselect(schedule)
       selection(schedule)&.mark_for_destruction
+      unwaitlist(schedule)
     end
 
     def waitlist_for(schedule)
       registration
         .waitlists
         .reject(&:marked_for_destruction?)
-        .detect { |w| w.schedule == schedule }
+        .detect { |w| w.schedule_id == schedule.id }
     end
 
     def waitlist(schedule)
