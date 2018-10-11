@@ -13,6 +13,8 @@
     = link_to admin_payments_path(payments.parameters.merge(kind: kind.to_param)), class: 'filter', role: 'tab', aria: { selected: payments.parameters[:kind] === kind.to_param } do
       .filter__text= t(kind.to_param, scope: 'payment.methods')
       = badge payments.count(kind: kind.to_param)
+  = link_to admin_vouchers_path(festival), class: 'filter', role: 'tab' do
+    .filter_text= t('.vouchers')
 
 .payments{data: { controller: 'admin--payments', action: 'payment:updated->admin--payments#paymentUpdated' }}
   = render(payments.to_a) || content_tag(:div, t('.empty'), class: 'payments--empty')

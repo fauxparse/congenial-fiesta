@@ -57,6 +57,22 @@ RSpec.describe Cart do
     end
   end
 
+  describe '#total' do
+    subject(:total) { cart.total }
+
+    it { is_expected.to eq(Money.new(16000)) }
+
+    context 'with vouchers applied' do
+      before do
+        2.times do
+          registration.vouchers.create!(workshop_count: 1, note: 'free')
+        end
+      end
+
+      it { is_expected.to eq(Money.new(5000)) }
+    end
+  end
+
   describe '#workshop_value' do
     subject { cart.workshop_value }
     it { is_expected.to be > cart.total }

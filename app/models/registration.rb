@@ -8,6 +8,7 @@ class Registration < ApplicationRecord
   has_many :selections, -> { sorted }, dependent: :destroy, autosave: true
   has_many :payments, dependent: :destroy, autosave: true
   has_many :waitlists, dependent: :destroy, autosave: true
+  has_many :vouchers
 
   enum state: {
     pending: 'pending',

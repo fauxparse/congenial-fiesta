@@ -2,5 +2,5 @@
 
 require 'rails_helper'
 
-RSpec.describe Admin::RegistrationsController, type: :controller do
+RSpec.describe Admin::RegistrationsController, type: :request do
 end

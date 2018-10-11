@@ -602,6 +602,39 @@ ALTER SEQUENCE public.venues_id_seq OWNED BY public.venues.id;
 
 
 --
+-- Name: vouchers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.vouchers (
+    id bigint NOT NULL,
+    registration_id bigint,
+    workshop_count integer DEFAULT 1,
+    note text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: vouchers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.vouchers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: vouchers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.vouchers_id_seq OWNED BY public.vouchers.id;
+
+
+--
 -- Name: waitlists; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -744,6 +777,13 @@ ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id
 --
 
 ALTER TABLE ONLY public.venues ALTER COLUMN id SET DEFAULT nextval('public.venues_id_seq'::regclass);
+
+
+--
+-- Name: vouchers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.vouchers ALTER COLUMN id SET DEFAULT nextval('public.vouchers_id_seq'::regclass);
 
 
 --
@@ -895,6 +935,14 @@ ALTER TABLE ONLY public.tags
 
 ALTER TABLE ONLY public.venues
     ADD CONSTRAINT venues_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: vouchers vouchers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.vouchers
+    ADD CONSTRAINT vouchers_pkey PRIMARY KEY (id);
 
 
 --
@@ -1214,6 +1262,13 @@ CREATE INDEX index_venues_on_latitude_and_longitude ON public.venues USING btree
 
 
 --
+-- Name: index_vouchers_on_registration_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_vouchers_on_registration_id ON public.vouchers USING btree (registration_id);
+
+
+--
 -- Name: index_waitlists_on_registration_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1311,6 +1366,14 @@ ALTER TABLE ONLY public.registrations
 
 ALTER TABLE ONLY public.waitlists
     ADD CONSTRAINT fk_rails_6cb00a50bf FOREIGN KEY (schedule_id) REFERENCES public.schedules(id) ON DELETE CASCADE;
+
+
+--
+-- Name: vouchers fk_rails_97a1f37da8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.vouchers
+    ADD CONSTRAINT fk_rails_97a1f37da8 FOREIGN KEY (registration_id) REFERENCES public.registrations(id) ON DELETE CASCADE;
 
 
 --
@@ -1418,6 +1481,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180831014046'),
 ('20180923002028'),
 ('20180927093109'),
-('20180930020209');
+('20180930020209'),
+('20181011080909');
 
 

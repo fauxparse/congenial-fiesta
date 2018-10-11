@@ -1,0 +1,11 @@
+%h1.page-title= t('.title')
+
+= form_for voucher, url: admin_voucher_path(festival, voucher), html: { class: 'voucher__form' } do |form|
+  = render 'form', form: form
+
+  .form-buttons
+    %button.button.button--primary{type: 'submit'}
+      .button__text= t('.save')
+
+    = link_to admin_voucher_path(festival, voucher), method: 'delete', class: 'button' do
+      .button__text= t('.delete')
