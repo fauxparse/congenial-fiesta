@@ -215,4 +215,9 @@ FactoryBot.define do
     schedule
     registration
   end
+
+  factory :voucher do
+    registration
+    note 'For a very good boy'
+  end
 end

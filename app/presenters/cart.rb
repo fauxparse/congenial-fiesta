@@ -41,7 +41,7 @@ class Cart
   end
 
   def total
-    workshop_cost
+    workshop_cost - voucher_discount
   end
 
   def per_workshop
@@ -54,6 +54,14 @@ class Cart
 
   def workshop_cost
     pricing_model.by_workshop_count(count)
+  end
+
+  def voucher_discount
+    pricing_model.by_workshop_count(discounted_workshop_count)
+  end
+
+  def discounted_workshop_count
+    [count, registration.vouchers.sum(&:workshop_count)].min
   end
 
   def to_partial_path

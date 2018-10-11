@@ -16,11 +16,17 @@
           = t('.discount')
         %td.cart-summary__line-total
           = money(cart.workshop_cost - cart.workshop_value)
+      - if cart.registration.vouchers.any?
+        %tr.cart-summary__discount
+          %td.cart-summary__item
+            = t('.vouchers')
+          %td.cart-summary__line-total
+            = money(-cart.voucher_discount)
       %tr.cart-summary__subtotal
         %td.cart-summary__item
           = t('.subtotal')
         %td.cart-summary__line-total
-          = money(cart.workshop_cost)
+          = money(cart.workshop_cost - cart.voucher_discount)
       = render partial: 'payment', collection: cart.payments
       %tr.cart-summary__total
         %td.cart-summary__item
