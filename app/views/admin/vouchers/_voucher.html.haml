@@ -1,0 +1,7 @@
+= link_to admin_voucher_path(festival, voucher), class: 'voucher' do
+  = icon :payment_approved, class: 'voucher__icon'
+  .voucher__participant
+    .voucher__name= voucher.registration.participant.name
+    .voucher__note= voucher.note
+  .voucher__count
+    = pluralize(voucher.workshop_count, 'workshop')

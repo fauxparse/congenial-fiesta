@@ -5,6 +5,7 @@ en:
         title: 'Payments'
         all: 'All'
         empty: 'No payments to show'
+        vouchers: 'Vouchers'
 
     payment:
       states:
@@ -19,3 +20,23 @@ en:
         cancelled: 'Cancel'
         declined: 'Decline'
         refunded: 'Refund'
+
+    vouchers:
+      index:
+        title: 'Vouchers'
+        new: 'New voucher'
+      show:
+        title: 'Voucher details'
+        delete: 'Delete voucher'
+        save: 'Save changes'
+      new:
+        title: 'New voucher'
+        save: 'Create voucher'
+      create:
+        created: 'Voucher created'
+        error: 'Oops! Please note the errors below and try again.'
+      update:
+        updated: 'Voucher updated'
+        error: 'Oops! Please note the errors below and try again.'
+      destroy:
+        deleted: 'Voucher deleted'

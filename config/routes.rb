@@ -35,6 +35,7 @@ Rails.application.routes.draw do
         end
       end
       resources :payments, only: %i[index show update]
+      resources :vouchers, except: :edit
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
       get '/timetable' => 'schedules#index', as: :timetable

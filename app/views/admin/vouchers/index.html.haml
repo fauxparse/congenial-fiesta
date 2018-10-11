@@ -1,0 +1,8 @@
+%h1.page-title= t('.title')
+
+.vouchers__actions
+  = link_to new_admin_voucher_path(festival), class: 'button button--primary' do
+    = t('.new')
+
+.vouchers
+  = render vouchers.all.sort_by { |v| v.registration.participant }
