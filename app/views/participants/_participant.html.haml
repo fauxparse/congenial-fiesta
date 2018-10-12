@@ -1,0 +1,5 @@
+.participant
+  = avatar(participant)
+  .participant__details
+    .participant__name= participant.name
+    = mail_to participant.email, participant.email, class: 'participant__email'

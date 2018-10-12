@@ -101,7 +101,11 @@ Rails.application.routes.draw do
       resources type.pluralize.to_sym,
         controller: 'activities',
         only: %i[index show],
-        defaults: { type: type.camelize }
+        defaults: { type: type.camelize } do
+        member do
+          resource :roll if type == 'workshop'
+        end
+      end
     end
   end
 

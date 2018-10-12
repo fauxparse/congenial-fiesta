@@ -1,0 +1,30 @@
+.participant {
+  display: flex;
+  align-items: center;
+  padding: .5em 0;
+
+  .avatar {
+    margin-right: $base-spacing;
+  }
+
+  &__details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name,
+  &__email {
+    @include ellipsis;
+    display: block;
+    text-decoration: none;
+  }
+
+  &__name {
+
+  }
+
+  &__email {
+    font-size: modular-scale(-1);
+    color: $secondary-font-color;
+  }
+}
