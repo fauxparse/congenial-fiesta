@@ -15,13 +15,6 @@
       flex: 1;
     }
 
-    &__photo {
-      margin-bottom: $small-spacing;
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
     &__name {
       font-size: modular-scale(1);
       text-decoration: none;
@@ -37,6 +30,13 @@
       margin-top: $small-spacing;
     }
   }
+}
+
+.activity__photo {
+  margin-bottom: $small-spacing;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .activity-list {
@@ -102,9 +102,9 @@
     grid-column-gap: calc(#{$keyline} - #{$avatar-size});
     grid-template-columns: auto 1fr;
     grid-template-areas:
-      '. pill'
-      'avatar name'
-      'avatar text';
+    '. pill'
+    'avatar name'
+    'avatar text';
 
     &::before {
       grid-area: pill;

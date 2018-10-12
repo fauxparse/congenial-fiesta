@@ -48,7 +48,7 @@
   align-items: center;
 
   &__button {
-    width: 100%;
+    width: calc(100% - 2em);
     max-width: 25em;
     font-size: modular-scale(2);
     font-family: $hero-font-family;
