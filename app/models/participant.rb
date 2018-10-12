@@ -50,7 +50,7 @@ class Participant < ApplicationRecord
   end
 
   def registered?(festival)
-    registrations.where(festival: festival).exists?
+    registrations.where(festival_id: festival.id).exists?
   end
 
   private
