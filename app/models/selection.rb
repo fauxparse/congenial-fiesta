@@ -41,7 +41,9 @@ class Selection < ApplicationRecord
   def self.included_in_limit
     with_activity
       .where(
-        'selections.state <> ? OR selections.updated_at > ?',
+        'selections.state = ? OR ' \
+        '(selections.state = ? AND selections.updated_at > ?)',
+        :allocated,
         :pending,
         Time.zone.now - TIME_TO_COMPLETE_REGISTRATION
       )

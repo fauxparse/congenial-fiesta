@@ -55,7 +55,7 @@ RSpec.describe Selection, type: :model do
       end
     end
 
-    context 'when not registered' do
+    context 'when not allocated' do
       it { is_expected.to include(selection) }
 
       context 'and some time has elapsed' do
@@ -64,9 +64,9 @@ RSpec.describe Selection, type: :model do
       end
     end
 
-    context 'when registered' do
+    context 'when allocated' do
       let(:selection) do
-        create(:selection, schedule: schedule).tap(&:registered!)
+        create(:selection, schedule: schedule).tap(&:allocated!)
       end
 
       it { is_expected.to include(selection) }
