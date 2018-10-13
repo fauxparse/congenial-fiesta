@@ -1,0 +1,11 @@
+- content_for :title, schedule.activity.name
+
+%h1.page-title= schedule.activity.name
+
+%section.tickets.tickets--allocated
+  %h2 Allocated tickets
+  = render partial: 'ticket', collection: allocated_tickets
+
+%section.tickets.tickets--waitlist
+  %h2 Waitlist
+  = render partial: 'ticket', collection: waitlist

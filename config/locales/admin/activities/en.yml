@@ -29,3 +29,6 @@ en:
     attendees:
       index:
         title: 'Attendees'
+    tickets:
+      index:
+        title: 'Box office'

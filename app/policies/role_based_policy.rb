@@ -24,6 +24,6 @@ class RoleBasedPolicy < ApplicationPolicy
   private
 
   def authorized?
-    user.admin? || user.role?(const_get(:ROLE))
+    user.admin? || user.role?(self.class.const_get(:ROLE))
   end
 end

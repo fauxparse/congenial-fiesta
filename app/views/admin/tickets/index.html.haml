@@ -1,0 +1,14 @@
+- content_for :title, t('.title')
+
+%h1.page-title= t('.title')
+
+- shows.group_by { |show| show.starts_at.to_date }.each do |date, schedules|
+  %section.tickets__day
+    %h2= l(date, format: :timetable)
+    .show-links
+      - schedules.each do |schedule|
+        = link_to admin_ticket_path(festival, schedule.activity), class: 'show-link' do
+          .show-link__time= l(schedule.starts_at, format: :time)
+          .show-link__details
+            .show-link__name= schedule.activity.name
+            .show-link__venue= schedule.venue&.name
