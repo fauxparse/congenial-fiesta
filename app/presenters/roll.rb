@@ -17,5 +17,10 @@ class Roll
         .sort
   end
 
+  def workshop
+    schedule.activity
+  end
+
   delegate :starts_at, :ends_at, to: :schedule
+  delegate :name, to: :workshop
 end

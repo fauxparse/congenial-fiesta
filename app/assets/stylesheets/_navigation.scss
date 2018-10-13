@@ -117,6 +117,11 @@
     }
   }
 
+  .separator {
+    margin: 0;
+    border-top: 1px solid $ghost-grey;
+  }
+
   .drop-open & {
     opacity: 1;
     pointer-events: auto;

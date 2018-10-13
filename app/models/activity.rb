@@ -38,6 +38,12 @@ class Activity < ApplicationRecord
       presenters.build(participant_id: id)
     end
   end
+
+  def self.presented_by(participant)
+    with_presenters
+      .references(:presenters)
+      .where('presenters.participant_id = ?', participant.id)
+  end
 end
 
 require_dependency 'workshop'

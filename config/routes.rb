@@ -109,6 +109,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/:year/teaching', to: 'rolls#index', as: :teaching
+
   def static_page(name)
     get "/#{name.tr('_', '-')}",
       to: 'high_voltage/pages#show',

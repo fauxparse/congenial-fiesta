@@ -14,6 +14,7 @@
               = link_to admin_root_path do
                 = icon :admin
                 = t('.festival_admin_link')
+            %li.separator
           %li
             = link_to registration_path do
               = icon :cart
@@ -22,14 +23,21 @@
             = link_to calendar_path do
               = icon :schedule
               = t('calendars.show.title')
+          - if Workshop.presented_by(current_participant).exists?
+            %li
+              = link_to teaching_path(festival) do
+                = icon :workshop
+                = t('rolls.index.title')
           %li
             = link_to profile_path do
               = icon :user
               = t('profiles.show.link')
-          %li
-            = link_to pitches_path do
-              = icon :pitch
-              = t('pitches.index.link')
+          - if festival&.pitches_open?
+            %li
+              = link_to pitches_path do
+                = icon :pitch
+                = t('pitches.index.link')
+          %li.separator
           %li
             = link_to logout_path, method: :delete do
               = icon :log_out

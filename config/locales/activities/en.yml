@@ -9,3 +9,7 @@ en:
       rookie: 'Rookie'
       intermediate: 'Intermediate'
       advanced: 'Advanced'
+
+  rolls:
+    index:
+      title: 'Your workshops'
