@@ -2,13 +2,17 @@
 
 module Admin
   class TicketsController < Controller
+    skip_before_action :require_admin
+
+    after_action :verify_authorized
+
     def index
-      authorize Show, policy_class: ShowPolicy
+      authorize Show, :index?, policy_class: ShowPolicy
     end
 
     def show
       raise ActiveRecord::NotFound unless schedule.present?
-      authorize schedule.activity, policy_class: ShowPolicy
+      authorize schedule.activity, :show?, policy_class: ShowPolicy
     end
 
     private

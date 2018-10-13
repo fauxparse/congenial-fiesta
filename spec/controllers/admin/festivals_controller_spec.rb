@@ -19,7 +19,7 @@ RSpec.describe Admin::FestivalsController, type: :request do
 
       context 'when logged in as a normal user' do
         let(:user) { create(:participant, :with_password) }
-        it { is_expected.to have_http_status(:unauthorized) }
+        it { is_expected.not_to be_successful }
       end
 
       context 'when logged in as an admin user' do

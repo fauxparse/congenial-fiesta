@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       resources :vouchers, except: :edit
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
-      resources :tickets, only: %i[index show update]
+      resources :tickets, only: %i[index show]
       get '/timetable' => 'schedules#index', as: :timetable
       match '/' => 'festivals#update', via: %i[put patch]
       get '/' => 'festivals#show', as: :festival

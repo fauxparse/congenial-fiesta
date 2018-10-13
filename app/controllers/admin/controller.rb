@@ -13,7 +13,8 @@ module Admin
     private
 
     def require_admin
-      render(status: :unauthorized) unless authorized_user?
+      raise Pundit::NotAuthorizedError, 'You don’t have access to that page' \
+        unless authorized_user?
     end
 
     def authorized_user?
