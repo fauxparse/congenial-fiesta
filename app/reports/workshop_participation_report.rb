@@ -45,16 +45,14 @@ class WorkshopParticipationReport < Report
   end
 
   def waitlist_rows(schedules)
-    schedules
+    time = schedules.first.starts_at
+    waitlisted =
+      schedules
       .flat_map(&:waitlists)
-      .sort_by { |s| s.registration.participant }
-      .map do |w|
-        row(
-          w.schedule.starts_at,
-          '(none)',
-          w.registration.participant.name
-        )
-      end
+      .flat_map { |w| w.registration.participant }
+      .uniq
+      .sort - schedules.flat_map { |s| s.selections.map(&:participant) }
+    waitlisted.map { |p| row(time, '(none)', p.name) }
   end
 
   def row(time, workshop, participant)
