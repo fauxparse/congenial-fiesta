@@ -3,7 +3,7 @@
 module Admin
   class TicketsController < Controller
     def index
-      authorize Show
+      authorize Show, policy_class: ShowPolicy
     end
 
     def show

@@ -3,27 +3,40 @@
 require 'rails_helper'
 
 RSpec.describe Admin::TicketsController, type: :request do
+  subject { response }
   let(:festival) { create(:festival) }
-  let(:bats) do
-    create(:participant, :with_password,  role_list: %w(box_office))
-  end
+  let(:show) { create(:show, festival: festival) }
+  let!(:schedule) { create(:schedule, activity: show) }
 
-  before { log_in_as(bats) }
+  before { log_in_as(participant) }
 
-  describe 'GET /admin/:year/tickets' do
-    it 'is successful' do
-      get admin_tickets_path(festival)
-      expect(response).to be_successful
+  context 'when logged in as a normal participant' do
+    let(:participant) { create(:participant, :with_password) }
+
+    describe 'GET /admin/:year/tickets' do
+      before { get admin_tickets_path(festival) }
+      it { is_expected.not_to be_successful }
+    end
+
+    describe 'GET /admin/:year/tickets/:id' do
+      before { get admin_ticket_path(festival, show) }
+      it { is_expected.not_to be_successful }
     end
   end
 
-  describe 'GET /admin/:year/tickets/:id' do
-    let(:show) { create(:show, festival: festival) }
-    let!(:schedule) { create(:schedule, activity: show) }
+  context 'when logged in as BATS staff' do
+    let(:participant) do
+      create(:participant, :with_password, role_list: %w(box_office))
+    end
 
-    it 'is successful' do
-      get admin_ticket_path(festival, show)
-      expect(response).to be_successful
+    describe 'GET /admin/:year/tickets' do
+      before { get admin_tickets_path(festival) }
+      it { is_expected.to be_successful }
+    end
+
+    describe 'GET /admin/:year/tickets/:id' do
+      before { get admin_ticket_path(festival, show) }
+      it { is_expected.to be_successful }
     end
   end
 end
