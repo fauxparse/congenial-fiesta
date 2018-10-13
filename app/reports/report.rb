@@ -69,3 +69,4 @@ end
 
 require_dependency 'workshops_report'
 require_dependency 'finance_report'
+require_dependency 'workshop_participation_report'

@@ -12,6 +12,11 @@ module Admin
       render_report FinanceReport.new(festival)
     end
 
+    def workshop_participation
+      authorize festival, :show?
+      render_report WorkshopParticipationReport.new(festival)
+    end
+
     private
 
     def render_report(report)

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       scope 'reports', controller: 'reports' do
         get :workshops, as: :workshops_report
         get :finance, as: :finance_report
+        get :workshop_participation, as: :workshop_participation_report
       end
       resources :registrations, only: :index
       resource :finance, only: :show
