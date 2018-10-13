@@ -1,6 +1,6 @@
 = form.group :registration_id, required: true do
   = form.label :registration_id
-  = form.select :registration_id, festival.registrations.includes(:participant).sort_by(&:participant).collect { |r| [r.participant.name, r.id] }, {}, data: { controller: 'select' }
+  = form.select :registration_id, festival.registrations.completed.includes(:participant).sort_by(&:participant).collect { |r| [r.participant.name, r.id] }, {}, data: { controller: 'select' }
   = form.error_messages_for :registration_id
 
 = form.group :workshop_count, required: true do
