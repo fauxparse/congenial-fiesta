@@ -121,6 +121,11 @@ Rails.application.routes.draw do
   static_page 'code_of_conduct'
   get '/:year/code-of-conduct', to: redirect('/code-of-conduct')
 
+  scope 'code-of-conduct' do
+    resources :incidents, only: %i[new create]
+    get '/incidents', to: redirect('/code-of-conduct')
+  end
+
   static_page 'terms_and_conditions'
   static_page 'privacy'
   static_page 'faq'

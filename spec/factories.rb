@@ -220,4 +220,14 @@ FactoryBot.define do
     registration
     note 'For a very good boy'
   end
+
+  factory :incident do
+    festival
+    participant
+    description 'Something bad happened'
+
+    trait :anonymous do
+      anonymous true
+    end
+  end
 end

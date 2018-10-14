@@ -1,0 +1,43 @@
+.incident-form {
+  padding-left: $keyline;
+
+  textarea {
+    margin: 0 (-$small-spacing) $base-spacing;
+    padding: $small-spacing;
+    border: $base-border;
+    border-radius: $base-border-radius;
+  }
+
+  .check-box-field {
+    margin-left: -3.25em;
+
+    p {
+      font-size: modular-scale(-1);
+      color: $secondary-font-color;
+    }
+  }
+}
+
+.incident-report {
+  ol {
+    counter-reset: step;
+
+    li {
+      position: relative;
+      padding: 0 0 $small-spacing 2.25em;
+
+      &::before {
+        @include position(absolute, 0 null null 0);
+        counter-increment: step;
+        content: counter(step);
+        line-height: $base-line-height;
+        width: $base-line-height * 1em;
+        text-align: center;
+        border-radius: 50%;
+        background: $accent-color;
+        color: $white;
+        font-weight: $bold-font-weight;
+      }
+    }
+  }
+}

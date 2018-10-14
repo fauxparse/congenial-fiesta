@@ -215,6 +215,40 @@ ALTER SEQUENCE public.identities_id_seq OWNED BY public.identities.id;
 
 
 --
+-- Name: incidents; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.incidents (
+    id bigint NOT NULL,
+    festival_id bigint,
+    participant_id bigint,
+    description text,
+    status character varying(32) DEFAULT 'open'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: incidents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.incidents_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: incidents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.incidents_id_seq OWNED BY public.incidents.id;
+
+
+--
 -- Name: participants; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -703,6 +737,13 @@ ALTER TABLE ONLY public.identities ALTER COLUMN id SET DEFAULT nextval('public.i
 
 
 --
+-- Name: incidents id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.incidents ALTER COLUMN id SET DEFAULT nextval('public.incidents_id_seq'::regclass);
+
+
+--
 -- Name: participants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -839,6 +880,14 @@ ALTER TABLE ONLY public.festivals
 
 ALTER TABLE ONLY public.identities
     ADD CONSTRAINT identities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: incidents incidents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.incidents
+    ADD CONSTRAINT incidents_pkey PRIMARY KEY (id);
 
 
 --
@@ -1028,6 +1077,20 @@ CREATE UNIQUE INDEX index_identities_on_participant_id_and_type_and_provider ON 
 --
 
 CREATE UNIQUE INDEX index_identities_on_provider_and_uid ON public.identities USING btree (provider, uid);
+
+
+--
+-- Name: index_incidents_on_festival_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_incidents_on_festival_id ON public.incidents USING btree (festival_id);
+
+
+--
+-- Name: index_incidents_on_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_incidents_on_participant_id ON public.incidents USING btree (participant_id);
 
 
 --
@@ -1297,6 +1360,14 @@ CREATE INDEX taggings_idy ON public.taggings USING btree (taggable_id, taggable_
 
 
 --
+-- Name: incidents fk_rails_1886bdb964; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.incidents
+    ADD CONSTRAINT fk_rails_1886bdb964 FOREIGN KEY (festival_id) REFERENCES public.festivals(id);
+
+
+--
 -- Name: schedules fk_rails_26cbb5018a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1374,6 +1445,14 @@ ALTER TABLE ONLY public.waitlists
 
 ALTER TABLE ONLY public.vouchers
     ADD CONSTRAINT fk_rails_97a1f37da8 FOREIGN KEY (registration_id) REFERENCES public.registrations(id) ON DELETE CASCADE;
+
+
+--
+-- Name: incidents fk_rails_9d8326cf5a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.incidents
+    ADD CONSTRAINT fk_rails_9d8326cf5a FOREIGN KEY (participant_id) REFERENCES public.participants(id);
 
 
 --
@@ -1482,6 +1561,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180923002028'),
 ('20180927093109'),
 ('20180930020209'),
-('20181011080909');
+('20181011080909'),
+('20181014070422');
 
 
