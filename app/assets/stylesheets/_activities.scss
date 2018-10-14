@@ -125,3 +125,19 @@
     }
   }
 }
+
+.roll__participants {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, #{($line-width - $base-spacing * 2) / 3});
+  grid-column-gap: $base-spacing;
+}
+
+.roll__session {
+  h2 {
+    small {
+      @include all-caps;
+      display: block;
+      font-size: modular-scale(-1);
+    }
+  }
+}

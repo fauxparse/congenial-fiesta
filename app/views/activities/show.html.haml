@@ -6,8 +6,8 @@
 %header.hero
   .breadcrumbs
     = link_to t(activity.type.underscore, scope: 'activity.types').pluralize, send(:"#{activity.type.underscore.pluralize}_path"), class: 'breadcrumbs__link'
-    %h1= activity.name
-    .activity-details__presenters= activity.presenters.to_sentence
+  %h1= activity.name
+  .activity-details__presenters= activity.presenters.to_sentence
 
 %section.activity__description
   = activity_photo(activity, size: :large)

@@ -1,0 +1,14 @@
+%header.hero
+  .breadcrumbs
+    = link_to t('activity.types.workshop').pluralize, workshops_path, class: 'breadcrumbs__link'
+  %h1= t('.title')
+
+- workshops.each do |workshop|
+  - rolls(workshop).each do |roll|
+    %section.roll__session
+      %h2
+        = roll.name
+        %small= l(roll.starts_at, format: :full)
+
+      .roll__participants
+        = render roll.participants
