@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Incident < ApplicationRecord
+  include Hashid::Rails
+
   belongs_to :festival
   belongs_to :participant, optional: true
 

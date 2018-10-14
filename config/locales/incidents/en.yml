@@ -16,3 +16,10 @@ en:
           two: 'We will contact the people involved to discuss next steps.'
           three: 'If you have chosen to attach your name to the report, we will contact you directly to follow up.'
     report: 'Click here to report an incident'
+
+  admin:
+    incidents:
+      index:
+        title: 'Incidents'
+      incident:
+        anonymous: 'Anonymous'

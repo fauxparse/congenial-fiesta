@@ -1,0 +1,19 @@
+.incidents {
+  border-top: $base-border;
+  padding-bottom: $base-spacing;
+}
+
+.incident {
+  display: flex;
+  padding: .5em 1em .5em $keyline;
+  align-items: flex-start;
+
+  &__date {
+    flex: 0 0 6em;
+    font-size: modular-scale(-1);
+  }
+
+  &__time {
+    color: $secondary-font-color;
+  }
+}
