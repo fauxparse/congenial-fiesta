@@ -109,10 +109,26 @@ export default class extends Controller {
     const id = e.target.closest('.activity').getAttribute('data-id')
     const activity = this.activities[id]
     if (activity && !this.addActivity(activity)) {
-      const event =
-        new CustomEvent('activities:limit', { detail: activity, bubbles: true })
-      this.element.dispatchEvent(event)
+      this.limitReached(activity)
     }
+  }
+
+  checkWaitlistLimit = e => {
+    const waitlistCount =
+      this.element.querySelectorAll('.join-waitlist:checked').length
+
+    if (this.count + waitlistCount > this.maximum) {
+      const id = e.target.closest('.activity').getAttribute('data-id')
+      const activity = this.activities[id]
+      e.target.checked = false
+      this.limitReached(activity)
+    }
+  }
+
+  limitReached(activity) {
+    const event =
+      new CustomEvent('activities:limit', { detail: activity, bubbles: true })
+    this.element.dispatchEvent(event)
   }
 
   addActivity(activity) {

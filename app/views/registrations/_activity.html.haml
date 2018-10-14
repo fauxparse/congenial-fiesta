@@ -21,7 +21,7 @@
       .button__text= t('.add')
   - unless activity.clash? || activity.compulsory?
     %label.activity__waitlist
-      = check_box_tag "registration[waitlist][]", activity.id, activity.waitlisted?
+      = check_box_tag "registration[waitlist][]", activity.id, activity.waitlisted?, class: 'join-waitlist', data: { action: 'change->activity-selector#checkWaitlistLimit' }
       .button.activity__waitlisted--no
         = icon :waitlist, class: 'button__icon'
         .button__text= t('.add_to_waitlist')
