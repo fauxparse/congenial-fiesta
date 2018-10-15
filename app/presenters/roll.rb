@@ -21,6 +21,10 @@ class Roll
     schedule.activity
   end
 
+  def to_partial_path
+    'roll'
+  end
+
   delegate :starts_at, :ends_at, to: :schedule
   delegate :name, to: :workshop
 end

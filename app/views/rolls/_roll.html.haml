@@ -1,0 +1,11 @@
+%section.roll__session
+  .roll__title
+    %h2
+      = roll.name
+      %small= l(roll.starts_at, format: :full)
+
+    = copy_to_clipboard(roll.participants.map(&:email).join(',')) do
+      %span Copy email addresses
+
+  .roll__participants
+    = render roll.participants
