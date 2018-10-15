@@ -37,11 +37,11 @@ class Cart
   end
 
   def to_pay
-    total - paid - (include_pending? ? pending : 0)
+    total - voucher_discount - paid - (include_pending? ? pending : 0)
   end
 
   def total
-    workshop_cost - voucher_discount
+    workshop_cost
   end
 
   def per_workshop

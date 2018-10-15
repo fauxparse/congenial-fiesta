@@ -31,6 +31,8 @@ class RegistrationForm
       def update(attributes = {})
         Selection.acts_as_list_no_update do
           super
+
+          UpdateAmountPending.new(registration).call
         end
       end
 
