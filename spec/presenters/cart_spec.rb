@@ -57,8 +57,8 @@ RSpec.describe Cart do
     end
   end
 
-  describe '#total' do
-    subject(:total) { cart.total }
+  describe '#to_pay' do
+    subject(:to_pay) { cart.to_pay }
 
     it { is_expected.to eq(Money.new(16000)) }
 
