@@ -132,12 +132,21 @@
   grid-column-gap: $base-spacing;
 }
 
-.roll__session {
+.roll__title {
   h2 {
     small {
       @include all-caps;
       display: block;
       font-size: modular-scale(-1);
+    }
+  }
+
+  @media (min-width: #{$line-width / 2}) {
+    display: flex;
+    align-items: center;
+
+    h2 {
+      flex: 1;
     }
   }
 }
