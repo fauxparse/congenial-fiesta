@@ -218,6 +218,7 @@ FactoryBot.define do
 
   factory :voucher do
     registration
+    workshop_count 1
     note 'For a very good boy'
   end
 end

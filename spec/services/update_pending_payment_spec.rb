@@ -43,5 +43,18 @@ RSpec.describe UpdateAmountPending, type: :service do
           .to(pricing.by_workshop_count(2))
       end
     end
+
+    context 'when a voucher has been added' do
+      before do
+        create(:voucher, registration: registration, workshop_count: 4)
+      end
+
+      it 'cancels the payment' do
+        expect { service.call }
+          .to change { payment.reload.state }
+          .from('pending')
+          .to('cancelled')
+      end
+    end
   end
 end

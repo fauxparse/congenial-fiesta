@@ -24,7 +24,11 @@ class UpdateAmountPending
   end
 
   def update_pending_payment
-    pending_payment.update!(amount: cart.to_pay)
+    if cart.to_pay > 0
+      pending_payment.update!(amount: cart.to_pay)
+    else
+      pending_payment.cancelled!
+    end
   end
 
   def should_update?
