@@ -20,8 +20,8 @@ class CompleteRegistration
   def pending_selections
     registration
       .selections
+      .pending
       .includes(schedule: :activity)
-      .where.not(state: :allocated)
   end
 
   def confirm_selections
