@@ -1,0 +1,25 @@
+en:
+  incidents:
+    new:
+      title: 'Report an incident'
+      prompt: 'Tell us in your own words what happened, where, and when. If you can, include who was involved, including anyone else who may have observed the incident. You don’t have to say why you feel this was a breach of the Code of Conduct: if anything at the Festival has made you feel uncomfortable, we’d love to hear about it so that we can improve the experience for you and for other participants.'
+      anonymous: 'I’d like to stay anonymous'
+      anonymous_info: 'We record your details with this incident report so that we can contact you to follow up. If you’d rather make an anonymous report, please check this box and we won’t store those details in the system.'
+      submit: 'Submit report'
+    create:
+      title: 'Incident report submitted'
+      thanks: 'Thank you for submitting your report. We’re sorry you’ve had a negative experience at the Festival, but we’re grateful for the opportunity to address what happened in a constructive way.'
+      what_now:
+        title: 'What happens now?'
+        next_steps:
+          one: 'The Festival team will review your report, including checking for any other reports involving similar events, behaviour or people.'
+          two: 'We will contact the people involved to discuss next steps.'
+          three: 'If you have chosen to attach your name to the report, we will contact you directly to follow up.'
+    report: 'Click here to report an incident'
+
+  admin:
+    incidents:
+      index:
+        title: 'Incidents'
+      incident:
+        anonymous: 'Anonymous'

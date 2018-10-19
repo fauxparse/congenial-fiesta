@@ -1,8 +1,9 @@
 - content_for :title, t('.title')
 
-%main
-  %header.hero
-    %h1= t('.title')
+%header.hero
+  %h1= t('.title')
+  .breadcrumbs
+    = link_to t('incidents.report'), new_incident_path, class: 'breadcrumbs__link'
 
-  %section.static-page__content.code-of-conduct
-    = render 'shared/code_of_conduct'
+%section.static-page__content.code-of-conduct
+  = render 'shared/code_of_conduct'

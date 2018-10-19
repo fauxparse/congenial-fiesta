@@ -1,0 +1,19 @@
+- content_for :title, t('.title')
+
+%header.hero
+  %h1= t('.title')
+
+%section.incident-report
+  = form_for incident, url: incidents_path, html: { class: 'incident-form', data: { controller: 'incident' } } do |form|
+    = form.group :description, required: true do
+      %p= t('.prompt')
+      = form.text_area :description, rows: 2, data: { target: 'incident.description' }
+      = form.error_messages_for :description
+
+    = form.check_box_field :anonymous do
+      = t('.anonymous')
+      %p= t('.anonymous_info')
+
+    .form__buttons
+      %button.button.button--primary{type: 'submit'}
+        .button__text= t('.submit')

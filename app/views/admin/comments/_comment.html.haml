@@ -1,0 +1,5 @@
+.comment
+  .comment__text= markdown comment.text
+  .comment__author
+    %strong= comment.participant.name
+    = l(comment.created_at, format: :full)

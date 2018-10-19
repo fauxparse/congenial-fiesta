@@ -8,6 +8,7 @@ class Festival < ApplicationRecord
   has_many :payments, through: :registrations
   has_many :selections, through: :registrations
   has_many :workshops
+  has_many :incidents # I mean, hopefully not
 
   validates :year, presence: true, uniqueness: true
   validates :start_date, :end_date, presence: true

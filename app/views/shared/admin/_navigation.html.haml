@@ -15,3 +15,4 @@
     = navigation_link 'timetable', admin_timetable_path(festival), icon: 'schedule' if policy(Schedule).index?
     = navigation_link 'venues', admin_venues_path(festival), icon: 'venue' if policy(Venue).index?
     = navigation_link 'settings', edit_admin_festival_path(festival), icon: 'admin' if policy(festival).update?
+    = navigation_link 'incidents', admin_incidents_path(festival), icon: 'incident' if policy(Incident).index?

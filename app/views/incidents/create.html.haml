@@ -1,0 +1,12 @@
+- content_for :title, t('.title')
+
+%header.hero
+  %h1= t('.title')
+
+%section.incident-report
+  %p= t('.thanks')
+  %h2= t('.what_now.title')
+  %ol
+    %li= t('.what_now.next_steps.one')
+    %li= t('.what_now.next_steps.two')
+    %li= t('.what_now.next_steps.three')

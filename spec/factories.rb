@@ -221,4 +221,20 @@ FactoryBot.define do
     workshop_count 1
     note 'For a very good boy'
   end
+
+  factory :incident do
+    festival
+    participant
+    description 'Something bad happened'
+
+    trait :anonymous do
+      anonymous true
+    end
+  end
+
+  factory :comment do
+    participant
+    subject { create(:incident) }
+    text 'An interesting comment'
+  end
 end

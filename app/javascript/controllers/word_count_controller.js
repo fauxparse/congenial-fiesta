@@ -1,5 +1,4 @@
 import { Controller } from 'stimulus'
-import autosize from 'autosize'
 
 const SVG = 'http://www.w3.org/2000/svg'
 const RADIUS = 7

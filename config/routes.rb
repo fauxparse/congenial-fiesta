@@ -40,6 +40,13 @@ Rails.application.routes.draw do
       resources :schedules, path: 'timetable', except: :index
       resources :venues, only: %i[index create update destroy]
       resources :tickets, only: %i[index show]
+      resources :incidents, only: %i[index show] do
+        member do
+          post :close
+          post :reopen
+          post :comments
+        end
+      end
       get '/timetable' => 'schedules#index', as: :timetable
       match '/' => 'festivals#update', via: %i[put patch]
       get '/' => 'festivals#show', as: :festival
@@ -120,6 +127,11 @@ Rails.application.routes.draw do
 
   static_page 'code_of_conduct'
   get '/:year/code-of-conduct', to: redirect('/code-of-conduct')
+
+  scope 'code-of-conduct' do
+    resources :incidents, only: %i[new create]
+    get '/incidents', to: redirect('/code-of-conduct')
+  end
 
   static_page 'terms_and_conditions'
   static_page 'privacy'

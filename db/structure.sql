@@ -144,6 +144,40 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: comments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.comments (
+    id bigint NOT NULL,
+    participant_id bigint,
+    subject_type character varying,
+    subject_id bigint,
+    text text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
+
+
+--
 -- Name: festivals; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -212,6 +246,40 @@ CREATE SEQUENCE public.identities_id_seq
 --
 
 ALTER SEQUENCE public.identities_id_seq OWNED BY public.identities.id;
+
+
+--
+-- Name: incidents; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.incidents (
+    id bigint NOT NULL,
+    festival_id bigint,
+    participant_id bigint,
+    description text,
+    status character varying(32) DEFAULT 'open'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: incidents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.incidents_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: incidents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.incidents_id_seq OWNED BY public.incidents.id;
 
 
 --
@@ -689,6 +757,13 @@ ALTER TABLE ONLY public.activities ALTER COLUMN id SET DEFAULT nextval('public.a
 
 
 --
+-- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.comments ALTER COLUMN id SET DEFAULT nextval('public.comments_id_seq'::regclass);
+
+
+--
 -- Name: festivals id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -700,6 +775,13 @@ ALTER TABLE ONLY public.festivals ALTER COLUMN id SET DEFAULT nextval('public.fe
 --
 
 ALTER TABLE ONLY public.identities ALTER COLUMN id SET DEFAULT nextval('public.identities_id_seq'::regclass);
+
+
+--
+-- Name: incidents id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.incidents ALTER COLUMN id SET DEFAULT nextval('public.incidents_id_seq'::regclass);
 
 
 --
@@ -826,6 +908,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: festivals festivals_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -839,6 +929,14 @@ ALTER TABLE ONLY public.festivals
 
 ALTER TABLE ONLY public.identities
     ADD CONSTRAINT identities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: incidents incidents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.incidents
+    ADD CONSTRAINT incidents_pkey PRIMARY KEY (id);
 
 
 --
@@ -1003,6 +1101,27 @@ CREATE INDEX index_activities_on_pitch_id ON public.activities USING btree (pitc
 
 
 --
+-- Name: index_comments_on_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_participant_id ON public.comments USING btree (participant_id);
+
+
+--
+-- Name: index_comments_on_subject_id_and_subject_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_comments_on_subject_id_and_subject_type ON public.comments USING btree (subject_id, subject_type);
+
+
+--
+-- Name: index_comments_on_subject_type_and_subject_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_subject_type_and_subject_id ON public.comments USING btree (subject_type, subject_id);
+
+
+--
 -- Name: index_festivals_on_year; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1028,6 +1147,20 @@ CREATE UNIQUE INDEX index_identities_on_participant_id_and_type_and_provider ON 
 --
 
 CREATE UNIQUE INDEX index_identities_on_provider_and_uid ON public.identities USING btree (provider, uid);
+
+
+--
+-- Name: index_incidents_on_festival_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_incidents_on_festival_id ON public.incidents USING btree (festival_id);
+
+
+--
+-- Name: index_incidents_on_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_incidents_on_participant_id ON public.incidents USING btree (participant_id);
 
 
 --
@@ -1297,6 +1430,14 @@ CREATE INDEX taggings_idy ON public.taggings USING btree (taggable_id, taggable_
 
 
 --
+-- Name: incidents fk_rails_1886bdb964; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.incidents
+    ADD CONSTRAINT fk_rails_1886bdb964 FOREIGN KEY (festival_id) REFERENCES public.festivals(id);
+
+
+--
 -- Name: schedules fk_rails_26cbb5018a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1377,6 +1518,14 @@ ALTER TABLE ONLY public.vouchers
 
 
 --
+-- Name: incidents fk_rails_9d8326cf5a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.incidents
+    ADD CONSTRAINT fk_rails_9d8326cf5a FOREIGN KEY (participant_id) REFERENCES public.participants(id);
+
+
+--
 -- Name: pitches fk_rails_b8c4f77d16; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1422,6 +1571,14 @@ ALTER TABLE ONLY public.schedules
 
 ALTER TABLE ONLY public.activities
     ADD CONSTRAINT fk_rails_d55f2d8599 FOREIGN KEY (festival_id) REFERENCES public.festivals(id) ON DELETE CASCADE;
+
+
+--
+-- Name: comments fk_rails_db8b8e9fe8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT fk_rails_db8b8e9fe8 FOREIGN KEY (participant_id) REFERENCES public.participants(id);
 
 
 --
@@ -1482,6 +1639,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180923002028'),
 ('20180927093109'),
 ('20180930020209'),
-('20181011080909');
+('20181011080909'),
+('20181014070422'),
+('20181019003703');
 
 

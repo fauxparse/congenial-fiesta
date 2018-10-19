@@ -1,0 +1,78 @@
+.incidents {
+  border-top: $base-border;
+  padding-bottom: $base-spacing;
+}
+
+.incident {
+  display: flex;
+  padding: .5em 1em .5em $keyline;
+  align-items: center;
+  border-bottom: $base-border;
+
+  &__date {
+    flex: 0 0 6em;
+    text-align: right;
+    font-size: modular-scale(-1);
+  }
+
+  &__time {
+    color: $secondary-font-color;
+  }
+
+  .icon {
+    margin: 0 1em;
+  }
+
+  &--closed {
+    opacity: .5;
+
+    .icon {
+      visibility: hidden;
+    }
+  }
+}
+
+.incident-details,
+.incident-comments,
+.incident-actions {
+  padding: $base-spacing $base-spacing $base-spacing $keyline;
+
+  &:not(:first-of-type) {
+    border-top: $base-border;
+  }
+}
+
+.incident-closed {
+  background: $accent-color;
+  color: $base-font-white;
+  padding: $small-spacing $keyline;
+}
+
+.incident-comments {
+  .comment {
+    padding: .5em 0;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 2.5em;
+      margin-top: $base-spacing;
+      border-bottom: $base-border;
+    }
+  }
+
+  .comment__author {
+    font-size: modular-scale(-1);
+    color: $secondary-font-color;
+  }
+
+  .comment-form {
+    margin-top: $base-spacing;
+  }
+
+  textarea {
+    padding: $small-spacing;
+    border: $base-border;
+    border-radius: $base-border-radius;
+  }
+}
