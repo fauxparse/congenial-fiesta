@@ -1,6 +1,7 @@
-.incident
+.incident{class: class_string('incident--closed' => incident.closed?)}
   .incident__date
     .incident__day= incident.created_at.strftime('%A')
     .incident__time= l(incident.created_at, format: :time)
+  = icon :incident
   = link_to admin_incident_path(festival, incident), class: 'incident__summary' do
     .incident__reporter= incident.participant || t('.anonymous')

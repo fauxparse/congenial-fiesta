@@ -28,6 +28,17 @@ RSpec.describe IncidentsController, type: :request do
       it 'creates an incident' do
         expect { do_post }.to change(Incident, :count).by(1)
       end
+
+      context 'when logged in' do
+        let(:participant) { create(:participant, :with_password) }
+
+        before { log_in_as(participant) }
+
+        it 'logs the incident against the participant' do
+          do_post
+          expect(Incident.last.participant).to eq participant
+        end
+      end
     end
 
     context 'with bad params' do

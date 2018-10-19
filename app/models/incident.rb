@@ -5,6 +5,7 @@ class Incident < ApplicationRecord
 
   belongs_to :festival
   belongs_to :participant, optional: true
+  has_many :comments, -> { order(:created_at) }, as: :subject
 
   enum status: {
     open: 'open',
@@ -22,11 +23,7 @@ class Incident < ApplicationRecord
   attr_accessor :anonymous
 
   def anonymous?
-    if anonymous.nil?
-      participant.blank?
-    else
-      anonymous
-    end
+    anonymous.to_b
   end
 
   private

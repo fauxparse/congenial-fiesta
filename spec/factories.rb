@@ -230,4 +230,10 @@ FactoryBot.define do
       anonymous true
     end
   end
+
+  factory :comment do
+    participant
+    subject { create(:incident) }
+    text 'An interesting comment'
+  end
 end

@@ -144,6 +144,40 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: comments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.comments (
+    id bigint NOT NULL,
+    participant_id bigint,
+    subject_type character varying,
+    subject_id bigint,
+    text text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
+
+
+--
 -- Name: festivals; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -723,6 +757,13 @@ ALTER TABLE ONLY public.activities ALTER COLUMN id SET DEFAULT nextval('public.a
 
 
 --
+-- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.comments ALTER COLUMN id SET DEFAULT nextval('public.comments_id_seq'::regclass);
+
+
+--
 -- Name: festivals id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -864,6 +905,14 @@ ALTER TABLE ONLY public.activities
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -1049,6 +1098,27 @@ CREATE UNIQUE INDEX index_activities_on_festival_id_and_type_and_slug ON public.
 --
 
 CREATE INDEX index_activities_on_pitch_id ON public.activities USING btree (pitch_id);
+
+
+--
+-- Name: index_comments_on_participant_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_participant_id ON public.comments USING btree (participant_id);
+
+
+--
+-- Name: index_comments_on_subject_id_and_subject_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_comments_on_subject_id_and_subject_type ON public.comments USING btree (subject_id, subject_type);
+
+
+--
+-- Name: index_comments_on_subject_type_and_subject_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_subject_type_and_subject_id ON public.comments USING btree (subject_type, subject_id);
 
 
 --
@@ -1504,6 +1574,14 @@ ALTER TABLE ONLY public.activities
 
 
 --
+-- Name: comments fk_rails_db8b8e9fe8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT fk_rails_db8b8e9fe8 FOREIGN KEY (participant_id) REFERENCES public.participants(id);
+
+
+--
 -- Name: pitches fk_rails_faa4f9f838; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1562,6 +1640,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180927093109'),
 ('20180930020209'),
 ('20181011080909'),
-('20181014070422');
+('20181014070422'),
+('20181019003703');
 
 

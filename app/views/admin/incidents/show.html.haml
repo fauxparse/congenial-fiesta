@@ -1,2 +1,33 @@
-%h1 Admin::Incidents#show
-%p Find me in app/views/admin/incidents/show.html.haml
+- content_for :title, t('admin.incidents.index.title')
+
+- if incident.closed?
+  .incident-closed
+    = "This incident was closed #{l(incident.updated_at, format: :full)}"
+
+%section.incident-details
+
+  %h3.incident-details__reporter
+    = "Reported #{l(incident.created_at, format: :full)} by #{incident.participant&.name || '(anonymous)'}"
+
+  .incident-details__description
+    = markdown incident.description
+
+- if incident.open? || incident.comments.any?
+  %section.incident-comments
+    = render incident.comments
+
+    - if incident.open?
+      = form_for @comment || incident.comments.build, url: comments_admin_incident_path(festival, incident), html: { class: 'comment-form', data: { controller: 'admin--comment' } } do |form|
+        = form.group :text do
+          = form.text_area :text, data: { target: 'admin--comment.text' }
+          = form.error_messages_for :text
+        %button.button
+          .button__text Add comment
+
+%section.incident-actions
+  - if incident.open?
+    = button_to close_admin_incident_path(festival, incident), class: 'button button--primary', method: :post do
+      .button__text Close
+  - else
+    = button_to reopen_admin_incident_path(festival, incident), class: 'button button--primary', method: :post do
+      .button__text Reopen
