@@ -16,6 +16,7 @@ class ParticipantMailer < ApplicationMailer
     @schedule = waitlist.schedule
     @participant = @registration.participant
     mail to: @participant.email,
+      cc: 'registrations@nzimprovfestival.co.nz',
       subject: t('.subject', activity: @schedule.activity.name)
   end
 
