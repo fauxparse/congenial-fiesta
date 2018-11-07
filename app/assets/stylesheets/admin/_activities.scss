@@ -215,12 +215,19 @@
     padding: 0 $base-spacing $base-spacing $keyline;
 
     h2 {
+      display: flex;
+      justify-content: space-between;
       position: relative;
 
       .badge {
         position: absolute;
         right: 100%;
         margin-right: .5em;
+      }
+
+      .clipboard {
+        font-size: modular-scale(-1);
+        font-weight: $base-font-weight;
       }
     }
   }
