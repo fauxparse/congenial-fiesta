@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         get :workshops, as: :workshops_report
         get :finance, as: :finance_report
         get :workshop_participation, as: :workshop_participation_report
+        get :washup, as: :washup_report
       end
       resources :registrations, only: :index
       resource :finance, only: :show

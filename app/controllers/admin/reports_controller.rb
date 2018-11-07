@@ -7,6 +7,11 @@ module Admin
       render_report WorkshopsReport.new(festival)
     end
 
+    def washup
+      authorize festival, :show?
+      render_report WashupReport.new(festival)
+    end
+
     def finance
       authorize festival, :show?
       render_report FinanceReport.new(festival)
