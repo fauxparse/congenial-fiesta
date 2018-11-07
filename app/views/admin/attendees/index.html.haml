@@ -3,10 +3,15 @@
 %h1.page-title= activity.name
 
 - activity.schedules.sort.each do |schedule|
+  - participants = schedule.selections.select(&:allocated?).map(&:participant).sort
+
   %section.attendees__schedule
     %h2
       .badge= schedule.selections.select(&:allocated?).size
       = l(schedule.starts_at, format: :full)
 
+      = copy_to_clipboard(participants.map(&:email).join(',')) do
+        %span Copy email addresses
+
     .attendees__list
-      = render partial: 'attendee', collection: schedule.selections.select(&:allocated?).map(&:participant).sort
+      = render partial: 'attendee', collection: participants

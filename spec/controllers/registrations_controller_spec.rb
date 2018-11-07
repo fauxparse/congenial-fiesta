@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe RegistrationsController, type: :request do
   subject { response }
   let!(:festival) { create(:festival) }
+  let(:registration_time) { festival.registrations_open_at + 1.day }
   let(:registration_params) do
     {
       name: 'Kiki Hohnen',
@@ -16,16 +17,18 @@ RSpec.describe RegistrationsController, type: :request do
     }
   end
 
+  around do |example|
+    Timecop.freeze(registration_time) do
+      example.run
+    end
+  end
+
   describe 'GET /register' do
     before { get registration_path }
     it { is_expected.to be_successful }
 
     context 'when registrations are closed' do
-      around do |example|
-        Timecop.freeze(festival.registrations_open_at - 2.weeks) do
-          example.run
-        end
-      end
+      let(:registration_time) { festival.registrations_open_at - 2.weeks }
 
       it { is_expected.to redirect_to root_path }
     end
