@@ -45,7 +45,7 @@ class WashupReport < Report
 
   def self.total_paid(row, payment_method)
     payments = row.registration.payments.select do |p|
-      p.payment_method.is_a?(PaymentMethod::InternetBanking)
+      p.payment_method.is_a?(payment_method)
     end
     payments.select(&:approved?).map(&:amount).inject(Money.new(0), &:+)
   end
