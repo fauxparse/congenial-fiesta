@@ -11,7 +11,7 @@
     "draggabilly": "^2.2.0",
     "flickity": "^2.1.2",
     "intersection-observer": "^0.5.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.21",
     "lodash-inflection": "^1.5.0",
     "mdn-polyfills": "^5.9.0",
     "moment": "^2.22.2",
