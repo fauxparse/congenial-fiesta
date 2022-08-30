@@ -15,7 +15,7 @@
     "lodash-inflection": "^1.5.0",
     "mdn-polyfills": "^5.9.0",
     "moment": "^2.22.2",
-    "moment-timezone": "^0.5.21",
+    "moment-timezone": "^0.5.35",
     "odometer": "^0.4.8",
     "packery": "^2.1.2",
     "rails-ujs": "^5.2.0",
